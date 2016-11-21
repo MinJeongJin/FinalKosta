@@ -9,7 +9,7 @@
 <title>Welcome to Teamphony</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../../resources/teamPage/css/main.css" />
+<link rel="stylesheet" href="../../resources/css/main.css" />
 
 <style type="text/css">
 .date {

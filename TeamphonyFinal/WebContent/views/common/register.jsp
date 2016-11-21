@@ -12,8 +12,8 @@
 <title></title>
 
 <!-- Stylesheets -->
-<link rel="stylesheet" href="resources/register/css/registerStyle.css">
-<link rel="stylesheet" href="resources/register/css/registerSet.css">
+<link rel="stylesheet" href="../../resources/css/registerStyle.css">
+<link rel="stylesheet" href="../../resources/css/registerSet.css">
 
 <!--Google Fonts-->
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display'
@@ -108,8 +108,8 @@ function myFunction() {
 	<!-- Scripts -->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="register/js/scripts.js"></script>
-	<script src="register/js/classie.js"></script>
+	<script src="../js/scripts.js"></script>
+	<script src="../js/classie.js"></script>
 
 	<script>
   (function() {
