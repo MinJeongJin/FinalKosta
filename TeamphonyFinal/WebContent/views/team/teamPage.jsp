@@ -122,11 +122,11 @@ table tr td {
 	</div>
 
 	<!-- Scripts -->
-	<script src="resources/teamPage/js/jquery.min.js"></script>
-	<script src="resources/teamPage/js/jquery.scrolly.min.js"></script>
-	<script src="resources/teamPage/js/skel.min.js"></script>
-	<script src="resources/teamPage/js/util.js"></script>
-	<script src="resources/teamPage/js/main.js"></script>
+	<script src="../../resources/js/jquery.min.js"></script>
+	<script src="../../resources/js/jquery.scrolly.min.js"></script>
+	<script src="../../resources/js/skel.min.js"></script>
+	<script src="../../resources/js/util.js"></script>
+	<script src="../../resources/js/main.js"></script>
 
 </body>
 </html>

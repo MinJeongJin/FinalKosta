@@ -8,13 +8,13 @@
 <title>Insert title here</title>
 <style>
 .date {
-	height: 100px;width: 100px;
+	height: 100px;
+	width: 100px;
 }
 
 table tr td {
 	text-align: left;
 	vertical-align: top;
-	
 }
 
 .red {
@@ -33,19 +33,19 @@ ul {
 </style>
 <body>
 	<table border="3" style="width: 780px">
-		
-			<h1>2016.10 October</h1>
-			<a href="InsertScheduleForm.jsp">
-				<input type="button" value="일정등록" >
-			</a>
+
+		<h1>2016.10 October</h1>
+		<a href="InsertScheduleForm.jsp"> <input type="button"
+			value="일정등록">
+		</a>
 		<colgroup>
-			<col width ="110px" />
-			<col width ="110px" />
-			<col width ="110px" />
-			<col width ="110px" />
-			<col width ="110px" />
-			<col width ="110px" />
-			<col width ="110px" />
+			<col width="110px" />
+			<col width="110px" />
+			<col width="110px" />
+			<col width="110px" />
+			<col width="110px" />
+			<col width="110px" />
+			<col width="110px" />
 		</colgroup>
 		<tr>
 			<th><h4>일</h4></th>
