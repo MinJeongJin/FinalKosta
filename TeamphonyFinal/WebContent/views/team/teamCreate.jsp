@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>JSP</title>
-<link href="resources/teamCreate/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/teamCreate/css/style.css" rel="stylesheet">
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 

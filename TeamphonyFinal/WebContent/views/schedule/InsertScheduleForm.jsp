@@ -6,10 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>일정등록</title>
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/style.css" rel="stylesheet">
-<script src="resources/js/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/schedule/schedule.js"></script>
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../resources/css/style.css" rel="stylesheet">
+<script src="../../resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../resources/js/schedule/schedule.js"></script>
 </head>
 <body>
 	<input id="scheduleId" name="scheduleId" type="hidden" value="">

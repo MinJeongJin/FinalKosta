@@ -18,7 +18,7 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Pacifico'
 	rel='stylesheet' type='text/css'>
-<link href='resources/main/css/style.css' rel='stylesheet'
+<link href='../../resources/main/css/style.css' rel='stylesheet'
 	type='text/css'>
 
 </head>
