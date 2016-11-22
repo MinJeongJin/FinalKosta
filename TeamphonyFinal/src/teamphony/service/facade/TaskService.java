@@ -10,12 +10,12 @@ public interface TaskService {
 
 	 void modifyTask(Task task);
 
-	 void removeTask(String taskId);
+	 void removeTask(int taskId);
 
 	 List<Task> findAllTask();
 
 	 List<Task> findTaskByMemberId(String memberId);
 
-	 Task findTaskByTaskId(String taskId);
+	 Task findTaskByTaskId(int taskId);
 
 }

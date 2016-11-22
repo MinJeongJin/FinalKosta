@@ -8,60 +8,67 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Repository;
 
 import teamphony.domain.Task;
 import teamphony.store.facade.TaskStore;
+import teamphony.store.mapper.TaskMapper;
 
+
+@Repository
 public class TaskStoreLogic implements TaskStore {
-	
-	private static final String Resource= "teamphony/resource/config.xml";
-	
-	private SqlSessionFactory getSessionFactory(){
-		
-		Reader reader =null;
-		
+
+	private static final String Resource = "teamphony/resource/config.xml";
+
+	private SqlSessionFactory getSessionFactory() {
+
+		Reader reader = null;
+
 		try {
-			reader= Resources.getResourceAsReader(Resource);
+			reader = Resources.getResourceAsReader(Resource);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return new SqlSessionFactoryBuilder().build(reader);
 	}
-	
 
 	@Override
 	public void insertTask(Task task) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateTask(Task task) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteTask(int taskId) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public List<Task> selectAllTask() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Task selectTaskByTaskId(int taskId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		SqlSession session = getSessionFactory().openSession();
+
+		try {
+
+			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			return mapper.selectTaskByTaskId(taskId);
+
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public List<Task> selectTaskByMemberId(String memberId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -2,6 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="teamphony.store.mapper.AssignmentMapper">
+<mapper namespace="teamphony.store.mapper.TaskMapper">
+
+	<!-- <resultMap type="Task" id="taskMap"> </resultMap> -->
+
+
+
+	<insert id="insertTask" parameterType="task">
+
+	</insert>
+
+	<update id="updateTask" parameterType="String">
+
+	</update>
+
+
+	<delete id="deleteTask" parameterType="String">
+
+	</delete>
+
+
+	<select id="selectAllTask" resultType="task">
+
+
+
+	</select>
+
+
+	<select id="selectTaskByTaskId" 
+		resultType="task">
+
+		select
+
+		ID   				AS taskId
+		,TITLE              AS title
+		,CONTENTS           AS contents
+		,DEADLINE           AS deadline
+		,EVALUATIONPERIOD   
+		,FLAG               
+		,POINT              AS point
+		from task_tb
+		where id= #{taskId}
+
+	</select>
+
+	<select id="selectTaskByMemberId" parameterType="String"
+		resultType="task">
+
+	</select>
+
+
 
 </mapper>

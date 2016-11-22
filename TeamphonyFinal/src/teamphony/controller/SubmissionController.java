@@ -31,7 +31,7 @@ public class SubmissionController {
 		return null;
 	}
 
-	public String searchSubmissionBySubmissionId(String taskId, Model model) {
+	public String searchSubmissionBySubmissionId(int taskId, Model model) {
 
 		return null;
 	}
