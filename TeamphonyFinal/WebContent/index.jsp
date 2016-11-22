@@ -5,6 +5,6 @@
 <head>
 </head>
 <body>
-	<c:redirect url="/views/login.jsp"/>
+	<c:redirect url="/views/common/login.jsp"/>
 </body>
 </html>
