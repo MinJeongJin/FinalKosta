@@ -2,48 +2,47 @@ package teamphony.service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import teamphony.domain.Schedule;
 import teamphony.service.facade.ScheduleService;
+import teamphony.store.facade.ScheduleStore;
 
 @Service
 public class ScheduleServiceLogic implements ScheduleService {
 
+	@Autowired
+	private ScheduleStore scheduleStore;
+	
 	@Override
 	public void registerSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		
+		scheduleStore.insertSchedule(schedule);
 	}
 
 	@Override
 	public void modifySchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		
+		scheduleStore.updateSchedule(schedule);
 	}
 
 	@Override
 	public void removeSchedule(int scheduleId) {
-		// TODO Auto-generated method stub
-		
+		scheduleStore.deleteSchedule(scheduleId);
 	}
 
 	@Override
 	public List<Schedule> findScheduleByTeamCode(String teamCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return scheduleStore.selectScheduleByTeamCode(teamCode);
 	}
 
 	@Override
 	public List<Schedule> findScheduleByDate(String startDate) {
-		// TODO Auto-generated method stub
-		return null;
+		return scheduleStore.selectScheduleByDate(startDate);
 	}
 
 	@Override
 	public Schedule findScheduleByScheduleId(int scheduleId) {
-		// TODO Auto-generated method stub
-		return null;
+		return scheduleStore.selectScheduleByScheduleId(scheduleId);
 	}
 
 }

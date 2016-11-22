@@ -10,6 +10,7 @@ public class Schedule {
 	private String title;
 	private String place;
 	private String contents;
+	private String teamCode;
 
 	public int getScheduleId() {
 		return scheduleId;
@@ -17,6 +18,14 @@ public class Schedule {
 
 	public void setScheduleId(int scheduleId) {
 		this.scheduleId = scheduleId;
+	}
+
+	public String getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(String teamCode) {
+		this.teamCode = teamCode;
 	}
 
 	public Date getStartDate() {
