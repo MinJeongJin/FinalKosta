@@ -11,46 +11,51 @@ import teamphony.store.facade.TaskStore;
 
 @Service
 public class TaskServiceLogic implements TaskService {
-	
+
 	@Autowired
 	private TaskStore store;
+	
+	
 
 	@Override
 	public void registerTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		store.insertTask(task);
 	}
+	
 
 	@Override
 	public void modifyTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		store.updateTask(task);
+
 	}
+	
 
 	@Override
-	public void removeTask(String taskId) {
-		// TODO Auto-generated method stub
-		
+	public void removeTask(int taskId) {
+		store.deleteTask(taskId);
 	}
+	
 
 	@Override
 	public List<Task> findAllTask() {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectAllTask();
 	}
+	
+	
 
 	@Override
 	public List<Task> findTaskByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectTaskByMemberId(memberId);
 	}
+	
+	
 
 	@Override
-	public Task findTaskByTaskId(String taskId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Task findTaskByTaskId(int taskId) {
+		return store.selectTaskByTaskId(taskId);
 	}
-
-
+	
+	
+	
 
 }

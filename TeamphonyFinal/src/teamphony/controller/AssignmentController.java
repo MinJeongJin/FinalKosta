@@ -11,39 +11,49 @@ import teamphony.service.facade.TaskService;
 @Controller
 @RequestMapping("assignment")
 public class AssignmentController {
-	
+
 	@Autowired
-	private TaskService service ;
-	
+	private TaskService service;
 
-	public String createAssignment(Task task){
-		
-	return null;
+	@RequestMapping("/createAssignment.do")
+	public String createAssignment(Task task) {
+
+		return null;
 	}
 
-	public String  reviseAssignment(Task task){
-		
-	return null;
+	@RequestMapping("/reviseAssignment.do")
+	public String reviseAssignment(Task task) {
+
+		return null;
 	}
 
-	public String  eraseAssignment(Task task){
-		
-	return null;
+	@RequestMapping("/eraseAssignment.do")
+	public String eraseAssignment(Task task) {
+
+		return null;
 	}
 
-	public String  evaluateAssignment(Task task, int starPoint){
+	@RequestMapping("/evaluateAssignment.do")
+	public String evaluateAssignment(Task task, int starPoint) {
+
+		return null;
+	}
+	/*[contextPath]/assignment/searchAssignmentByAssignmentId.do
+		contextPath = /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path) */
+	@RequestMapping("/searchAssignmentByAssignmentId.do")
+	public String searchAssignmentByAssignmentId(int taskId, Model model) {
 		
-	return null;
+		taskId =1;
+		Task task = service.findTaskByTaskId(taskId);
+		model.addAttribute(task);
+
+		return "/assignmentDetail";
 	}
 
-	public String  searchAssignmentByAssignmentId(String taskId , Model model){
-		
-	return null;
+	@RequestMapping("/searchAllAssignment.do")
+	public String searchAllAssignment(Model model) {
+
+		return null;
 	}
 
-	public String  searchAllAssignment(Model model){
-		
-	return null;
-	}
-	
 }

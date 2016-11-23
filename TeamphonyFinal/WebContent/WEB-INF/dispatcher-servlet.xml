@@ -17,4 +17,5 @@
 	<mvc:interceptors>
 		<bean class="teamphony.interceptor.CharacterEncodingInterceptor"/>
 	</mvc:interceptors>
+	
 </beans>

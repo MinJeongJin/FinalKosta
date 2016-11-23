@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>부여 과제 상세</title>
-<link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../resources/css/style.css" rel="stylesheet">
-<script src="../../resources/js/jquery.min.js"></script>
+<title>제출 과제 수정</title>
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../../resources/css/style.css" rel="stylesheet">
+<script src="../../../resources/js/jquery.min.js"></script>
 <script type="text/javascript"
-	src="../../resources/js/schedule/schedule.js"></script>
+	src="../../../resources/js/schedule/schedule.js"></script>
 </head>
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
 	<a href="assignmentList.do">과제리스트 돌아가기</a>
-	<h3>부여 과제 상세</h3>
+	<h3>부여 과제 수정</h3>
 
 	<br>
-	<form>
+	<form action="taskModify.do" method="post">
 		<table class="table">
 			<colgroup>
 				<col width="150">
@@ -27,10 +27,10 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><label for="assignmetTitle" name="assignmetTitle"
-					class="form-control"  >${task.title } 제목입니다.</label></td>
+				<td><input id="assignmetTitle" name="assignmetTitle"
+					class="form-control" type="text" value="" placeholder="${task.tilte } 입력된 제목"></td>
 			</tr>
-			<tr>
+			<tr style="horizontal-align: left;">
 				<th>제출자</th>
 				<td>
 					<ul>
@@ -39,7 +39,6 @@
 						<li style="float: left; width: 70px;">현대경</li>
 						<li style="float: left; width: 70px;">김수호</li>
 						<li style="float: left; width: 70px;">윤영민</li>
-						
 					</ul>
 				</td>
 			</tr>
@@ -54,14 +53,14 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><label for="assignmentContents" name="assignmentContents"
-						class="form-control" rows="7" >${task.contents } 내용 입니다.</label></td>
+				<td><textarea id="assignmentContents" name="assignmentContents"
+						class="form-control" rows="7" placeholder="${task.contents } 입력된 내용"></textarea></td>
 			</tr>
 		</table>
 		<br>
 		<div align="center">
-			<a href="assignmentModify.do?taskId=${task.id}"><input class="btn" type="reset" value="수정"></a> 
-			<a href="assignmentErase.do?taskId=${task.id} "><input class="btn btn-success" type="submit" value="삭제"></a>
+				<a href="assignmentList.do"><input class="btn" type="reset" value="취소"></a> 
+				<a href="assignmentRegisterModigfy.do?memberId=${member.id} "><input class="btn btn-success" type="submit" value="완료"></a>
 		</div>
 	</form>
 	<br>

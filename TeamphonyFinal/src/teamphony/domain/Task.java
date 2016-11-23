@@ -5,18 +5,20 @@ import java.util.List;
 
 public class Task {
 
-	private int taskId;
+	private String taskId;
 	private String title;
 	private String contents;
 	private List<Member> memberList;
 	private Date deadline;
 	private String filePath;
+	private int point;
 
-	public int getTaskId() {
+
+	public String getTaskId() {
 		return taskId;
 	}
 
-	public void setTaskId(int taskId) {
+	public void setTaskId(String taskId) {
 		this.taskId = taskId;
 	}
 
@@ -59,5 +61,15 @@ public class Task {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	
+	
 
 }
