@@ -114,7 +114,7 @@ body,html{
 }
 
 #stripes{
-	background: url(../image/stripes.svg) no-repeat;
+	background: url(../images/stripes.svg) no-repeat;
 	position:absolute;
 	width:27px;
 	height:20px;

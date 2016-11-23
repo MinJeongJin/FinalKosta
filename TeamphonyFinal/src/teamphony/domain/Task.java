@@ -5,20 +5,22 @@ import java.util.List;
 
 public class Task {
 
-	private String taskId;
+	private int taskId;
 	private String title;
 	private String contents;
 	private List<Member> memberList;
 	private Date deadline;
 	private String filePath;
 	private int point;
+	private Date evaluationPeriod;
+	private int flag;
 
 
-	public String getTaskId() {
+	public int getTaskId() {
 		return taskId;
 	}
 
-	public void setTaskId(String taskId) {
+	public void setTaskId(int taskId) {
 		this.taskId = taskId;
 	}
 
@@ -69,6 +71,25 @@ public class Task {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+
+	public Date getEvaluationPeriod() {
+		return evaluationPeriod;
+	}
+
+	public void setEvaluationPeriod(Date evaluationPeriod) {
+		this.evaluationPeriod = evaluationPeriod;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	
+	
+	
 	
 	
 

@@ -26,12 +26,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>	
 	<mappers>
-		<mapper resource="/teamphony/store/mapper/MemberMapper.xml" />
-		<mapper resource="/teamphony/store/mapper/TeamMapper.xml" />
-		<mapper resource="/teamphony/store/mapper/PlaceMapper.xml" />
-		<mapper resource="/teamphony/store/mapper/PostMapper.xml" />
-		<mapper resource="/teamphony/store/mapper/ScheduleMapper.xml" />
-		<mapper resource="/teamphony/store/mapper/TaskMapper.xml" />
+		<mapper resource="/mapper/MemberMapper.xml" />
+		<mapper resource="/mapper/TeamMapper.xml" />
+		<mapper resource="/mapper/PlaceMapper.xml" />
+		<mapper resource="/mapper/PostMapper.xml" />
+		<mapper resource="/mapper/ScheduleMapper.xml" />
+		<mapper resource="/mapper/TaskMapper.xml" />
 	</mappers>
 	
 </configuration>

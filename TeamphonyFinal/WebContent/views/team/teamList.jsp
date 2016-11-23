@@ -52,9 +52,7 @@
 			<div id="wrapper-sorting">
 				<div class="recent object">로그아웃</div>
 				<div class="recent object">마이페이지</div>
-				<a href="teamCreate.jsp">
-				<div class="recent object">팀 생성</div>
-				</a>
+				<a class="recent object" href="teamCreate.jsp">팀 생성</a>
 			</div>
 		</div>
 	</div>
@@ -72,10 +70,12 @@
 					<c:forEach items="${teamList}" var="team" varStatus="teamStatus">
 
 						<figure class="white">
-							<a href="teamPage.do?teamCode=${team.code}"><div id="wrapper-part-info">
+							<a href="teamPage.do?teamCode=${team.code}">
+								<div id="wrapper-part-info">
 									<div class="part-info-image"></div>
 									<div id="part-info">${team.name}</div>
-								</div></a>
+								</div>
+							</a>
 						</figure>
 
 					</c:forEach>
@@ -90,22 +90,23 @@
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript"
-		src="resources/main/js/jquery.scrollTo.min.js"></script>
+		src="../../resources/js/jquery.scrollTo.min.js"></script>
 
 	<script type="text/javascript"
-		src="resources/main/js/jquery.localScroll.min.js"></script>
+		src="../../resources/js/jquery.localScroll.min.js"></script>
 
 	<script type="text/javascript"
-		src="resources/main/js/jquery-animate-css-rotate-scale.js"></script>
-
-	<script type="text/javascript" src="resources/main/js/fastclick.min.js"></script>
+		src="../../resources/js/jquery-animate-css-rotate-scale.js"></script>
 
 	<script type="text/javascript"
-		src="resources/main/js/jquery.animate-colors-min.js"></script>
+		src="../../resources/js/fastclick.min.js"></script>
 
 	<script type="text/javascript"
-		src="resources/main/js/jquery.animate-shadow-min.js"></script>
+		src="../../resources/js/jquery.animate-colors-min.js"></script>
 
-	<script type="text/javascript" src="resources/main/js/main.js"></script>
+	<script type="text/javascript"
+		src="../../resources/js/jquery.animate-shadow-min.js"></script>
+
+	<script type="text/javascript" src="../../resources/js/main.js"></script>
 </body>
 </html>
