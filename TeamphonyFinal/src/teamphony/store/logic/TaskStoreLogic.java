@@ -18,7 +18,7 @@ import teamphony.store.mapper.TaskMapper;
 @Repository
 public class TaskStoreLogic implements TaskStore {
 
-	private static final String Resource = "teamphony/resource/config.xml";
+	private static final String Resource = "config.xml";
 
 	private SqlSessionFactory getSessionFactory() {
 
@@ -49,7 +49,17 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public List<Task> selectAllTask() {
-		return null;
+		
+		
+		SqlSession session =getSessionFactory().openSession();
+		
+		try{
+			
+			TaskMapper mapper =session.getMapper(TaskMapper.class);
+			return mapper.selectAllTask();
+		}finally {
+			session.close();
+		}
 	}
 
 	@Override

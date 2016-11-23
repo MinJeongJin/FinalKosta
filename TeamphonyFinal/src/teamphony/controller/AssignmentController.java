@@ -1,5 +1,7 @@
 package teamphony.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,14 +35,17 @@ public class AssignmentController {
 		return null;
 	}
 
-	@RequestMapping("/evaluateAssignment.do")
+	@RequestMapping("/evaluate.do")
 	public String evaluateAssignment(Task task, int starPoint) {
 
 		return null;
 	}
+	
+	
+	
 	/*[contextPath]/assignment/searchAssignmentByAssignmentId.do
 		contextPath = /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path) */
-	@RequestMapping("/searchAssignmentByAssignmentId.do")
+	@RequestMapping("/searchByAssignmentId.do")
 	public String searchAssignmentByAssignmentId(int taskId, Model model) {
 		
 		taskId =1;
@@ -49,11 +54,19 @@ public class AssignmentController {
 
 		return "/assignmentDetail";
 	}
+	
 
-	@RequestMapping("/searchAllAssignment.do")
+	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(Model model) {
-
-		return null;
+		
+		List<Task> list =service.findAllTask();
+		model.addAttribute(list);
+		
+		System.out.println(list);
+		return "/task/assignment/assignmentList";
 	}
 
+	
+	
+	
 }
