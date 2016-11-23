@@ -1,5 +1,6 @@
 package teamphony.service.logic;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,13 @@ public class ScheduleServiceLogic implements ScheduleService {
 	}
 
 	@Override
-	public List<Schedule> findScheduleByTeamCode(String teamCode) {
-		return scheduleStore.selectScheduleByTeamCode(teamCode);
+	public List<Schedule> findSchedulesByTeamCode(String teamCode) {
+		return scheduleStore.selectSchedulesByTeamCode(teamCode);
 	}
 
 	@Override
-	public List<Schedule> findScheduleByDate(String startDate) {
-		return scheduleStore.selectScheduleByDate(startDate);
+	public List<Schedule> findSchedulesByDate(Date startDate) {
+		return scheduleStore.selectSchedulesByDate(startDate);
 	}
 
 	@Override

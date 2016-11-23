@@ -4,5 +4,37 @@
 
 <mapper namespace="teamphony.store.mapper.ScheduleMapper">
 
+	<insert id="insertSchedule" parameterType="Schedule">
+		INSERT INTO schedule_tb (id, startDate, endDate, title, place, contents, teamCode)
+		VALUES (Schedule_seq.nextval, #{startDate}, #{endDate}, #{title}, #{place}, #{contents}, #{teamCode})
+	</insert>
 
+	<update id="updateSchedule" parameterType="Schedule">
+		UPDATE schedule_tb
+		SET startDate = #{starDate}, endDate = #{endDate}, title = #{title}, place = #{place}, contents = #{contents}
+		WHERE id = #{scheduleId}
+	</update>
+	
+	<delete id="deleteSchedule" parameterType="int">
+		DELETE schedule_tb
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="selectSchedulesByTeamCode" resultType="Schedule" parameterType="int">
+		SELECT id AS scheduleId, startDate, endDate, title
+		FROM schedule_tb
+		WHERE teamCode = #{teamCode}
+	</select>
+	
+	<select id="selectSchedulesByDate" resultType="Schedule" parameterType="date">
+		SELETE id AS scheduleId, startDate, endDate, title, place, contents
+		FROM schedule_tb
+		WHERE startDate = #{startDate}
+	</select>
+	
+	<select id="selectScheduleByScheduleId" resultType="Schedule" parameterType="int">
+		SELECT id AS scheduleId, startDate, endDate, title, place, contents
+		FROM schedule_tb
+		WHERE id = #{id}
+	</select>
 </mapper>

@@ -2,6 +2,7 @@ package teamphony.store.logic;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class ScheduleStoreLogic implements ScheduleStore {
 		
 		try {
 		ScheduleMapper mapper = session.getMapper(ScheduleMapper.class);
-//		mapper.create(schedule);
+		mapper.insertSchedule(schedule);
 		session.commit();
 		} finally {
 			session.close();
@@ -51,7 +52,7 @@ public class ScheduleStoreLogic implements ScheduleStore {
 		
 		try {
 			ScheduleMapper mapper = session.getMapper(ScheduleMapper.class);
-//			mapper.update(schedule);
+			mapper.updateSchedule(schedule);
 			session.commit();
 			} finally {
 				session.close();
@@ -64,7 +65,7 @@ public class ScheduleStoreLogic implements ScheduleStore {
 		
 		try {
 			ScheduleMapper mapper = session.getMapper(ScheduleMapper.class);
-//			mapper.delete(scheduleId);
+			mapper.deleteSchedule(scheduleId);
 			session.commit();
 			} finally {
 				session.close();
@@ -72,14 +73,13 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 
 	@Override
-	public List<Schedule> selectScheduleByTeamCode(String teamCode) {
+	public List<Schedule> selectSchedulesByTeamCode(String teamCode) {
 		SqlSession session = getSessionFactory().openSession();
 		List<Schedule> list = new ArrayList<>();
-		list = null;
 		
 	try {
 		ScheduleMapper mapper = session.getMapper(ScheduleMapper.class);
-//		list = mapper.readByTeamCode(teamCode);
+		list = mapper.selectSchedulesByTeamCode(teamCode);
 		} finally {
 			session.close();
 		}
@@ -87,15 +87,29 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 
 	@Override
-	public List<Schedule> selectScheduleByDate(String startDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Schedule> selectSchedulesByDate(Date startDate) {
+		SqlSession session = getSessionFactory().openSession();
+		List<Schedule> list = new ArrayList<>();
+		
+		try {
+			ScheduleMapper mapper = session.getMapper(ScheduleMapper.class);
+			list = mapper.selectSchedulesByDate(startDate);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 	@Override
 	public Schedule selectScheduleByScheduleId(int scheduleId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = getSessionFactory().openSession();
+		
+		try{
+			ScheduleMapper mapper = session.getMapper(ScheduleMapper.class);
+			return mapper.selectScheduleByScheduleId(scheduleId);
+		} finally {
+			session.close();
+		}
 	}
 
 }
