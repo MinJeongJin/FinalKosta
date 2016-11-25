@@ -10,6 +10,23 @@
 
 	<insert id="insertTask" parameterType="task">
 
+		insert into task_tb(
+
+		id 
+		,TITLE
+		,CONTENTS
+		,DEADLINE
+		,FLAG
+		,POINT)
+
+		values(     
+		 task_tb_id_seq.nextval                
+		,#{title}                
+		,#{contents}
+		,#{deadline}                          
+		,#{flag}         
+		,#{point}                               
+		)
 	</insert>
 
 	<update id="updateTask" parameterType="String">
@@ -17,7 +34,7 @@
 	</update>
 
 
-	<delete id="deleteTask" >
+	<delete id="deleteTask">
 
 	</delete>
 
@@ -26,7 +43,7 @@
 		select
 
 		id AS taskId
-		,TITLE 
+		,TITLE
 		,CONTENTS
 		,DEADLINE
 		,EVALUATIONPERIOD
@@ -43,9 +60,9 @@
 		select
 
 		ID AS taskId
-		,TITLE 
-		,CONTENTS 
-		,DEADLINE 
+		,TITLE
+		,CONTENTS
+		,DEADLINE
 		,EVALUATIONPERIOD
 		,FLAG
 		,POINT AS point
@@ -54,8 +71,7 @@
 
 	</select>
 
-	<select id="selectTaskByMemberId" 
-		resultType="task">
+	<select id="selectTaskByMemberId" resultType="task">
 
 	</select>
 

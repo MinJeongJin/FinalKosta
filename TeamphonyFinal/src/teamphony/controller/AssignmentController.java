@@ -23,32 +23,28 @@ public class AssignmentController {
 	@RequestMapping("/create.do")
 	public String createAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
 		
-		String submitDay = deadlineDay + " "+deadlineHour;
+		String submitDay = deadlineDay + " " +deadlineHour;
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
 		
 		Date deadline =null;   
 		
-		
 		try{
 			deadline = sdf.parse(submitDay);
 		}catch (ParseException e) {
-
 		e.printStackTrace();
 		}
-		
-		System.out.println(deadline);
-		
-		
-		
+
 		Task task =new Task();
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setDeadline(deadline);
 		
-		System.out.println(task);
+		service.registerTask(task);
 		
 		
-		return null;
+		System.out.println("controller");
+		return "redirect:searchAll.do" ;
 	}
 
 	@RequestMapping("/revise.do")
@@ -87,9 +83,9 @@ public class AssignmentController {
 	public String searchAllAssignment(Model model) {
 
 		List<Task> list = service.findAllTask();
-		model.addAttribute(list);
+		model.addAttribute("list",list);
+		
 
-		System.out.println(list);
 		return "/task/assignment/assignmentList";
 	}
 
