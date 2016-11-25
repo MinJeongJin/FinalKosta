@@ -41,7 +41,7 @@
 				<br /> <input type="password" id="loginPw" name="loginPw">
 
 				<br />
-				<c:if test="${result }" ><label>아이디와 비밀번호가 다릅니다.</label></c:if>
+				<c:if test="${result eq 'true'}" ><label>아이디와 비밀번호가 다릅니다.</label><br/></c:if>
 				
 
 				<button type="submit">enter</button>

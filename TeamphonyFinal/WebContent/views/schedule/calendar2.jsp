@@ -234,11 +234,12 @@
                 selectable: true,
                 selectHelper: true,
                 select: function (start, end, allDay) {
+                 	/* 
                      $('#fc_create').click();
-
+                   
                     started = start;
                     ended = end;
-
+              
                     $(".antosubmit").on("click", function () {
                         var title = $("#title").val();
                         var place = $("#place").val();
@@ -269,8 +270,8 @@
                         $('.antoclose').click();
 
                         return false;
-                    });  
-                },
+                        });   */
+                   },
                 
                 eventClick: function (calEvent, jsEvent, view) {
                     $('#fc_edit').click();
@@ -285,7 +286,7 @@
 
                         calendar.fullCalendar('updateEvent', calEvent);
                         $('.antoclose2').click();
-                    });
+                    }); 
 
                     calendar.fullCalendar('unselect');
                 }, 

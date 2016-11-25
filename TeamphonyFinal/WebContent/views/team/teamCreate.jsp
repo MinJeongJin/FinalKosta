@@ -13,7 +13,7 @@
 
 	<h3>팀 등록</h3>
 
-	<form action="makeTeam.do" method="post">
+	<form action="member/create.do" method="post">
 		<table class="table table-bordered">
 			<colgroup>
 				<col width="60" />
