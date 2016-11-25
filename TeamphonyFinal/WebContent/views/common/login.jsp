@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,17 +34,19 @@
 				<h2>Log In</h2>
 			</div>
 
-			<form method="post" action="login.do">
+			<form method="post" action="${pageContext.request.contextPath}/member/login.do">
 				<label for="username">ID</label> <br /> <input type="text"
 					id="loginId" name="loginId"> <br /> <label for="password">PW</label>
 
 				<br /> <input type="password" id="loginPw" name="loginPw">
 
 				<br />
+				<c:if test="${result }" ><label>아이디와 비밀번호가 다릅니다.</label></c:if>
+				
 
 				<button type="submit">enter</button>
 
-				<br /> <a href="register.jsp"><p class="small">Register?</p></a>
+				<br /> <a href="${pageContext.request.contextPath}/views/common/register.jsp"><p class="small">Register?</p></a>
 			</form>
 
 		</div>
