@@ -6,11 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>부여 과제 상세</title>
-<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../../resources/css/style.css" rel="stylesheet">
-<script src="../../../resources/js/jquery.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 <script type="text/javascript"
-	src="../../../resources/js/schedule/schedule.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
 </head>
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
@@ -27,8 +27,8 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><label for="assignmetTitle" name="assignmetTitle"
-					class="form-control"  >${task.title } 제목입니다.</label></td>
+				<td><label for="title" name="title" class="form-control">${task.title }
+						</label></td>
 			</tr>
 			<tr>
 				<th>제출자</th>
@@ -39,31 +39,29 @@
 						<li style="float: left; width: 70px;">현대경</li>
 						<li style="float: left; width: 70px;">김수호</li>
 						<li style="float: left; width: 70px;">윤영민</li>
-						
+
 					</ul>
 				</td>
 			</tr>
 			<tr>
 				<th>제출 기한</th>
 				<td>
-					<label for="date" id="startDay" name="startDay">시작 날짜 
-					<label for="time" id="startHour" name="startHour">시작 시간 - 
-					<label for="date" id="endDay" name="endDay">종료 날짜
-					<label for="time" id="endHour" name="endHour">종료 시간 
-				</td>
+							<label for="deadline" id="deadline" name="deadline">${task.deadline} 
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><label for="assignmentContents" name="assignmentContents"
-						class="form-control" rows="7" >${task.contents } 내용 입니다.</label></td>
+				<td><label for="contents" name="contents" class="form-control"
+					rows="7">${task.contents }</label></td>
 			</tr>
 		</table>
 		<br>
 		<div align="center">
-			<a href="assignmentModify.do?taskId=${task.id}"><input class="btn" type="reset" value="수정"></a> 
-			<a href="assignmentErase.do?taskId=${task.id} "><input class="btn btn-success" type="submit" value="삭제"></a>
+			<a href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId}"><input
+				class="btn" type="reset" value="수정"></a> <a
+				href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId} "><input
+				class="btn btn-success" type="submit" value="삭제"></a>
 		</div>
 	</form>
-	<br>
+	</br>
 </body>
 </html>

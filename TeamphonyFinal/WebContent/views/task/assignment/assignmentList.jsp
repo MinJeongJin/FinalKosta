@@ -58,13 +58,13 @@ h1 {
 							type="submit" value="검색">
 					</form>
 				</div>
-				<table class="table table-hover table-condensed">
+				<table class="table table-hover table-condensed" text-align:center;>
 					<colgroup>
 						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
 					</colgroup>
 					<thead>
 						<tr>
@@ -75,14 +75,16 @@ h1 {
 						</tr>
 					</thead>
 					<tbody>
-							<c:forEach items="${list }" var="taskList" varStatus="sts">
-								<tr>
-									<td>${sts.count }번호</td>
-									<td><a href="assignmentDetail.do?taskId=${task.taskId }">${task.title }제목</a></td>
-									<td>${task.meberList.meber.id }제출자</td>
-									<td>${task.deadline }제출기한</td>
-								</tr>
-							</c:forEach>
+						<c:forEach items="${list }" var="task" varStatus="sts">
+							<tr>
+								<td>${sts.count }</td>
+								<td><a href="${pageContext.request.contextPath}/assignment/searchByAssignmentId.do?taskId=${task.taskId }">${task.title }제목</a></td>
+								<td></td>
+								
+								<td>${task.deadline }</td>
+								<%-- <td>${task.meberList.meber.id }제출자</td> --%>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

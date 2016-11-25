@@ -9,10 +9,10 @@ public class Task {
 	private String title;
 	private String contents;
 	private List<Member> memberList;
-	private Date deadline;
 	private String filePath;
 	private int point;
 	private Date evaluationPeriod;
+	private Date deadline;
 	private int flag;
 
 
