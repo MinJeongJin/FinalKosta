@@ -18,8 +18,12 @@ public class AssignmentController {
 	private TaskService service;
 
 	@RequestMapping("/create.do")
-	public String createAssignment(Task task) {
-
+	public String createAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
+		System.out.println(title);
+		System.out.println(contents);
+		System.out.println(deadlineDay);
+		System.out.println(deadlineHour);
+		System.out.println(0000);
 		return null;
 	}
 
@@ -40,33 +44,29 @@ public class AssignmentController {
 
 		return null;
 	}
-	
-	
-	
-	/*[contextPath]/assignment/searchAssignmentByAssignmentId.do
-		contextPath = /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path) */
+
+	/*
+	 * [contextPath]/assignment/searchAssignmentByAssignmentId.do contextPath =
+	 * /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path)
+	 */
 	@RequestMapping("/searchByAssignmentId.do")
 	public String searchAssignmentByAssignmentId(int taskId, Model model) {
-		
-		taskId =1;
+
+		taskId = 1;
 		Task task = service.findTaskByTaskId(taskId);
 		model.addAttribute(task);
 
 		return "/assignmentDetail";
 	}
-	
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(Model model) {
-		
-		List<Task> list =service.findAllTask();
+
+		List<Task> list = service.findAllTask();
 		model.addAttribute(list);
-		
+
 		System.out.println(list);
 		return "/task/assignment/assignmentList";
 	}
 
-	
-	
-	
 }

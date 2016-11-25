@@ -18,7 +18,7 @@
 	<h3>과제 부여</h3>
 
 	<br>
-	<form action="taskRegister.do" method="post">
+	<form action="${pageContext.request.contextPath}/assignment/create.do" method="post">
 		<table class="table">
 			<colgroup>
 				<col width="150">
@@ -27,7 +27,7 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><input id="assignmetTitle" name="assignmetTitle"
+				<td><input id="title" name="title"
 					class="form-control" type="text" value="" placeholder="제목을 입력하세요."></td>
 			</tr>
 			<tr style="horizontal-align: left;">
@@ -55,22 +55,21 @@
 			<tr>
 				<th>제출 기한</th>
 				<td>
-					<input type="date" id="startDay" name="startDay"> 
-					<input type="time" id="startHour" name="startHour"> - 
-					<input type="date" id="endDay" name="endDay"> 
-					<input type="time" id="endHour" name="endHour">
+					<input type="date" id="deadlineDay" name="deadlineDay"> 
+					<input type="time" id="deadlineHour" name="deadlineHour"> 
+					
 				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea id="assignmentContents" name="assignmentContents"
+				<td><textarea id="contents" name="contents"
 						class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요."></textarea></td>
 			</tr>
 		</table>
 		<br>
 		<div align="center">
 			<a href="assignmentList.do"><input class="btn" type="reset" value="취소"></a> 
-			<a href="assignmentRegister.do?memberId=${member.id} "><input class="btn btn-success" type="submit" value="저장"></a>
+			<input class="btn btn-success" type="submit" value="저장"></a>
 		</div>
 	</form>
 	<br>
