@@ -86,45 +86,54 @@
     <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-
+				<input id="scheduleId" name="scheduleId" type="hidden" value="">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="myModalLabel">일정등록</h4>
                 </div>
+                        <form id="antoform" class="form-horizontal calender" role="form"
+                        action="${pageContext.request.contextPath}/schedule/create.do" method="POST">
                 <div class="modal-body">
                     <div id="testmodal" style="padding: 5px 20px;">
-                        <form id="antoform" class="form-horizontal calender" role="form">
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">제목</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="title" name="title">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요.">
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">장소</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="place" name="place">
+                                    <input type="text" class="form-control" id="place" name="place" placeholder="만나실 곳을 입력하세요.">
                                 </div>
                             </div>
                             
+                            <div class="form-group">
+                            	<label class="col-sm-3 control-label">일시</label>
+                            	<div class="col-sm-9">
+                                    <input type="date" id="startDay" name="startDay">
+                                    <input type="time" id="startHour" name="startHour">
+                                    <br><br>
+                                    <input type="date" id="endDay" name="endDay">
+                                    <input type="time" id="endHour" name="endHour">
+                                </div>
+                            </div>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">내용</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" rows="5" id="descr" name="descr"></textarea>
+                                    <textarea class="form-control" rows="5" id="contents" name="contents" placeholder="일정에 필요한 설명을 남기세요."></textarea>
                                 </div>
                             </div>
-                            
-                            
-                        </form>
-                    </div>
-                </div>
+                   		 </div>
+              		  </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default antoclose" data-dismiss="modal">취소</button>
                     <button type="button" class="btn btn-primary antosubmit">등록</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -140,26 +149,38 @@
                 <div class="modal-body">
 
                     <div id="testmodal2" style="padding: 5px 20px;">
-                        <form id="antoform2" class="form-horizontal calender" role="form">
+                        <form id="antoform2" class="form-horizontal calender" role="form"
+                        action="${pageContext.request.contextPath}/schedule/revise.do" method="POST">
+                        <input id="scheduleId" name="scheduleId" type="hidden" value="${schedule.scheduleId }">	
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">제목</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="title2" name="title2">
+                                    <input type="text" class="form-control" id="title2" name="title2" value="${schedule.title }">
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">장소</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="place2" name="place2">
+                                    <input type="text" class="form-control" id="place2" name="place2" value="${schedule.place }">
                                 </div>
                             </div>
                             
+                            <div class="form-group">
+                            	<label class="col-sm-3 control-label">일시</label>
+                            	<div class="col-sm-9">
+                                    <input type="date" id="startDay" name="startDay" value="${schedule.starDate}">
+                                    <input type="time" id="startHour" name="startHour" value=${schdedule.startTime }>
+                                    <br><br>
+                                    <input type="date" id="endDay" name="endDay" value=${schedule.endDate }>
+                                    <input type="time" id="endHour" name="endHour" value=${schedule.endTime }>
+                                </div>
+                            </div>
                             
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">내용</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" rows="5" id="descr2" name="descr2"></textarea>
+                                    <textarea class="form-control" rows="5" id="contents2" name="contents2">${schedule.contents }</textarea>
                                 </div>
                             </div>
 
@@ -213,7 +234,7 @@
                 selectable: true,
                 selectHelper: true,
                 select: function (start, end, allDay) {
-                    $('#fc_create').click();
+                     $('#fc_create').click();
 
                     started = start;
                     ended = end;
@@ -221,43 +242,41 @@
                     $(".antosubmit").on("click", function () {
                         var title = $("#title").val();
                         var place = $("#place").val();
-                        var descr = $("#descr").val();
+                        var contents = $("#contents").val();
 
-                        var eventData;
+                        var eventData; 
 
                         categoryClass = $("#event_type").val();
 
                         if (title) {
                            eventData = {
                                title: title,
-                                    start: started,
-                                    end: ended,
-                                place: place,
-                               descr: descr,
-                                    allDay: allDay
+                               start: started,
+                               end: ended,
+                               place: place,
+                               contents: contents,
+                               allDay: allDay
                            };
-                            calendar.fullCalendar('renderEvent', eventData,
-                                true // make the event "stick"
-                            );
+                            calendar.fullCalendar('renderEvent', eventData, true); // make the event "stick"
                         }
 
                         $('#title').val('');
                         $('#place').val('');
-                        $('#descr').val('');
+                        $('#contents').val('');
 
                         calendar.fullCalendar('unselect');
 
                         $('.antoclose').click();
 
                         return false;
-                    });
+                    });  
                 },
                 
                 eventClick: function (calEvent, jsEvent, view) {
                     $('#fc_edit').click();
                     $('#title2').val(calEvent.title);
                     $('#place2').val(calEvent.place);
-                    $('#descr2').val(calEvent.descr);
+                    $('#contents2').val(calEvent.contents);
 
                     categoryClass = $("#event_type").val();
 
@@ -269,7 +288,7 @@
                     });
 
                     calendar.fullCalendar('unselect');
-                },
+                }, 
                 
                 editable: true,
                
