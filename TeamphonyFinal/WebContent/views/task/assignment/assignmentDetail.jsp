@@ -59,9 +59,9 @@
 	</table>
 	<br>
 	<div align="center">
-		<input class="btn" type="reset" value="수정"><a
-			href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId}"/></input>
-			 <a
+		<a
+			href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId}" />
+		<input class="btn" type="submit" value="수정"></input> <a
 			href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId} " /><input
 			class="btn btn-success" type="submit" value="삭제"></input>
 	</div>

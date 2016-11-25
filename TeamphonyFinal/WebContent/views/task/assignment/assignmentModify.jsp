@@ -6,11 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>부여 과제 수정</title>
-<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../../resources/css/style.css" rel="stylesheet">
-<script src="../../../resources/js/jquery.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 <script type="text/javascript"
-	src="../../../resources/js/schedule/schedule.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
 </head>
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
@@ -45,10 +45,8 @@
 			<tr>
 				<th>제출 기한</th>
 				<td>
-					<label for="date" id="startDay" name="startDay">시작 날짜 
-					<label for="time" id="startHour" name="startHour">시작 시간 - 
+					
 					<label for="date" id="endDay" name="endDay">종료 날짜
-					<label for="time" id="endHour" name="endHour">종료 시간 
 				</td>
 			</tr>
 			<tr>

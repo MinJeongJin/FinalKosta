@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import teamphony.domain.Task;
 import teamphony.service.facade.TaskService;
@@ -47,13 +48,23 @@ public class AssignmentController {
 
 	@RequestMapping("/revise.do")
 	public String reviseAssignment(int taskId) {
-		
-		
+		taskId = 15;
 		
 
-		return "task/assignment/assignmentList";
+		return "task/assignment/assignmentModify";
+	}
+	
+	@RequestMapping(value="/revise.do", method=RequestMethod.POST)
+	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
+		
+
+		return "";
 	}
 
+	
+	
+	
+	
 	@RequestMapping("/erase.do")
 	public String eraseAssignment(int  taskId) {
 		System.out.println("====================");
@@ -61,6 +72,7 @@ public class AssignmentController {
 		service.removeTask(taskId);
 		
 		System.out.println("삭제 완료!!");
+		System.out.println("은채쩔어!!");
 		return "redirect:searchAll.do";
 	}
 
@@ -76,7 +88,7 @@ public class AssignmentController {
 	 */
 	@RequestMapping("/searchByAssignmentId.do")
 	public String searchAssignmentByAssignmentId(int taskId, Model model) {
-		taskId = 18;
+		taskId = 15;
 		Task task = new Task();
 		task.setTaskId(taskId);
 
