@@ -1,5 +1,8 @@
 package teamphony.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,32 @@ public class AssignmentController {
 
 	@RequestMapping("/create.do")
 	public String createAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
-		System.out.println(title);
-		System.out.println(contents);
-		System.out.println(deadlineDay);
-		System.out.println(deadlineHour);
-		System.out.println(0000);
+		
+		String submitDay = deadlineDay + " "+deadlineHour;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
+		
+		Date deadline =null;   
+		
+		
+		try{
+			deadline = sdf.parse(submitDay);
+		}catch (ParseException e) {
+
+		e.printStackTrace();
+		}
+		
+		System.out.println(deadline);
+		
+		
+		
+		Task task =new Task();
+		task.setTitle(title);
+		task.setContents(contents);
+		task.setDeadline(deadline);
+		
+		System.out.println(task);
+		
+		
 		return null;
 	}
 
