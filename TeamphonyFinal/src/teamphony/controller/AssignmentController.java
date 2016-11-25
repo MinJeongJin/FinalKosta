@@ -46,15 +46,22 @@ public class AssignmentController {
 	}
 
 	@RequestMapping("/revise.do")
-	public String reviseAssignment(Task task) {
+	public String reviseAssignment(int taskId) {
+		
+		
+		
 
-		return null;
+		return "task/assignment/assignmentList";
 	}
 
 	@RequestMapping("/erase.do")
-	public String eraseAssignment(Task task) {
-
-		return null;
+	public String eraseAssignment(int  taskId) {
+		System.out.println("====================");
+		
+		service.removeTask(taskId);
+		
+		System.out.println("삭제 완료!!");
+		return "redirect:searchAll.do";
 	}
 
 	@RequestMapping("/evaluate.do")
@@ -69,11 +76,10 @@ public class AssignmentController {
 	 */
 	@RequestMapping("/searchByAssignmentId.do")
 	public String searchAssignmentByAssignmentId(int taskId, Model model) {
-		taskId = 10;
+		taskId = 18;
 		Task task = new Task();
 		task.setTaskId(taskId);
-		
-		
+
 		task = service.findTaskByTaskId(taskId);
 		System.out.println("deadline : " + task.getDeadline());
 		model.addAttribute("task", task);
