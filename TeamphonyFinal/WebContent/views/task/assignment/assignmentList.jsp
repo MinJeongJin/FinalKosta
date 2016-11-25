@@ -78,7 +78,7 @@ h1 {
 						<c:forEach items="${list }" var="task" varStatus="sts">
 							<tr>
 								<td>${sts.count }</td>
-								<td><a href="assignmentDetail.do?taskId=${task.taskId }">${task.title }제목</a></td>
+								<td><a href="${pageContext.request.contextPath}/assignment/searchByAssignmentId.do?taskId=${task.taskId }">${task.title }제목</a></td>
 								<td></td>
 								
 								<td>${task.deadline }</td>

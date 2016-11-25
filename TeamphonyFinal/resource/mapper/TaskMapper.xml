@@ -55,7 +55,7 @@
 	</select>
 
 
-	<select id="selectTaskByTaskId" resultType="task">
+	<select id="selectTaskByTaskId" resultType="Task">
 
 		select
 

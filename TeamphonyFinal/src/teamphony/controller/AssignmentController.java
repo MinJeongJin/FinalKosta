@@ -22,29 +22,27 @@ public class AssignmentController {
 
 	@RequestMapping("/create.do")
 	public String createAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
-		
-		String submitDay = deadlineDay + " " +deadlineHour;
-		
+
+		String submitDay = deadlineDay + " " + deadlineHour;
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
-		
-		Date deadline =null;   
-		
-		try{
+
+		Date deadline = null;
+
+		try {
 			deadline = sdf.parse(submitDay);
-		}catch (ParseException e) {
-		e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 
-		Task task =new Task();
+		Task task = new Task();
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setDeadline(deadline);
-		
+
 		service.registerTask(task);
-		
-		
-		System.out.println("controller");
-		return "redirect:searchAll.do" ;
+
+		return "redirect:searchAll.do";
 	}
 
 	@RequestMapping("/revise.do")
@@ -71,20 +69,23 @@ public class AssignmentController {
 	 */
 	@RequestMapping("/searchByAssignmentId.do")
 	public String searchAssignmentByAssignmentId(int taskId, Model model) {
+		taskId = 10;
+		Task task = new Task();
+		task.setTaskId(taskId);
+		
+		
+		task = service.findTaskByTaskId(taskId);
+		System.out.println("deadline : " + task.getDeadline());
+		model.addAttribute("task", task);
 
-		taskId = 1;
-		Task task = service.findTaskByTaskId(taskId);
-		model.addAttribute(task);
-
-		return "/assignmentDetail";
+		return "/task/assignment/assignmentDetail";
 	}
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(Model model) {
 
 		List<Task> list = service.findAllTask();
-		model.addAttribute("list",list);
-		
+		model.addAttribute("list", list);
 
 		return "/task/assignment/assignmentList";
 	}
