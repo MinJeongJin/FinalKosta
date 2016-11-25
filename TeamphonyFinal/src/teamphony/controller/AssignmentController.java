@@ -17,19 +17,19 @@ public class AssignmentController {
 	@Autowired
 	private TaskService service;
 
-	@RequestMapping("/createAssignment.do")
+	@RequestMapping("/create.do")
 	public String createAssignment(Task task) {
 
 		return null;
 	}
 
-	@RequestMapping("/reviseAssignment.do")
+	@RequestMapping("/revise.do")
 	public String reviseAssignment(Task task) {
 
 		return null;
 	}
 
-	@RequestMapping("/eraseAssignment.do")
+	@RequestMapping("/erase.do")
 	public String eraseAssignment(Task task) {
 
 		return null;

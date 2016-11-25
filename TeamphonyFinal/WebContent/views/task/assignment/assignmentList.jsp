@@ -75,27 +75,14 @@ h1 {
 						</tr>
 					</thead>
 					<tbody>
-						<table>
-							<tr>
-								<td><c:forEach items="list" var="taskList" varStatus="sts">
-										<c:forEach items="taskList" var="task">
-											<ul>
-												<li style="float: left; width: 90px;">${sts.count }번호</li>
-												<a href="assignmentDetail.do?taskId=${task.taskId }">
-												<li style="float: left; width: 90px;">${task.title }제목</li></a>
-												<li style="float: left; width: 90px;">${task.meberList.meber.id }제출자</li>
-												<li style="float: left; width: 90px;">${task.deadline }제출기한</li>
-											</ul>
-										</c:forEach>
-									</c:forEach></td>
-							</tr>
-							<tr>
-								<td><a href=""><input class="btn" type="reset"
-										value="이전 단계"></a> <a href="assignmentRegister.do "> <input
-										class="btn btn-success" type="submit" value="부여과제 등록"></a>
-								</td>
-							</tr>
-						</table>
+							<c:forEach items="${list }" var="taskList" varStatus="sts">
+								<tr>
+									<td>${sts.count }번호</td>
+									<td><a href="assignmentDetail.do?taskId=${task.taskId }">${task.title }제목</a></td>
+									<td>${task.meberList.meber.id }제출자</td>
+									<td>${task.deadline }제출기한</td>
+								</tr>
+							</c:forEach>
 					</tbody>
 				</table>
 			</div>
