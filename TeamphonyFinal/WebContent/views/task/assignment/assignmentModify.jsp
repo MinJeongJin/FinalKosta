@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 	<h3>부여 과제 수정</h3>
 
 	<br>
-	<form action="taskModify.do" method="post">
+	<form action="${pageContext.request.contextPath}/assignment/revise.do" method="post">
 		<table class="table">
 			<colgroup>
 				<col width="150">
@@ -45,10 +46,19 @@
 			<tr>
 				<th>제출 기한</th>
 				<td>
-					<input type="date" id="deadlineDay" name="deadlineDay" value= "입력된 날짜"> 
-					<input type="time" id="deadlineHour" name="deadlineHour" value= "입력된 시간"> 
+					  
+					<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/><br>
 				</td>
 			</tr>
+			<tr>
+			<th>수정 기한</th>
+				<td>
+					<input type="date" min="2016-02-01" id="deadlineDay" name="deadlineDay" value= "">
+					<input type="time" id="deadlineHour" name="deadlineHour" value= "">  
+				
+				</td>
+			</tr>
+			
 			<tr>
 				<th>내용</th>
 				<td><textarea id="contents" name="contents"
@@ -58,7 +68,7 @@
 		<br>
 		<div align="center">
 				<a href="assignmentList.do"><input class="btn" type="reset" value="취소"></a> 
-				<a href="${pageContext.request.contextPath}/assignment/revise.do?memberId=${member.id} "><input class="btn btn-success" type="submit" value="완료"></a>
+				<input class="btn btn-success" type="submit" value="완료"></a>
 		</div>
 	</form>
 	<br>

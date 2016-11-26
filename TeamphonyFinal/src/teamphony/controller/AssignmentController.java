@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,15 +32,20 @@ public class AssignmentController {
 		Date deadline = null;
 
 		try {
+			
 			deadline = sdf.parse(submitDay);
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
 		Task task = new Task();
+
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setDeadline(deadline);
+		
+		System.out.println("저장된 날짜  javaType= "+task);
 
 		service.registerTask(task);
 
@@ -49,44 +55,59 @@ public class AssignmentController {
 	@RequestMapping("/revise.do")
 	public String reviseAssignment(String taskId, Model model) {
 		int taskIdNo;
-		System.out.println("======start=========");
-		System.out.println(taskId);
-		
+		int deadlineYear;
+		int deadlineMonth;
+		int deadlineDay;
+		long deadlineTime;
+		int time;
+
 		taskIdNo = Integer.parseInt(taskId);
+
+		Task task = service.findTaskByTaskId(taskIdNo);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
+		String deadline = sdf.format(task.getDeadline());
 		
 		
+		model.addAttribute("task" ,task);
+		model.addAttribute("deadline" ,deadline);
 		
-		System.out.println("taskId = " +taskId);
-		
-		Task task =service.findTaskByTaskId(taskIdNo);
-		
-		System.out.println(task.getTitle());
-		System.out.println(task.getContents());
-		System.out.println(task.getDeadline());
-		
-		model.addAttribute("task", task);
+
 		return "task/assignment/assignmentModify";
 	}
-	
-	
-	
-	@RequestMapping(value="/revise.do", method=RequestMethod.POST)
-	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
-		
 
-		return "";
+	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
+	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
+		System.out.println("start!!!!!!!!!!!!!!!!!!!!!!");
+		Task task = new Task();
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-mm-dd HH:MM");
+			
+		try {
+			
+			Date inputDate= null;
+			inputDate = sdf.parse(deadlineDay);
+			
+			task.setTitle(title);
+			task.setContents(contents);
+			task.setDeadline(inputDate);
+			task.setTitle(title);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		service.modifyTask(task);
+		
+		
+		return "redirect:/task/assignment/assignmentList";
 	}
 
-	
-	
-	
-	
 	@RequestMapping("/erase.do")
-	public String eraseAssignment(int  taskId) {
+	public String eraseAssignment(int taskId) {
 		System.out.println("====================");
-		
+
 		service.removeTask(taskId);
-		
+
 		System.out.println("삭제 완료!!");
 		System.out.println("은채쩔어!!");
 		return "redirect:searchAll.do";
