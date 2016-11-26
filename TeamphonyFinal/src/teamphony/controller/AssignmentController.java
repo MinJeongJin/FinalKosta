@@ -32,9 +32,9 @@ public class AssignmentController {
 		Date deadline = null;
 
 		try {
-			
+
 			deadline = sdf.parse(submitDay);
-			
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -44,8 +44,8 @@ public class AssignmentController {
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setDeadline(deadline);
-		
-		System.out.println("저장된 날짜  javaType= "+task);
+
+		System.out.println("저장된 날짜  javaType= " + task);
 
 		service.registerTask(task);
 
@@ -55,51 +55,36 @@ public class AssignmentController {
 	@RequestMapping("/revise.do")
 	public String reviseAssignment(String taskId, Model model) {
 		int taskIdNo;
-		int deadlineYear;
-		int deadlineMonth;
-		int deadlineDay;
-		long deadlineTime;
-		int time;
-
 		taskIdNo = Integer.parseInt(taskId);
 
 		Task task = service.findTaskByTaskId(taskIdNo);
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
-		String deadline = sdf.format(task.getDeadline());
-		
-		
-		model.addAttribute("task" ,task);
-		model.addAttribute("deadline" ,deadline);
-		
+		model.addAttribute("task", task);
 
 		return "task/assignment/assignmentModify";
 	}
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
-	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
-		System.out.println("start!!!!!!!!!!!!!!!!!!!!!!");
-		Task task = new Task();
-		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-mm-dd HH:MM");
-			
+	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour, Model model) {
+		
+		System.out.println("start revise!!!!!!!!!!!!!!!!!!!!!!");
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
+		
+		String submitDay = deadlineDay + " " + deadlineHour;
+		Date deadline =null;
+		
 		try {
-			
-			Date inputDate= null;
-			inputDate = sdf.parse(deadlineDay);
-			
-			task.setTitle(title);
-			task.setContents(contents);
-			task.setDeadline(inputDate);
-			task.setTitle(title);
-			
+			deadline = sdf.parse(submitDay);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
+		int taskId = 15;
+		Task task = new Task(taskId, title,contents,deadline);
+		
 		service.modifyTask(task);
 		
-		
-		return "redirect:/task/assignment/assignmentList";
+		return "redirect:searchAll.do";
 	}
 
 	@RequestMapping("/erase.do")

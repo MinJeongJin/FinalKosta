@@ -6,10 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>일정등록</title>
-<link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../resources/css/style.css" rel="stylesheet">
-<script src="../../resources/js/jquery.min.js"></script>
-<script type="text/javascript" src="../../resources/js/schedule/schedule.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/schedule/schedule.js"></script>
 </head>
 <body>
 	<input id="scheduleId" name="scheduleId" type="hidden" value="">
@@ -17,7 +18,7 @@
 	<h3>일정등록</h3>
 
 	<br>
-	<form action="insertSchedule.do" method="post">
+	<form action="${pageContext.request.contextPath}/schedule/create.do" method="post">
 		<table class="table">
 			<colgroup>
 				<col width="150">
@@ -36,10 +37,10 @@
 			<tr>
 				<th>일시</th>
 				<td>
-				<input type="date" id="startDay" name="startDay">
+				<input type="date" id="startDay" name="startDay" value="${startDay }">
 				<input type="time" id="startHour" name="startHour">
 				-
-				<input type="date" id="endDay" name="endDay">
+				<input type="date" id="endDay" name="endDay" value="${endDay }">
 				<input type="time" id="endHour" name="endHour">
 				</td>
 			</tr>
