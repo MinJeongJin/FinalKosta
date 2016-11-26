@@ -35,8 +35,6 @@ public class TaskStoreLogic implements TaskStore {
 	public void insertTask(Task task) {
 
 		System.out.println(task);
-		
-		
 
 		SqlSession session = getSessionFactory().openSession();
 
@@ -48,14 +46,14 @@ public class TaskStoreLogic implements TaskStore {
 			System.out.println(task.getFlag());
 			System.out.println(task.getTitle());
 			System.out.println(task.getDeadline());
-			
+
 			mapper.insertTask(task);
 			session.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
-		}finally {
+		} finally {
 			session.close();
 			System.out.println("asdfoiasjdfio end");
 		}
@@ -63,25 +61,39 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public void updateTask(Task task) {
+		SqlSession session = getSessionFactory().openSession();
 
+		try {
+			
+			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			mapper.updateTask(task);
+			session.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		}
+		finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public void deleteTask(int taskId) {
-		
+
 		SqlSession session = getSessionFactory().openSession();
-		
-		try{
-			
+
+		try {
+
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.deleteTask(taskId);
 			session.commit();
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			session.rollback();
-		}finally{
+		} finally {
 			session.close();
 		}
 

@@ -13,17 +13,17 @@
     <title>Teamphony !  </title>
 
     <!-- Bootstrap -->
-    <link href="../../resources/schedule/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/schedule/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../../resources/schedule/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/schedule/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../../resources/schedule/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- FullCalendar -->
-    <link href="../../resources/schedule/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
-    <link href="../../resources/schedule/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
+    <link href="${pageContext.request.contextPath}/resources/schedule/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/schedule/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
 
     <!-- Custom styling plus plugins -->
-    <link href="../../resources/schedule/build/css/custom.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <!-- calendar modal -->
+    <%-- <!-- calendar modal -->
     <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -197,22 +197,22 @@
 
     <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
     <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-    <!-- /calendar modal -->
+    <!-- /calendar modal -->  --%>
 
     <!-- jQuery -->
-    <script src="../../resources/schedule/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../../resources/schedule/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../../resources/schedule/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../../resources/schedule/vendors/nprogress/nprogress.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.js"></script>
     <!-- FullCalendar -->
-    <script src="../../resources/schedule/vendors/moment/min/moment.min.js"></script>
-    <script src="../../resources/schedule/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/moment/min/moment.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../../resources/schedule/build/js/custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/schedule/build/js/custom.min.js"></script>
 
     <!-- FullCalendar -->
     <script>
@@ -234,13 +234,23 @@
                 selectable: true,
                 selectHelper: true,
                 select: function (start, end, allDay) {
+<<<<<<< HEAD
+                    /*  $('#fc_create').click(); */
+
+=======
                  	/* 
                      $('#fc_create').click();
                    
+>>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
                     started = start;
                     ended = end;
+<<<<<<< HEAD
+
+                    /* $(".antosubmit").on("click", function () {
+=======
               
                     $(".antosubmit").on("click", function () {
+>>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
                         var title = $("#title").val();
                         var place = $("#place").val();
                         var contents = $("#contents").val();
@@ -270,10 +280,15 @@
                         $('.antoclose').click();
 
                         return false;
+<<<<<<< HEAD
+                    });    */
+                },
+=======
                         });   */
                    },
+>>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
                 
-                eventClick: function (calEvent, jsEvent, view) {
+               /*  eventClick: function (calEvent, jsEvent, view) {
                     $('#fc_edit').click();
                     $('#title2').val(calEvent.title);
                     $('#place2').val(calEvent.place);
@@ -290,7 +305,7 @@
 
                     calendar.fullCalendar('unselect');
                 }, 
-                
+                 */
                 editable: true,
                
             });
