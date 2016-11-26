@@ -15,6 +15,7 @@ public class MemberServiceLogic implements MemberService {
 
 	@Override
 	public void registerMember(Member member) {
+		System.out.println("service "+ member.getMemberId());
 		store.insertMember(member);
 	}
 

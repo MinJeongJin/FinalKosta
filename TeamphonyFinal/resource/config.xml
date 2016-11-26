@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			</dataSource>
 		</environment>
 	</environments>	
+	
 	<mappers>
 		<mapper resource="/mapper/MemberMapper.xml" />
 		<mapper resource="/mapper/TeamMapper.xml" />

@@ -35,6 +35,7 @@ public class MemberStoreLogic implements MemberStore {
 		SqlSession session = getSessionFactory().openSession();
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			System.out.println("store "+ member.getMemberId());
 			mapper.insertMember(member);
 			session.commit();
 		} catch (Exception e) {

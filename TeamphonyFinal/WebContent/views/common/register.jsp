@@ -51,33 +51,33 @@
 						<h3>계정을 생성하세요</h3>
 					</header>
 				</div>
-				<form action="${pageContext.request.contextPath}/member/create.do"
-					method="post" enctype="multipart/form-data">
+				<form action="${pageContext.request.contextPath}/member/create.do" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="starPoint">
 					<div class="col-md-6 right-side">
 						<img src="resources/images/default.png" alt="사진없음"
-							id="profileImage" width="90" height="110"> <br> <input
-							type="file" id="imagePath" name="imagePath" />
+							id="profileImage" width="90" height="110"> <br> 
+							<input type="file" id="imagePath" name="imagePath" />
 						<button type="button" onclick="myFunction()">등록</button>
 						<span class="input input--hoshi"> 
-							<input class="input__field input__field--hoshi" type="text" id="id"name="memberId" /> 
+							<input class="input__field input__field--hoshi" type="text" id="memberId" name="memberId" /> 
 							<label class="input__label input__label--hoshi input__label--hoshi-color-3" for="name"> 
 								<span class="input__label-content input__label-content--hoshi">ID</span>
 							</label>
 						</span> 
-						<span class="input input--hoshi"> <input class="input__field input__field--hoshi" type="text" id="alias" name="alias" /> 
+						<span class="input input--hoshi">
+							<input class="input__field input__field--hoshi" type="text" id="alias" name="alias" /> 
 							<label class="input__label input__label--hoshi input__label--hoshi-color-3" for="email"> 
 								<span class="input__label-content input__label-content--hoshi">별명</span>
 							</label>
 						</span> 
 						<span class="input input--hoshi"> 
-						<input class="input__field input__field--hoshi" type="password"
-							id="password" name="password" /> <label
-							class="input__label input__label--hoshi input__label--hoshi-color-3"
-							for="password"> <span
-								class="input__label-content input__label-content--hoshi">비밀번호</span>
-						</label>
-						</span> <span class="input input--hoshi"></span>
+							<input class="input__field input__field--hoshi" type="password" id="password" name="password" /> 
+							<label class="input__label input__label--hoshi input__label--hoshi-color-3" for="password"> 
+								<span class="input__label-content input__label-content--hoshi">비밀번호</span>
+							</label>
+						</span> 
+							<span class="input input--hoshi">
+						</span>
 						<div class="cta">
 							<button type="submit" class="btn btn-primary pull-left">회원가입</button>
 						</div>

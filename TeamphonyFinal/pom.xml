@@ -64,5 +64,12 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.jfinal/cos -->
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>cos</artifactId>
+			<version>26Dec2008</version>
+		</dependency>
+
 	</dependencies>
 </project>

@@ -7,12 +7,21 @@ public class Member {
 	private String alias;
 	private String imagePath;
 	private int starPoint;
-	
-	public Member(){}
-	
-	public Member(String id,String password){
-		this.memberId = id;
+
+	public Member() {
+	}
+
+	public Member(String memberId, String password) {
+		this.memberId = memberId;
 		this.password = password;
+	}
+
+	public Member(String memberId, String password, String alias, String imagePath) {
+		this.memberId = memberId;
+		this.password = password;
+		this.alias = alias;
+		this.imagePath = imagePath;
+		this.starPoint = 0;
 	}
 
 	public String getMemberId() {
