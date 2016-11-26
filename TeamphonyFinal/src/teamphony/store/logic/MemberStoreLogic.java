@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import teamphony.domain.Member;
 import teamphony.store.facade.MemberStore;
 import teamphony.store.mapper.MemberMapper;
+import teamphony.store.mapper.TaskMapper;
 
 @Repository
 public class MemberStoreLogic implements MemberStore {
@@ -32,14 +33,18 @@ public class MemberStoreLogic implements MemberStore {
 	
 	@Override
 	public void insertMember(Member member) {
+
 		SqlSession session = getSessionFactory().openSession();
+
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
-			System.out.println("store "+ member.getMemberId());
 			mapper.insertMember(member);
 			session.commit();
+
 		} catch (Exception e) {
-		}finally{
+			e.printStackTrace();
+			session.rollback();
+		} finally {
 			session.close();
 		}
 		
@@ -59,8 +64,17 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public Member selectMemberByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		Member member = new Member();
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			member = mapper.selectMemberByMemberId(memberId);
+		} catch (Exception e) {
+		}finally{
+			session.close();
+		}
+		
+		return member;
 	}
 
 }

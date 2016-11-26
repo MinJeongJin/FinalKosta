@@ -30,10 +30,10 @@ public class MemberController {
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
 		Member member = new Member(loginId, loginPw);
-		// boolean result = service.checkMember(member);
-		if (loginId.equals("admin")) {
+		 boolean result = service.checkMember(member);
+		if (result) {
 			session.setAttribute("loginId", loginId);
-			return "/team/teamList";
+			return "redirect:../views/team/teamList.jsp";
 		} else {
 			model.addAttribute("result", "true");
 			return "/common/login";
@@ -123,6 +123,11 @@ public class MemberController {
 		
 		String imagePath = imgPath.substring(104,imgPath.length());
 		member.setImagePath(imagePath);
+		
+		System.out.println(member.getMemberId());
+		System.out.println(member.getPassword());
+		System.out.println(member.getAlias());
+		System.out.println(member.getImagePath());
 		
 		service.registerMember(member);
 

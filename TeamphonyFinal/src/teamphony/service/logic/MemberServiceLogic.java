@@ -9,31 +9,35 @@ import teamphony.store.facade.MemberStore;
 
 @Service
 public class MemberServiceLogic implements MemberService {
-	
+
 	@Autowired
 	private MemberStore store;
 
 	@Override
 	public void registerMember(Member member) {
-		System.out.println("service "+ member.getMemberId());
+		System.out.println("service " + member.getMemberId());
 		store.insertMember(member);
 	}
 
 	@Override
 	public void modifyMember(Member member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeMember(String memberId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean checkMember(Member member) {
-		// TODO Auto-generated method stub
+
+		Member loginMember = store.selectMemberByMemberId(member.getMemberId());
+		if(!loginMember.getMemberId().isEmpty()&&loginMember.getPassword().equals(member.getPassword())){
+			return true;
+		}
 		return false;
 	}
 
@@ -46,7 +50,7 @@ public class MemberServiceLogic implements MemberService {
 	@Override
 	public void saveStarPoint(Member member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

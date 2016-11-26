@@ -34,29 +34,7 @@ public class TaskStoreLogic implements TaskStore {
 	@Override
 	public void insertTask(Task task) {
 
-		System.out.println(task);
-
-		SqlSession session = getSessionFactory().openSession();
-
-		try {
-			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			System.out.println("==============================");
-			System.out.println(task.getContents());
-			System.out.println(task.getFilePath());
-			System.out.println(task.getFlag());
-			System.out.println(task.getTitle());
-			System.out.println(task.getDeadline());
-
-			mapper.insertTask(task);
-			session.commit();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.rollback();
-		} finally {
-			session.close();
-			System.out.println("asdfoiasjdfio end");
-		}
+		
 	}
 
 	@Override

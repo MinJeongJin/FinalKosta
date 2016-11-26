@@ -15,11 +15,17 @@
 		)
 		VALUES
 		(
-		"qwe",
-		"asd"',
-		"asd",
-		"asd"
-		);
+		#{memberId},
+		#{password},
+		#{alias},
+		#{imagePath}
+		)
 	</insert>
+	
+	<select id="selectMemberByMemberId" parameterType="String" resultType="Member">
+		select id As memberId, password, alias, imagePath
+		from member_tb
+		where id = #{memberId}
+	</select>
 
 </mapper>
