@@ -22,14 +22,24 @@
 		values(
 		task_tb_id_seq.nextval
 		,#{title}
-		,#{contents}
-		,#{deadline}
-		,#{flag}
-		,#{point}
+		,#{contents, jdbcType=DATE}
+		,#{deadline , jdbcType=INTEGER}
+		,#{flag , jdbcType=INTEGER}
+		,#{point , jdbcType=INTEGER}
 		)
 	</insert>
-
-	<update id="updateTask" parameterType="String">
+	
+	<update id="updateTask" parameterType="task">
+			UPDATE TASK_TB
+			SET 
+				ID						= #{taskId}
+				,TITLE                  = #{title}
+				,CONTENTS               = #{contents}
+				,DEADLINE               = #{deadline , jdbcType=DATE}
+				,EVALUATIONPERIOD       = #{evaluationPeriod , jdbcType=DATE}
+				,FLAG                   = #{flag , jdbcType=INTEGER}
+				,POINT                  = #{point , jdbcType=INTEGER}
+			WHERE ID	= #{taskId}
 	</update>
 
 

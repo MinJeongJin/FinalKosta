@@ -14,6 +14,47 @@ public class Task {
 	private Date evaluationPeriod;
 	private Date deadline;
 	private int flag;
+	
+	public Task() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Task(int taskId, String title, String contents, Date deadline) {
+		super();
+		this.taskId = taskId;
+		this.title = title;
+		this.contents = contents;
+		this.deadline = deadline;
+	}
+	
+	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
+			Date evaluationPeriod, Date deadline) {
+		super();
+		this.taskId = taskId;
+		this.title = title;
+		this.contents = contents;
+		this.memberList = memberList;
+		this.filePath = filePath;
+		this.point = point;
+		this.evaluationPeriod = evaluationPeriod;
+		this.deadline = deadline;
+	}
+	
+	
+	
+	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
+			Date evaluationPeriod, Date deadline, int flag) {
+		super();
+		this.taskId = taskId;
+		this.title = title;
+		this.contents = contents;
+		this.memberList = memberList;
+		this.filePath = filePath;
+		this.point = point;
+		this.evaluationPeriod = evaluationPeriod;
+		this.deadline = deadline;
+		this.flag = flag;
+	}
 
 
 	public int getTaskId() {
@@ -87,6 +128,12 @@ public class Task {
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
+
+
+
+	
+
+	
 	
 	
 	
