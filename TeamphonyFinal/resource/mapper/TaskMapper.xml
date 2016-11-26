@@ -42,7 +42,6 @@
 			WHERE ID	= #{taskId}
 	</update>
 
-
 	<select id="selectAllTask" resultType="Task">
 		select
 
