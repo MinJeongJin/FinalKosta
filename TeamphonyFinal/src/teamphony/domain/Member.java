@@ -7,6 +7,13 @@ public class Member {
 	private String alias;
 	private String imagePath;
 	private int starPoint;
+	
+	public Member(){}
+	
+	public Member(String id,String password){
+		this.memberId = id;
+		this.password = password;
+	}
 
 	public String getMemberId() {
 		return memberId;

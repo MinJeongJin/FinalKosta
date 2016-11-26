@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import teamphony.domain.Task;
 import teamphony.service.facade.TaskService;
@@ -46,15 +47,49 @@ public class AssignmentController {
 	}
 
 	@RequestMapping("/revise.do")
-	public String reviseAssignment(Task task) {
+	public String reviseAssignment(String taskId, Model model) {
+		int taskIdNo;
+		System.out.println("======start=========");
+		System.out.println(taskId);
+		
+		taskIdNo = Integer.parseInt(taskId);
+		
+		
+		
+		System.out.println("taskId = " +taskId);
+		
+		Task task =service.findTaskByTaskId(taskIdNo);
+		
+		System.out.println(task.getTitle());
+		System.out.println(task.getContents());
+		System.out.println(task.getDeadline());
+		
+		model.addAttribute("task", task);
+		return "task/assignment/assignmentModify";
+	}
+	
+	
+	
+	@RequestMapping(value="/revise.do", method=RequestMethod.POST)
+	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
+		
 
-		return null;
+		return "";
 	}
 
+	
+	
+	
+	
 	@RequestMapping("/erase.do")
-	public String eraseAssignment(Task task) {
-
-		return null;
+	public String eraseAssignment(int  taskId) {
+		System.out.println("====================");
+		
+		service.removeTask(taskId);
+		
+		System.out.println("삭제 완료!!");
+		System.out.println("은채쩔어!!");
+		return "redirect:searchAll.do";
 	}
 
 	@RequestMapping("/evaluate.do")
@@ -69,11 +104,10 @@ public class AssignmentController {
 	 */
 	@RequestMapping("/searchByAssignmentId.do")
 	public String searchAssignmentByAssignmentId(int taskId, Model model) {
-		taskId = 10;
+		taskId = 15;
 		Task task = new Task();
 		task.setTaskId(taskId);
-		
-		
+
 		task = service.findTaskByTaskId(taskId);
 		System.out.println("deadline : " + task.getDeadline());
 		model.addAttribute("task", task);

@@ -4,4 +4,8 @@
 
 <mapper namespace="teamphony.store.mapper.MemberMapper">
 
+	<insert id="insertMember" parameterType="Member">
+		insert into member_tb(id,password,alias,imagePath) values(memberId,password,alias,"test");
+	</insert>
+
 </mapper>

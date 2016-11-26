@@ -18,7 +18,7 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Pacifico'
 	rel='stylesheet' type='text/css'>
-<link href='../../resources/css/style.css' rel='stylesheet'
+<link href='${pageContext.request.contextPath}/resources/main/css/style.css' rel='stylesheet'
 	type='text/css'>
 
 </head>
@@ -52,7 +52,7 @@
 			<div id="wrapper-sorting">
 				<div class="recent object">로그아웃</div>
 				<div class="recent object">마이페이지</div>
-				<a class="recent object" href="teamCreate.jsp">팀 생성</a>
+				<a class="recent object" href="${pageContext.request.contextPath}/views/team/teamCreate.jsp">팀 생성</a>
 			</div>
 		</div>
 	</div>
@@ -90,23 +90,23 @@
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript"
-		src="../../resources/js/jquery.scrollTo.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/main/js/jquery.scrollTo.min.js"></script>
 
 	<script type="text/javascript"
-		src="../../resources/js/jquery.localScroll.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/main/js/jquery.localScroll.min.js"></script>
 
 	<script type="text/javascript"
-		src="../../resources/js/jquery-animate-css-rotate-scale.js"></script>
+		src="${pageContext.request.contextPath}/resources/main/js/jquery-animate-css-rotate-scale.js"></script>
 
 	<script type="text/javascript"
-		src="../../resources/js/fastclick.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/main/js/fastclick.min.js"></script>
 
 	<script type="text/javascript"
-		src="../../resources/js/jquery.animate-colors-min.js"></script>
+		src="${pageContext.request.contextPath}/resources/main/js/jquery.animate-colors-min.js"></script>
 
 	<script type="text/javascript"
-		src="../../resources/js/jquery.animate-shadow-min.js"></script>
+		src="${pageContext.request.contextPath}/resources/main/js/jquery.animate-shadow-min.js"></script>
 
-	<script type="text/javascript" src="../../resources/js/main.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
 </body>
 </html>

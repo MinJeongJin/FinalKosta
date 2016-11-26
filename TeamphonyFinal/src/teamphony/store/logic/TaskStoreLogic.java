@@ -68,6 +68,22 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public void deleteTask(int taskId) {
+		
+		SqlSession session = getSessionFactory().openSession();
+		
+		try{
+			
+			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			mapper.deleteTask(taskId);
+			session.commit();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+			session.rollback();
+		}finally{
+			session.close();
+		}
 
 	}
 
@@ -91,7 +107,6 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			return mapper.selectTaskByTaskId(taskId);
 

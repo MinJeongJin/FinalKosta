@@ -1,17 +1,21 @@
 package teamphony.service.logic;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import teamphony.domain.Member;
 import teamphony.service.facade.MemberService;
+import teamphony.store.facade.MemberStore;
 
 @Service
 public class MemberServiceLogic implements MemberService {
+	
+	@Autowired
+	private MemberStore store;
 
 	@Override
 	public void registerMember(Member member) {
-		// TODO Auto-generated method stub
-		
+		store.insertMember(member);
 	}
 
 	@Override
