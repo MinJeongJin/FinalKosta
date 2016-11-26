@@ -18,7 +18,7 @@
 </head>
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="assignmentList.do">과제리스트 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/assignment/searchAll.do">과제리스트 돌아가기</a>
 	<h3>부여 과제 상세</h3>
 
 	<br>
@@ -27,7 +27,6 @@
 		<colgroup>
 			<col width="150">
 			<col width="*">
-
 		</colgroup>
 		<tr>
 			<th>제목</th>
@@ -60,7 +59,7 @@
 	<br>
 	<div align="center">
 		<a
-			href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId}" />
+			href="${pageContext.request.contextPath}/assignment/revise.do?taskId=15" />
 		<input class="btn" type="submit" value="수정"></input> <a
 			href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId} " /><input
 			class="btn btn-success" type="submit" value="삭제"></input>

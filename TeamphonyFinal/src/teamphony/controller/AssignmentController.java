@@ -47,12 +47,28 @@ public class AssignmentController {
 	}
 
 	@RequestMapping("/revise.do")
-	public String reviseAssignment(int taskId) {
-		taskId = 15;
+	public String reviseAssignment(String taskId, Model model) {
+		int taskIdNo;
+		System.out.println("======start=========");
+		System.out.println(taskId);
 		
-
+		taskIdNo = Integer.parseInt(taskId);
+		
+		
+		
+		System.out.println("taskId = " +taskId);
+		
+		Task task =service.findTaskByTaskId(taskIdNo);
+		
+		System.out.println(task.getTitle());
+		System.out.println(task.getContents());
+		System.out.println(task.getDeadline());
+		
+		model.addAttribute("task", task);
 		return "task/assignment/assignmentModify";
 	}
+	
+	
 	
 	@RequestMapping(value="/revise.do", method=RequestMethod.POST)
 	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour) {
