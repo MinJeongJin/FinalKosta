@@ -29,10 +29,9 @@ public class MemberController {
 
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
-		Member member = new Member(loginId, loginPw);
-		 boolean result = service.checkMember(member);
-		if (result) {
-			session.setAttribute("loginId", loginId);
+		Member result = service.findMemberByMemberId(loginId);
+		if (!result.getMemberId().isEmpty()&&result.getPassword().equals(loginPw)) {
+			session.setAttribute("member",result);
 			return "redirect:../views/team/teamList.jsp";
 		} else {
 			model.addAttribute("result", "true");
@@ -61,8 +60,7 @@ public class MemberController {
 
 			// multipart form request receive
 			// file is generated in directory you mentioned
-			MultipartRequest multipartRequest = new MultipartRequest(request, savePath, MAX_SIZE, "UTF-8",
-					new DefaultFileRenamePolicy());
+			MultipartRequest multipartRequest = new MultipartRequest(request, savePath, MAX_SIZE, "UTF-8", new DefaultFileRenamePolicy());
 
 			// value setting
 			id = multipartRequest.getParameter("memberId");
@@ -120,14 +118,8 @@ public class MemberController {
 		member.setMemberId(id);
 		member.setPassword(pw);
 		member.setAlias(alias);
+		member.setImagePath(imgPath);
 		
-		String imagePath = imgPath.substring(104,imgPath.length());
-		member.setImagePath(imagePath);
-		
-		System.out.println(member.getMemberId());
-		System.out.println(member.getPassword());
-		System.out.println(member.getAlias());
-		System.out.println(member.getImagePath());
 		
 		service.registerMember(member);
 

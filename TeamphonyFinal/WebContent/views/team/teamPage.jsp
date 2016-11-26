@@ -9,7 +9,7 @@
 <title>Welcome to Teamphony</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../../resources/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 
 <style type="text/css">
 .date {
@@ -122,11 +122,11 @@ table tr td {
 	</div>
 
 	<!-- Scripts -->
-	<script src="../../resources/js/jquery.min.js"></script>
-	<script src="../../resources/js/jquery.scrolly.min.js"></script>
-	<script src="../../resources/js/skel.min.js"></script>
-	<script src="../../resources/js/util.js"></script>
-	<script src="../../resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.scrolly.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/skel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>

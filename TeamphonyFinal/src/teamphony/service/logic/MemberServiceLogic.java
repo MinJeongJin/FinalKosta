@@ -43,8 +43,7 @@ public class MemberServiceLogic implements MemberService {
 
 	@Override
 	public Member findMemberByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectMemberByMemberId(memberId);
 	}
 
 	@Override
