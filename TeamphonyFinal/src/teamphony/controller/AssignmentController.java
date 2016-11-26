@@ -45,8 +45,6 @@ public class AssignmentController {
 		task.setContents(contents);
 		task.setDeadline(deadline);
 
-		System.out.println("저장된 날짜  javaType= " + task);
-
 		service.registerTask(task);
 
 		return "redirect:searchAll.do";
@@ -65,8 +63,6 @@ public class AssignmentController {
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
 	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour, Model model) {
-		
-		System.out.println("start revise!!!!!!!!!!!!!!!!!!!!!!");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
 		
@@ -83,18 +79,14 @@ public class AssignmentController {
 		Task task = new Task(taskId, title,contents,deadline);
 		
 		service.modifyTask(task);
-		
 		return "redirect:searchAll.do";
 	}
 
 	@RequestMapping("/erase.do")
 	public String eraseAssignment(int taskId) {
-		System.out.println("====================");
 
 		service.removeTask(taskId);
 
-		System.out.println("삭제 완료!!");
-		System.out.println("은채쩔어!!");
 		return "redirect:searchAll.do";
 	}
 
@@ -115,7 +107,6 @@ public class AssignmentController {
 		task.setTaskId(taskId);
 
 		task = service.findTaskByTaskId(taskId);
-		System.out.println("deadline : " + task.getDeadline());
 		model.addAttribute("task", task);
 
 		return "/task/assignment/assignmentDetail";
@@ -126,6 +117,12 @@ public class AssignmentController {
 
 		List<Task> list = service.findAllTask();
 		model.addAttribute("list", list);
+		
+		for(Task task :list){
+			System.out.println(task.getPointStar());
+		}
+		
+		
 
 		return "/task/assignment/assignmentList";
 	}
