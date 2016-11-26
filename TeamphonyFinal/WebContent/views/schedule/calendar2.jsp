@@ -233,24 +233,15 @@
                 eventLimit: true,
                 selectable: true,
                 selectHelper: true,
-                select: function (start, end, allDay) {
-<<<<<<< HEAD
-                    /*  $('#fc_create').click(); */
+                select: function (start, end) {
+                     /* $('#fc_create').click(); */
 
-=======
-                 	/* 
-                     $('#fc_create').click();
-                   
->>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
                     started = start;
-                    ended = end;
-<<<<<<< HEAD
+                    ended = end; 
+                    
+                    location.href = "${pageContext.request.contextPath}/schedule/create.do?started=" + started + "&ended=" + ended; 
 
                     /* $(".antosubmit").on("click", function () {
-=======
-              
-                    $(".antosubmit").on("click", function () {
->>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
                         var title = $("#title").val();
                         var place = $("#place").val();
                         var contents = $("#contents").val();
@@ -280,15 +271,10 @@
                         $('.antoclose').click();
 
                         return false;
-<<<<<<< HEAD
-                    });    */
+                    }); */    
                 },
-=======
-                        });   */
-                   },
->>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
-                
-               /*  eventClick: function (calEvent, jsEvent, view) {
+                 
+                /*  eventClick: function (calEvent, jsEvent, view) {
                     $('#fc_edit').click();
                     $('#title2').val(calEvent.title);
                     $('#place2').val(calEvent.place);
@@ -304,8 +290,8 @@
                     }); 
 
                     calendar.fullCalendar('unselect');
-                }, 
-                 */
+                }, */ 
+                 
                 editable: true,
                
             });

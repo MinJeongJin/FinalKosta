@@ -1,6 +1,9 @@
 package teamphony.controller;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,8 +24,27 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;
 	
-	@RequestMapping(value="create.do")
+	@RequestMapping(value="create.do", method=RequestMethod.GET)
+	public String createSchedule(long started, long ended, Model model){
+	
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date start = new Date(started);
+		Date end = new Date(ended);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(end);
+		cal.add(Calendar.DATE, -1);
+		
+		String endDate = dateFormat.format(cal.getTime());
+
+		model.addAttribute("startDay", start);
+		model.addAttribute("endDay", endDate);
+		return "schedule/scheduleRegister";
+	}
+	
+	@RequestMapping(value="create.do", method=RequestMethod.POST)
 	public String createSchedule(Schedule schedule, HttpSession session){
+
 		schedule.setTeamCode((String) session.getAttribute("teamCode"));
 		scheduleService.registerSchedule(schedule);
 		return "redirect:/calendar2";
