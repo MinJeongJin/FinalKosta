@@ -1,0 +1,52 @@
+/* 
+1. system 계정에서 아래 코드 실행 
+create user finalPhony identified by phony;
+
+grant connect, resource, dba to finalPhony;
+
+2. 새 접속 만들기 
+사용자이름 : finalPhony
+비밀번호 : phony 
+
+3. finalPhony로 접속 후 아래 코드 실행 
+*/
+
+create table Member_tb (id varchar2(50) Primary key, password varchar2(50), 
+alias varchar2(50), imagePath varchar2(50));
+
+create table Team_tb (code int Primary key, cycle int, endDate date, 
+leaderId varchar(20), Foreign Key(leaderId) REFERENCES Member_tb (id));
+
+create table Belong_tb (teamCode int, Foreign Key(teamCode) References Team_tb (code),
+memberId varchar2(20),Foreign Key(memberId) References Member_tb (id));
+
+create table Schedule_tb(id int Primary key, startDate date, endDate date, 
+title varchar2(50), contents varchar2(500),teamCode int,
+Foreign Key(teamCode) References Team_tb (code));
+
+create table Post_tb (id int Primary key, contents varchar(500), 
+videoLink varchar2(50), filePath varchar2(50), 
+teamCode int,Foreign Key(teamCode) References Team_tb (code),
+memberId varchar2(20),Foreign Key(memberId) References Member_tb (id));
+
+create table Evaluation_tb (memberId varchar2(20),
+Foreign Key(memberId) References Member_tb (id), starPoint int);
+
+create table Task_tb(id int Primary key, title varchar2(50), contents varchar2(500),
+deadLine Date, evaluationPeriod Date,flag int, point int);
+
+create table TaskFile_tb(submissionId int, Foreign Key(submissionId) REFERENCES Task_tb (id),
+filePath varchar2(50));
+
+create table taskMember(assignmentId int, Foreign Key(assignmentId) REFERENCES Task_tb (id),
+memberId varchar2(20),Foreign Key(memberId) References Member_tb (id));
+
+create table Place_tb(id int Primary key, name varchar2(20), address varchar2(200), 
+phoneNumber varchar2(50), imagePath varchar2(50));
+
+create Sequence Place_seq start with 1 Increment By 1 Maxvalue 1000000;
+create Sequence Task_seq start with 1 Increment By 1 Maxvalue 1000000;
+create Sequence Post_seq start with 1 Increment By 1 Maxvalue 1000000;
+create Sequence Schedule_seq start with 1 Increment By 1 Maxvalue 1000000;
+
+commit;
