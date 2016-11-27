@@ -1,6 +1,6 @@
 package teamphony.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Schedule {
 
@@ -68,4 +68,8 @@ public class Schedule {
 		this.contents = contents;
 	}
 
+	public int getDay() {
+		int day = startDate.getDate();
+		return day;
+	}
 }

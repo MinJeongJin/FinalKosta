@@ -6,7 +6,13 @@
 
 	<insert id="insertSchedule" parameterType="Schedule">
 		INSERT INTO schedule_tb (id, startDate, endDate, title, place, contents, teamCode)
-		VALUES (Schedule_seq.nextval, #{startDate}, #{endDate}, #{title}, #{place}, #{contents}, #{teamCode})
+		VALUES (Schedule_seq.nextval
+		,#{startDate, jdbcType=DATE}
+		,#{endDate, jdbcType=DATE}
+		,#{title, jdbcType=VARCHAR}
+		,#{place, jdbcType=VARCHAR}
+		,#{contents, jdbcType=VARCHAR}
+		,#{teamCode, jdbcType=INTEGER})
 	</insert>
 
 	<update id="updateSchedule" parameterType="Schedule">

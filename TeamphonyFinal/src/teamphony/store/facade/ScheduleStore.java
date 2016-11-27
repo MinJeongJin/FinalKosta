@@ -1,6 +1,6 @@
 package teamphony.store.facade;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import teamphony.domain.Schedule;

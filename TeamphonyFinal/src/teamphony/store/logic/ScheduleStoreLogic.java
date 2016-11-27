@@ -2,8 +2,8 @@ package teamphony.store.logic;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;

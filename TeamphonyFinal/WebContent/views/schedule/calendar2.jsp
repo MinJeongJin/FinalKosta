@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -71,7 +71,13 @@
                                 <div class="x_content">
 
                                     <div id='calendar'></div>
-
+                                    <c:forEach items="${teamSchedules }" var="schedule">
+									<c:if test="${schedule.getDay() eq day }">
+										<ul>
+											<li>${schedule.title }</li>
+										</ul>
+									</c:if>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>

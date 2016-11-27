@@ -1,10 +1,10 @@
 package teamphony.controller;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,31 +32,44 @@ public class ScheduleController {
 		Date start = new Date(started);
 		Date end = new Date(ended);
 		
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(end);
-		cal.add(Calendar.DATE, -1);
+		Calendar startCal = Calendar.getInstance();
+		startCal.setTime(start);
 		
-		String endDate = dateFormat.format(cal.getTime());
+		Calendar endCal = Calendar.getInstance();
+		endCal.setTime(end);
+		endCal.add(Calendar.DATE, -1);
+		
+		String endDate = dateFormat.format(endCal.getTime());
+		String startDate = dateFormat.format(startCal.getTime());
 
-		model.addAttribute("startDay", start);
+		model.addAttribute("startDay", startDate);
 		model.addAttribute("endDay", endDate);
 		return "schedule/scheduleRegister";
 	}
 	
 	@RequestMapping(value="create.do", method=RequestMethod.POST)
-	public String createSchedule(Schedule schedule, String startDay, String startHour, String endDay, String endHour, HttpSession session){
+	public String createSchedule(Schedule schedule, String startDay, String startHour, 
+			String endDay, String endHour, HttpSession session){
+		Date startDate = null, endDate = null;
 
 		String start = startDay + " " + startHour;
 		String end = endDay + " " + endHour;
-		
-		System.out.println(start);
-		System.out.println(end);
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
 
+		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
+		try {
+			startDate = sdf.parse(start);
+			endDate = sdf.parse(end);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		schedule.setStartDate(startDate);
+		schedule.setEndDate(endDate);
 		schedule.setTeamCode((String) session.getAttribute("teamCode"));
 		scheduleService.registerSchedule(schedule);
-		return "redirect:/calendar2";
+		return "schedule/calendar2";
 	}
 	
 	@RequestMapping(value="revise.do", method=RequestMethod.GET)
@@ -88,9 +101,9 @@ public class ScheduleController {
 	@RequestMapping("calendar.do")
 	public String searchSchedulesByTeamCode(HttpSession session, Model model){
 		String teamCode = (String) session.getAttribute("teamCode");
-		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(teamCode);
+		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode("aa");
 		model.addAttribute("teamSchedules", teamSchedules);
-		return null;
+		return "redirect:schedule/calendar2";
 	}
 	
 	@RequestMapping("list.do")

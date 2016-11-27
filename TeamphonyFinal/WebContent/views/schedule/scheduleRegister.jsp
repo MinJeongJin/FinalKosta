@@ -14,7 +14,7 @@
 </head>
 <body>
 	<input id="scheduleId" name="scheduleId" type="hidden" value="">
-	<a href="scheduleList.do">달력으로 돌아가기</a>
+	<a href="calendar2.jsp">달력으로 돌아가기</a>
 	<h3>일정등록</h3>
 
 	<br>
@@ -26,12 +26,12 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><input id="scheduleTitle" name="scheduleTitle"
+				<td><input id="title" name="title"
 					class="form-control" type="text" value="" placeholder="일정을 입력하세요."></td>
 			</tr>
 			<tr>
 				<th>장소</th>
-				<td><input id="schedulePlace" name="schedulePlace"
+				<td><input id="place" name="place"
 					class="form-control" type="text" value=""></td>
 			</tr>
 			<tr>
@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea id="scheduleContents" name="scheduleContents"
+				<td><textarea id="contents" name="contents"
 						class="form-control" rows="7" placeholder="일정에 필요한 설명을 남기세요."></textarea></td>
 			</tr>
 		</table>
