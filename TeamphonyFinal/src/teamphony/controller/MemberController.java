@@ -30,8 +30,8 @@ public class MemberController {
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
 		Member result = service.findMemberByMemberId(loginId);
-		if (!result.getMemberId().isEmpty()&&result.getPassword().equals(loginPw)) {
-			session.setAttribute("member",result);
+		if (!result.getMemberId().isEmpty() && result.getPassword().equals(loginPw)) {
+			session.setAttribute("member", result);
 			return "redirect:../views/team/teamList.jsp";
 		} else {
 			model.addAttribute("result", "true");
@@ -60,7 +60,8 @@ public class MemberController {
 
 			// multipart form request receive
 			// file is generated in directory you mentioned
-			MultipartRequest multipartRequest = new MultipartRequest(request, savePath, MAX_SIZE, "UTF-8", new DefaultFileRenamePolicy());
+			MultipartRequest multipartRequest = new MultipartRequest(request, savePath, MAX_SIZE, "UTF-8",
+					new DefaultFileRenamePolicy());
 
 			// value setting
 			id = multipartRequest.getParameter("memberId");
@@ -75,7 +76,6 @@ public class MemberController {
 			// default image copy
 			fin = new FileInputStream(new File(savePath + "default.png"));
 			fout = new FileOutputStream(new File(folder.getAbsolutePath() + "\\default.png"));
-
 
 			while ((read = fin.read(buf, 0, buf.length)) != -1) {
 				fout.write(buf, 0, read);
@@ -119,10 +119,31 @@ public class MemberController {
 		member.setPassword(pw);
 		member.setAlias(alias);
 		member.setImagePath(imgPath);
-		
-		
+
 		service.registerMember(member);
 
 		return "/common/login";
 	}
+
+	@RequestMapping("check.do")
+	public String checkMember(HttpSession session, String password, String flag) {
+
+		Member member = (Member) session.getAttribute("member");
+		System.out.println(password);
+		System.out.println(member.getPassword());
+		System.out.println(flag);
+		if (member.getPassword().equals(password)) {
+			return "/member/myPage";
+		}
+		return null;
+	}
+	
+	@RequestMapping(value="revise", method=RequestMethod.POST)
+	public String reviseMember(HttpSession session, Member member){
+		
+		
+		
+		return null;
+	}
+
 }

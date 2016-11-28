@@ -56,6 +56,7 @@ table tr td {
 		<div id="main">
 			<!-- One -->
 			<section id="one">
+			<form action="${pageContext.request.contextPath}/member/check.do">
 			
 				<table>
 					<tr>
@@ -64,10 +65,11 @@ table tr td {
 					</tr>
 					<tr>
 						<th>비밀 번호 확인</th>
-						<td><input id="password" name="passwordCheck" type="password"/></td>
+						<td><input id="passwordCheck" name="passwordCheck" type="password"/></td>
 					</tr>
 				</table>
-				
+				<Button type="submit">확인</Button>
+				</form>
 			</section>
 		</div>
 	</div>

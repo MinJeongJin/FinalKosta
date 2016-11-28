@@ -1,6 +1,7 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- 
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8" />
@@ -34,16 +35,18 @@ table tr td {
 	<!-- Header -->
 	<section id="header">
 		<header>
-			<span class="image avatar"> 
-				<img src="${member.imagePath }" alt="사진없음" width="90" height="110" />
+			<span class="image avatar"> <img src="${member.imagePath }"
+				alt="사진없음" width="90" height="110" />
 			</span>
 			<h1 id="logo">${member.memberId}</h1>
 			<p>${member.alias}</p>
 		</header>
 		<nav id="nav">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/resources/views/member/myPage.jsp" class="active">마이페이지</a></li>
-				<li><a href="#two">회원 정보 수정</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/resources/views/member/myPage.jsp"
+					>마이페이지</a></li>
+				<li><a href="#two" class="active">회원 정보 수정</a></li>
 				<li><a href="#three">팀 탈퇴</a></li>
 				<li><a href="#four">회원 탈퇴</a></li>
 				<li><a href="#four">개발자</a></li>
@@ -56,7 +59,27 @@ table tr td {
 		<div id="main">
 			<!-- One -->
 			<section id="one">
-				
+				<form action="/member/revise.do" method="Post">
+					<table>
+						<tr>
+							<td>비밀번호</td>
+							<td><input type="password" /></td>
+						</tr>
+						<tr>
+							<td>비밀번호 확인</td>
+							<td><input type="password" /></td>
+						</tr>
+						<tr>
+							<td>별명</td>
+							<td><input type="text" /></td>
+						</tr>
+						<tr>
+							<td>사진</td>
+							<td><input type="file" /></td>
+						</tr>
+					</table>
+					<button type="submit">수정</button>
+				</form>
 			</section>
 		</div>
 	</div>
