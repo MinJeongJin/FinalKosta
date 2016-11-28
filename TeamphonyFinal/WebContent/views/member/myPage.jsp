@@ -44,7 +44,7 @@ table tr td {
 		<nav id="nav">
 			<ul>
 				<li><a href="#one" class="active">마이페이지</a></li>
-				<li><a href="${pageContext.request.contextPath}/views/member/revise.jsp">회원 정보 수정</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/revise.do">회원 정보 수정</a></li>
 				<li><a href="#three">팀 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/views/member/delete.jsp">회원 탈퇴</a></li>
 				<li><a href="">개발자</a></li>
