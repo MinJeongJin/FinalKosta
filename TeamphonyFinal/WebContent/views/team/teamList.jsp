@@ -51,7 +51,7 @@
 		<div class="navbar object">
 			<div id="wrapper-sorting">
 				<div class="recent object">로그아웃</div>
-				<a class="recent object" href="${pageContext.request.contextPath}/views/common/myPage.jsp">마이페이지</a>
+				<a class="recent object" href="${pageContext.request.contextPath}/views/member/myPage.jsp">마이페이지</a>
 				<a class="recent object" href="${pageContext.request.contextPath}/views/team/teamCreate.jsp">팀 생성</a>
 			</div>
 		</div>
