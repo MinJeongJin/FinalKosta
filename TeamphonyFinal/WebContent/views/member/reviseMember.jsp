@@ -73,7 +73,7 @@ table tr td {
 		<div id="main">
 			<!-- One -->
 			<section id="one">
-				<form action="${pageContext.request.contextPath}/member/revise.do" method="Post">
+				<form action="${pageContext.request.contextPath}/member/revise.do" method="Post" enctype="multipart/form-data">
 					<table>
 						<tr>
 							<td>비밀번호</td>

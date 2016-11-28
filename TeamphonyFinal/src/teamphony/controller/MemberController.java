@@ -137,10 +137,10 @@ public class MemberController {
 		}
 		return null;
 	}
-	
-	@RequestMapping(value="revise", method=RequestMethod.POST)
-	public String reviseMember(HttpSession session, HttpServletRequest request){
-		
+
+	@RequestMapping(value = "revise", method = RequestMethod.POST)
+	public String reviseMember(HttpSession session, HttpServletRequest request) {
+
 		Member member = new Member();
 		String id = null, alias = null, pw = null, imgPath = null;
 
@@ -164,7 +164,6 @@ public class MemberController {
 					new DefaultFileRenamePolicy());
 
 			// value setting
-			id = multipartRequest.getParameter("memberId");
 			alias = multipartRequest.getParameter("alias");
 			pw = multipartRequest.getParameter("password");
 			imgPath = multipartRequest.getFilesystemName("imagePath");
@@ -214,27 +213,44 @@ public class MemberController {
 		}
 
 		// member generate
-		Member login=(Member)session.getAttribute("member");
-		
+		Member login = (Member) session.getAttribute("member");
+
+		System.out.println(pw + " " + alias);
 		member.setMemberId(login.getMemberId());
-		member.setPassword(pw);
-		member.setAlias(alias);
+		if (pw.equals("null")) {
+			member.setPassword(login.getPassword());
+		} else {
+			member.setPassword(pw);
+		}
+		if (pw.equals("null")) {
+			member.setPassword(login.getAlias());
+		} else {
+			member.setAlias(alias);
+		}
+		if (pw.equals("null")) {
+			member.setPassword(login.getPassword());
+		} else {
+			member.setMemberId(login.getMemberId());
+		}
+
+		
+		
 		member.setImagePath(imgPath);
 
 		service.modifyMember(member);
 
 		return null;
 	}
-	
-	@RequestMapping(value="revise.do", method=RequestMethod.GET )
-	public String revise(HttpSession session, Model model){
-		
-		Member member = (Member)session.getAttribute("member");
-		
+
+	@RequestMapping(value = "revise.do", method = RequestMethod.GET)
+	public String revise(HttpSession session, Model model) {
+
+		Member member = (Member) session.getAttribute("member");
+
 		System.out.println(member.getMemberId());
-		
+
 		Member reviseMember = service.findMemberByMemberId(member.getMemberId());
-		
+
 		model.addAttribute("member", reviseMember);
 		System.out.println("ok");
 		return "/member/reviseMember";
