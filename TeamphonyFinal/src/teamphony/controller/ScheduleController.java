@@ -51,28 +51,11 @@ public class ScheduleController {
 			String endDay, String endHour, HttpSession session){
 		
 
-		String start = startDay + "T" + startHour + ":00";
+		String start = startDay + " " + startHour;
 		String end = endDay + " " + endHour;
 
 		schedule.setStartDate(start);
 		schedule.setEndDate(end);
-		
-//		Date startDate = null, endDate = null;
-//		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//		
-//		try {
-//			startDate = sdf.parse(start);
-//			endDate = sdf.parse(end);
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		schedule.setStartDate(startDate);
-//		schedule.setEndDate(endDate);
-//		
-//		System.out.println(startDate);
-//		System.out.println(endDate);
 		
 //		schedule.setTeamCode((int) session.getAttribute("teamCode"));
 		schedule.setTeamCode(2);
@@ -102,8 +85,23 @@ public class ScheduleController {
 	@RequestMapping("detail.do")
 	public String searchScheduleByScheduleId(int scheduleId, Model model){
 		Schedule schedule = scheduleService.findScheduleByScheduleId(scheduleId);
+		String startDate = schedule.getStartDate();
+		String endDate = schedule.getEndDate();
+		
+		String [] startArray = startDate.split(" ");
+		String startDay = startArray[0];
+		String startHour = startArray[1];
+		
+		String [] endArray = endDate.split(" ");
+		String endDay = endArray[0];
+		String endHour = endArray[1];
+		
+		model.addAttribute("startDay", startDay);
+		model.addAttribute("startHour", startHour);
+		model.addAttribute("endDay", endDay);
+		model.addAttribute("endHour", endHour);
 		model.addAttribute("schedule", schedule);
-		return null;
+		return "schedule/scheduleDetail";
 	}
 	
 	@RequestMapping("calendar.do")
@@ -112,7 +110,7 @@ public class ScheduleController {
 //		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(teamCode);
 		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(2);
 		model.addAttribute("teamSchedules", teamSchedules);
-		return "schedule/calendar2";
+		return "schedule/calendar";
 	}
 	
 //	@RequestMapping("list.do")
