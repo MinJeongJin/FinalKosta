@@ -4,4 +4,13 @@
 
 <mapper namespace="teamphony.store.mapper.TeamMapper">
 
+
+	<insert id="insertTeam" parameterType="Team">
+		INSERT INTO TEAM_TB(CODE, CYCLE, ENDDATE, LEADERID, NAME)
+		VALUES (#{code}, #{cycle}, #{endDate}, #{leaderId}, #{name})
+		
+	</insert>
+
+
+
 </mapper>
