@@ -37,10 +37,7 @@ public class SubmissionController {
 		String path = "c:/uploadTemp";
 		
 		for(MultipartFile attchFile : attchFileList){
-			System.out.println(attchFile.getName()); //input name 
-			System.out.println(attchFile.getOriginalFilename()); //파일명
 			String saveFileName = path + File.separator + attchFile.getOriginalFilename();
-			System.out.println("저장 경로 : " + saveFileName);
 			
 			File f = new File(saveFileName);
 			try {
@@ -51,7 +48,6 @@ public class SubmissionController {
 				e.printStackTrace();
 			}
 		}
-		
 		
 		return "";
 	}
