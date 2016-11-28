@@ -33,7 +33,21 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public void insertTask(Task task) {
+		SqlSession session = getSessionFactory().openSession();
 
+		try {
+			
+			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			mapper.insertTask(task);
+			session.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		}
+		finally {
+			session.close();
+		}
 		
 	}
 

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -30,16 +31,17 @@ public class SubmissionController {
 	private TaskService service;
 
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
-	public String createSubmission(@RequestParam("attchFile") MultipartFile[] attchFileList, Task task) { // attchFile
-		
-		
-		System.out.println("=======================");
-		String path = "c:/uploadTemp";
-		
-		for(MultipartFile attchFile : attchFileList){
-			String saveFileName = path + File.separator + attchFile.getOriginalFilename();
+	public String createSubmission(@RequestParam("attchFile") MultipartFile[] attchFileList, String taskId,
+			String title, String contents) { // attchFile
+
+		int taskIdNo = Integer.parseInt(taskId);
+		String filePathOnly = "c:/uploadTemp";
+
+		for (MultipartFile attchFile : attchFileList) {
+			String filePath = filePathOnly + File.separator + attchFile.getOriginalFilename();
 			
-			File f = new File(saveFileName);
+			System.out.println("저장 경로 =" + filePath);
+			File f = new File(filePath);
 			try {
 				attchFile.transferTo(f);
 			} catch (IllegalStateException e) {
@@ -47,9 +49,10 @@ public class SubmissionController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			Task task = new Task(taskIdNo, title, contents, filePath);
+			service.registerTask(task);
 		}
-		
-		return "";
+		return "redirect:serchAll.do";
 	}
 
 	@RequestMapping("/revise.do")
