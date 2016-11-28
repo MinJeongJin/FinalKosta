@@ -9,11 +9,20 @@ public class Task {
 	private String title;
 	private String contents;
 	private List<Member> memberList;
-	private String filePath;
 	private int point;
 	private Date evaluationPeriod;
 	private Date deadline;
 	private int flag;
+	
+	private List<TaskFile> taskFileList;
+
+	public List<TaskFile> getTaskFileList() {
+		return taskFileList;
+	}
+
+	public void setTaskFileList(List<TaskFile> taskFileList) {
+		this.taskFileList = taskFileList;
+	}
 
 	public Task() {
 		// TODO Auto-generated constructor stub
@@ -26,6 +35,13 @@ public class Task {
 		this.contents = contents;
 		this.deadline = deadline;
 	}
+	
+	public Task(int taskId, String title, String contents,String filePath){
+		super();
+		this.taskId =taskId;
+		this.title =title;
+		this.contents =contents;
+	}
 
 	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
 			Date evaluationPeriod, Date deadline) {
@@ -34,7 +50,6 @@ public class Task {
 		this.title = title;
 		this.contents = contents;
 		this.memberList = memberList;
-		this.filePath = filePath;
 		this.point = point;
 		this.evaluationPeriod = evaluationPeriod;
 		this.deadline = deadline;
@@ -47,7 +62,6 @@ public class Task {
 		this.title = title;
 		this.contents = contents;
 		this.memberList = memberList;
-		this.filePath = filePath;
 		this.point = point;
 		this.evaluationPeriod = evaluationPeriod;
 		this.deadline = deadline;
@@ -94,13 +108,6 @@ public class Task {
 		this.deadline = deadline;
 	}
 
-	public String getFilePath() {
-		return filePath;
-	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
 
 	public int getPointStar() {
 		int percent = point* 100 / 5;  

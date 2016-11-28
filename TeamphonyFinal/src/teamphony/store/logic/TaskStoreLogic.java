@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Repository;
 
 import teamphony.domain.Task;
+import teamphony.domain.TaskFile;
 import teamphony.store.facade.TaskStore;
 import teamphony.store.mapper.TaskMapper;
 
@@ -33,7 +34,32 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public void insertTask(Task task) {
+		SqlSession session = getSessionFactory().openSession();
 
+		try {
+			
+			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			mapper.insertTask(task); 
+			
+			if (task.getFlag()==1){
+				int taskId = task.getTaskId();
+				List<TaskFile> taskFileList = task.getTaskFileList();
+				
+				for(TaskFile taskFile : taskFileList){
+					taskFile.setSubmissionId(taskId);
+					mapper.insertTaskFile(taskFile); 
+				}
+				
+			}
+			session.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		}
+		finally {
+			session.close();
+		}
 		
 	}
 

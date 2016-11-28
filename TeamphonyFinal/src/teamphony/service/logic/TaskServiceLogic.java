@@ -19,6 +19,7 @@ public class TaskServiceLogic implements TaskService {
 
 	@Override
 	public void registerTask(Task task) {
+		
 		store.insertTask(task);
 	}
 	

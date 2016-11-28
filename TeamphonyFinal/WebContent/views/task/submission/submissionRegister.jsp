@@ -18,38 +18,38 @@
 	<h3>과제 제출</h3>
 
 	<br>
-	<form action="submissionRegister.do" method="post">
+	<form action="${pageContext.request.contextPath}/submission/create.do"
+		method="post" enctype="multipart/form-data">
 		<table class="table">
 			<colgroup>
 				<col width="150">
 				<col width="*">
 			</colgroup>
-
-			<form action="" method="post" enctype="multipart/form-data"
-				name="filePath">
-				<tr>
-					<input type="file" name=file>
-				</tr>
-			</form>
 			<tr>
 				<th>제목</th>
-				<td><input id="submissionTitle" name="submissionTitle"
+				<td><input id="title" name="title"
 					class="form-control" type="text" value="" placeholder="제목을 입력하세요."></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea id="submissionContents" name="submissionContents"
+				<td><textarea id="contents" name="contents"
 						class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요."></textarea></td>
 			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td>
+					<input style="width: 250px" ; type="file" name="attchFile" class="form-control">
+					<input type="hidden" name="flag" value="1" />
+				</td>
+			</tr>
+	
+			
 		</table>
-		<br>
 		<div align="center">
 			<a href="submissionList.do"><input class="btn" type="reset"
-				value="취소"></a> <a
-				href="assignmentRegister.do?memberId=${member.id} "><input
-				class="btn btn-success" type="submit" value="저장"></a>
+				value="취소"></a> <input class="btn btn-success" type="submit"
+				value="저장">
 		</div>
-	</form>
-	<br>
+		</form>
 </body>
 </html>

@@ -7,26 +7,40 @@
 	<!-- <resultMap type="Task" id="taskMap"> </resultMap> -->
 
 
+	
 
 	<insert id="insertTask" parameterType="task">
-
+		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
+		SELECT task_tb_id_seq.nextval FROM DUAL
+		</selectKey>
 		insert into task_tb(
-
-		id
-		,TITLE
-		,CONTENTS
-		,DEADLINE
-		,FLAG
-		,POINT)
-
+			id
+			,TITLE
+			,CONTENTS
+			,DEADLINE
+			,FLAG
+			,POINT
+			)
 		values(
-		task_tb_id_seq.nextval
-		,#{title}
-		,#{contents, jdbcType=DATE}
-		,#{deadline , jdbcType=INTEGER}
-		,#{flag , jdbcType=INTEGER}
-		,#{point , jdbcType=INTEGER}
+			#{taskId}
+			,#{title}
+			,#{contents, jdbcType=VARCHAR}
+			,#{deadline , jdbcType=DATE}
+			,#{flag , jdbcType=INTEGER}
+			,#{point , jdbcType=INTEGER}
 		)
+	</insert>
+	
+	<insert id="insertTaskFile" parameterType="taskFile">
+		INSERT INTO 
+			TASKFILE_TB(
+				SUBMISSIONID
+				,FILEPATH
+			) 
+			VALUES(
+				#{submissionId} 
+				,#{filePath}
+			)
 	</insert>
 	
 	<update id="updateTask" parameterType="task">
