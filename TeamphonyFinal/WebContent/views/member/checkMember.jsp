@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="utf-8" />
@@ -43,9 +42,9 @@ table tr td {
 		</header>
 		<nav id="nav">
 			<ul>
-				<li><a href="#one" class="active">마이페이지</a></li>
-				<li><a href="#two">회원 정보 수정</a></li>
-				<li><a href="#three">팀 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/resources/views/member/myPage.jsp">마이페이지</a></li>
+				<li><a href="#two" class="active">회원 정보 수정</a></li>
+				<li><a href="#three">팀 탈퇴</a></li>
 				<li><a href="#four">회원 탈퇴</a></li>
 				<li><a href="#four">개발자</a></li>
 			</ul>
@@ -57,7 +56,20 @@ table tr td {
 		<div id="main">
 			<!-- One -->
 			<section id="one">
-				회원 수정 페이지!!!!
+			<form action="${pageContext.request.contextPath}/member/check.do">
+			
+				<table>
+					<tr>
+						<th>비밀 번호</th>
+						<td><input id="password" name="password" type="password"/></td>
+					</tr>
+					<tr>
+						<th>비밀 번호 확인</th>
+						<td><input id="passwordCheck" name="passwordCheck" type="password"/></td>
+					</tr>
+				</table>
+				<Button type="submit">확인</Button>
+				</form>
 			</section>
 		</div>
 	</div>

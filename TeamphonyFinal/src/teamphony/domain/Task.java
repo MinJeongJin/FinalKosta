@@ -26,6 +26,14 @@ public class Task {
 		this.contents = contents;
 		this.deadline = deadline;
 	}
+	
+	public Task(int taskId, String title, String contents,String filePath){
+		super();
+		this.taskId =taskId;
+		this.title =title;
+		this.contents =contents;
+		this.filePath =filePath;
+	}
 
 	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
 			Date evaluationPeriod, Date deadline) {

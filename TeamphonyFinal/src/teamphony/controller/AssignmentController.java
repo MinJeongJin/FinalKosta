@@ -91,9 +91,13 @@ public class AssignmentController {
 	}
 
 	@RequestMapping("/evaluate.do")
-	public String evaluateAssignment(Task task, int starPoint) {
-
-		return null;
+	public String evaluateAssignment(String taskId,Task task, Model model) {
+		int taskIdNo= Integer.parseInt(taskId);
+		
+		task= service.findTaskByTaskId(taskIdNo);
+		model.addAttribute(task);
+		
+		return "/task/assignment/assignmentEvaluate";
 	}
 
 	/*
@@ -101,12 +105,13 @@ public class AssignmentController {
 	 * /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path)
 	 */
 	@RequestMapping("/searchByAssignmentId.do")
-	public String searchAssignmentByAssignmentId(int taskId, Model model) {
-		taskId = 15;
+	public String searchAssignmentByAssignmentId(String taskId, Model model) {
+		int taskIdNo = Integer.parseInt(taskId);
+		
 		Task task = new Task();
-		task.setTaskId(taskId);
+		task.setTaskId(taskIdNo);
 
-		task = service.findTaskByTaskId(taskId);
+		task = service.findTaskByTaskId(taskIdNo);
 		model.addAttribute("task", task);
 
 		return "/task/assignment/assignmentDetail";
@@ -118,12 +123,6 @@ public class AssignmentController {
 		List<Task> list = service.findAllTask();
 		model.addAttribute("list", list);
 		
-		for(Task task :list){
-			System.out.println(task.getPointStar());
-		}
-		
-		
-
 		return "/task/assignment/assignmentList";
 	}
 

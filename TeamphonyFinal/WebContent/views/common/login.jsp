@@ -46,7 +46,7 @@
 
 				<button type="submit">enter</button>
 
-				<br /> <a href="${pageContext.request.contextPath}/views/common/register.jsp"><p class="small">Register?</p></a>
+				<br /> <a href="${pageContext.request.contextPath}/views/member/register.jsp"><p class="small">Register?</p></a>
 			</form>
 
 		</div>

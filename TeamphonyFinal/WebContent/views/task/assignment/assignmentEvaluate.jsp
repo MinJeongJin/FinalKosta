@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>부여 과제 상세</title>
+<title>부여 과제 평가</title>
 <link
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -19,7 +19,7 @@
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
 	<a href="${pageContext.request.contextPath}/assignment/searchAll.do">과제리스트 돌아가기</a>
-	<h3>부여 과제 상세</h3>
+	<h3>부여 과제 평가</h3>
 
 	<br>
 
@@ -60,12 +60,7 @@
 	<div align="center">
 		<a
 			href="${pageContext.request.contextPath}/assignment/revise.do?taskId=15" />
-		<input class="btn" type="submit" value="수정"></input> <a
-			href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId} " /><input
-			class="btn btn-success" type="submit" value="삭제"></input>
-			<a
-			href="${pageContext.request.contextPath}/assignment/evaluate.do?taskId=${task.taskId} " /><input
-			class="btn btn-success" type="submit" value="평가"></input>
+		<input class="btn" type="submit" value="평가완료"></input> 
 	</div>
 
 	</br>
