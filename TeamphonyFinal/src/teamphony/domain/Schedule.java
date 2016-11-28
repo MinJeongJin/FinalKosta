@@ -5,12 +5,14 @@ import java.util.Date;
 public class Schedule {
 
 	private int scheduleId;
-	private Date startDate;
-	private Date endDate;
+//	private Date startDate;
+//	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private String title;
 	private String place;
 	private String contents;
-	private String teamCode;
+	private int teamCode;
 
 	public int getScheduleId() {
 		return scheduleId;
@@ -20,29 +22,50 @@ public class Schedule {
 		this.scheduleId = scheduleId;
 	}
 
-	public String getTeamCode() {
+	public int getTeamCode() {
 		return teamCode;
 	}
 
-	public void setTeamCode(String teamCode) {
+	public void setTeamCode(int teamCode) {
 		this.teamCode = teamCode;
 	}
 
-	public Date getStartDate() {
+	
+//	public Date getStartDate() {
+//		return startDate;
+//	}
+//
+//	public void setStartDate(Date startDate) {
+//		this.startDate = startDate;
+//	}
+//
+//	public Date getEndDate() {
+//		return endDate;
+//	}
+//
+//	public void setEndDate(Date endDate) {
+//		this.endDate = endDate;
+//	}
+	
+
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
+	
+	
 
 	public String getTitle() {
 		return title;
@@ -68,8 +91,4 @@ public class Schedule {
 		this.contents = contents;
 	}
 
-	public int getDay() {
-		int day = startDate.getDate();
-		return day;
-	}
 }

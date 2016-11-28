@@ -71,13 +71,7 @@
                                 <div class="x_content">
 
                                     <div id='calendar'></div>
-                                    <c:forEach items="${teamSchedules }" var="schedule">
-									<c:if test="${schedule.getDay() eq day }">
-										<ul>
-											<li>${schedule.title }</li>
-										</ul>
-									</c:if>
-                                    </c:forEach>
+                              
                                 </div>
                             </div>
                         </div>
@@ -236,7 +230,7 @@
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                eventLimit: true,
+               
                 selectable: true,
                 selectHelper: true,
                 select: function (start, end) {
@@ -277,7 +271,8 @@
                         $('.antoclose').click();
 
                         return false;
-                    }); */    
+                    }); */  
+                
                 },
                  
                 /*  eventClick: function (calEvent, jsEvent, view) {
@@ -299,6 +294,24 @@
                 }, */ 
                  
                 editable: true,
+                eventLimit: true,
+                events: [
+                	{
+                		title: 'co',
+                		start: '2016-11-09T16:00:00',
+                		end: '2016-11-11T02:33:00'
+                	},
+                	
+           			<c:forEach items="${teamSchedules}" var="schedule">
+    				{
+    					id: '${schedule.scheduleId}',
+    					title: '${schedule.title}',
+    					start: '${schedule.startDate}',
+    					end: '${schedule.endDate}'
+    				},
+    				</c:forEach>
+    				
+    			]
                
             });
         });
