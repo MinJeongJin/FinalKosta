@@ -112,6 +112,12 @@ h1 {
 								<span style="width:${task.getPointStar()}%">${task.point }점</span></span></p>
 								</td>
 								<%-- <td>${task.meberList.meber.id }제출자</td> --%>
+								
+								<td>
+									<a href="${pageContext.request.contextPath}/assignment/searchByAssignmentId.do?taskId=${task.taskId}">
+										<input class="btn" type="submit" value="평가"/>
+									</a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
