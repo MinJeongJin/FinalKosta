@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import teamphony.domain.Task;
+import teamphony.domain.TaskFile;
 import teamphony.service.facade.TaskService;
 
 @Controller
@@ -31,27 +33,52 @@ public class SubmissionController {
 	private TaskService service;
 
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
-	public String createSubmission(@RequestParam("attchFile") MultipartFile[] attchFileList, String taskId,
-			String title, String contents) { // attchFile
-
-		int taskIdNo = Integer.parseInt(taskId);
+	public String createSubmission(@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) { // attchFile
+		System.out.println("============================");
+		System.out.println("flag= " +flag);
+		
+//		int taskIdNo = Integer.parseInt(taskId);
+		int flagNo = Integer.parseInt(flag);
+		System.out.println("flagNo= " +flagNo);
+		
+		
 		String filePathOnly = "c:/uploadTemp";
-
+		
+		Task task = new Task();
+		task.setTitle(title);
+		task.setContents(contents);
+		task.setFlag(flagNo);
+		
+		System.out.println("title = "+task.getTitle());
+		System.out.println(("contens= "+task.getContents()));
+		System.out.println(("flag= "+task.getFlag()));
+		
+		
+		
+		
+		
+		
+		
+		//첨부 파일 List파일저장 , TASKFILE_TB 저장
+		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
+			int taskId = task.getTaskId();
 			String filePath = filePathOnly + File.separator + attchFile.getOriginalFilename();
+			TaskFile taskFile = new TaskFile(filePath);
 			
 			System.out.println("저장 경로 =" + filePath);
 			File f = new File(filePath);
 			try {
-				attchFile.transferTo(f);
+				attchFile.transferTo(f); //물리 파일 저장
+				taskFileList.add(taskFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Task task = new Task(taskIdNo, title, contents, filePath);
-			service.registerTask(task);
 		}
+		task.setTaskFileList(taskFileList);
+		service.registerTask(task); //task_tb 저장
 		return "redirect:serchAll.do";
 	}
 
