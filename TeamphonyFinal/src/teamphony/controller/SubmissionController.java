@@ -54,11 +54,6 @@ public class SubmissionController {
 		System.out.println(("flag= "+task.getFlag()));
 		
 		
-		
-		
-		
-		
-		
 		//첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {

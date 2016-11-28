@@ -27,12 +27,12 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><input id="submissionTitle" name="submissionTitle"
+				<td><input id="title" name="title"
 					class="form-control" type="text" value="" placeholder="제목을 입력하세요."></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea id="submissionContents" name="submissionContents"
+				<td><textarea id="contents" name="contents"
 						class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요."></textarea></td>
 			</tr>
 			<tr>

@@ -40,6 +40,7 @@ public class TaskStoreLogic implements TaskStore {
 			
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.insertTask(task); 
+			
 			if (task.getFlag()==1){
 				int taskId = task.getTaskId();
 				List<TaskFile> taskFileList = task.getTaskFileList();
