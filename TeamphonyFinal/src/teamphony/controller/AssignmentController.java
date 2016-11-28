@@ -123,12 +123,6 @@ public class AssignmentController {
 		List<Task> list = service.findAllTask();
 		model.addAttribute("list", list);
 		
-		for(Task task :list){
-			System.out.println(task.getPointStar());
-		}
-		
-		
-
 		return "/task/assignment/assignmentList";
 	}
 
