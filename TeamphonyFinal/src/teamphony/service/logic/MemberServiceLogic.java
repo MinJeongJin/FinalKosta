@@ -21,8 +21,9 @@ public class MemberServiceLogic implements MemberService {
 
 	@Override
 	public void modifyMember(Member member) {
-		// TODO Auto-generated method stub
 
+		store.updateMember(member);
+		
 	}
 
 	@Override

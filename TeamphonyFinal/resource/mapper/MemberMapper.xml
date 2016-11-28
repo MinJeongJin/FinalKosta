@@ -27,5 +27,9 @@
 		from member_tb
 		where id = #{memberId}
 	</select>
+	
+	<update id="updateMember" parameterType="Member">
+		update Member_tb set password = #{password}, alias = #{alias}, imagePath = #{imagePath} where id = #{memberId}
+	</update>
 
 </mapper>
