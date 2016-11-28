@@ -8,7 +8,7 @@ public class Team {
 	private String name;
 	private int cycle;
 	private Date endDate;
-	private String code;
+	private int code;
 	private List<Member> memberList;
 	private String leaderId;
 
@@ -36,11 +36,11 @@ public class Team {
 		this.endDate = endDate;
 	}
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 

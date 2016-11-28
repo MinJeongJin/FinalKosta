@@ -2,18 +2,25 @@ package teamphony.service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import teamphony.domain.Member;
 import teamphony.domain.Team;
 import teamphony.service.facade.TeamService;
+import teamphony.store.facade.TeamStore;
 
 @Service
 public class TeamServiceLogic implements TeamService {
 
+	@Autowired
+	private TeamStore store;
+	
+	
 	@Override
 	public void registerTeam(Team team) {
-		// TODO Auto-generated method stub
+
+		store.insertTeam(team);
 		
 	}
 

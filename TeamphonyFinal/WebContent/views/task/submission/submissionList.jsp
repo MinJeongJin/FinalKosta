@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>제출 과제 리스트</title>
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <style type="text/css">
 body {
 	padding: 50px;
@@ -50,7 +50,7 @@ h1 {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Assignment List</h1>
+				<h1>Submission List</h1>
 				<div align="right">
 					<form action="searchByName.do">
 						<input name="musicName" type="text" placeholder="검색어를 입력 하세요"
@@ -75,28 +75,30 @@ h1 {
 						</tr>
 					</thead>
 					<tbody>
-						<table>
-							<tr>
-								<td>
-									<ul>
-										<li style="float: left; width: 90px;">${sts.count }번호</li>
-										<a href="assignmentDetail.do?taskId=${task.id }"><li
-											style="float: left; width: 90px;">${task.title }제목</li></a>
-										<li style="float: left; width: 90px;">${task.meberList.meber.id }제출자</li>
-										<li style="float: left; width: 90px;">${task.deadline }제출기한</li>
-									</ul>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href=""><input class="btn" type="reset" value="이전 단계"></a> 
-									<a href="assignmentRegister.do ">
-									<input class="btn btn-success" type="submit" value="부여과제 등록"></a>
-								</td>
-							</tr>
-						</table>
+						<c:forEach items="taskList" var="task" varStatus="sts">
+									<tr>
+										<td>
+											<ul>
+												<li style="float: left; width: 90px;">
+												<a href="assignmentDetail.do?taskId=${task.id }">${sts.count }번호</a>
+												</li>
+												
+												<li style="float: left; width: 90px;">${task.title }제목</li>
+												<li style="float: left; width: 90px;">${task.meberList.meber.id }제출자</li>
+												<li style="float: left; width: 90px;">${task.deadline }제출기한</li>
+											</ul>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<a href=""><input class="btn" type="reset" value="이전 단계"></a> 
+											<a href="assignmentRegister.do ">
+											<input class="btn btn-success" type="submit" value="부여과제 등록"></a>
+										</td>
+									</tr>
+							</table>
+						</c:forEach>
 					</tbody>
-				</table>
 			</div>
 		</div>
 	</div>
