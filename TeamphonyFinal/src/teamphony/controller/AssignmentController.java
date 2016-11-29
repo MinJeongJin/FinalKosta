@@ -104,7 +104,7 @@ public class AssignmentController {
 	 * /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path)
 	 */
 	@RequestMapping("/searchByAssignmentId.do")
-	public String searchAssignmentByAssignmentId(String taskId, Model model) {
+	public String searchAssignmentByTaskId(String taskId, Model model) {
 		int taskIdNo = Integer.parseInt(taskId);
 		
 		Task task = new Task();

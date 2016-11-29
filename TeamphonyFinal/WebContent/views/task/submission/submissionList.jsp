@@ -79,10 +79,10 @@ h1 {
 						<c:forEach items="${taskList }" var="task" varStatus="sts">
 									<tr>
 										<td >
-											<a href="assignmentDetail.do?taskId=${task.taskId }">${sts.count }</a>
+											${sts.count }
 										</td>
 										<td>
-											${task.title }
+											<a href="${pageContext.request.contextPath}/submission/searchBySubmissionId.do?taskId=${task.taskId }">${task.title }</a>
 										</td>
 										<td>
 											제출자 미구현

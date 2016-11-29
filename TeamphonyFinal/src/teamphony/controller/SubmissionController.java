@@ -106,7 +106,7 @@ public class SubmissionController {
 	}
 
 	@RequestMapping("/searchBySubmissionId.do")
-	public String searchSubmissionBySubmissionId(int taskId, Model model) {
+	public String searchSubmissionByTaskId(int taskId, Model model) {
 
 		return null;
 	}
