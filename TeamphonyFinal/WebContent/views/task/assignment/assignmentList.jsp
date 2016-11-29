@@ -93,7 +93,7 @@ h1 {
 					</colgroup>
 					<thead>
 						<tr>
-							<th>순번ssss</th>
+							<th>순번</th>
 							<th>제목</th>
 							<th>제출자</th>
 							<th>제출기한</th>

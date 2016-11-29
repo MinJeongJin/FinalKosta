@@ -119,17 +119,9 @@ public class SubmissionController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(Model model) {
-
 		List<Task> taskList = service.findAllTask();
+		
 		model.addAttribute("taskList", taskList);
-
-		for (Task task : taskList) {
-			System.out.println(task.getTitle());
-			System.out.println(task.getContents());
-			System.out.println(task.getDeadline());
-
-		}
-
-		return "/task/submission/submissionList.jsp";
+		return "/task/submission/submissionList";
 	}
 }
