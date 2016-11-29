@@ -1,7 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,13 +58,13 @@ h1 {
 							type="submit" value="검색">
 					</form>
 				</div>
-				<table class="table table-hover table-condensed">
+				<table class="table table-hover table-condensed" >
 					<colgroup>
 						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
 					</colgroup>
 					<thead>
 						<tr>
@@ -74,21 +74,23 @@ h1 {
 							<th>제출기한</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach items="taskList" var="task" varStatus="sts">
+					<tbody >
+						<c:forEach items="${taskList }" var="task" varStatus="sts">
 									<tr>
+										<td >
+											${sts.count }
+										</td>
 										<td>
-											<ul>
-												<li style="float: left; width: 90px;">
-												<a href="assignmentDetail.do?taskId=${task.id }">${sts.count }번호</a>
-												</li>
-												
-												<li style="float: left; width: 90px;">${task.title }제목</li>
-												<li style="float: left; width: 90px;">${task.meberList.meber.id }제출자</li>
-												<li style="float: left; width: 90px;">${task.deadline }제출기한</li>
-											</ul>
+											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+										</td>
+										<td>
+											제출자 미구현
+										</td>
+										<td>
+											<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
 										</td>
 									</tr>
+						</c:forEach>
 									<tr>
 										<td>
 											<a href=""><input class="btn" type="reset" value="이전 단계"></a> 
@@ -96,9 +98,8 @@ h1 {
 											<input class="btn btn-success" type="submit" value="부여과제 등록"></a>
 										</td>
 									</tr>
-							</table>
-						</c:forEach>
 					</tbody>
+				</table> 
 			</div>
 		</div>
 	</div>

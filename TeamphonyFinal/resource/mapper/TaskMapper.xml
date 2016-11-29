@@ -90,17 +90,21 @@
 	<select id="selectTaskByMemberId" resultType="task">
 	</select>
 
-
-
-
 	<delete id="deleteTask" parameterType="int">
 		delete
 		from task_tb
 		where id
 		=#{taskId}
 	</delete>
-
-
+	
+	
+	<!--추가했음  -->
+	<delete id="deleteTaskFile" parameterType="int">
+		DELETE FROM TASKFILE_TB
+		WHERE 1=1
+		AND SUBMISSIONID = #{taskId}
+	</delete>
+	
 
 
 
