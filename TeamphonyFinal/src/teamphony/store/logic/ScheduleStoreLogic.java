@@ -73,7 +73,7 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 
 	@Override
-	public List<Schedule> selectSchedulesByTeamCode(String teamCode) {
+	public List<Schedule> selectSchedulesByTeamCode(int teamCode) {
 		SqlSession session = getSessionFactory().openSession();
 		List<Schedule> list = new ArrayList<>();
 		

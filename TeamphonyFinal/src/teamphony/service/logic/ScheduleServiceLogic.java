@@ -32,7 +32,7 @@ public class ScheduleServiceLogic implements ScheduleService {
 	}
 
 	@Override
-	public List<Schedule> findSchedulesByTeamCode(String teamCode) {
+	public List<Schedule> findSchedulesByTeamCode(int teamCode) {
 		return scheduleStore.selectSchedulesByTeamCode(teamCode);
 	}
 

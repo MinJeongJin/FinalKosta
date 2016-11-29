@@ -52,7 +52,20 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public void updateMember(Member member) {
-		// TODO Auto-generated method stub
+
+		SqlSession session = getSessionFactory().openSession();
+
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			mapper.updateMember(member);
+			session.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
 		
 	}
 

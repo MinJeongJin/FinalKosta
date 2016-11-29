@@ -13,7 +13,7 @@ public class Task {
 	private Date evaluationPeriod;
 	private Date deadline;
 	private int flag;
-	
+
 	private List<TaskFile> taskFileList;
 
 	public List<TaskFile> getTaskFileList() {
@@ -35,12 +35,12 @@ public class Task {
 		this.contents = contents;
 		this.deadline = deadline;
 	}
-	
-	public Task(int taskId, String title, String contents,String filePath){
+
+	public Task(int taskId, String title, String contents, String filePath) {
 		super();
-		this.taskId =taskId;
-		this.title =title;
-		this.contents =contents;
+		this.taskId = taskId;
+		this.title = title;
+		this.contents = contents;
 	}
 
 	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
@@ -108,13 +108,11 @@ public class Task {
 		this.deadline = deadline;
 	}
 
-
 	public int getPointStar() {
-		int percent = point* 100 / 5;  
+		int percent = point * 100 / 5;
 		return percent;
 	}
 
-	
 	public int getPoint() {
 		return point;
 	}
@@ -138,5 +136,13 @@ public class Task {
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
+
+	@Override
+	public String toString() {
+		return "taskId=" + taskId + "\n" + "title= " + title + "\n" + "contents= " + contents + "\n" + "deadline= "
+				+ deadline + "\n" + "flag= " + flag;
+	}
+
+
 
 }

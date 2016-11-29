@@ -1,14 +1,14 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>제출 과제 리스트</title>
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <style type="text/css">
 body {
 	padding: 50px;
@@ -50,7 +50,7 @@ h1 {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Assignment List</h1>
+				<h1>Submission List</h1>
 				<div align="right">
 					<form action="searchByName.do">
 						<input name="musicName" type="text" placeholder="검색어를 입력 하세요"
@@ -58,13 +58,13 @@ h1 {
 							type="submit" value="검색">
 					</form>
 				</div>
-				<table class="table table-hover table-condensed">
+				<table class="table table-hover table-condensed" >
 					<colgroup>
 						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
-						<col width="100" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
 					</colgroup>
 					<thead>
 						<tr>
@@ -74,29 +74,32 @@ h1 {
 							<th>제출기한</th>
 						</tr>
 					</thead>
-					<tbody>
-						<table>
-							<tr>
-								<td>
-									<ul>
-										<li style="float: left; width: 90px;">${sts.count }번호</li>
-										<a href="assignmentDetail.do?taskId=${task.id }"><li
-											style="float: left; width: 90px;">${task.title }제목</li></a>
-										<li style="float: left; width: 90px;">${task.meberList.meber.id }제출자</li>
-										<li style="float: left; width: 90px;">${task.deadline }제출기한</li>
-									</ul>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href=""><input class="btn" type="reset" value="이전 단계"></a> 
-									<a href="assignmentRegister.do ">
-									<input class="btn btn-success" type="submit" value="부여과제 등록"></a>
-								</td>
-							</tr>
-						</table>
+					<tbody >
+						<c:forEach items="${taskList }" var="task" varStatus="sts">
+									<tr>
+										<td >
+											${sts.count }
+										</td>
+										<td>
+											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+										</td>
+										<td>
+											제출자 미구현
+										</td>
+										<td>
+											<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
+										</td>
+									</tr>
+						</c:forEach>
+									<tr>
+										<td>
+											<a href=""><input class="btn" type="reset" value="이전 단계"></a> 
+											<a href="assignmentRegister.do ">
+											<input class="btn btn-success" type="submit" value="부여과제 등록"></a>
+										</td>
+									</tr>
 					</tbody>
-				</table>
+				</table> 
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -48,24 +50,24 @@
 		</tr>
 		<tr>
 			<th>제출 기한</th>
-			<td><label for="deadline" id="deadline" name="deadline">${task.deadline}
+			<td>
+				<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
+			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><label for="contents" name="contents" class="form-control"
-				rows="7">${task.contents }</label></td>
+				<td>
+					<label for="contents" name="contents" class="form-control"
+					rows="7">${task.contents }
+					</label>
+				</td>
 		</tr>
 	</table>
 	<br>
 	<div align="center">
-		<a
-			href="${pageContext.request.contextPath}/assignment/revise.do?taskId=15" />
-		<input class="btn" type="submit" value="수정"></input> <a
-			href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId} " /><input
-			class="btn btn-success" type="submit" value="삭제"></input>
-			<a
-			href="${pageContext.request.contextPath}/assignment/evaluate.do?taskId=${task.taskId} " /><input
-			class="btn btn-success" type="submit" value="평가"></input>
+		<a class="btn btn-success"  href="${pageContext.request.contextPath}/assignment/revise.do?taskId=15" />수정</a>
+		<a class="btn btn-success"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId} " />삭제</a>
+		<a class="btn btn-success"  href="${pageContext.request.contextPath}/assignment/evaluate.do?taskId=${task.taskId} " />평가</a>
 	</div>
 
 	</br>

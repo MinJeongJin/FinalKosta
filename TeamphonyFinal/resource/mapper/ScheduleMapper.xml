@@ -7,8 +7,8 @@
 	<insert id="insertSchedule" parameterType="Schedule">
 		INSERT INTO schedule_tb (id, startDate, endDate, title, place, contents, teamCode)
 		VALUES (Schedule_seq.nextval
-		,#{startDate, jdbcType=DATE}
-		,#{endDate, jdbcType=DATE}
+		,#{startDate, jdbcType=VARCHAR}
+		,#{endDate, jdbcType=VARCHAR}
 		,#{title, jdbcType=VARCHAR}
 		,#{place, jdbcType=VARCHAR}
 		,#{contents, jdbcType=VARCHAR}

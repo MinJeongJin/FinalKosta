@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,8 +103,8 @@ public class AssignmentController {
 	 * [contextPath]/assignment/searchAssignmentByAssignmentId.do contextPath =
 	 * /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path)
 	 */
-	@RequestMapping("/searchByAssignmentId.do")
-	public String searchAssignmentByAssignmentId(String taskId, Model model) {
+	@RequestMapping("/searchByTaskId.do")
+	public String searchAssignmentByTaskId(String taskId, Model model) {
 		int taskIdNo = Integer.parseInt(taskId);
 		
 		Task task = new Task();

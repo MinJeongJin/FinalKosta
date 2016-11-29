@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="teamphony.domain.Schedule" alias="Schedule" />
 		<typeAlias type="teamphony.domain.Task" alias="Task" />
 		<typeAlias type="teamphony.domain.Team" alias="Team" />
+		<typeAlias type="teamphony.domain.TaskFile" alias="TaskFile" />
 	</typeAliases>
 
 	<environments default="development">

@@ -40,6 +40,7 @@ public class TaskStoreLogic implements TaskStore {
 			
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.insertTask(task); 
+			
 			if (task.getFlag()==1){
 				int taskId = task.getTaskId();
 				List<TaskFile> taskFileList = task.getTaskFileList();
@@ -85,11 +86,16 @@ public class TaskStoreLogic implements TaskStore {
 	public void deleteTask(int taskId) {
 
 		SqlSession session = getSessionFactory().openSession();
+		
+		
+		
 
 		try {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			mapper.deleteTaskFile(taskId);
 			mapper.deleteTask(taskId);
+			
 			session.commit();
 
 		} catch (Exception e) {
