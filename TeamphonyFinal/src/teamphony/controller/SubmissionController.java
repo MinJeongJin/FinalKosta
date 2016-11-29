@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import teamphony.domain.Member;
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
 import teamphony.service.facade.TaskService;
@@ -31,40 +36,51 @@ public class SubmissionController {
 
 	@Autowired
 	private TaskService service;
+	private File folder;
+	private static final int MAX_SIZE = 1024 * 1024 * 20;
 
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
-	public String createSubmission(@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) { // attchFile
+	public String createSubmission(HttpServletRequest request, HttpSession session,
+			@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) { // attchFile
 		System.out.println("============================");
-		System.out.println("flag= " +flag);
-		
-//		int taskIdNo = Integer.parseInt(taskId);
+		System.out.println("flag= " + flag);
+
+		// int taskIdNo = Integer.parseInt(taskId);
+
 		int flagNo = Integer.parseInt(flag);
-		System.out.println("flagNo= " +flagNo);
-		
-		
+		System.out.println("flagNo= " + flagNo);
+
 		String filePathOnly = "c:/uploadTemp";
-		
+
+		// // folder generate
+		// folder = new File(savePath + id);
+		// folder.mkdirs();
+		//
 		Task task = new Task();
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setFlag(flagNo);
-		
-		System.out.println("title = "+task.getTitle());
-		System.out.println(("contens= "+task.getContents()));
-		System.out.println(("flag= "+task.getFlag()));
-		
-		
-		//첨부 파일 List파일저장 , TASKFILE_TB 저장
+
+		System.out.println("title = " + task.getTitle());
+		System.out.println(("contens= " + task.getContents()));
+		System.out.println(("flag= " + task.getFlag()));
+
+		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
+
 		for (MultipartFile attchFile : attchFileList) {
+
 			int taskId = task.getTaskId();
 			String filePath = filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
-			
-			System.out.println("저장 경로 =" + filePath);
+
 			File f = new File(filePath);
 			try {
-				attchFile.transferTo(f); //물리 파일 저장
+
+				MultipartRequest multipartRequest = new MultipartRequest(request, filePath, MAX_SIZE, "UTF-8",
+						new DefaultFileRenamePolicy());
+				String memberId = multipartRequest.getParameter("memberId");
+				attchFile.transferTo(f); // 물리 파일 저장
 				taskFileList.add(taskFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
@@ -73,7 +89,7 @@ public class SubmissionController {
 			}
 		}
 		task.setTaskFileList(taskFileList);
-		service.registerTask(task); //task_tb 저장
+		service.registerTask(task); // task_tb 저장
 		return "redirect:serchAll.do";
 	}
 
@@ -103,15 +119,15 @@ public class SubmissionController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(Model model) {
-		
+
 		List<Task> taskList = service.findAllTask();
-		model.addAttribute("taskList",taskList);
-		
-		for(Task task: taskList){
+		model.addAttribute("taskList", taskList);
+
+		for (Task task : taskList) {
 			System.out.println(task.getTitle());
 			System.out.println(task.getContents());
 			System.out.println(task.getDeadline());
-			
+
 		}
 
 		return "/task/submission/submissionList.jsp";
