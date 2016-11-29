@@ -15,7 +15,7 @@ public interface TaskMapper {
 	void updateTask(Task task);
 
 	void deleteTask(int taskId);
-	
+	// 추가했음
 	void deleteTaskFile(int taskId);
 	
 	List<Task> selectAllTask();
