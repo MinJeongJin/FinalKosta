@@ -15,7 +15,9 @@ public interface TaskMapper {
 	void updateTask(Task task);
 
 	void deleteTask(int taskId);
-
+	
+	void deleteTaskFile(int taskId);
+	
 	List<Task> selectAllTask();
 
 	Task selectTaskByTaskId(int taskId);

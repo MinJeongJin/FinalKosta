@@ -100,9 +100,11 @@ public class SubmissionController {
 	}
 
 	@RequestMapping("/erase.do")
-	public String eraseSubmission(Task task) {
+	public String eraseSubmission(String taskId) {
+		int taskIdNo = Integer.parseInt(taskId);
+		service.removeTask(taskIdNo);
 
-		return null;
+		return "redirect:searchAll.do";
 	}
 
 	@RequestMapping("/searchByTaskId.do")

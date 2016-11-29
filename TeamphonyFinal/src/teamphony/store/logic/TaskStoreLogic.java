@@ -86,11 +86,16 @@ public class TaskStoreLogic implements TaskStore {
 	public void deleteTask(int taskId) {
 
 		SqlSession session = getSessionFactory().openSession();
+		
+		
+		
 
 		try {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			mapper.deleteTaskFile(taskId);
 			mapper.deleteTask(taskId);
+			
 			session.commit();
 
 		} catch (Exception e) {
