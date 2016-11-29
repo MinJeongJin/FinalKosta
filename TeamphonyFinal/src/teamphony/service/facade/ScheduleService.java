@@ -11,6 +11,5 @@ public interface ScheduleService {
 	void modifySchedule(Schedule schedule);
 	void removeSchedule(int scheduleId);
 	List<Schedule> findSchedulesByTeamCode(int teamCode);
-	List<Schedule> findSchedulesByDate(Date startDate);
 	Schedule findScheduleByScheduleId(int scheduleId);
 }

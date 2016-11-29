@@ -11,7 +11,6 @@ public interface ScheduleStore {
 	void updateSchedule(Schedule schedule);
 	void deleteSchedule(int scheduleId);
 	List<Schedule> selectSchedulesByTeamCode(int teamCode);
-	List<Schedule> selectSchedulesByDate(Date startDate);
 	Schedule selectScheduleByScheduleId(int ScheduleId);
 	
 }

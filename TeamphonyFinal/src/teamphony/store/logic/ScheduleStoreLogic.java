@@ -87,20 +87,6 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 
 	@Override
-	public List<Schedule> selectSchedulesByDate(Date startDate) {
-		SqlSession session = getSessionFactory().openSession();
-		List<Schedule> list = new ArrayList<>();
-		
-		try {
-			ScheduleMapper mapper = session.getMapper(ScheduleMapper.class);
-			list = mapper.selectSchedulesByDate(startDate);
-		} finally {
-			session.close();
-		}
-		return list;
-	}
-
-	@Override
 	public Schedule selectScheduleByScheduleId(int scheduleId) {
 		SqlSession session = getSessionFactory().openSession();
 		

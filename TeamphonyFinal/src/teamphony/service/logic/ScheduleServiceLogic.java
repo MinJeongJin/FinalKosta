@@ -37,11 +37,6 @@ public class ScheduleServiceLogic implements ScheduleService {
 	}
 
 	@Override
-	public List<Schedule> findSchedulesByDate(Date startDate) {
-		return scheduleStore.selectSchedulesByDate(startDate);
-	}
-
-	@Override
 	public Schedule findScheduleByScheduleId(int scheduleId) {
 		return scheduleStore.selectScheduleByScheduleId(scheduleId);
 	}

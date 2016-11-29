@@ -71,15 +71,8 @@ public class ScheduleController {
 		return "redirect:/schedule/calendar.do";
 	}
 	
-//	@RequestMapping(value="revise.do", method=RequestMethod.GET)
-//	public String modifySchedule(int scheduleId, Model model){
-//		Schedule schedule = scheduleService.findScheduleByScheduleId(scheduleId);
-//		model.addAttribute("schedule", schedule);
-//		return null;
-//	}
-	
 	@RequestMapping(value="revise.do", method=RequestMethod.POST)
-	public String modifySchedule(Schedule schedule, String startDay, String startHour, 
+	public String reviseSchedule(Schedule schedule, String startDay, String startHour, 
 			String endDay, String endHour){
 		String start = startDay + " " + startHour;
 		String end = endDay + " " + endHour;
@@ -123,12 +116,5 @@ public class ScheduleController {
 		model.addAttribute("teamSchedules", teamSchedules);
 		return "schedule/calendar";
 	}
-	
-//	@RequestMapping("list.do")
-//	public String searchSchedulesByDate(Date startDate, Model model){
-//		List<Schedule> dateSchedules = scheduleService.findSchedulesByDate(startDate);
-//		model.addAttribute("dateSchedules", dateSchedules);
-//		return null;
-//	}
 	
 }
