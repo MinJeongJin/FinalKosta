@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -82,7 +81,7 @@ h1 {
 											${sts.count }
 										</td>
 										<td>
-											<a href="${pageContext.request.contextPath}/submission/searchBySubmissionId.do?taskId=${task.taskId }">${task.title }</a>
+											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
 										</td>
 										<td>
 											제출자 미구현

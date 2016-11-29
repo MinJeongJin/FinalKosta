@@ -104,7 +104,7 @@ h1 {
 						<c:forEach items="${list }" var="task" varStatus="sts">
 							<tr>
 								<td>${sts.count }</td>
-								<td><a href="${pageContext.request.contextPath}/assignment/searchByAssignmentId.do?taskId=${task.taskId }">${task.title }</a></td>
+								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do.do?taskId=${task.taskId }">${task.title }</a></td>
 								<td></td>
 								<td><fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/></td>
 								<td><p><span class="starRating">

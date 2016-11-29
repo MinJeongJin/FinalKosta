@@ -105,10 +105,15 @@ public class SubmissionController {
 		return null;
 	}
 
-	@RequestMapping("/searchBySubmissionId.do")
+	@RequestMapping("/searchByTaskId.do")
 	public String searchSubmissionByTaskId(int taskId, Model model) {
+		
+		Task task = service.findTaskByTaskId(taskId);
+		
+		model.addAttribute("task",task);
+		
 
-		return null;
+		return "/task/submission/submissionDetail";
 	}
 
 	@RequestMapping("/searchByMemberId.do")

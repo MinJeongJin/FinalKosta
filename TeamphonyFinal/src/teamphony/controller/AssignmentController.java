@@ -103,7 +103,7 @@ public class AssignmentController {
 	 * [contextPath]/assignment/searchAssignmentByAssignmentId.do contextPath =
 	 * /TeamphonyFinal - > 서버 - > 모듈텝 - > 그리드(Path)
 	 */
-	@RequestMapping("/searchByAssignmentId.do")
+	@RequestMapping("/searchByTaskId.do")
 	public String searchAssignmentByTaskId(String taskId, Model model) {
 		int taskIdNo = Integer.parseInt(taskId);
 		
