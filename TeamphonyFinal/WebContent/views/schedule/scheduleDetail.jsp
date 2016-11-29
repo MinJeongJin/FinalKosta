@@ -9,20 +9,28 @@
 <title>일정 상세 페이지</title>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<style type="text/css">
+#reset, #okay {
+display: none;
+}
+</style>
+
 </head>
 
+
 <body>
-	<input id="scheduleId" name="scheduleId" type="hidden"
-		value="${schedule.scheduleId}">
+	<input id="scheduleId" name="scheduleId" type="hidden" value="${schedule.scheduleId}">
+	<a href="${pageContext.request.contextPath}/schedule/calendar.do">달력으로 돌아가기</a>
 	<h3>일정상세</h3>
 
+	<form action="${pageContext.request.contextPath}/schedule/revise.do?scheduleId=${schedule.scheduleId}" method="post">
 	<table class="table">
 		<colgroup>
 			<col width="150">
 			<col width="*">
 		</colgroup>
-        <a href="${pageContext.request.contextPath}/article/remove.do?articleId=${article.articleId}&boardId=${article.boardId}" class="glyphicon glyphicon-trash pull-right" style="padding:10px">삭제</a>
-		<a href="${pageContext.request.contextPath}/article/modify.do?articleId=${article.articleId}&boardId=${article.boardId}" class="glyphicon glyphicon-cog pull-right" style="padding:10px">수정</a>
+        <a href="${pageContext.request.contextPath}/schedule/erase.do?scheduleId=${schedule.scheduleId}" class="glyphicon glyphicon-trash pull-right" style="padding:10px">삭제</a>
+		<a onclick="bt_revise_click();" id="revise" class="glyphicon glyphicon-cog pull-right" style="padding:10px">수정</a>
 		<tr>
 			<th>제목</th>
 			<td><input id="title" name="title"
@@ -30,7 +38,7 @@
 		</tr>
 		<tr>
 			<th>장소</th>
-			<td><input id="place" name=""place""
+			<td><input id="place" name="place"
 				class="form-control" type="text" value="${schedule.place }" readonly></td>
 		</tr>
 		<tr>
@@ -51,7 +59,21 @@
 	
 	</table>
 	<br>
-
+	<div align="center">
+		<input id="reset" class="btn" type="reset" value="취소" > 
+		<input id="okay" class="btn btn-success" type="submit"value="저장" >
+	</div>
+	</form>
+	
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+	<!-- revise button click event -->
+	function bt_revise_click(){
+		$('#title, #place, #startDay, #startHour, #endDay, #endHour, #contents').attr('readonly',false);
+		$('#reset, #okay').show();
+	}
+	</script>
 </body>
 </html>
 

@@ -1,12 +1,8 @@
 package teamphony.domain;
 
-import java.util.Date;
-
 public class Schedule {
 
 	private int scheduleId;
-//	private Date startDate;
-//	private Date endDate;
 	private String startDate;
 	private String endDate;
 	private String startTime;
@@ -48,24 +44,6 @@ public class Schedule {
 		this.teamCode = teamCode;
 	}
 
-	
-//	public Date getStartDate() {
-//		return startDate;
-//	}
-//
-//	public void setStartDate(Date startDate) {
-//		this.startDate = startDate;
-//	}
-//
-//	public Date getEndDate() {
-//		return endDate;
-//	}
-//
-//	public void setEndDate(Date endDate) {
-//		this.endDate = endDate;
-//	}
-	
-
 	public String getStartDate() {
 		return startDate;
 	}
@@ -81,9 +59,6 @@ public class Schedule {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-
-	
-	
 
 	public String getTitle() {
 		return title;

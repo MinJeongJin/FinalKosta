@@ -17,7 +17,8 @@
 
 	<update id="updateSchedule" parameterType="Schedule">
 		UPDATE schedule_tb
-		SET startDate = #{starDate}, endDate = #{endDate}, title = #{title}, place = #{place}, contents = #{contents}
+		SET 
+		startDate = #{startDate}, endDate = #{endDate}, title = #{title}, place = #{place}, contents = #{contents}
 		WHERE id = #{scheduleId}
 	</update>
 	

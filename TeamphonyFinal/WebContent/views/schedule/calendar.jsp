@@ -19,9 +19,9 @@
     <!-- NProgress -->
     <link href="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- FullCalendar -->
-    <link href="${pageContext.request.contextPath}/resources/schedule/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+<%--     <link href="${pageContext.request.contextPath}/resources/schedule/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet"> --%>
     <link href="${pageContext.request.contextPath}/resources/schedule/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
-
+    <link href="${pageContext.request.contextPath}/resources/schedule/vendors/fullcalendar/dist/fullcalendar.css" rel="stylesheet">
     <!-- Custom styling plus plugins -->
     <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
 </head>
@@ -130,21 +130,7 @@
                 	
                 	var scheduleId = calEvent.id;
                 	location.href = "${pageContext.request.contextPath}/schedule/detail.do?scheduleId=" + scheduleId;
-                   /*  $('#fc_edit').click();
-                    $('#title2').val(calEvent.title);
-                    $('#place2').val(calEvent.place);
-                    $('#contents2').val(calEvent.contents);
-
-                    categoryClass = $("#event_type").val();
-
-                    $(".antosubmit2").on("click", function () {
-                        calEvent.title = $("#title2").val();
-
-                        calendar.fullCalendar('updateEvent', calEvent);
-                        $('.antoclose2').click();
-                    }); 
-
-                    calendar.fullCalendar('unselect'); */
+               
                 }, 
                  
                 editable: true,
@@ -155,7 +141,8 @@
     					id: '${schedule.scheduleId}',
     					title: '${schedule.title}',
     					start: '${schedule.startDate}',
-    					end: '${schedule.endDate}'
+    					end: '${schedule.endDate}',
+    					constraint: 'schedule'
     				},
     				</c:forEach>
     			]

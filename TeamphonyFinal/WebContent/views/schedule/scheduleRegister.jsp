@@ -14,7 +14,7 @@
 </head>
 <body>
 	<input id="scheduleId" name="scheduleId" type="hidden" value="">
-	<a href="calendar2.jsp">달력으로 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/schedule/calendar.do">달력으로 돌아가기</a>
 	<h3>일정등록</h3>
 
 	<br>
