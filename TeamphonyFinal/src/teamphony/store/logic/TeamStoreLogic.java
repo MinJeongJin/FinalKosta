@@ -34,6 +34,7 @@ public class TeamStoreLogic implements TeamStore {
 
 	@Override
 	public void insertTeam(Team team) {
+
 		SqlSession session = getSessionFactory().openSession();
 		try {
 			TeamMapper mapper = session.getMapper(TeamMapper.class);
@@ -74,8 +75,21 @@ public class TeamStoreLogic implements TeamStore {
 
 	@Override
 	public List<Team> selectTeamsByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Team> teamList = null;
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			teamList = mapper.selectTeamsByMemberId(memberId);
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return teamList;
 	}
 
 	@Override
