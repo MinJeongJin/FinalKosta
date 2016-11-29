@@ -38,8 +38,9 @@ public class TeamServiceLogic implements TeamService {
 
 	@Override
 	public List<Team> findTeamsByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		
+		return store.selectTeamsByMemberId(memberId);
 	}
 
 	@Override
