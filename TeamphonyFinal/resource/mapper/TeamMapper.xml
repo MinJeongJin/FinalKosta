@@ -6,16 +6,30 @@
 
 
 	<insert id="insertTeam" parameterType="Team">
-		INSERT INTO TEAM_TB(CODE, CYCLE, ENDDATE, LEADERID, NAME)
-		VALUES (#{code}, #{cycle}, #{endDate}, #{leaderId}, #{name})
-		
+		INSERT INTO TEAM_TB(CODE,
+		CYCLE, ENDDATE, LEADERID, NAME)
+		VALUES (#{code}, #{cycle}, #{endDate},
+		#{leaderId}, #{name})
+
 	</insert>
-	
-	<select id="selectTeamsByMemberId" parameterType="String" resultType="Team">
-	
-		SELECT CODE, CYCLE, ENDDATE, LEADERID, NAME FROM TEAM_TB WHERE LEADERID = #{memberId};
-	
+
+	<select id="selectTeamsByMemberId" parameterType="String"
+		resultType="Team">
+
+		SELECT CODE, CYCLE, ENDDATE, LEADERID, NAME
+		FROM TEAM_TB
+		WHERE CODE in (SELECT TEAMCODE FROM BELONG_TB WHERE MEMBERID = #{memberId})
+
+
 	</select>
+
+	<insert id="insertBelong">
+
+		INSERT INTO BELONG_TB(TEAMCODE, MEMBERID)
+		VALUES(#{teamCode}, #{memberId})
+
+
+	</insert>
 
 
 

@@ -13,7 +13,7 @@ public interface TeamStore {
 	Team selectTeamByTeamCode(int teamCode);
 	List<Member> selectMembersByTeamCode(int teamCode);
 	List<Team> selectTeamsByMemberId(String memberId);
-	void selectBelong(int teamCode, String memberId);
+	void insertBelong(int teamCode, String memberId);
 	void deleteBelong(int teamCode, String memberId);
 	
 

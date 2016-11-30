@@ -26,27 +26,24 @@ public class TeamController {
 	@Autowired
 	private TeamService teamService;
 
-	@Autowired
-	private MemberService memberService;
-
 	@RequestMapping("create.do")
 	public String createTeam(Team team, HttpSession session) {
 
-		// leaderId 임시 set
-		String tempLeaderId = "tnghsla13";
+		// Member로 임시 테스트
+		Member member = (Member)session.getAttribute("member");
+		String leaderId = member.getMemberId();
+		int teamCode = getTeamCode();
 
-		team.setLeaderId(tempLeaderId);
-		// code 또한 임시 generate
-		team.setCode(getTeamCode());
+		team.setLeaderId(leaderId);
+		
+		// code 임시 generate
+		team.setCode(teamCode);
+		session.setAttribute("teamCode", teamCode);
 
 		// Leader는 생성과 동시에 그 팀에 속하는 팀원임
-		Member leader = memberService.findMemberByMemberId(tempLeaderId);
-
-		List<Member> memberList = new ArrayList<Member>();
-		memberList.add(leader);
-
 		teamService.registerTeam(team);
-
+		teamService.belongToTeam(teamCode, leaderId);
+		
 		return "redirect:/team/main.do";
 	}
 
@@ -61,21 +58,25 @@ public class TeamController {
 		return TEAM_CODE++;
 	}
 
+	@RequestMapping("revise.do")
 	public String reviseTeam(Team team) {
 
 		return null;
 	}
 
+	@RequestMapping("erase.do")
 	public String eraseTeam(int teamCode) {
 
 		return null;
 	}
 
+	@RequestMapping("join.do")
 	public String joinTeam(int teamCode, HttpSession session) {
 
 		return null;
 	}
 
+	@RequestMapping("search.do")
 	public String searchTeamByCode(HttpSession session, Model model) {
 
 		return null;
@@ -86,11 +87,13 @@ public class TeamController {
 		return null;
 	}
 
+	@RequestMapping("withdraw.do")
 	public String withdrawTeam(HttpSession session) {
 
 		return null;
 	}
 
+	@RequestMapping("invite.do")
 	public String inviteMember(List<String> email, HttpSession session) {
 
 		return null;
@@ -99,15 +102,13 @@ public class TeamController {
 	@RequestMapping("main.do")
 	public String searchTeamsByMemberId(HttpSession session, Model model) {
 
-		System.out.println("정상적으로 잘 작동하고 있습니다.");
-		String testId = "tnghsla13";
+		Member member = (Member)session.getAttribute("member");
+		String memberId = member.getMemberId();
 
-		List<Team> teamList = teamService.findTeamsByMemberId(testId);
+		List<Team> teamList = teamService.findTeamsByMemberId(memberId);
 
 		model.addAttribute("teamList", teamList);
 
-		
-		
 		return "team/teamList";
 	}
 }

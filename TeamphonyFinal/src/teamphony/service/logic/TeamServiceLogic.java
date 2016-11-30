@@ -57,13 +57,15 @@ public class TeamServiceLogic implements TeamService {
 
 	@Override
 	public void belongToTeam(int teamCode, String memberId) {
-		// TODO Auto-generated method stub
+		
+		store.insertBelong(teamCode, memberId);
 		
 	}
 
 	@Override
 	public void leaveTeam(int teamCode, String memberId) {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 

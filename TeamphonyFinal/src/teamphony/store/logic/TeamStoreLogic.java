@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -93,8 +94,19 @@ public class TeamStoreLogic implements TeamStore {
 	}
 
 	@Override
-	public void selectBelong(int teamCode, String memberId) {
-		// TODO Auto-generated method stub
+	public void insertBelong(int teamCode, String memberId) {
+		
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			mapper.insertBelong( teamCode,  memberId);
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
 	}
 

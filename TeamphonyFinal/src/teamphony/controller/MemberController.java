@@ -39,7 +39,7 @@ public class MemberController {
 			return "/common/login";
 		} else {
 			session.setAttribute("member", result);
-			return "redirect:../views/team/teamList.jsp";
+			return "redirect:/team/main.do";
 		}
 
 	}
