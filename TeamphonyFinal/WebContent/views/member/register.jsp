@@ -32,36 +32,47 @@
 </script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#memberId").keyup(function() {
-			if ($("#memberId").val().length > 5) {
-				var id = $(this).val();
-				$.ajax({
-					type : 'POST',
-					url : 'checkId.do',
-					data : {
-						id : id
-					},
-					success : function(result) {
-						if ($.trim(result) == "ok") {
-							$("#idCheckResult").html("사용 가능한 ID입니다.");
-						} else {
-							$("#idCheckResult").html("사용 중인 ID입니다.");
-						}
-					}
-				});
-			} else {
-				$("#idCheckResult").html("ID는 5자 이상입니다.");
-			}
-		});
-		$("#password").keyup(function() {
-			if ($("#password").val().length > 8 && $("#password").val().length < 11) {
-				$("#idCheckResult").html("사용 가능한 Password입니다.");
-			} else {
-				$("#idCheckResult").html("Password는 8자 이상입니다.");
-			}
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$("#memberId").keyup(
+								function() {
+									if ($("#memberId").val().length > 5) {
+										var id = $(this).val();
+										$.ajax({
+											type : 'POST',
+											url : 'checkId.do',
+											data : {
+												id : id
+											},
+											success : function(result) {
+												if ($.trim(result) == "ok") {
+													$("#idCheckResult").html(
+															"사용 가능한 ID입니다.");
+												} else {
+													$("#idCheckResult").html(
+															"사용 중인 ID입니다.");
+												}
+											}
+										});
+									} else {
+										$("#idCheckResult").html(
+												"ID는 5자 이상입니다.");
+									}
+								});
+						$("#password")
+								.keyup(
+										function() {
+											if ($("#password").val().length > 8
+													&& $("#password").val().length < 11) {
+												$("#idCheckResult").html(
+														"사용 가능한 Password입니다.");
+											} else {
+												$("#idCheckResult").html(
+														"Password는 8자 이상입니다.");
+											}
+										});
+					});
 </script>
 
 <style type="text/css">
@@ -98,8 +109,7 @@
 							class="input__label input__label--hoshi input__label--hoshi-color-3"
 							for="name"> <span
 								class="input__label-content input__label-content--hoshi">ID</span>
-						</label>
-						<label id="idCheckResult"></label>
+						</label> <label id="idCheckResult"></label>
 						</span> <span class="input input--hoshi"> <input
 							class="input__field input__field--hoshi" type="text" id="alias"
 							name="alias" /> <label
@@ -113,8 +123,7 @@
 							class="input__label input__label--hoshi input__label--hoshi-color-3"
 							for="password"> <span
 								class="input__label-content input__label-content--hoshi">비밀번호</span>
-						</label>
-						<label id="passwordCheckResult"></label>
+						</label> <label id="passwordCheckResult"></label>
 						</span> <span class="input input--hoshi"> </span>
 						<div class="cta">
 							<button type="submit" class="btn btn-primary pull-left">회원가입</button>
