@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 
 <!doctype html>
@@ -91,7 +92,7 @@
 			<div class="row">
 				<div class="col-md-6 left-side">
 					<header>
-						<span>Theamphony 가입</span>
+						<span>Theamphony 가입 </span>
 						<h3>계정을 생성하세요</h3>
 					</header>
 				</div>

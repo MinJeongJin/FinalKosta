@@ -198,7 +198,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "revise", method = RequestMethod.POST)
-	public String reviseMember(HttpSession session, String password, String alias) {
+	public String reviseMember(HttpSession session, String password, String alias, HttpServletRequest request) {
 
 		// Member member = new Member();
 		// String id = null, alias = null, pw = null, imgPath = null;
@@ -277,6 +277,48 @@ public class MemberController {
 		// // member generate
 		Member member = new Member();
 		Member login = (Member) session.getAttribute("member");
+		// Request에서 첨부파일을 받기위해 캐스팅을 함
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+		// 첨부 파일을 개수 파악?
+		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+		// 필요한 변수 선언
+		MultipartFile multipartFile = null;
+		String originalFileName = null;
+
+		// 파일을 저장할 폴더 설정
+		File file = new File(filePath + login.getMemberId() + "\\");
+		// 폴더가 없으면 폴더 생성
+		if (file.exists() == false) {
+			file.mkdirs();
+		}
+
+		// 첨부 파일 찾기
+		if (iterator.hasNext()) {
+			// 첨부파일 불러오기
+			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+			// 첨부파일 존재 여부 확인
+			if (multipartFile.isEmpty() == false) {
+				// 파일이름 저장
+				originalFileName = multipartFile.getOriginalFilename();
+
+				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
+				file = new File(filePath + login.getMemberId() + "\\" + originalFileName);
+				member.setImagePath(filePath + login.getMemberId() + "\\" + originalFileName);
+				try {
+					// 파일 전송
+					multipartFile.transferTo(file);
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} else {
+
+		}
+		
 
 		System.out.println(password + " " + alias);
 		if (!session.isNew()) {
@@ -297,10 +339,9 @@ public class MemberController {
 		// } else {
 		// member.setImagePath(imgPath);
 		// }
-		member.setImagePath("add");
 
 		service.modifyMember(member);
-		System.out.println("ok2");
+		session.setAttribute("member", member);
 
 		return "/member/myPage";
 	}
