@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>TeamphonyFinal</display-name>
 	<!-- 추가 부분  시작  // 파일 업로드시 한글 파일 이름이 깨져서 추가 해 주었다 !!핮ㅣ만 그게 다가 아니라 리퀘스트에 대하여 인코딩 처리를 해주는거임
-	넹!! ㅠㅠ-->  
+	-->  
 	<filter>
 		<description>Encoding Filter</description>
 		<filter-name>encodingFilter</filter-name>

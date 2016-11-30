@@ -59,6 +59,14 @@
 						</label>
 					</td>
 			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td>
+					<input style="width: 250px" ; type="file" name="attchFile" class="form-control">
+					<input type="hidden" name="flag" value="1" />
+				</td>
+			</tr>
+			
 		</table>
 		<br>
 		<div align="center">
