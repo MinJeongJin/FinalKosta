@@ -37,7 +37,6 @@
 					<ul>
 						<li style="float: left; width: 70px;">이은채</li>
 						<li style="float: left; width: 70px;">진민정</li>
-						<li style="float: left; width: 70px;">현대경</li>
 						<li style="float: left; width: 70px;">김수호</li>
 						<li style="float: left; width: 70px;">윤영민</li>
 					</ul>
@@ -61,8 +60,9 @@
 			
 			<tr>
 				<th>내용</th>
-				<td><textarea id="contents" name="contents"
-						class="form-control" rows="7" placeholder="${task.contents } 입력된 내용"></textarea></td>
+					<td>
+						<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="${task.contents } 입력된 내용"></textarea>
+					</td>
 			</tr>
 		</table>
 		<br>

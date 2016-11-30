@@ -55,6 +55,15 @@
 				,POINT                  = #{point , jdbcType=INTEGER}
 			WHERE ID	= #{taskId}
 	</update>
+	
+	<update id="updateTaskFile" parameterType="taskFile">
+		UPDATE TASKFILE_TB
+		SET 
+				SUBMISSIONID			= #{submissionId}
+				,FILEPATH				=#{filePath}
+			
+			WHERE SUBMISSIONID	= #{submissionId}
+	</update>
 
 	<select id="selectAllTask" resultType="Task">
 		select

@@ -41,14 +41,14 @@ public class SubmissionController {
 	private TaskService service;
 	private File folder;
 
+	private static final String filePathOnly = "c:/uploadTemp";
+
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
 	public String createSubmission(HttpServletRequest request, HttpSession session,
 			@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) { // attchFile
 
 		int flagNo = Integer.parseInt(flag);
 		System.out.println("flagNo= " + flagNo);
-
-		String filePathOnly = "c:/uploadTemp";
 
 		Task task = new Task();
 		task.setTitle(title);
@@ -63,13 +63,13 @@ public class SubmissionController {
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
 			int taskId = task.getTaskId();
-			String filePath = filePathOnly + File.separator + attchFile.getOriginalFilename();
+			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
 
 			System.out.println("저장 경로 =" + filePath);
 			File f = new File(filePath);
 			try {
-				attchFile.transferTo(f); // 물리 파일 저장
+				attchFile.transferTo(f);
 				taskFileList.add(taskFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
@@ -79,18 +79,15 @@ public class SubmissionController {
 		}
 		task.setTaskFileList(taskFileList);
 		service.registerTask(task); // task_tb 저장
-		
-		
+
 		return "redirect:searchAll.do";
 
 	}
 
 	@RequestMapping("/revise.do")
-	public String reviseSubmission(String taskId, Model model) {
-		int taskIdNo;
-		taskIdNo = Integer.parseInt(taskId);
+	public String reviseSubmission(int taskId, Model model) {
 
-		Task task = service.findTaskByTaskId(taskIdNo);
+		Task task = service.findTaskByTaskId(taskId);
 		model.addAttribute("task", task);
 
 		return "task/submission/submissionModify";
@@ -98,46 +95,48 @@ public class SubmissionController {
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
 	public String reviseSubmission(HttpServletRequest request, HttpSession session,
-			@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) {
+			@RequestParam("attchFile") MultipartFile[] attchFileList,int taskId ,String title, String contents, String flag) {
 
-		String taskId = null;
 		int flagNo = Integer.parseInt(flag);
-		int taskIdNo = Integer.parseInt(taskId);
-		taskIdNo = 61;
-		String filePathOnly = "c:/uploadTemp";
+		System.out.println("flagNo= " + flagNo);
 
+		Task task = new Task();
+		task.setTaskId(taskId);
+		task.setTitle(title);
+		task.setContents(contents);
+		task.setFlag(flagNo);
+		System.out.println("taskId = " + task.getTaskId());
+		System.out.println("title = " + task.getTitle());
+		System.out.println(("contens= " + task.getContents()));
+		System.out.println(("flag= " + task.getFlag()));
+
+		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
-
 		for (MultipartFile attchFile : attchFileList) {
-
-			String filePath = filePathOnly + File.separator + attchFile.getOriginalFilename();
+			
+			//int taskId = task.getTaskId();
+			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
 
-			// File f = new File(filePath);
-			// try {
-			//
-			// MultipartRequest multipartRequest = new MultipartRequest(request,
-			// savePath, MAX_SIZE, "UTF-8",
-			// new DefaultFileRenamePolicy());
-			//
-			// String memberId = multipartRequest.getParameter("memberId");
-			// memberId = "solzzang0";
-			//
-			// attchFile.transferTo(f); // 물리 파일 저장
-			// taskFileList.add(taskFile);
-			//
-			// Task task = new Task(taskIdNo, title, contents, filePath);
-			// task.setTitle(title);
-			// task.setContents(contents);
-			// task.setFlag(flagNo);
-			//
-			// service.modifyTask(task);
-			// } catch (IllegalStateException e) {
-			// e.printStackTrace();
-			// } catch (IOException e) {
-			// e.printStackTrace();
-			// }
+			System.out.println("저장 경로 =" + filePath);
+			File f = new File(filePath);
+			
+			
+			//방금 파일 업로드 안했잖아.. 그래서 그런거 아이야?
+			//설길이 컨트롤러 저장 안했어
+			try {
+				attchFile.transferTo(f);
+				taskFileList.add(taskFile);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
+		task.setTaskFileList(taskFileList);
+		service.modifyTask(task);; // task_tb 저장
+
 		return "redirect:searchAll.do";
 	}
 

@@ -71,6 +71,13 @@ public class TaskStoreLogic implements TaskStore {
 			
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.updateTask(task);
+			List<TaskFile> taskFileList = task.getTaskFileList();
+			
+			for(TaskFile taskFile : taskFileList){
+				taskFile.setSubmissionId(task.getTaskId());
+				mapper.updateTaskFile(taskFile);
+			}
+			
 			session.commit();
 			
 		} catch (Exception e) {

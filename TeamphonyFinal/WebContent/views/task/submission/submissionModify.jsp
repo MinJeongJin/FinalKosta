@@ -14,12 +14,12 @@
 	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
 </head>
 <body>
-	<input id="taskId" name="taskId" type="hidden" value="">
 	<a href="assignmentList.do">과제리스트 돌아가기</a>
 	<h3>부여 과제 수정</h3>
 
 	<br>
-	<form action="${pageContext.request.contextPath}/submission/revise.do" method="post">
+	<form action="${pageContext.request.contextPath}/submission/revise.do" method="post" enctype="multipart/form-data">
+		<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
 		<table class="table">
 			<colgroup>
 				<col width="150">
@@ -28,8 +28,9 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><input id="assignmetTitle" name="assignmetTitle"
-					class="form-control" type="text" value="" placeholder="${task.tilte } 입력된 제목"></td>
+				<td>
+					<input id="title" name="title" class="form-control" type="text" value="" placeholder="${task.title }">
+				</td>
 			</tr>
 			<tr style="horizontal-align: left;">
 				<th>제출자</th>
@@ -37,24 +38,17 @@
 					<ul>
 						<li style="float: left; width: 70px;">이은채</li>
 						<li style="float: left; width: 70px;">진민정</li>
-						<li style="float: left; width: 70px;">현대경</li>
 						<li style="float: left; width: 70px;">김수호</li>
 						<li style="float: left; width: 70px;">윤영민</li>
+						<li style="float: left; width: 70px;">미구현</li>
 					</ul>
 				</td>
 			</tr>
+			
 			<tr>
-				<th>제출 기한</th>
-				<td>
-					<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
-				</td>
-			</tr>
-			<tr>
-				<th>내용</th>
+				<th>내용</th>	
 					<td>
-						<textarea id="subsmissionContents" name="subsmissionContents"
-							class="form-control" rows="7" placeholder="${task.contents } 입력된 내용">
-						</textarea>
+						<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="${task.contents }"></textarea>
 					</td>
 			</tr>
 			<tr>
