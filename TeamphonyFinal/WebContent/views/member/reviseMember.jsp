@@ -77,7 +77,7 @@ table tr td {
 					<table>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" /></td>
+							<td><input type="password" name="password" /></td>
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
@@ -85,7 +85,7 @@ table tr td {
 						</tr>
 						<tr>
 							<td>별명</td>
-							<td><input type="text" value="${member.alias }" ></td>
+							<td><input type="text" name="alias" value="${member.alias }" ></td>
 						</tr>
 						<tr>
 							<td>사진</td>

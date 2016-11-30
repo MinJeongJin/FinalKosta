@@ -30,106 +30,110 @@ public class MemberController {
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
 		Member result = service.findMemberByMemberId(loginId);
-		System.out.println(result.getPassword());
-		
-		
-		if (!(result == null || result.getPassword().length() == 0)&& result.getPassword().equals(loginPw)) {
-			session.setAttribute("member", result);
-			System.out.println("로그인");
-			return "redirect:../views/team/teamList.jsp";
-		} else {
-			model.addAttribute("result", "true");
-			System.out.println("안됨");
+
+		if (result == null || result.getPassword().length() == 0) {
+			model.addAttribute("result", "notId");
 			return "/common/login";
+		} else if (!result.getPassword().equals(loginPw)) {
+			model.addAttribute("result", "true");
+			return "/common/login";
+		} else {
+			session.setAttribute("member", result);
+			return "redirect:../views/team/teamList.jsp";
 		}
+
 	}
 
 	@RequestMapping(value = "create.do", method = RequestMethod.POST)
 	public String createMember(String memberId, String password, String alias) {
-//		
-//		String id = null, alias = null, pw = null, imgPath = null;
-//
-//		// file data
-//		String root, savePath;
-//		root = request.getSession().getServletContext().getRealPath("/");
-//		savePath = root + "MemberContainer\\";
-//		File folder;
-//
-//		// for read file
-//		int read = 0;
-//		byte[] buf = new byte[1024];
-//		FileInputStream fin = null;
-//		FileOutputStream fout = null;
-//
-//		try {
-//
-//			// multipart form request receive
-//			// file is generated in directory you mentioned
-//			MultipartRequest multipartRequest = new MultipartRequest(request, savePath, MAX_SIZE, "UTF-8",
-//					new DefaultFileRenamePolicy());
-//
-//			// value setting
-//			id = multipartRequest.getParameter("memberId");
-//			alias = multipartRequest.getParameter("alias");
-//			pw = multipartRequest.getParameter("password");
-//			imgPath = multipartRequest.getFilesystemName("imagePath");
-//
-//			// folder generate
-//			folder = new File(savePath + id);
-//			folder.mkdirs();
-//
-//			// default image copy
-//			fin = new FileInputStream(new File(savePath + "default.png"));
-//			fout = new FileOutputStream(new File(folder.getAbsolutePath() + "\\default.png"));
-//
-//			while ((read = fin.read(buf, 0, buf.length)) != -1) {
-//				fout.write(buf, 0, read);
-//			}
-//			fin.close();
-//			fout.close();
-//
-//			// if imagePath null
-//			if (imgPath == null) {
-//
-//				imgPath = folder.getAbsolutePath() + "\\default.png";
-//				// else
-//			} else {
-//
-//				String fileName = imgPath;
-//
-//				imgPath = savePath + fileName;
-//
-//				File oldFile = new File(imgPath);
-//				fin = new FileInputStream(oldFile);
-//				fout = new FileOutputStream(new File(folder.getAbsolutePath() + "\\" + fileName));
-//
-//				imgPath = folder.getAbsolutePath() + "\\" + fileName;
-//				while ((read = fin.read(buf, 0, buf.length)) != -1) {
-//					fout.write(buf, 0, read);
-//				}
-//
-//				fin.close();
-//				fout.close();
-//				oldFile.delete();
-//			}
-//
-//		} catch (Exception e) {
-//
-//			e.printStackTrace();
-//		}
-//
-//		// member generate
-//
-//		member.setMemberId(id);
-//		member.setPassword(pw);
-//		member.setAlias(alias);
-//		member.setImagePath(imgPath);
 
 		System.out.println(memberId);
-		System.out.println(alias);
 		System.out.println(password);
-		
-		Member member = new Member(memberId, alias, password);
+		System.out.println(alias);
+		//
+		// String id = null, alias = null, pw = null, imgPath = null;
+		//
+		// // file data
+		// String root, savePath;
+		// root = request.getSession().getServletContext().getRealPath("/");
+		// savePath = root + "MemberContainer\\";
+		// File folder;
+		//
+		// // for read file
+		// int read = 0;
+		// byte[] buf = new byte[1024];
+		// FileInputStream fin = null;
+		// FileOutputStream fout = null;
+		//
+		// try {
+		//
+		// // multipart form request receive
+		// // file is generated in directory you mentioned
+		// MultipartRequest multipartRequest = new MultipartRequest(request,
+		// savePath, MAX_SIZE, "UTF-8",
+		// new DefaultFileRenamePolicy());
+		//
+		// // value setting
+		// id = multipartRequest.getParameter("memberId");
+		// alias = multipartRequest.getParameter("alias");
+		// pw = multipartRequest.getParameter("password");
+		// imgPath = multipartRequest.getFilesystemName("imagePath");
+		//
+		// // folder generate
+		// folder = new File(savePath + id);
+		// folder.mkdirs();
+		//
+		// // default image copy
+		// fin = new FileInputStream(new File(savePath + "default.png"));
+		// fout = new FileOutputStream(new File(folder.getAbsolutePath() +
+		// "\\default.png"));
+		//
+		// while ((read = fin.read(buf, 0, buf.length)) != -1) {
+		// fout.write(buf, 0, read);
+		// }
+		// fin.close();
+		// fout.close();
+		//
+		// // if imagePath null
+		// if (imgPath == null) {
+		//
+		// imgPath = folder.getAbsolutePath() + "\\default.png";
+		// // else
+		// } else {
+		//
+		// String fileName = imgPath;
+		//
+		// imgPath = savePath + fileName;
+		//
+		// File oldFile = new File(imgPath);
+		// fin = new FileInputStream(oldFile);
+		// fout = new FileOutputStream(new File(folder.getAbsolutePath() + "\\"
+		// + fileName));
+		//
+		// imgPath = folder.getAbsolutePath() + "\\" + fileName;
+		// while ((read = fin.read(buf, 0, buf.length)) != -1) {
+		// fout.write(buf, 0, read);
+		// }
+		//
+		// fin.close();
+		// fout.close();
+		// oldFile.delete();
+		// }
+		//
+		// } catch (Exception e) {
+		//
+		// e.printStackTrace();
+		// }
+		//
+		// // member generate
+		//
+		// member.setMemberId(id);
+		// member.setPassword(pw);
+		// member.setAlias(alias);
+		// member.setImagePath(imgPath);
+
+		Member member = new Member(memberId, alias, password, "add");
+		service.registerMember(member);
 
 		return "/common/login";
 	}
@@ -148,107 +152,111 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "revise", method = RequestMethod.POST)
-	public String reviseMember(HttpSession session, HttpServletRequest request) {
+	public String reviseMember(HttpSession session, String password, String alias) {
 
+		// Member member = new Member();
+		// String id = null, alias = null, pw = null, imgPath = null;
+		//
+		// // file data
+		// String root, savePath;
+		// root = request.getSession().getServletContext().getRealPath("/");
+		// savePath = root + "MemberContainer\\";
+		// File folder;
+		//
+		// // for read file
+		// int read = 0;
+		// byte[] buf = new byte[1024];
+		// FileInputStream fin = null;
+		// FileOutputStream fout = null;
+		//
+		// try {
+		//
+		// // multipart form request receive
+		// // file is generated in directory you mentioned
+		// MultipartRequest multipartRequest = new MultipartRequest(request,
+		// savePath, MAX_SIZE, "UTF-8",
+		// new DefaultFileRenamePolicy());
+		//
+		// // value setting
+		// alias = multipartRequest.getParameter("alias");
+		// pw = multipartRequest.getParameter("password");
+		// imgPath = multipartRequest.getFilesystemName("imagePath");
+		//
+		// // folder generate
+		// folder = new File(savePath + id);
+		// folder.mkdirs();
+		//
+		// // default image copy
+		// fin = new FileInputStream(new File(savePath + "default.png"));
+		// fout = new FileOutputStream(new File(folder.getAbsolutePath() +
+		// "\\default.png"));
+		//
+		// while ((read = fin.read(buf, 0, buf.length)) != -1) {
+		// fout.write(buf, 0, read);
+		// }
+		// fin.close();
+		// fout.close();
+		//
+		// // if imagePath null
+		// if (imgPath == null) {
+		//
+		// imgPath = folder.getAbsolutePath() + "\\default.png";
+		// // else
+		// } else {
+		//
+		// String fileName = imgPath;
+		//
+		// imgPath = savePath + fileName;
+		//
+		// File oldFile = new File(imgPath);
+		// fin = new FileInputStream(oldFile);
+		// fout = new FileOutputStream(new File(folder.getAbsolutePath() + "\\"
+		// + fileName));
+		//
+		// imgPath = folder.getAbsolutePath() + "\\" + fileName;
+		// while ((read = fin.read(buf, 0, buf.length)) != -1) {
+		// fout.write(buf, 0, read);
+		// }
+		//
+		// fin.close();
+		// fout.close();
+		// oldFile.delete();
+		// }
+		//
+		// } catch (Exception e) {
+		//
+		// e.printStackTrace();
+		// }
+		//
+		// // member generate
 		Member member = new Member();
-		String id = null, alias = null, pw = null, imgPath = null;
-
-		// file data
-		String root, savePath;
-		root = request.getSession().getServletContext().getRealPath("/");
-		savePath = root + "MemberContainer\\";
-		File folder;
-
-		// for read file
-		int read = 0;
-		byte[] buf = new byte[1024];
-		FileInputStream fin = null;
-		FileOutputStream fout = null;
-
-		try {
-
-			// multipart form request receive
-			// file is generated in directory you mentioned
-			MultipartRequest multipartRequest = new MultipartRequest(request, savePath, MAX_SIZE, "UTF-8",
-					new DefaultFileRenamePolicy());
-
-			// value setting
-			alias = multipartRequest.getParameter("alias");
-			pw = multipartRequest.getParameter("password");
-			imgPath = multipartRequest.getFilesystemName("imagePath");
-
-			// folder generate
-			folder = new File(savePath + id);
-			folder.mkdirs();
-
-			// default image copy
-			fin = new FileInputStream(new File(savePath + "default.png"));
-			fout = new FileOutputStream(new File(folder.getAbsolutePath() + "\\default.png"));
-
-			while ((read = fin.read(buf, 0, buf.length)) != -1) {
-				fout.write(buf, 0, read);
-			}
-			fin.close();
-			fout.close();
-
-			// if imagePath null
-			if (imgPath == null) {
-
-				imgPath = folder.getAbsolutePath() + "\\default.png";
-				// else
-			} else {
-
-				String fileName = imgPath;
-
-				imgPath = savePath + fileName;
-
-				File oldFile = new File(imgPath);
-				fin = new FileInputStream(oldFile);
-				fout = new FileOutputStream(new File(folder.getAbsolutePath() + "\\" + fileName));
-
-				imgPath = folder.getAbsolutePath() + "\\" + fileName;
-				while ((read = fin.read(buf, 0, buf.length)) != -1) {
-					fout.write(buf, 0, read);
-				}
-
-				fin.close();
-				fout.close();
-				oldFile.delete();
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-		// member generate
 		Member login = (Member) session.getAttribute("member");
 
-		System.out.println(pw + " " + alias);
-		member.setMemberId(login.getMemberId());
-		if (pw.equals("null")) {
+		System.out.println(password + " " + alias);
+		if (!session.isNew()) {
+			member.setMemberId(login.getMemberId());
+		}
+		if (password.equals("null")) {
 			member.setPassword(login.getPassword());
 		} else {
-			member.setPassword(pw);
+			member.setPassword(password);
 		}
-		if (pw.equals("null")) {
+		if (alias.equals("null")) {
 			member.setPassword(login.getAlias());
 		} else {
 			member.setAlias(alias);
 		}
-		if (pw.equals("null")) {
-			member.setPassword(login.getPassword());
-		} else {
-			member.setMemberId(login.getMemberId());
-		}
-
-		
-		
-		member.setImagePath(imgPath);
+		// if (imagePath.equals("null")) {
+		// member.setPassword(login.getPassword());
+		// } else {
+		// member.setImagePath(imgPath);
+		// }
+		member.setImagePath("add");
 
 		service.modifyMember(member);
+		System.out.println("ok2");
 
-		return null;
+		return "/member/myPage";
 	}
 
 	@RequestMapping(value = "revise.do", method = RequestMethod.GET)
@@ -263,6 +271,16 @@ public class MemberController {
 		model.addAttribute("member", reviseMember);
 		System.out.println("ok");
 		return "/member/reviseMember";
+	}
+
+	@RequestMapping("delete.do")
+	public String delete(HttpSession session) {
+
+		Member member = (Member) session.getAttribute("member");
+		System.out.println(member.getMemberId());
+		service.removeMember(member.getMemberId());
+
+		return "/common/login";
 	}
 
 }

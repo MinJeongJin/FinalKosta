@@ -34,7 +34,7 @@
             <ul class="nav navbar-nav">
 
                 <li><a href="#" data-toggle="modal" data-target="#myModal">팀 생성</a></li>
-                <li><a href="#">마이페이지</a></li>
+                <li><a href="${pageContext.request.contextPath}/views/member/checkMember.jsp">마이페이지</a></li>
                 <li><a href="#">로그아웃</a></li>
 
             </ul>

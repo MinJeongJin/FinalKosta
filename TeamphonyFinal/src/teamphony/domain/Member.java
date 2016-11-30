@@ -16,10 +16,11 @@ public class Member {
 		this.password = password;
 	}
 
-	public Member(String memberId, String password, String alias) {
+	public Member(String memberId, String password, String alias, String imagePath) {
 		this.memberId = memberId;
 		this.password = password;
 		this.alias = alias;
+		this.imagePath = imagePath;
 		this.starPoint = 0;
 	}
 
