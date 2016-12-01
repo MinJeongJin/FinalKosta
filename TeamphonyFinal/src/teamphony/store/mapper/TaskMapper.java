@@ -23,7 +23,13 @@ public interface TaskMapper {
 	List<Task> selectAllTask();
 
 	Task selectTaskByTaskId(int taskId);
+	//추가 했음
+	Task selectTaskDetail(int taskId);
+	//추가 했음
+	TaskFile selectFileList(int taskId);
 
 	List<Task> selectTaskByMemberId(String memberId);
+
+	
 	
 }

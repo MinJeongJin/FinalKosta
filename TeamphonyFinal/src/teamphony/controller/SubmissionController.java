@@ -95,7 +95,8 @@ public class SubmissionController {
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
 	public String reviseSubmission(HttpServletRequest request, HttpSession session,
-			@RequestParam("attchFile") MultipartFile[] attchFileList,int taskId ,String title, String contents, String flag) {
+			@RequestParam("attchFile") MultipartFile[] attchFileList, int taskId, String title, String contents,
+			String flag) {
 
 		int flagNo = Integer.parseInt(flag);
 		System.out.println("flagNo= " + flagNo);
@@ -113,17 +114,16 @@ public class SubmissionController {
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
-			
-			//int taskId = task.getTaskId();
+
+			// int taskId = task.getTaskId();
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
 
 			System.out.println("저장 경로 =" + filePath);
 			File f = new File(filePath);
-			
-			
-			//방금 파일 업로드 안했잖아.. 그래서 그런거 아이야?
-			//설길이 컨트롤러 저장 안했어
+
+			// 방금 파일 업로드 안했잖아.. 그래서 그런거 아이야?
+			// 설길이 컨트롤러 저장 안했어
 			try {
 				attchFile.transferTo(f);
 				taskFileList.add(taskFile);
@@ -133,9 +133,10 @@ public class SubmissionController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		task.setTaskFileList(taskFileList);
-		service.modifyTask(task);; // task_tb 저장
+		service.modifyTask(task);
+		; // task_tb 저장
 
 		return "redirect:searchAll.do";
 	}
@@ -150,9 +151,9 @@ public class SubmissionController {
 	}
 
 	@RequestMapping("/searchByTaskId.do")
-	public String searchSubmissionByTaskId(int taskId, Model model) {
-
-		Task task = service.findTaskByTaskId(taskId);
+	public String searchSubmissionByTaskId(String taskId, Model model) {
+		System.out.println("taskId =  " +taskId);
+		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
 
 		model.addAttribute("task", task);
 
@@ -168,6 +169,11 @@ public class SubmissionController {
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(Model model) {
 		List<Task> taskList = service.findAllTask();
+
+		// for(Task task : taskList){
+		// System.out.println(task.toString());
+		// System.out.println("=============================================");
+		// }
 
 		model.addAttribute("taskList", taskList);
 		return "/task/submission/submissionList";
