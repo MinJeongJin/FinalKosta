@@ -69,7 +69,7 @@
 		<br>
 		<div align="center">
 			<a href="assignmentList.do"><input class="btn" type="reset" value="취소"></a> 
-			<input class="btn btn-success" type="submit" value="저장"></a>
+			<input class="btn btn-success" type="submit" value="저장">
 		</div>
 	</form>
 	<br>

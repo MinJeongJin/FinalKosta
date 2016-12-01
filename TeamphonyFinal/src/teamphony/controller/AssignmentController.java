@@ -89,15 +89,7 @@ public class AssignmentController {
 		return "redirect:searchAll.do";
 	}
 
-	@RequestMapping("/evaluate.do")
-	public String evaluateAssignment(String taskId,Task task, Model model) {
-		int taskIdNo= Integer.parseInt(taskId);
-		
-		task= service.findTaskByTaskId(taskIdNo);
-		model.addAttribute(task);
-		
-		return "/task/assignment/assignmentEvaluate";
-	}
+	
 
 	/*
 	 * [contextPath]/assignment/searchAssignmentByAssignmentId.do contextPath =

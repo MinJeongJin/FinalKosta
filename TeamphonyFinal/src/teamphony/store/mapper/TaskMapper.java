@@ -13,6 +13,8 @@ public interface TaskMapper {
 	void insertTaskFile(TaskFile task);
 
 	void updateTask(Task task);
+	//  추가했음
+	void updateTaskFile(TaskFile task);
 
 	void deleteTask(int taskId);
 	// 추가했음
@@ -21,7 +23,13 @@ public interface TaskMapper {
 	List<Task> selectAllTask();
 
 	Task selectTaskByTaskId(int taskId);
+	//추가 했음
+	Task selectTaskDetail(int taskId);
+	//추가 했음
+	TaskFile selectFileList(int taskId);
 
 	List<Task> selectTaskByMemberId(String memberId);
+
+	
 	
 }

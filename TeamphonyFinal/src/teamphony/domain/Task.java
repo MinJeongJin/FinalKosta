@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Task {
+	//설길이 아까 에러나서 민정이한테 물어 봤는데... 
+	//그래서 태스크 아이디 파스 인트 안하고 그냥 넣었어... 그래서 고장난거야? 아니
 
 	private int taskId;
 	private String title;
@@ -13,9 +15,11 @@ public class Task {
 	private Date evaluationPeriod;
 	private Date deadline;
 	private int flag;
-
 	private List<TaskFile> taskFileList;
-
+	//추가했음
+	private TaskFile taskFile;
+	private Task task;
+	
 	public List<TaskFile> getTaskFileList() {
 		return taskFileList;
 	}
@@ -137,12 +141,32 @@ public class Task {
 		this.flag = flag;
 	}
 
+	public TaskFile getTaskFile() {
+		return taskFile;
+	}
+
+	public void setTaskFile(TaskFile taskFile) {
+		this.taskFile = taskFile;
+	}
+
+	public Task getTask() {
+		return task;
+	}
+
+	public void setTask(Task task) {
+		this.task = task;
+	}
+
 	@Override
 	public String toString() {
 		return "taskId=" + taskId + "\n" + "title= " + title + "\n" + "contents= " + contents + "\n" + "deadline= "
-				+ deadline + "\n" + "flag= " + flag;
+				+ deadline + "\n" + "flag= " + flag + "\n" + "taskFileList=" + taskFileList;
 	}
-
-
+	
+	
+	
+	
+	
+	
 
 }

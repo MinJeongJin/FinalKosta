@@ -72,6 +72,7 @@ h1 {
 							<th>제목</th>
 							<th>제출자</th>
 							<th>제출기한</th>
+							<th>첨부파일</th>
 						</tr>
 					</thead>
 					<tbody >
@@ -81,13 +82,16 @@ h1 {
 											${sts.count }
 										</td>
 										<td>
-											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=88">${task.title }</a>
 										</td>
 										<td>
 											제출자 미구현
 										</td>
 										<td>
 											<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
+										</td>
+										<td>
+											첨부파일 제목
 										</td>
 									</tr>
 						</c:forEach>

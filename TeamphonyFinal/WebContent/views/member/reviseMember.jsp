@@ -89,7 +89,7 @@ table tr td {
 						</tr>
 						<tr>
 							<td>사진</td>
-							<td><input type="file" /></td>
+							<td><input type="file" name="imagePath" /></td>
 						</tr>
 					</table>
 					<button type="submit">수정</button>

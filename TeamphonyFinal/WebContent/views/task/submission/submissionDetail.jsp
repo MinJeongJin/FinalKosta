@@ -28,8 +28,7 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><label for="title" name="title"
-					class="form-control"  >${task.title }</label></td>
+				<td>${task.title }</td>
 			</tr>
 			<tr>
 				<th>제출자</th>
@@ -54,15 +53,20 @@
 			<tr>
 				<th>내용</th>
 					<td>
-						<label for="submissionContents" name="submissionContents"
-								class="form-control" rows="7" >${task.contents }
-						</label>
+						${task.contents }
 					</td>
 			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td>
+					파일 이름 미구현
+				</td>
+			</tr>
+			
 		</table>
 		<br>
 		<div align="center">
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=15" >수정</a>
+			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=88" >수정</a>
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId} " >삭제</a>
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId} " >평가</a>
 		</div>

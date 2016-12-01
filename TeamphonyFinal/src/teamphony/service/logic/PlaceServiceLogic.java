@@ -2,14 +2,19 @@ package teamphony.service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import teamphony.domain.Place;
 import teamphony.service.facade.PlaceService;
+import teamphony.store.facade.PlaceStore;
 
 @Service
 public class PlaceServiceLogic implements PlaceService {
 
+	@Autowired
+	private PlaceStore placeStore;
+	
 	@Override
 	public void registerPlace(Place place) {
 		// TODO Auto-generated method stub
@@ -36,8 +41,7 @@ public class PlaceServiceLogic implements PlaceService {
 
 	@Override
 	public List<Place> findAllPlace() {
-		// TODO Auto-generated method stub
-		return null;
+		return placeStore.selectAllPlace();
 	}
 
 	@Override

@@ -4,4 +4,13 @@
 
 <mapper namespace="teamphony.store.mapper.PlaceMapper">
 
+	<select id="selectAllPlace" resultType="Place">
+		SELECT id AS placeId,
+			   name, 
+			   address,
+			   phoneNumber AS phoneNum,
+			   imagePath,
+			   contents
+		FROM place_tb
+	</select>
 </mapper>

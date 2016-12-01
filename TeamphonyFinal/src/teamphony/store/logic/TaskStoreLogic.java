@@ -2,6 +2,7 @@ package teamphony.store.logic;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -37,30 +38,29 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-			
+
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			mapper.insertTask(task); 
-			
-			if (task.getFlag()==1){
+			mapper.insertTask(task);
+
+			if (task.getFlag() == 1) {
 				int taskId = task.getTaskId();
 				List<TaskFile> taskFileList = task.getTaskFileList();
-				
-				for(TaskFile taskFile : taskFileList){
+
+				for (TaskFile taskFile : taskFileList) {
 					taskFile.setSubmissionId(taskId);
-					mapper.insertTaskFile(taskFile); 
+					mapper.insertTaskFile(taskFile);
 				}
-				
+
 			}
 			session.commit();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
-		
+
 	}
 
 	@Override
@@ -68,16 +68,22 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-			
+
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.updateTask(task);
+			List<TaskFile> taskFileList = task.getTaskFileList();
+
+			for (TaskFile taskFile : taskFileList) {
+				taskFile.setSubmissionId(task.getTaskId());
+				mapper.updateTaskFile(taskFile);
+			}
+
 			session.commit();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -86,16 +92,13 @@ public class TaskStoreLogic implements TaskStore {
 	public void deleteTask(int taskId) {
 
 		SqlSession session = getSessionFactory().openSession();
-		
-		
-		
 
 		try {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.deleteTaskFile(taskId);
 			mapper.deleteTask(taskId);
-			
+
 			session.commit();
 
 		} catch (Exception e) {
@@ -124,16 +127,32 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public Task selectTaskByTaskId(int taskId) {
-
+		System.out.println("=====스토어 시작======================");
 		SqlSession session = getSessionFactory().openSession();
-
+		Task task = null;
 		try {
+			System.out.println("=====try 시작======================");
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			return mapper.selectTaskByTaskId(taskId);
 
+			System.out.println("===========매퍼 시작=========");
+			task = mapper.selectTaskDetail(taskId);
+
+			// List<TaskFile> fileList = new ArrayList<>();
+			String filePath = mapper.selectFileList(taskId).getFilePath();
+
+			System.out.println("filePath = " + filePath);
+
+			System.out.println("===========매퍼 끝=========");
+
+			System.out.println(task.toString());
+			return task;
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
+		return task;
 	}
 
 	@Override

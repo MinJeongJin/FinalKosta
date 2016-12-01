@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,7 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                     <h2> <small> 스터디 공간을 찾아보세요</small></h2> 
+                     <h2> <small> 스터디 공간을 알려드릴게요</small></h2> 
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -75,64 +76,29 @@
 
                     <div class="row">
                     
-                      <div class="col-md-4">
-                        <div class="thumbnail">
-                          <div class="image view view-first">
-                            <img style="width: 100%; display: block;" src="${pageContext.request.contextPath}/resources/place/img/img_1.jpg" alt="image" />
-                          <!--   <div class="mask">
-                              <p><br></p>
-                              <div class="tools tools-bottom">
-                                <a href="#"><i class="fa fa-link"></i></a>
-                                <a href="#"><i class="fa fa-pencil"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                              </div> 
-                            </div> -->
-                          </div>
-                          <div class="caption">
-                           <h2> <p>강남 복합문화공간 꿈틀</p> </h2>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div class="col-md-4">
-                        <div class="thumbnail">
-                          <div class="image view view-first">
-                            <img style="width: 100%; display: block;" src="${pageContext.request.contextPath}/resources/place/img/img_1.jpg" alt="image" />
-                          <!--   <div class="mask">
-                              <p><br></p>
-                              <div class="tools tools-bottom">
-                                <a href="#"><i class="fa fa-link"></i></a>
-                                <a href="#"><i class="fa fa-pencil"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                              </div> 
-                            </div> -->
-                          </div>
-                          <div class="caption">
-                           <h2> <p>강남 복합문화공간 꿈틀</p> </h2>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div class="col-md-4">
-                        <div class="thumbnail">
-                          <div class="image view view-first">
-                            <img style="width: 100%; display: block;" src="${pageContext.request.contextPath}/resources/place/img/img_1.jpg" alt="image" />
-                          <!--   <div class="mask">
-                              <p><br></p>
-                              <div class="tools tools-bottom">
-                                <a href="#"><i class="fa fa-link"></i></a>
-                                <a href="#"><i class="fa fa-pencil"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                              </div> 
-                            </div> -->
-                          </div>
-                          <div class="caption">
-                           <h2> <p>강남 복합문화공간 꿈틀</p> </h2>
-                          </div>
-                        </div>
-                      </div>
-                      
-                    </div>
+                   	<c:forEach items="${places }" var="place">
+	                      <div class="col-md-4">
+	                        <div class="thumbnail" style="height: 500%;">
+	                          <div class="image view view-first" style="height: 160px;">
+	                          <a href="${pageContext.request.contextPath}/schedule/calendar.do"></a>
+	                            <img style="width: 100%; display: block;" src="${pageContext.request.contextPath}/resources/place/img/${place.imagePath }" alt="image"/>
+	                          <!--   <div class="mask">
+	                              <p><br></p>
+	                              <div class="tools tools-bottom">
+	                                <a href="#"><i class="fa fa-link"></i></a>
+	                                <a href="#"><i class="fa fa-pencil"></i></a>
+	                                <a href="#"><i class="fa fa-times"></i></a>
+	                              </div> 
+	                            </div> -->
+	                          </div>
+	                          <div class="caption">
+	                           <h2> <p>${place.name }</p> </h2>
+	                          </div>
+	                        </div>
+	                      </div>
+                   </c:forEach>
+
+                    </div>	
                   </div>
                 </div>
               </div>
@@ -140,15 +106,6 @@
           </div>
         </div>
         <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
       </div>
     </div>
 

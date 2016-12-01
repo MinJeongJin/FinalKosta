@@ -47,24 +47,26 @@ h1 {
 }
 
 /* Star Rating */
-.starRating,
-.starRating span{
-    display:inline-block;
-    height:14px;
-    background:transparent url(<c:url value="/views/img/icoFiveStar.gif" />) no-repeat;
-    overflow:hidden;
+.starRating, .starRating span {
+	display: inline-block;
+	height: 14px;
+	background: transparent
+		url(< c : url value = "/views/img/icoFiveStar.gif"/ >) no-repeat;
+	overflow: hidden;
 }
-.starRating{
-    width:79px;
-    vertical-align:middle;
+
+.starRating {
+	width: 79px;
+	vertical-align: middle;
 }
-.starRating span{
-    font-size:0;
-    line-height:0;
-    vertical-align:top;
-    text-indent:-100px;
-    *text-indent:0;
-    background-position:0 -14px;
+
+.starRating span {
+	font-size: 0;
+	line-height: 0;
+	vertical-align: top;
+	text-indent: -100px;
+	*text-indent: 0;
+	background-position: 0 -14px;
 }
 </style>
 </head>
