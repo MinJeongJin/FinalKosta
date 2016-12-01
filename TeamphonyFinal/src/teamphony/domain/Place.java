@@ -7,6 +7,7 @@ public class Place {
 	private String address;
 	private String phoneNum;
 	private String imagePath;
+	private String contents;
 
 	public int getPlaceId() {
 		return placeId;
@@ -46,6 +47,14 @@ public class Place {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public String getContents() {
+		return contents;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 }

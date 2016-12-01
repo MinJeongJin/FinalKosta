@@ -33,12 +33,6 @@
 		WHERE teamCode = #{teamCode}
 	</select>
 	
-	<select id="selectSchedulesByDate" resultType="Schedule" parameterType="date">
-		SELETE id AS scheduleId, startDate, endDate, title, place, contents
-		FROM schedule_tb
-		WHERE startDate = #{startDate}
-	</select>
-	
 	<select id="selectScheduleByScheduleId" resultType="Schedule" parameterType="int">
 		SELECT id AS scheduleId, startDate, endDate, title, place, contents
 		FROM schedule_tb
