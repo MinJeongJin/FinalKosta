@@ -4,9 +4,9 @@
 
 <!DOCTYPE html>
 
-
 <head>
 
+<title>Welcome to teamphony</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +36,6 @@
 				<label class="navbar-brand">Teamphony</label>
 			</div>
 
-
 			<ul class="nav navbar-nav">
 
 				<li><a href="#" data-toggle="modal" data-target="#myModal">팀
@@ -47,10 +46,11 @@
 
 			</ul>
 
-			<form class="navbar-form navbar-right" action="${pageContext.request.contextPath}/team/search.do">
+			<form class="navbar-form navbar-right" method="post"
+				action="${pageContext.request.contextPath}/team/join.do">
 				<div class="form-group">
 					<input type="number" maxlength="4" class="form-control"
-						placeholder="팀 코드 입력">
+						name="teamCode" placeholder="팀 코드 입력">
 				</div>
 				<button type="submit" class="btn btn-default">검색</button>
 			</form>
@@ -58,23 +58,18 @@
 		</div>
 	</nav>
 
-
-
-
 	<div id="wrapper-container">
 
 		<div id="contents">
-			<fieldset id="field">
+			
 
-				<legend>
+				
 					<h2 id="title">팀 목록</h2>
-				</legend>
-
-
-
+				
 				<c:forEach items="${teamList}" var="team" varStatus="cntOfTeam">
 					<figure class="white">
-						<a href="${pageContext.request.contextPath}/views/team/teamPage.jsp">
+						<a
+							href="${pageContext.request.contextPath}/team/search.do?teamCode=${team.code}">
 							<div id="wrapper-part-info">
 								<div class="part-info-image"></div>
 								<div id="part-info">${team.name}</div>
@@ -84,15 +79,10 @@
 				</c:forEach>
 
 
-			</fieldset>
+		
 		</div>
 
 	</div>
-
-
-
-
-
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
@@ -134,31 +124,21 @@
 
 	</div>
 
-
-
-
-
-
-
-
-
-
 	<script>
-        function getActualHeight() {
-            var actualHeight = window.innerHeight ||
-                document.documentElement.clientHeight ||
-                document.body.clientHeight ||
-                document.body.offsetHeight;
+		function getActualHeight() {
+			var actualHeight = window.innerHeight
+					|| document.documentElement.clientHeight
+					|| document.body.clientHeight || document.body.offsetHeight;
 
-            return actualHeight;
-        }
+			return actualHeight;
+		}
 
+		window.onload = function() {
 
-        window.onload = function () {
-
-            document.getElementById("field").style.height = getActualHeight() / 2 + 'px';
-        }
-    </script>
+			document.getElementById("field").style.height = getActualHeight()
+					/ 2 + 'px';
+		}
+	</script>
 
 </body>
 

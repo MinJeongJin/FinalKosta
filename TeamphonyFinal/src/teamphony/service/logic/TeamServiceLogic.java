@@ -26,14 +26,14 @@ public class TeamServiceLogic implements TeamService {
 
 	@Override
 	public void modifyTeam(Team team) {
-		// TODO Auto-generated method stub
-		
+
+		store.updateTeam(team);
 	}
 
 	@Override
 	public void removeTeam(int teamCode) {
-		// TODO Auto-generated method stub
-		
+
+		store.deleteTeam(teamCode);
 	}
 
 	@Override
@@ -45,14 +45,12 @@ public class TeamServiceLogic implements TeamService {
 
 	@Override
 	public Team findTeamByTeamCode(int teamCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectTeamByTeamCode(teamCode);
 	}
 
 	@Override
 	public List<Member> findMembersByTeamCode(int teamCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectMembersByTeamCode(teamCode);
 	}
 
 	@Override
@@ -65,8 +63,7 @@ public class TeamServiceLogic implements TeamService {
 	@Override
 	public void leaveTeam(int teamCode, String memberId) {
 		
-		
-		
+		store.deleteBelong(teamCode, memberId);
 	}
 
 }

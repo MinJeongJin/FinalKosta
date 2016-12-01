@@ -64,14 +64,38 @@ public class TeamStoreLogic implements TeamStore {
 
 	@Override
 	public Team selectTeamByTeamCode(int teamCode) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Team team = null;
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			team = mapper.selectTeamByTeamCode(teamCode);
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return team;
 	}
 
 	@Override
 	public List<Member> selectMembersByTeamCode(int teamCode) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Member> memberList = null;
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			memberList = mapper.selectMembersByTeamCode(teamCode);
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return memberList;
 	}
 
 	@Override
@@ -95,11 +119,11 @@ public class TeamStoreLogic implements TeamStore {
 
 	@Override
 	public void insertBelong(int teamCode, String memberId) {
-		
+
 		SqlSession session = getSessionFactory().openSession();
 		try {
 			TeamMapper mapper = session.getMapper(TeamMapper.class);
-			mapper.insertBelong( teamCode,  memberId);
+			mapper.insertBelong(teamCode, memberId);
 			session.commit();
 		} catch (Exception e) {
 

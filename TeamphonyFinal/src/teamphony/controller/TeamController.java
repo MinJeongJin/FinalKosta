@@ -3,12 +3,16 @@ package teamphony.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.compiler.MemberResolver.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import teamphony.domain.Member;
 import teamphony.domain.Team;
@@ -30,12 +34,12 @@ public class TeamController {
 	public String createTeam(Team team, HttpSession session) {
 
 		// Member로 임시 테스트
-		Member member = (Member)session.getAttribute("member");
+		Member member = (Member) session.getAttribute("member");
 		String leaderId = member.getMemberId();
 		int teamCode = getTeamCode();
 
 		team.setLeaderId(leaderId);
-		
+
 		// code 임시 generate
 		team.setCode(teamCode);
 		session.setAttribute("teamCode", teamCode);
@@ -43,7 +47,7 @@ public class TeamController {
 		// Leader는 생성과 동시에 그 팀에 속하는 팀원임
 		teamService.registerTeam(team);
 		teamService.belongToTeam(teamCode, leaderId);
-		
+
 		return "redirect:/team/main.do";
 	}
 
@@ -73,16 +77,38 @@ public class TeamController {
 	@RequestMapping("join.do")
 	public String joinTeam(int teamCode, HttpSession session) {
 
-		return null;
+		Team team = teamService.findTeamByTeamCode(teamCode);
+
+		return "team/teamManage";
 	}
 
-	@RequestMapping("search.do")
-	public String searchTeamByCode(HttpSession session, Model model) {
+	@RequestMapping(value = "search.do", method = RequestMethod.GET)
+	public String searchTeamByCode(int teamCode, HttpSession session, Model model) {
 
-		return null;
+		Team team = teamService.findTeamByTeamCode(teamCode);
+		List<Member> memberList = teamService.findMembersByTeamCode(teamCode);
+		Member member = (Member) session.getAttribute("member");
+		String id = null, leaderId = null;
+
+		team.setMemberList(memberList);
+		model.addAttribute("team", team);
+		model.addAttribute("memberList", memberList);
+
+		id = ((Member) session.getAttribute("member")).getMemberId();
+		leaderId = team.getLeaderId();
+
+		if (session.getAttribute("teamCode") == null) {
+
+			session.setAttribute("teamCode", teamCode);
+		}
+
+		if (id.equals(leaderId))
+			return "team/teamManageForLeader";
+
+		return "team/teamManage";
 	}
 
-	public String searchMemberByCode(HttpSession session) {
+	public String searchMembersByCode(HttpSession session) {
 
 		return null;
 	}
@@ -94,15 +120,24 @@ public class TeamController {
 	}
 
 	@RequestMapping("invite.do")
-	public String inviteMember(List<String> email, HttpSession session) {
+	public String inviteMember(String e_mail_1, HttpSession session) {
+		int teamCode = (Integer) session.getAttribute("teamCode");
+		try {
+			GoogleMail.Send("tnghsla13", "tlqkf9464", e_mail_1, "Welcom to teamphony", teamCode + "");
 
-		return null;
+		} catch (AddressException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/team/search.do?teamCode=" + teamCode;
 	}
 
 	@RequestMapping("main.do")
 	public String searchTeamsByMemberId(HttpSession session, Model model) {
 
-		Member member = (Member)session.getAttribute("member");
+		Member member = (Member) session.getAttribute("member");
 		String memberId = member.getMemberId();
 
 		List<Team> teamList = teamService.findTeamsByMemberId(memberId);

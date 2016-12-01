@@ -5,6 +5,41 @@
 <mapper namespace="teamphony.store.mapper.TeamMapper">
 
 
+	<select id="selectTeamsByMemberId" parameterType="String"
+		resultType="Team">
+
+		SELECT CODE, CYCLE, ENDDATE, LEADERID, NAME
+		FROM TEAM_TB
+		WHERE CODE in (SELECT TEAMCODE FROM BELONG_TB WHERE MEMBERID =
+		#{memberId})
+
+
+	</select>
+
+
+	<select id="selectTeamByTeamCode" parameterType="int"
+		resultType="Team">
+
+		SELECT CODE, CYCLE, ENDDATE, LEADERID, NAME
+		FROM TEAM_TB
+		WHERE CODE = #{teamCode}
+
+	</select>
+
+	<select id="selectMembersByTeamCode" parameterType="int"
+		resultType="Member">
+
+
+		SELECT ID, PASSWORD, ALIAS, IMAGEPATH
+		FROM MEMBER_TB
+		WHERE ID IN
+		( SELECT MEMBERID FROM BELONG_TB WHERE TEAMCODE = #{teamCode})
+
+
+	</select>
+
+
+
 	<insert id="insertTeam" parameterType="Team">
 		INSERT INTO TEAM_TB(CODE,
 		CYCLE, ENDDATE, LEADERID, NAME)
@@ -13,15 +48,7 @@
 
 	</insert>
 
-	<select id="selectTeamsByMemberId" parameterType="String"
-		resultType="Team">
 
-		SELECT CODE, CYCLE, ENDDATE, LEADERID, NAME
-		FROM TEAM_TB
-		WHERE CODE in (SELECT TEAMCODE FROM BELONG_TB WHERE MEMBERID = #{memberId})
-
-
-	</select>
 
 	<insert id="insertBelong">
 
