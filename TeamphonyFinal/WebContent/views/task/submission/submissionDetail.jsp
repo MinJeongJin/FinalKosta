@@ -59,10 +59,18 @@
 						</label>
 					</td>
 			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td>
+					<input style="width: 250px" ; type="file" name="attchFile" class="form-control">
+					<input type="hidden" name="flag" value="1" />
+				</td>
+			</tr>
+			
 		</table>
 		<br>
 		<div align="center">
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=15" >수정</a>
+			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=88" >수정</a>
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId} " >삭제</a>
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId} " >평가</a>
 		</div>

@@ -5,21 +5,7 @@
 <mapper namespace="teamphony.store.mapper.MemberMapper">
 
 	<insert id="insertMember" parameterType="Member">
-		INSERT
-		INTO MEMBER_TB
-		(
-		ID,
-		PASSWORD,
-		ALIAS,
-		IMAGEPATH
-		)
-		VALUES
-		(
-		#{memberId},
-		#{password},
-		#{alias},
-		#{imagePath}
-		)
+		insert into Member_tb(id, password, alias, imagePath) values(#{memberId}, #{password}, #{alias}, #{imagePath})
 	</insert>
 	
 	<select id="selectMemberByMemberId" parameterType="String" resultType="Member">
@@ -29,7 +15,11 @@
 	</select>
 	
 	<update id="updateMember" parameterType="Member">
-		update Member_tb set password = #{password}, alias = #{alias}, imagePath = #{imagePath} where id = #{memberId}
+		update Member_tb set password = #{password}, alias = #{alias}, imagePath=#{imagePath} where id = #{memberId}
 	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		delete from Member_tb where id = #{memberId}
+	</delete>
 
 </mapper>

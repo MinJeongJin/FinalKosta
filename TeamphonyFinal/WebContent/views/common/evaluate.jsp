@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>부여 과제 평가</title>
+<title>제출 과제 평가</title>
 <link
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -19,7 +19,7 @@
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
 	<a href="${pageContext.request.contextPath}/assignment/searchAll.do">과제리스트 돌아가기</a>
-	<h3>부여 과제 평가</h3>
+	<h3>제출 과제 평가</h3>
 
 	<br>
 

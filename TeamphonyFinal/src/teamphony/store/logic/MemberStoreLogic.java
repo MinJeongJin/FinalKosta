@@ -52,14 +52,12 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public void updateMember(Member member) {
-
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			mapper.updateMember(member);
 			session.commit();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
@@ -71,8 +69,15 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public void deleteMember(String memberId) {
-		// TODO Auto-generated method stub
-		
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			mapper.deleteMember(memberId);
+			session.commit();
+		} catch (Exception e) {
+		}finally{
+			session.close();
+		}
 	}
 
 	@Override

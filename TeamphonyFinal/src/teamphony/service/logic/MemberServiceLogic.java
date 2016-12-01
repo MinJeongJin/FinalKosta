@@ -15,28 +15,27 @@ public class MemberServiceLogic implements MemberService {
 
 	@Override
 	public void registerMember(Member member) {
-		System.out.println("service " + member.getMemberId());
+		System.out.println(member.getMemberId());
+		System.out.println(member.getPassword());
+		System.out.println(member.getAlias());
 		store.insertMember(member);
 	}
 
 	@Override
 	public void modifyMember(Member member) {
-
 		store.updateMember(member);
-		
 	}
 
 	@Override
 	public void removeMember(String memberId) {
-		// TODO Auto-generated method stub
-
+		store.deleteMember(memberId);
 	}
 
 	@Override
 	public boolean checkMember(Member member) {
 
 		Member loginMember = store.selectMemberByMemberId(member.getMemberId());
-		if(!loginMember.getMemberId().isEmpty()&&loginMember.getPassword().equals(member.getPassword())){
+		if (!loginMember.getMemberId().isEmpty() && loginMember.getPassword().equals(member.getPassword())) {
 			return true;
 		}
 		return false;
