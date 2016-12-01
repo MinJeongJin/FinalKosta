@@ -120,10 +120,8 @@ public class SubmissionController {
 			TaskFile taskFile = new TaskFile(filePath);
 
 			System.out.println("저장 경로 =" + filePath);
-			File f = new File(filePath);
 
-			// 방금 파일 업로드 안했잖아.. 그래서 그런거 아이야?
-			// 설길이 컨트롤러 저장 안했어
+			File f = new File(filePath);
 			try {
 				attchFile.transferTo(f);
 				taskFileList.add(taskFile);
@@ -152,7 +150,7 @@ public class SubmissionController {
 
 	@RequestMapping("/searchByTaskId.do")
 	public String searchSubmissionByTaskId(String taskId, Model model) {
-		System.out.println("taskId =  " +taskId);
+		System.out.println("taskId =  " + taskId);
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
 
 		model.addAttribute("task", task);
@@ -170,28 +168,19 @@ public class SubmissionController {
 	public String searchAllSubmission(Model model) {
 		List<Task> taskList = service.findAllTask();
 
-		// for(Task task : taskList){
-		// System.out.println(task.toString());
-		// System.out.println("=============================================");
-		// }
-
 		model.addAttribute("taskList", taskList);
 		return "/task/submission/submissionList";
 	}
-	
+
 	@RequestMapping("/evaluate.do")
 	public String evaluateAssignment(String point, String taskId) {
-		
-		
-		
-//		System.out.println("taskId= "+Integer.parseInt(taskId));
-		System.out.println("point= "+Integer.parseInt(point));
-		
-	
-		
-//		task= service.findTaskByTaskId(taskIdNo);
-//		model.addAttribute(task);
-//		
+
+		System.out.println("taskId= " + Integer.parseInt(taskId));
+		System.out.println("point= " + Integer.parseInt(point));
+
+		// task= service.findTaskByTaskId(taskIdNo);
+		// model.addAttribute(task);
+		//
 		return "/task/assignment/assignmentEvaluate";
 	}
 }
