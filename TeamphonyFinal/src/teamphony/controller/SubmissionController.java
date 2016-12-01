@@ -178,4 +178,20 @@ public class SubmissionController {
 		model.addAttribute("taskList", taskList);
 		return "/task/submission/submissionList";
 	}
+	
+	@RequestMapping("/evaluate.do")
+	public String evaluateAssignment(String point, String taskId) {
+		
+		
+		
+//		System.out.println("taskId= "+Integer.parseInt(taskId));
+		System.out.println("point= "+Integer.parseInt(point));
+		
+	
+		
+//		task= service.findTaskByTaskId(taskIdNo);
+//		model.addAttribute(task);
+//		
+		return "/task/assignment/assignmentEvaluate";
+	}
 }

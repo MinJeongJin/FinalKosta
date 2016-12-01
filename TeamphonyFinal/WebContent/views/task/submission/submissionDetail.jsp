@@ -28,8 +28,7 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><label for="title" name="title"
-					class="form-control"  >${task.title }</label></td>
+				<td>${task.title }</td>
 			</tr>
 			<tr>
 				<th>제출자</th>
@@ -54,16 +53,13 @@
 			<tr>
 				<th>내용</th>
 					<td>
-						<label for="submissionContents" name="submissionContents"
-								class="form-control" rows="7" >${task.contents }
-						</label>
+						${task.contents }
 					</td>
 			</tr>
 			<tr>
 				<th>첨부파일</th>
 				<td>
-					<input style="width: 250px" ; type="file" name="attchFile" class="form-control">
-					<input type="hidden" name="flag" value="1" />
+					파일 이름 미구현
 				</td>
 			</tr>
 			
