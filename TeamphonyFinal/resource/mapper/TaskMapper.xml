@@ -134,8 +134,8 @@
 
 	</select>
 
--->
-=======
+
+
 	
 	<update id="updateTask" parameterType="task">
 			UPDATE TASK_TB		
@@ -148,7 +148,7 @@
 				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
 			WHERE ID = #{taskId}
 	</update>
->>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
 
+-->
 
 </mapper>
