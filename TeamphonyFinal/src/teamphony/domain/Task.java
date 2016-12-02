@@ -4,15 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 public class Task {
-	//설길이 아까 에러나서 민정이한테 물어 봤는데... 
-	//그래서 태스크 아이디 파스 인트 안하고 그냥 넣었어... 그래서 고장난거야? 아니
 
 	private int taskId;
 	private String title;
 	private String contents;
 	private List<Member> memberList;
 	private int point;
-	private Date evaluationPeriod;
+	private Date evaluationPeriodStart;
+	private Date evaluationPeriodEnd;
 	private Date deadline;
 	private int flag;
 	private List<TaskFile> taskFileList;
@@ -29,15 +28,16 @@ public class Task {
 	}
 
 	public Task() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public Task(int taskId, String title, String contents, Date deadline) {
+	public Task(int taskId, String title, String contents, Date deadline, Date evaluationPeriodStart, Date evaluationPeriodEnd) {
 		super();
 		this.taskId = taskId;
 		this.title = title;
 		this.contents = contents;
 		this.deadline = deadline;
+		this.evaluationPeriodStart = evaluationPeriodStart;
+		this.evaluationPeriodEnd = evaluationPeriodEnd;
 	}
 
 	public Task(int taskId, String title, String contents, String filePath) {
@@ -48,26 +48,28 @@ public class Task {
 	}
 
 	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
-			Date evaluationPeriod, Date deadline) {
+			Date evaluationPeriodStart,Date evaluationPeriodEnd, Date deadline) {
 		super();
 		this.taskId = taskId;
 		this.title = title;
 		this.contents = contents;
 		this.memberList = memberList;
 		this.point = point;
-		this.evaluationPeriod = evaluationPeriod;
+		this.evaluationPeriodStart = evaluationPeriodStart;
+		this.evaluationPeriodEnd = evaluationPeriodEnd;
 		this.deadline = deadline;
 	}
 
 	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
-			Date evaluationPeriod, Date deadline, int flag) {
+			Date evaluationPeriodStart,Date evaluationPeriodEnd, Date deadline, int flag) {
 		super();
 		this.taskId = taskId;
 		this.title = title;
 		this.contents = contents;
 		this.memberList = memberList;
 		this.point = point;
-		this.evaluationPeriod = evaluationPeriod;
+		this.evaluationPeriodStart = evaluationPeriodStart;
+		this.evaluationPeriodEnd = evaluationPeriodEnd;
 		this.deadline = deadline;
 		this.flag = flag;
 	}
@@ -125,14 +127,6 @@ public class Task {
 		this.point = point;
 	}
 
-	public Date getEvaluationPeriod() {
-		return evaluationPeriod;
-	}
-
-	public void setEvaluationPeriod(Date evaluationPeriod) {
-		this.evaluationPeriod = evaluationPeriod;
-	}
-
 	public int getFlag() {
 		return flag;
 	}
@@ -156,11 +150,30 @@ public class Task {
 	public void setTask(Task task) {
 		this.task = task;
 	}
+	
+	
+
+	public Date getEvaluationPeriodStart() {
+		return evaluationPeriodStart;
+	}
+
+	public void setEvaluationPeriodStart(Date evaluationPeriodStart) {
+		this.evaluationPeriodStart = evaluationPeriodStart;
+	}
+
+	public Date getEvaluationPeriodEnd() {
+		return evaluationPeriodEnd;
+	}
+
+	public void setEvaluationPeriodEnd(Date evaluationPeriodEnd) {
+		this.evaluationPeriodEnd = evaluationPeriodEnd;
+	}
 
 	@Override
 	public String toString() {
 		return "taskId=" + taskId + "\n" + "title= " + title + "\n" + "contents= " + contents + "\n" + "deadline= "
-				+ deadline + "\n" + "flag= " + flag + "\n" + "taskFileList=" + taskFileList;
+				+ deadline + "\n" + "flag= " + flag + "\n" + "taskFileList= " + taskFileList+ "\n" + "evaluationPeriodStart= " + evaluationPeriodStart
+				+ "\n" + "evaluationPeriodEnd= " + evaluationPeriodEnd;
 	}
 	
 	

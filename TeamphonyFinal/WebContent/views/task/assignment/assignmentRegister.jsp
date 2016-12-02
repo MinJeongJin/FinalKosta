@@ -61,9 +61,23 @@
 				</td>
 			</tr>
 			<tr>
+				<th>평가 기한</th>
+				<td>
+					<input type="date" id="evalDayStart" name="evalDayStart"> 
+					<input type="time" id="evalHourStart" name="evalHourStart">-
+					<input type="date" id="evalDayEnd" name="evalDayEnd"> 
+					<input type="time" id="evalHourEnd" name="evalHourEnd"> 
+					
+				</td>
+			</tr>
+			
+			<tr>
 				<th>내용</th>
-				<td><textarea id="contents" name="contents"
-						class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요."></textarea></td>
+					<td>
+						<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요.">
+						</textarea>
+						<input type="hidden" name="flag" value="0"/>
+					</td>
 			</tr>
 		</table>
 		<br>

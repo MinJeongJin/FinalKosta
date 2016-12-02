@@ -177,20 +177,20 @@
 					<span class="star-input">
 							<span class="input">
 								<input id="taskId" name="taskId" type="hidden" value=88>
-								<input type="radio" name="point" id="p1" value="1"><label for="p1">1</label>
-								<input type="radio" name="point" id="p2" value="2"><label for="p2">2</label>
-								<input type="radio" name="point" id="p3" value="3"><label for="p3">3</label>
-								<input type="radio" name="point" id="p4" value="4"><label for="p4">4</label>
-								<input type="radio" name="point" id="p5" value="5"><label for="p5">5</label>
-								<input type="radio" name="point" id="p6" value="6"><label for="p6">6</label>
-								<input type="radio" name="point" id="p7" value="7"><label for="p7">7</label>
-								<input type="radio" name="point" id="p8" value="8"><label for="p8">8</label>
-								<input type="radio" name="point" id="p9" value="9"><label for="p9">9</label>
-								<input type="radio" name="point" id="p10" value="10"><label for="p10">10</label>
+								<input type="radio" type="hidden" name="point" value="1"><label for="p1">1</label>
+								<input type="radio" type="hidden" name="point" value="2"><label for="p2">2</label>
+								<input type="radio" type="hidden" name="point" value="3"><label for="p3">3</label>
+								<input type="radio" type="hidden" name="point" value="4"><label for="p4">4</label>
+								<input type="radio" type="hidden" name="point" value="5"><label for="p5">5</label>
+								<input type="radio" type="hidden" name="point" value="6"><label for="p6">6</label>
+								<input type="radio" type="hidden" name="point" value="7"><label for="p7">7</label>
+								<input type="radio" type="hidden" name="point" value="8"><label for="p8">8</label>
+								<input type="radio" type="hidden" name="point" value="9"><label for="p9">9</label>
+								<input type="radio" type="hidden" name="point" value="10"><label for="p10">10</label>
 							</span>
-							<output for="star-input"><b>0</b>점</output>
+							<output  name="outPut" id="outPut" for="star-input"><b type="hidden">0</b>점</output>
 							<a href="${pageContext.request.contextPath}/assignment/revise.do?taskId=15&point=getPoint()"></a>
-							<input class="btn" type="submit" value="평가완료"></input>
+							<input class="btn_ok" type="submit" type="hidden" value="평가완료"></input>
 					</span>
 				</form>
 			</td>
@@ -200,7 +200,7 @@
 		<div align="center">
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=88" >수정</a>
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId} " >삭제</a>
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId} " >평가</a>
+			<a onclick="evalutate_click();" id="evalutate" class="btn btn-success"  href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId} " >평가</a>
 		</div>
 	<br>
 	
@@ -236,6 +236,10 @@
 		  });
 		};
 		starRating();
+		
+	function evalutate_click() {
+		$('input[name=point]').show();
+	}
 </script>
 </body>
 </html>
