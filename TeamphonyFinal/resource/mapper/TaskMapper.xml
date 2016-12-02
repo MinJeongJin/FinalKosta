@@ -6,7 +6,7 @@
 
 	<!-- <resultMap type="Task" id="taskMap"> </resultMap> -->
 
-
+<!--  
 
 
 	<insert id="insertTask" parameterType="task">
@@ -126,7 +126,7 @@
 	</delete>
 
 
-	<!--추가했음 -->
+	
 	<delete id="deleteTaskFile" parameterType="int">
 		DELETE FROM
 		TASKFILE_TB
@@ -143,9 +143,9 @@
 		<result property="evaluationPeriod" column="TASK_EVALUATIONPERIOD" />
 		<result property="flag" column="TASK_FLAG" />
 		<result property="point" column="TASK_POINT" />
-		<!-- <collection property="taskFileList" column="TASK_ID" ofType="TaskFile" 
+		 <collection property="taskFileList" column="TASK_ID" ofType="TaskFile" 
 			select="teamphony.store.mapper.TaskMapper.selectTaskDetail" javaType="ArrayList" 
-			jdbcType="NUMERIC"> </collection> -->
+			jdbcType="NUMERIC"> </collection> 
 	</resultMap>
 
 	<select id="selectTaskDetail" resultMap="taskDetail">
@@ -185,7 +185,7 @@
 
 	</select>
 
-
+-->
 
 
 </mapper>
