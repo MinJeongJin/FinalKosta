@@ -119,6 +119,8 @@ public class TaskStoreLogic implements TaskStore {
 
 		try {
 
+			
+			
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			return mapper.selectAllTask();
 		} finally {
