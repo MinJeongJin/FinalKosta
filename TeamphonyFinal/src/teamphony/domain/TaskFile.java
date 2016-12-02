@@ -3,6 +3,8 @@ package teamphony.domain;
 public class TaskFile {
 	private int submissionId;
 	private String filePath;
+	
+	
 	public TaskFile() {
 		// TODO Auto-generated constructor stub
 	}
@@ -27,6 +29,12 @@ public class TaskFile {
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "submissionId= "+ submissionId+ "filePath"+ filePath;
 	}
 	
 	

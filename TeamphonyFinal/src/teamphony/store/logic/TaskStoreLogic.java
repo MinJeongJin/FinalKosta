@@ -43,17 +43,19 @@ public class TaskStoreLogic implements TaskStore {
 			mapper.insertTask(task);
 
 			if (task.getFlag() == 1) {
+				
 				int taskId = task.getTaskId();
+				System.out.println("======================");
+				System.out.println("taskId= "+taskId);
 				List<TaskFile> taskFileList = task.getTaskFileList();
 
 				for (TaskFile taskFile : taskFileList) {
 					taskFile.setSubmissionId(taskId);
-//					mapper.insertTaskFile(taskFile);
+					mapper.insertTaskFile(taskFile);
+					session.commit();
 				}
-
 			}
 			session.commit();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
@@ -118,9 +120,6 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-
-			
-			
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			return mapper.selectAllTask();
 		} finally {
@@ -131,16 +130,34 @@ public class TaskStoreLogic implements TaskStore {
 	@Override
 	public Task selectTaskByTaskId(int taskId) {
 		SqlSession session = getSessionFactory().openSession();
-		Task task = null;
+		String path;
+		Task task = new Task();
+		TaskFile taskFile= new TaskFile();
+		List<TaskFile> fileList =new ArrayList<>();
 		
 		try {
+			
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 
+			taskFile.setSubmissionId(task.getTaskId());
+			
 			task = mapper.selectTaskByTaskId(taskId);
-
-//			String filePath = mapper.selectFileList(taskId).getFilePath();
-
-//			System.out.println("filePath = " + filePath);
+			path = mapper.selectFileList(taskId).getFilePath();
+			
+			taskFile.setFilePath(path);
+			
+			System.out.println("======매퍼종료============");
+			System.out.println("task toString= "+ task.toString());
+			System.out.println("path = " +path);
+			
+			task.setTaskFileList(fileList);
+			
+//			task.setTaskFile(taskFile);
+			System.out.println("============================================");
+			System.out.println("taskFile toString= "+ task.getTaskFileList().get(1).toString());
+			
+			
+//			taskFile.setFilePath(filePath);
 			return task;
 
 		} catch (Exception e) {
