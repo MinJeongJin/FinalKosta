@@ -4,126 +4,75 @@
 
 <mapper namespace="teamphony.store.mapper.TaskMapper">
 
-	<!-- <resultMap type="Task" id="taskMap"> </resultMap> -->
 
 <!--  
 
 
 	<insert id="insertTask" parameterType="task">
 		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
-			SELECT task_tb_id_seq.nextval FROM DUAL
+			SELECT TASK_TB_ID_SEQ.NEXTVAL
+			FROM DUAL
 		</selectKey>
-		insert into task_tb(
-		id
-		,TITLE
-		,CONTENTS
-		,DEADLINE
-		,FLAG
-		,POINT
-		)
-		values(
-		#{taskId}
-		,#{title}
-		,#{contents, jdbcType=VARCHAR}
-		,#{deadline ,
-		jdbcType=DATE}
-		,#{flag , jdbcType=INTEGER}
-		,#{point , jdbcType=INTEGER}
-		)
-	</insert>
+			INSERT
+			INTO TASK_TB
+			(
+				ID,
+				TITLE,
+				CONTENTS,
+				DEADLINE,
+				FLAG,
+				EVALUATIONPERIODSTART,
+				EVALUATIONPERIODEND,
+				POINT
+			)
+			VALUES
+			(
+				#{taskId},
+				#{title},
+				#{contents, jdbcType=VARCHAR},
+				#{deadline, jdbcType=DATE},
+				#{flag, jdbcType=INTEGER},
+				#{evaluationPeriodStart, jdbcType=DATE},
+				#{evaluationPeriodEnd, jdbcType=DATE},
+				#{point, jdbcType=INTEGER}
+			)
+	</insert>  
 
-	<insert id="insertTaskFile" parameterType="taskFile">
-		INSERT INTO
-		TASKFILE_TB(
-		SUBMISSIONID
-		,FILEPATH
-		)
-		VALUES(
-		#{submissionId}
-		,#{filePath}
-		)
-	</insert>
-
-	<update id="updateTask" parameterType="task">
-		UPDATE TASK_TB
-		SET
-		ID =
-		#{taskId}
-		,TITLE = #{title}
-		,CONTENTS = #{contents}
-		,DEADLINE =
-		#{deadline , jdbcType=DATE}
-		,EVALUATIONPERIOD = #{evaluationPeriod ,
-		jdbcType=DATE}
-		,FLAG = #{flag , jdbcType=INTEGER}
-		,POINT = #{point ,
-		jdbcType=INTEGER}
-		WHERE ID = #{taskId}
-	</update>
-
-	<update id="updateTaskFile" parameterType="taskFile">
-		UPDATE TASKFILE_TB
-		SET
-		SUBMISSIONID = #{submissionId}
-		,FILEPATH =#{filePath}
-
-		WHERE SUBMISSIONID
-		= #{submissionId}
-	</update>
 
 	<select id="selectAllTask" resultType="Task">
-
-		select
-		t.id AS taskId
-		,t.TITLE
-		,t.CONTENTS
-		,t.DEADLINE
-		,t.EVALUATIONPERIOD
-		,t.FLAG
-		,t.POINT
-		,f.FILEPATH
-		from task_tb t, taskFile_tb f
-		where t.id =
-		f.submissionId
-
+			SELECT 
+				ID							AS taskId,
+				TITLE,                  
+				CONTENTS,               
+				DEADLINE,               
+				EVALUATIONPERIODSTART,  
+				EVALUATIONPERIODEND,    
+				FLAG,                   
+				POINT                  
+				FROM TASK_TB            
+				ORDER BY ID ASC
 	</select>
-
-	<select id="selectAllTaskFile" resultType="TaskFile">
-		SELECT
-
-		SUBMISSIONID
-		,FILEPATH
-		FROM
-		TASKFILE_TB(
-	</select>
-
-
+	
 	<select id="selectTaskByTaskId" resultType="Task">
-
-		select
-
-		ID AS taskId
-		,TITLE
-		,CONTENTS
-		,DEADLINE
-		,EVALUATIONPERIOD
-		,FLAG
-		,POINT AS point
-		from
-		task_tb
-		where id= #{taskId}
-
+			SELECT 
+				ID						AS taskId,
+				TITLE,                  
+				CONTENTS,               
+				DEADLINE,               
+				EVALUATIONPERIODSTART,  
+				EVALUATIONPERIODEND,    
+				FLAG,                   
+				POINT                  
+       			FROM TASK_TB 
+			WHERE ID= #{taskId}  
 	</select>
-
-	<select id="selectTaskByMemberId" resultType="task">
-	</select>
-
-	<delete id="deleteTask" parameterType="int">
-		delete
-		from task_tb
-		where id
-		=#{taskId}
+	
+	<delete id="deleteTask"  parameterType="int">
+			DELETE
+			FROM TASK_TB
+			WHERE ID	= #{taskId}
 	</delete>
+<<<<<<< HEAD
 
 
 	
@@ -186,6 +135,20 @@
 	</select>
 
 -->
+=======
+	
+	<update id="updateTask" parameterType="task">
+			UPDATE TASK_TB		
+				SET
+				ID =						#{taskId}
+				,TITLE =					#{title}
+				,CONTENTS =					#{contents}
+				,DEADLINE =					#{deadline , jdbcType=DATE}
+				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=DATE}
+				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
+			WHERE ID = #{taskId}
+	</update>
+>>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
 
 
 </mapper>
