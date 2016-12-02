@@ -48,7 +48,7 @@ public class TaskStoreLogic implements TaskStore {
 
 				for (TaskFile taskFile : taskFileList) {
 					taskFile.setSubmissionId(taskId);
-					mapper.insertTaskFile(taskFile);
+//					mapper.insertTaskFile(taskFile);
 				}
 
 			}
@@ -71,14 +71,15 @@ public class TaskStoreLogic implements TaskStore {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.updateTask(task);
-			List<TaskFile> taskFileList = task.getTaskFileList();
+					
+//			List<TaskFile> taskFileList = task.getTaskFileList();
 
-			for (TaskFile taskFile : taskFileList) {
-				taskFile.setSubmissionId(task.getTaskId());
-				mapper.updateTaskFile(taskFile);
-			}
-
-			session.commit();
+//			for (TaskFile taskFile : taskFileList) {
+//				taskFile.setSubmissionId(task.getTaskId());
+//				mapper.updateTaskFile(taskFile);
+//			}
+//
+//			session.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,7 +97,7 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			mapper.deleteTaskFile(taskId);
+//			mapper.deleteTaskFile(taskId);
 			mapper.deleteTask(taskId);
 
 			session.commit();
@@ -118,6 +119,8 @@ public class TaskStoreLogic implements TaskStore {
 
 		try {
 
+			
+			
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			return mapper.selectAllTask();
 		} finally {
@@ -127,24 +130,17 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public Task selectTaskByTaskId(int taskId) {
-		System.out.println("=====스토어 시작======================");
 		SqlSession session = getSessionFactory().openSession();
 		Task task = null;
+		
 		try {
-			System.out.println("=====try 시작======================");
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 
-			System.out.println("===========매퍼 시작=========");
-			task = mapper.selectTaskDetail(taskId);
+			task = mapper.selectTaskByTaskId(taskId);
 
-			// List<TaskFile> fileList = new ArrayList<>();
-			String filePath = mapper.selectFileList(taskId).getFilePath();
+//			String filePath = mapper.selectFileList(taskId).getFilePath();
 
-			System.out.println("filePath = " + filePath);
-
-			System.out.println("===========매퍼 끝=========");
-
-			System.out.println(task.toString());
+//			System.out.println("filePath = " + filePath);
 			return task;
 
 		} catch (Exception e) {
