@@ -10,8 +10,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
+
 </head>
 <style type="text/css">
 
@@ -114,17 +113,11 @@
     vertical-align: middle;
 }
 
-
-
-
-
-
 </style>
 
-
-
-
 <body>
+	<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
+					
 	<input id="taskId" name="taskId" type="hidden" value="">
 	<a href="submissionList.do">과제리스트 돌아가기</a>
 	<h3>제출 과제 상세</h3>
@@ -135,6 +128,7 @@
 				<col width="150">
 				<col width="*">
 			</colgroup>
+		
 			<tr>
 				<th>제목</th>
 				<td>${task.title }</td>
@@ -161,19 +155,20 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-					<td>
-						${task.contents }
-					</td>
-			</tr>
-			<tr>
-				<th>첨부파일</th>
 				<td>
-					파일 이름 미구현
+					${task.contents }dddd
 				</td>
 			</tr>
 			<tr>
-			<td>																						
-			<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
+				<th>첨부파일</th>
+					<c:forEach items="${task.taskFileList }" var="taskFile">
+						<td>
+							${taskFile.filePath }
+						</td>
+					</c:forEach>
+			</tr>
+			<tr>
+				<td>	
 					<span class="star-input">
 							<span class="input">
 								<input id="taskId" name="taskId" type="hidden" value=88>
@@ -188,14 +183,16 @@
 								<input type="radio" type="hidden" name="point" value="9"><label for="p9">9</label>
 								<input type="radio" type="hidden" name="point" value="10"><label for="p10">10</label>
 							</span>
-							<output  name="outPut" id="outPut" for="star-input"><b type="hidden">0</b>점</output>
-							<a href="${pageContext.request.contextPath}/assignment/revise.do?taskId=15&point=getPoint()"></a>
-							<input class="btn_ok" type="submit" type="hidden" value="평가완료"></input>
-					</span>
-				</form>
-			</td>
-		</tr>
+								<output  name="outPut" id="outPut" for="star-input"><b>0</b>점</output>
+								<a href="${pageContext.request.contextPath}/assignment/revise.do?taskId=15&point=getPoint()"></a>
+								<input class="btn_ok" type="submit" type="hidden" value="평가완료"></input>
+						</span>																					
+						
+					
+				</td>
+			</tr>
 	</table>
+	</form>
 		<br>
 		<div align="center">
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=88" >수정</a>

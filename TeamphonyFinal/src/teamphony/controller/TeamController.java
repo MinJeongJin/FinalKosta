@@ -1,13 +1,11 @@
 package teamphony.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.compiler.MemberResolver.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import teamphony.domain.Member;
 import teamphony.domain.Team;
-import teamphony.service.facade.MemberService;
 import teamphony.service.facade.TeamService;
 
 // teamCode 중복 없이 randomGenerate
@@ -62,16 +59,37 @@ public class TeamController {
 		return TEAM_CODE++;
 	}
 
-	@RequestMapping("revise.do")
-	public String reviseTeam(Team team) {
+	@RequestMapping(value = "revise.do", method = RequestMethod.GET)
+	public String reviseTeam() {
 
-		return null;
+
+		return "redirect:/team/search.do?flag=-1";
+	}
+
+	@RequestMapping(value = "revise.do", method = RequestMethod.POST)
+	public String reviseTeam(Team team, Model model) {
+
+		model.addAttribute("flag", -1);
+
+		return "team/teamManageForLeader";
 	}
 
 	@RequestMapping("erase.do")
-	public String eraseTeam(int teamCode) {
+	public String eraseTeam(HttpSession session) {
 
-		return null;
+		int teamCode = (Integer) session.getAttribute("teamCode");
+		List<Member> memberList = teamService.findMembersByTeamCode(teamCode);
+
+		for (Member member : memberList) { // 모든 팀원들을 내보냄
+
+			System.out.println(teamCode);
+			System.out.println(member.getMemberId());
+			teamService.leaveTeam(teamCode, member.getMemberId());
+		}
+
+		teamService.removeTeam(teamCode);
+
+		return "redirect:/team/main.do";
 	}
 
 	@RequestMapping("join.do")
@@ -79,7 +97,19 @@ public class TeamController {
 
 		Team team = teamService.findTeamByTeamCode(teamCode);
 
-		return "team/teamManage";
+		if (team == null) {
+
+			return "redirect:/team/main.do";
+
+		} else {
+
+			Member member = (Member) session.getAttribute("member");
+			String memberId = member.getMemberId();
+
+			teamService.belongToTeam(teamCode, memberId);
+
+			return "redirect:/team/main.do";
+		}
 	}
 
 	@RequestMapping(value = "search.do", method = RequestMethod.GET)
@@ -94,13 +124,13 @@ public class TeamController {
 		model.addAttribute("team", team);
 		model.addAttribute("memberList", memberList);
 
-		id = ((Member) session.getAttribute("member")).getMemberId();
+		id = member.getMemberId();
 		leaderId = team.getLeaderId();
 
-		if (session.getAttribute("teamCode") == null) {
+		if (session.getAttribute("teamCode") != null)
+			session.removeAttribute("teamCode");
 
-			session.setAttribute("teamCode", teamCode);
-		}
+		session.setAttribute("teamCode", teamCode);
 
 		if (id.equals(leaderId))
 			return "team/teamManageForLeader";
@@ -116,7 +146,13 @@ public class TeamController {
 	@RequestMapping("withdraw.do")
 	public String withdrawTeam(HttpSession session) {
 
-		return null;
+		Member member = (Member) session.getAttribute("member");
+		String memberId = member.getMemberId();
+		int teamCode = (Integer) session.getAttribute("teamCode");
+
+		teamService.leaveTeam(teamCode, memberId);
+
+		return "redirect:/team/main.do";
 	}
 
 	@RequestMapping("invite.do")
@@ -145,5 +181,6 @@ public class TeamController {
 		model.addAttribute("teamList", teamList);
 
 		return "team/main";
+
 	}
 }

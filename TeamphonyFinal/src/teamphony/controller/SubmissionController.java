@@ -34,22 +34,26 @@ public class SubmissionController {
 	public String createSubmission(HttpServletRequest request, HttpSession session,
 			@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) { // attchFile
 
-		int flagNo = Integer.parseInt(flag);
-
 		Task task = new Task();
+		
 		task.setTitle(title);
 		task.setContents(contents);
-		task.setFlag(flagNo);
+		task.setFlag(Integer.parseInt(flag));
+		task.setTaskId(109);
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
+			
 			int taskId = task.getTaskId();
+			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
 
 			System.out.println("저장 경로 =" + filePath);
+			
 			File f = new File(filePath);
+			
 			try {
 				attchFile.transferTo(f);
 				taskFileList.add(taskFile);
@@ -59,11 +63,11 @@ public class SubmissionController {
 				e.printStackTrace();
 			}
 		}
+		
 		task.setTaskFileList(taskFileList);
 		service.registerTask(task); // task_tb 저장
 
 		return "redirect:searchAll.do";
-
 	}
 
 	@RequestMapping("/revise.do")
@@ -133,9 +137,18 @@ public class SubmissionController {
 	public String searchSubmissionByTaskId(String taskId, Model model) {
 		System.out.println("taskId =  " + taskId);
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-
+		
+//		for(TaskFile taskFile: task.getTaskFileList()){
+//			System.out.println("getFilePath= "+taskFile.getFilePath());
+//		}
 		model.addAttribute("task", task);
-
+		System.out.println("========컨트롤러=======");
+		System.out.println("size = "+ task.getTaskFileList().size());
+		
+//		for(int i=0; i==task.getTaskFileList().size();i++ ){
+//			
+//			System.out.println("task"+i+ task.getTaskFileList().get(i).toString());
+//		}
 		return "/task/submission/submissionDetail";
 	}
 

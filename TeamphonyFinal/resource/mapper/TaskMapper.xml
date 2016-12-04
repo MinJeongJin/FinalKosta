@@ -53,7 +53,7 @@
 				ORDER BY ID ASC
 	</select>
 	
-	<select id="selectTaskByTaskId" resultType="Task">
+	<select id="selectTaskByTaskId" parameterType="int" resultType="Task">
 			SELECT 
 				ID						AS taskId,
 				TITLE,                  
@@ -66,6 +66,7 @@
        			FROM TASK_TB 
 			WHERE ID= #{taskId}  
 	</select>
+	
 	
 	<delete id="deleteTask"  parameterType="int">
 			DELETE
@@ -148,7 +149,27 @@
 				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
 			WHERE ID = #{taskId}
 	</update>
+<<<<<<< HEAD
 
 -->
+=======
+	
+	<insert id="insertTaskFile" parameterType="taskFile">
+			INSERT INTO
+				TASKFILE_TB
+				(
+					SUBMISSIONID
+					,FILEPATH
+				)
+				VALUES
+				(
+					#{submissionId}
+					,#{filePath}
+				)
+	</insert>
+	
+	
+
+>>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
 
 </mapper>

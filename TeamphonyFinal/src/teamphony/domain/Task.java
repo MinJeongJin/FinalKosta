@@ -16,7 +16,7 @@ public class Task {
 	private int flag;
 	private List<TaskFile> taskFileList;
 	//추가했음
-	private TaskFile taskFile;
+//	private TaskFile taskFile;
 	private Task task;
 	
 	public List<TaskFile> getTaskFileList() {
@@ -135,13 +135,13 @@ public class Task {
 		this.flag = flag;
 	}
 
-	public TaskFile getTaskFile() {
-		return taskFile;
-	}
-
-	public void setTaskFile(TaskFile taskFile) {
-		this.taskFile = taskFile;
-	}
+//	public TaskFile getTaskFile() {
+//		return taskFile;
+//	}
+//
+//	public void setTaskFile(TaskFile taskFile) {
+//		this.taskFile = taskFile;
+//	}
 
 	public Task getTask() {
 		return task;
@@ -173,7 +173,7 @@ public class Task {
 	public String toString() {
 		return "taskId=" + taskId + "\n" + "title= " + title + "\n" + "contents= " + contents + "\n" + "deadline= "
 				+ deadline + "\n" + "flag= " + flag + "\n" + "taskFileList= " + taskFileList+ "\n" + "evaluationPeriodStart= " + evaluationPeriodStart
-				+ "\n" + "evaluationPeriodEnd= " + evaluationPeriodEnd;
+				+ "\n" + "evaluationPeriodEnd= " + evaluationPeriodEnd + "\n" + "taskFile= " + taskFileList;
 	}
 	
 	

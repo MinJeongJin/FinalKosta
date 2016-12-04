@@ -18,7 +18,8 @@
 	rel="stylesheet">
 
 <!-- Font Awesome cdn-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
 <!-- Custom Theme Style -->
@@ -64,10 +65,20 @@
 }
 </style>
 
+
+<script type="text/javascript">
+	var reviseInfo = function myFunction() {
+		document.getElementById("teamName").readOnly = false;
+		document.getElementById("cyle").readOnly = false;
+		document.getElementById("endDate").readOnly = false;
+
+	}
+</script>
+
 </head>
 
 
-<body class="nav-md">
+<body class="nav-md" onload="reviseInfo()">
 	<div class="container body">
 		<div class="main_container">
 
@@ -197,9 +208,9 @@
 
 						<div class="row">
 							<div class="form-group col-xs-7">
-								<label for="evaluationDate">평가 만료기간:</label> <input type="date"
+								<label for="endDate">평가 만료기간:</label> <input type="date"
 									value="${team.endDate}" class="form-control input-lg"
-									id="evaluationDate" readonly>
+									id="endDate" readonly>
 							</div>
 
 						</div>
@@ -262,12 +273,15 @@
 
 
 					<div class="col-xs-7">
-						<button class="btn-primary btn-lg col-xs-3"
-							style="margin-left: 5%; margin-right: 5%;" id="withdrawBtn">
-							수정</button>
 
-						<button class="btn-primary btn-lg col-xs-3" id="withdrawBtn">
-							삭제</button>
+						<a href="${pageContext.request.contextPath}/team/revise.do">
+							<button class="btn-primary btn-lg col-xs-3"
+								style="margin-left: 5%; margin-right: 5%;" id="withdrawBtn">
+								수정</button>
+						</a> <a href="${pageContext.request.contextPath}/team/erase.do">
+							<button class="btn-primary btn-lg col-xs-3" id="withdrawBtn">
+								삭제</button>
+						</a>
 
 					</div>
 

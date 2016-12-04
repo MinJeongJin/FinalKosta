@@ -30,7 +30,7 @@
 		resultType="Member">
 
 
-		SELECT ID, PASSWORD, ALIAS, IMAGEPATH
+		SELECT ID AS memberId, PASSWORD, ALIAS, IMAGEPATH
 		FROM MEMBER_TB
 		WHERE ID IN
 		( SELECT MEMBERID FROM BELONG_TB WHERE TEAMCODE = #{teamCode})
@@ -49,14 +49,26 @@
 	</insert>
 
 
-
 	<insert id="insertBelong">
 
 		INSERT INTO BELONG_TB(TEAMCODE, MEMBERID)
 		VALUES(#{teamCode}, #{memberId})
 
-
 	</insert>
+	
+	<delete id="deleteBelong">
+	
+		DELETE FROM BELONG_TB
+		WHERE MEMBERID = #{memberId} AND TEAMCODE = #{teamCode}
+	
+	</delete>
+	
+	<delete id="deleteTeam">
+	
+		DELETE FROM TEAM_TB
+		WHERE CODE = #{teamCode}
+	
+	</delete>
 
 
 

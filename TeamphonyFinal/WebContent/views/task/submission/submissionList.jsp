@@ -82,7 +82,7 @@ h1 {
 											${sts.count }
 										</td>
 										<td>
-											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=88">${task.title }</a>
+											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=112">${task.title }</a>
 										</td>
 										<td>
 											제출자 미구현

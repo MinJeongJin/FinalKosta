@@ -16,5 +16,5 @@ public interface TeamMapper {
 	List<Member> selectMembersByTeamCode(int teamCode);
 	List<Team> selectTeamsByMemberId(String memberId);
 	void insertBelong(@Param("teamCode") int teamCode, @Param("memberId") String memberId);
-	void deleteBelong( int teamCode,  String memberId);
+	void deleteBelong(@Param("teamCode") int teamCode, @Param("memberId") String memberId);
 }

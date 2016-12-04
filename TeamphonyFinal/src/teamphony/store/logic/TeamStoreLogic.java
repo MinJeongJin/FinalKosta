@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -52,13 +51,25 @@ public class TeamStoreLogic implements TeamStore {
 
 	@Override
 	public void updateTeam(Team team) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void deleteTeam(int teamCode) {
-		// TODO Auto-generated method stub
+		
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			
+			
+			
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
 	}
 
@@ -136,7 +147,18 @@ public class TeamStoreLogic implements TeamStore {
 
 	@Override
 	public void deleteBelong(int teamCode, String memberId) {
-		// TODO Auto-generated method stub
+		
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			mapper.deleteBelong(teamCode, memberId);
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
 	}
 
