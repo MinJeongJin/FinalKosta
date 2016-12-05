@@ -156,18 +156,21 @@ public class SubmissionController {
 		int flag = (int)session.getAttribute("flag");
 		
 		List<Task> taskList = service.findAllTaskByFlag(flag);
-		
 		model.addAttribute("taskList", taskList);
 		
 		return "/task/submission/submissionList";
 	}
 
-	@RequestMapping("/evaluate.do")
+	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
 	public String evaluateAssignment(String point, String taskId) {
-
-		System.out.println("taskId= " + Integer.parseInt(taskId));
-		System.out.println("point= " + Integer.parseInt(point));
-
-		return "/task/assignment/assignmentEvaluate";
+		
+		Task task = new Task();
+		
+		task= service.findTaskByTaskId(Integer.parseInt(taskId));
+		task.setPoint(Integer.parseInt(point));
+		
+		service.modifyTask(task);
+		
+		return "redirect:searchByTaskId.do";
 	}
 }

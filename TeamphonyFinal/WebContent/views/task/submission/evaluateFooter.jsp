@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,62 +119,12 @@
 
 <body>
 	<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
-					
-	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="submissionList.do">과제리스트 돌아가기</a>
-	<h3>제출 과제 상세</h3>
-
-	<br>
-		<table class="table">
-			<colgroup>
-				<col width="150">
-				<col width="*">
-			</colgroup>
-			<tr>
-				<th>제목</th>
-				<td>${task.title }</td>
-				
-			</tr>
-			<tr>
-				<th>제출자</th>
-				<td>
-					<ul>
-						<li style="float: left; width: 70px;">이은채</li>
-						<li style="float: left; width: 70px;">진민정</li>
-						<li style="float: left; width: 70px;">현대경</li>
-						<li style="float: left; width: 70px;">김수호</li>
-						<li style="float: left; width: 70px;">윤영민</li>
-						<li style="float: left; width: 70px;">미구현</li>
-						
-					</ul>
-				</td>
-			</tr>
-			<tr>
-				<th>제출 기한</th>
-					<td>
-						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
-					</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-					${task.contents }
-				</td>
-			</tr>
-			<tr>
-				<th>첨부파일</th>
-						<td>
-							<c:forEach items="${task.taskFileList }" var="taskFile">
-							${taskFile.filePath }<br>
-							</c:forEach>
-						</td>
-			</tr>
-		<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
+		<table>
 			<tr>
 				<td>	
 					<span class="point">
 						<span class="input">
-							<input type="hidden" name="taskId" id="id" value="${task.taskId} }">
+							<input type="hidden" name="taskId" id="id" value="122">
 							<input type="radio" name="point" id="p1" value="1"><label for="p1">1</label>
 							<input type="radio" name="point" id="p2" value="2"><label for="p2">2</label>
 							<input type="radio" name="point" id="p3" value="3"><label for="p3">3</label>
@@ -186,22 +137,13 @@
 							<input type="radio" name="point" id="p10" value="10"><label for="p10">10</label>
 						</span>
 							<output for="point"><b></b>점</output>
-						</span>
-				</td>
-				<td>
-					<button type="submit" class="btn btn-primary pull-left">평가완료</button>
+					</span>
 				</td>
 			</tr>
-		</form>
-	</table>
+		</table>
+		<button type="submit" class="btn btn-primary pull-left">평가완료</button>
 	</form>
-		<br>
-		<div align="center">
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId}" >수정</a>
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId}" >삭제</a>
-			<a onclick="evalutate_click();" id="evalutate" class="btn btn-success" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >평가</a>
-		</div>
-	<br>
+	
 	
 <script type="text/javascript">
 	var starRating = function(){
