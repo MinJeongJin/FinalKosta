@@ -27,8 +27,7 @@ public class PostServiceLogic implements PostService {
 
 	@Override
 	public Post findPostByPostId(int postId) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectPostByPostId(postId);
 	}
 
 	@Override

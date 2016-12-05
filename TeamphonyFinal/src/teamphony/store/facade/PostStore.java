@@ -12,4 +12,5 @@ public interface PostStore {
 	List<Post> selectAllPost(int teamId);
 	List<Post> selectPostByMemberId(String memberId);
 	List<Post> selectPostByContents(String content);
+	Post selectPostByPostId(int postId);
 }

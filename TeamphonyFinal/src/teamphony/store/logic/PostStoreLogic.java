@@ -68,7 +68,6 @@ public class PostStoreLogic implements PostStore {
 		try {
 			PostMapper mapper = session.getMapper(PostMapper.class);
 			list=mapper.selectAllPost(teamId);
-			session.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,6 +88,24 @@ public class PostStoreLogic implements PostStore {
 	public List<Post> selectPostByContents(String content) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public Post selectPostByPostId(int postId){
+		
+		SqlSession session = getSessionFactory().openSession();
+		Post post = null;
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			post=mapper.selectPostByPostId(postId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
+		return post;
 	}
 
 }

@@ -6,13 +6,17 @@
 
 	<insert id="insertPost" parameterType="Post">
 		insert into Post_tb(id,
-		contents, videoLink, filePath, teamCode, MemberId)
+		contents, videoLink, filePath, teamCode, MemberId, imagePath)
 		values(post_seq.nextval, #{contents}, #{videoLink}, #{filePath},
-		#{teamCode}, #{member.memberId})
+		#{teamCode}, #{member.memberId}, #{imagePath})
 	</insert>
 
 	<select id="selectAllPost" parameterType="int" resultMap="PostMap">
-		Select id,contents,teamCode,memberId from Post_tb where teamCode=#{teamCode}
+		Select id,contents,teamCode,memberId, videoLink from Post_tb where teamCode=#{teamCode}
+	</select>
+	
+	<select id="selectPostByPostId" parameterType="int" resultMap="PostMap">
+		Select id,contents,teamCode,memberId, videoLink from Post_tb where id=#{postId}
 	</select>
 
 	<resultMap type="Post" id="PostMap">
