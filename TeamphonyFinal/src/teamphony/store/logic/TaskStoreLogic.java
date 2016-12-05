@@ -73,7 +73,7 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			mapper.updateTask(task);
+//			mapper.updatdeTask(task);
 					
 //			List<TaskFile> taskFileList = task.getTaskFileList();
 

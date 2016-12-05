@@ -171,6 +171,6 @@ public class SubmissionController {
 		
 		service.modifyTask(task);
 		
-		return "redirect:searchByTaskId.do";
+		return "redirect:searchByTaskId.do?taskId="+task.getTaskId();
 	}
 }

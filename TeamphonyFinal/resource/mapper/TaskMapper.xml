@@ -92,6 +92,26 @@
 			WHERE ID= #{taskId}  
 	</select>
 	
+	<update id="updateTask" parameterType="task">
+			UPDATE TASK_TB		
+				SET
+				ID =						#{taskId}
+				,TITLE =					#{title}
+				,CONTENTS =					#{contents}
+				,DEADLINE =					#{deadline , jdbcType=DATE}
+				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=DATE}
+				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
+			WHERE ID = #{taskId}
+	</update>
+	
+	<update id="updateTaskPoint">
+			UPDATE TASK_TB
+				SET point			=7
+				WHERE ID			= 122;
+			
+	
+	</update>
+	
 	<delete id="deleteTask"  parameterType="int">
 			DELETE
 			FROM TASK_TB
@@ -142,16 +162,6 @@
 
 	</select>
  -->
-	<update id="updateTask" parameterType="task">
-			UPDATE TASK_TB		
-				SET
-				ID =						#{taskId}
-				,TITLE =					#{title}
-				,CONTENTS =					#{contents}
-				,DEADLINE =					#{deadline , jdbcType=DATE}
-				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=DATE}
-				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
-			WHERE ID = #{taskId}
-	</update>
+	
 
 </mapper>
