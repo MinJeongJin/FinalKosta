@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Repository;
+import org.w3c.dom.ls.LSInput;
 
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
@@ -115,56 +116,47 @@ public class TaskStoreLogic implements TaskStore {
 	}
 
 	@Override
-	public List<Task> selectAllTask() {
+	public List<Task> selectAllTaskByFlag(int flag) {
 
 		SqlSession session = getSessionFactory().openSession();
-
+		List<Task> taskList= new ArrayList<>();
+		List<TaskFile> fileList = new ArrayList<>();
+		
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			return mapper.selectAllTask();
+			
+			taskList = mapper.selectAllTaskByFlag(flag);
+			
+				for(Task task : taskList){
+					
+						fileList = mapper.selectFileListByTaskId(task.getTaskId());
+						System.out.println("fileListSize= "+fileList.size());
+						task.setTaskFileList(fileList);
+				}
+			return taskList;
 		} finally {
 			session.close();
 		}
 	}
+	
+	
 
 	@Override
 	public Task selectTaskByTaskId(int taskId) {
-		SqlSession session = getSessionFactory().openSession();
-		String path;
-		Task task = new Task();
-		TaskFile taskFile= new TaskFile();
-		List<TaskFile> fileList =new ArrayList<>();
 		
-		try {
-			
-			TaskMapper mapper = session.getMapper(TaskMapper.class);
-
-			taskFile.setSubmissionId(task.getTaskId());
-			
-			task = mapper.selectTaskByTaskId(taskId);
-			path = mapper.selectFileList(taskId).getFilePath();
-			
-			taskFile.setFilePath(path);
-			
-			System.out.println("======매퍼종료============");
-			System.out.println("task toString= "+ task.toString());
-			System.out.println("path = " +path);
-			
-			task.setTaskFileList(fileList);
-			
-//			task.setTaskFile(taskFile);
-			System.out.println("============================================");
-			System.out.println("taskFile toString= "+ task.getTaskFileList().get(1).toString());
-			
-			
-//			taskFile.setFilePath(filePath);
-			return task;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+		SqlSession session = getSessionFactory().openSession();
+		Task task = new Task();
+		List<TaskFile> fileList = new ArrayList<>();
+		
+			try{
+				TaskMapper mapper = session.getMapper(TaskMapper.class);
+				task = mapper.selectTaskByTaskId(taskId);
+				
+				fileList = mapper.selectFileListByTaskId(task.getTaskId());
+				task.setTaskFileList(fileList);
+			}finally {
+				session.close();
+			}
 		return task;
 	}
 

@@ -12,7 +12,7 @@ public interface TaskService {
 
 	 void removeTask(int taskId);
 
-	 List<Task> findAllTask();
+	 List<Task> findAllTaskByFlag(int flag);
 
 	 List<Task> findTaskByMemberId(String memberId);
 

@@ -4,10 +4,6 @@
 
 <mapper namespace="teamphony.store.mapper.TaskMapper">
 
-
-<!--  
-
-
 	<insert id="insertTask" parameterType="task">
 		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
 			SELECT TASK_TB_ID_SEQ.NEXTVAL
@@ -38,8 +34,21 @@
 			)
 	</insert>  
 
-
-	<select id="selectAllTask" resultType="Task">
+	<insert id="insertTaskFile" parameterType="taskFile">
+			INSERT INTO
+				TASKFILE_TB
+				(
+					SUBMISSIONID
+					,FILEPATH
+				)
+				VALUES
+				(
+					#{submissionId}
+					,#{filePath}
+				)
+	</insert>
+	
+	<select id="selectAllTaskByFlag" parameterType="int" resultType="Task">
 			SELECT 
 				ID							AS taskId,
 				TITLE,                  
@@ -50,8 +59,24 @@
 				FLAG,                   
 				POINT                  
 				FROM TASK_TB            
+				WHERE FLAG = #{flag}
 				ORDER BY ID ASC
 	</select>
+	
+	<select id="selectAllFileList" resultType="TaskFile">
+		SELECT 
+			SUBMISSIONID
+			,FILEPATH 
+			FROM TASKFILE_TB
+	</select>
+	
+	<select id="selectFileListByTaskId" parameterType="int" resultType="TaskFile">
+		SELECT 
+			SUBMISSIONID, FILEPATH 
+			FROM TASKFILE_TB 
+			WHERE SUBMISSIONID = #{taskId}
+	</select>
+	
 	
 	<select id="selectTaskByTaskId" parameterType="int" resultType="Task">
 			SELECT 
@@ -67,15 +92,11 @@
 			WHERE ID= #{taskId}  
 	</select>
 	
-	
 	<delete id="deleteTask"  parameterType="int">
 			DELETE
 			FROM TASK_TB
 			WHERE ID	= #{taskId}
 	</delete>
-<<<<<<< HEAD
-
-
 	
 	<delete id="deleteTaskFile" parameterType="int">
 		DELETE FROM
@@ -84,7 +105,7 @@
 		AND SUBMISSIONID = #{taskId}
 	</delete>
 
-	<resultMap type="Task" id="taskDetail">
+	<!-- <resultMap type="Task" id="taskDetail">
 
 		<id property="taskId" column="TASK_ID" />
 		<result property="title" column="TASK_TITLE" />
@@ -120,24 +141,7 @@
 		AND T.ID = #{taskId}
 
 	</select>
-
-	<select id="selectFileList" resultMap="TaskFile">
-
-
-		select
-		f.submissionId
-		,f.FILEPATH
-		from task_tb t, taskFile_tb f
-		
-		where t.id = f.submissionId
-		and
-		t.id = #{taskId};
-
-	</select>
-
-
-
-	
+ -->
 	<update id="updateTask" parameterType="task">
 			UPDATE TASK_TB		
 				SET
@@ -149,27 +153,5 @@
 				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
 			WHERE ID = #{taskId}
 	</update>
-<<<<<<< HEAD
-
--->
-=======
-	
-	<insert id="insertTaskFile" parameterType="taskFile">
-			INSERT INTO
-				TASKFILE_TB
-				(
-					SUBMISSIONID
-					,FILEPATH
-				)
-				VALUES
-				(
-					#{submissionId}
-					,#{filePath}
-				)
-	</insert>
-	
-	
-
->>>>>>> branch 'master' of https://github.com/MinJeongJin/FinalKosta.git
 
 </mapper>

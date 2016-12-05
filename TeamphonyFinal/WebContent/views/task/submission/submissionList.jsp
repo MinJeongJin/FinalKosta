@@ -82,7 +82,7 @@ h1 {
 											${sts.count }
 										</td>
 										<td>
-											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=112">${task.title }</a>
+											<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=122">${task.title }</a>
 										</td>
 										<td>
 											제출자 미구현
@@ -90,9 +90,13 @@ h1 {
 										<td>
 											<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
 										</td>
+										
 										<td>
-											첨부파일 제목
+											<c:forEach items="${task.taskFileList}" var="taskFile">
+											${taskFile.filePath}<br>
+											</c:forEach>
 										</td>
+							
 									</tr>
 						</c:forEach>
 									<tr>

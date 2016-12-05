@@ -126,7 +126,7 @@ public class AssignmentController {
 	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(Model model) {
 
-		List<Task> list = service.findAllTask();
+		List<Task> list = service.findAllTaskByFlag(0);
 		model.addAttribute("list", list);
 		
 		return "/task/assignment/assignmentList";

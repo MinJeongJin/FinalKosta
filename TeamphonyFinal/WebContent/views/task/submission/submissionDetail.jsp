@@ -128,7 +128,6 @@
 				<col width="150">
 				<col width="*">
 			</colgroup>
-		
 			<tr>
 				<th>제목</th>
 				<td>${task.title }</td>
@@ -156,22 +155,22 @@
 			<tr>
 				<th>내용</th>
 				<td>
-					${task.contents }dddd
+					${task.contents }
 				</td>
 			</tr>
 			<tr>
 				<th>첨부파일</th>
-					<c:forEach items="${task.taskFileList }" var="taskFile">
 						<td>
-							${taskFile.filePath }
+							<c:forEach items="${task.taskFileList }" var="taskFile">
+							${taskFile.filePath }<br>
+							</c:forEach>
 						</td>
-					</c:forEach>
 			</tr>
 			<tr>
 				<td>	
 					<span class="star-input">
 							<span class="input">
-								<input id="taskId" name="taskId" type="hidden" value=88>
+								<input id="taskId" name="taskId" type="hidden" value=${task.taskId}>
 								<input type="radio" type="hidden" name="point" value="1"><label for="p1">1</label>
 								<input type="radio" type="hidden" name="point" value="2"><label for="p2">2</label>
 								<input type="radio" type="hidden" name="point" value="3"><label for="p3">3</label>
@@ -195,9 +194,9 @@
 	</form>
 		<br>
 		<div align="center">
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=88" >수정</a>
+			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId}" >수정</a>
 			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId} " >삭제</a>
-			<a onclick="evalutate_click();" id="evalutate" class="btn btn-success"  href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId} " >평가</a>
+			<a onclick="evalutate_click();" id="evalutate" class="btn btn-success"  >평가</a>
 		</div>
 	<br>
 	

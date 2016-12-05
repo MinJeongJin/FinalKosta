@@ -12,7 +12,7 @@ public interface TaskStore {
 
 	void deleteTask(int taskId);
 
-	List<Task> selectAllTask();
+	List<Task> selectAllTaskByFlag(int flag);
 
 	Task selectTaskByTaskId(int taskId);
 

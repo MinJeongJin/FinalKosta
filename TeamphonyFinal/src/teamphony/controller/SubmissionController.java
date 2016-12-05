@@ -28,18 +28,19 @@ public class SubmissionController {
 	private TaskService service;
 	private File folder;
 
-	private static final String filePathOnly = "c:/uploadTemp";
+	private static final String filePathOnly = "c:/upload";
 
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
 	public String createSubmission(HttpServletRequest request, HttpSession session,
 			@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) { // attchFile
-
+		
+		System.out.println("flag= " + flag);
+		
 		Task task = new Task();
 		
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setFlag(Integer.parseInt(flag));
-		task.setTaskId(109);
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
@@ -66,7 +67,8 @@ public class SubmissionController {
 		
 		task.setTaskFileList(taskFileList);
 		service.registerTask(task); // task_tb 저장
-
+		
+		session.setAttribute("flag",1);
 		return "redirect:searchAll.do";
 	}
 
@@ -135,20 +137,11 @@ public class SubmissionController {
 
 	@RequestMapping("/searchByTaskId.do")
 	public String searchSubmissionByTaskId(String taskId, Model model) {
-		System.out.println("taskId =  " + taskId);
+		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
 		
-//		for(TaskFile taskFile: task.getTaskFileList()){
-//			System.out.println("getFilePath= "+taskFile.getFilePath());
-//		}
 		model.addAttribute("task", task);
-		System.out.println("========컨트롤러=======");
-		System.out.println("size = "+ task.getTaskFileList().size());
 		
-//		for(int i=0; i==task.getTaskFileList().size();i++ ){
-//			
-//			System.out.println("task"+i+ task.getTaskFileList().get(i).toString());
-//		}
 		return "/task/submission/submissionDetail";
 	}
 
@@ -159,10 +152,13 @@ public class SubmissionController {
 	}
 
 	@RequestMapping("/searchAll.do")
-	public String searchAllSubmission(Model model) {
-		List<Task> taskList = service.findAllTask();
-
+	public String searchAllSubmission(HttpSession session, Model model) {
+		int flag = (int)session.getAttribute("flag");
+		
+		List<Task> taskList = service.findAllTaskByFlag(flag);
+		
 		model.addAttribute("taskList", taskList);
+		
 		return "/task/submission/submissionList";
 	}
 

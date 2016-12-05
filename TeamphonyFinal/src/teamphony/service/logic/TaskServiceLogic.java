@@ -38,8 +38,8 @@ public class TaskServiceLogic implements TaskService {
 	
 
 	@Override
-	public List<Task> findAllTask() {
-		return store.selectAllTask();
+	public List<Task> findAllTaskByFlag(int flag) {
+		return store.selectAllTaskByFlag(flag);
 	}
 	
 	

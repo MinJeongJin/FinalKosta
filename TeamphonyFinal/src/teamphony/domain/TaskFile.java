@@ -34,7 +34,7 @@ public class TaskFile {
 	
 	@Override
 	public String toString() {
-		return "submissionId= "+ submissionId+ "filePath"+ filePath;
+		return "\n"+"submissionId= "+ submissionId +"\n"+ "filePath"+ filePath+"\n";
 	}
 	
 	
