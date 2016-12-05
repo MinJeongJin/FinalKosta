@@ -2,24 +2,27 @@ package teamphony.service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import teamphony.domain.Post;
 import teamphony.service.facade.PostService;
+import teamphony.store.facade.PostStore;
 
 @Service
 public class PostServiceLogic implements PostService {
+	
+	@Autowired
+	PostStore store;
 
 	@Override
 	public void registerPost(Post post) {
-		// TODO Auto-generated method stub
-		
+		store.insertPost(post);
 	}
 
 	@Override
 	public List<Post> findAllPost(int teamId) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectAllPost(teamId);
 	}
 
 	@Override

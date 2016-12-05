@@ -7,7 +7,16 @@ public class Post {
 	private String videoLink;
 	private String filePath;
 	private Member member;
+	private int teamCode;
 	private int id;
+
+	public int getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(int teamCode) {
+		this.teamCode = teamCode;
+	}
 
 	public int getId() {
 		return id;

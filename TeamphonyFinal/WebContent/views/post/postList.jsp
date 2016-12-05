@@ -124,11 +124,11 @@
 }
 
 .float-left .card {
-	float: left;
 	width: 300px;
 	height: 270px;
 }
-.float-right  {
+
+.float-right {
 	float: right;
 	width: 300px;
 	height: 270px;
@@ -209,15 +209,15 @@
 
 				<div class="container" id="teamManage">
 					<div class="content float-right">
-						<a class="btn btn-info btn-lg">등록</a>
+						<a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/views/post/createPost.jsp">등록</a>
 					</div>
 					<div class="content float-left">
 						<c:choose>
-							<c:when test="${postList eq null || empty postList }">
+							<c:when test="${listPost eq null || empty listPost }">
 								<p>게시물이 존재하지 않습니다. 팀원들과 공유하고 싶은 자료를 올려보세요.</p>
 							</c:when>
 							<c:otherwise>
-								<c:forEach items="${postList}" var="post" varStatus="status">
+								<c:forEach items="${listPost}" var="post" varStatus="status">
 									<a class="card"
 										href="${pageContext.request.contextPath}/post/searchByPostId.do?postId=${post.id}">
 										<p>${post.contents }</p>

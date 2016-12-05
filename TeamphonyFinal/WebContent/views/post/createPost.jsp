@@ -140,25 +140,28 @@
 				<div class="container" id="teamManage">
 					<h2 id="menuTitle">게시물 등록</h2>
 
-					<form enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/post/create.do">
+					<form enctype="multipart/form-data" method="post"
+						action="${pageContext.request.contextPath}/post/create.do">
 
 						<div class="row">
 							<div class="form-group col-xs-7">
-								<label for="contents">내용 : </label> 
-								<textarea class="form-control input-lg" id="contents" style="width:675px;height:300px;"></textarea>
+								<label for="contents">내용 : </label>
+								<textarea class="form-control input-lg" name="contents" id="contents"
+									style="width: 675px; height: 300px;"></textarea>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group col-xs-7">
-								<label for="contents">첨부 파일 : </label> 
-								<input type="file" class="form-control input-lg" id="contents">
+								<label for="contents">첨부 파일 : </label> <input type="file"
+									class="form-control input-lg" id="contents">
 							</div>
 						</div>
 
-
-						<button type="submit" class="btn btn-info btn-lg">등록</button>
-						<a href="${pageContext.request.contextPath}/post/searchAll.do" class="btn btn-warning btn-lg">취소</a>
+						<div>
+							<button type="submit" class="btn btn-info btn-lg">등록</button>
+							<a href="${pageContext.request.contextPath}/post/postList.do?teamCode=${teamCode}" class="btn btn-warning btn-lg">취소</a>
+						</div>
 					</form>
 				</div>
 			</div>

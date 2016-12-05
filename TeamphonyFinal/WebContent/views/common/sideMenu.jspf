@@ -12,7 +12,7 @@
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a href="${pageContext.request.contextPath}"><i
+					<li><a href="${pageContext.request.contextPath}/post/list.do"><i
 							class="fa fa-edit"></i> 게시판 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
@@ -33,8 +33,9 @@
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a href="${pageContext.request.contextPath}/place/searchAll.do"><i class="fa fa-clone"></i>장소정보 <span
-							class="fa fa-chevron-down"></span></a>
+					<li><a
+						href="${pageContext.request.contextPath}/place/searchAll.do"><i
+							class="fa fa-clone"></i>장소정보 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 						</ul></li>
 				</ul>
@@ -50,28 +51,30 @@
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a href="${pageContext.request.contextPath}/post/searchAll.do"><i
+					<li><a
+						href="${pageContext.request.contextPath}/post/list.do"><i
 							class="fa fa-edit"></i> 게시판 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a><i class="fa fa-desktop"></i> 과제 <span class="fa fa-chevron-down"></span></a>
+					<li><a><i class="fa fa-desktop"></i> 과제 <span
+							class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">부여 과제</ul>
-						<ul class="nav child_menu">부여 과제 등록</ul>
-						</li>
+						<ul class="nav child_menu">부여 과제 등록</ul></li>
 					<li><a
 						href="${pageContext.request.contextPath}/schedule/calendar.do"><i
 							class="fa fa-table"></i> 일정 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
-							
+
 						</ul></li>
 					<li><a href=""><i class="fa fa-bar-chart-o"></i> 팀원평가 <span
 							class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a href=""><i class="fa fa-clone"></i>장소정보 <span
-							class="fa fa-chevron-down"></span></a>
+					<li><a
+						href="${pageContext.request.contextPath}/place/searchAll.do"><i
+							class="fa fa-clone"></i>장소정보 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 						</ul></li>
 				</ul>

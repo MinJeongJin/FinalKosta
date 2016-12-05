@@ -4,4 +4,27 @@
 
 <mapper namespace="teamphony.store.mapper.PostMapper">
 
+	<insert id="insertPost" parameterType="Post">
+		insert into Post_tb(id,
+		contents, videoLink, filePath, teamCode, MemberId)
+		values(post_seq.nextval, #{contents}, #{videoLink}, #{filePath},
+		#{teamCode}, #{member.memberId})
+	</insert>
+
+	<select id="selectAllPost" parameterType="int" resultMap="PostMap">
+		Select id,contents,teamCode,memberId from Post_tb where teamCode=#{teamCode}
+	</select>
+
+	<resultMap type="Post" id="PostMap">
+		<id property="id" column="id" />
+		<result property="contents" column="contents" />
+		<result property="teamCode" column="teamCode" />
+		<result property="imagePath" column="imagePath" />
+		<result property="videoLink" column="videoLink" />
+		<result property="filePath" column="filePath" />
+		<association property="member" column="memberId"
+			select="teamphony.store.mapper.MemberMapper.selectMemberByMemberId" javaType="Member"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
 </mapper>
