@@ -63,22 +63,82 @@
 .profile {
 	margin-bottom: 80px;
 }
+
+.card {
+	background: #FFF;
+	border: 1px solid #AAA;
+	border-bottom: 3px solid #BBB;
+	padding: 0px;
+	margin: 15px;
+	overflow: hidden;
+}
+
+.card h1 {
+	margin: 0px;
+	padding: 10px;
+	padding-bottom: 0px;
+}
+
+.card p {
+	margin: 0px;
+	padding: 10px;
+}
+
+.card-image h1, .card-image h2, .card-image h3, .card-image h4,
+	.card-image h5, .card-image h6 {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	color: white;
+	background: rgba(0, 0, 0, 0.65);
+	margin: 0px;
+	padding: 6px;
+	border: none;
+}
+
+.card-image .banner {
+	height: 50px;
+	width: 50px;
+	top: 0px;
+	right: 0px;
+	background-position: top right;
+	background-repeat: no-repeat;
+	background-image: url('../images/new.png');
+	position: absolute;
+}
+
+.card-image {
+	width: 100%;
+	height: 200px;
+	padding: 0px;
+	margin: 0px;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	overflow: hidden;
+}
+
+.image1 {
+	background-image:
+		url('http://farm6.staticflickr.com/5323/9902848784_cbd10ba3ca_c.jpg');
+}
+
+.float-left .card {
+	float: left;
+	width: 300px;
+	height: 270px;
+}
+.float-right  {
+	float: right;
+	width: 300px;
+	height: 270px;
+}
 </style>
-
-
-<script type="text/javascript">
-	var reviseInfo = function myFunction() {
-		document.getElementById("teamName").readOnly = false;
-		document.getElementById("cyle").readOnly = false;
-		document.getElementById("endDate").readOnly = false;
-
-	}
-</script>
 
 </head>
 
 
-<body class="nav-md" onload="reviseInfo()">
+<body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 
@@ -100,8 +160,8 @@
 								alt="..." class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
-							<span>tnghsla13</span>
-							<h2>육식중인초식남</h2>
+							<span>${member.memberId }</span>
+							<h2>${member.alias }</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
@@ -109,7 +169,7 @@
 					<br />
 
 					<!-- sidebar menu -->
-					<%@ include file="/views/common/sideMenu.jspf" %>
+					<%@ include file="/views/common/sideMenu.jspf"%>
 					<!-- /sidebar menu -->
 
 
@@ -142,122 +202,31 @@
 					</nav>
 				</div>
 			</div>
-
 			<!-- /top navigation -->
-
 
 			<!-- page content -->
 			<div class="right_col" role="main">
 
 				<div class="container" id="teamManage">
-					<h2 id="menuTitle">팀 관리</h2>
-
-					<form>
-
-						<div class="row">
-							<div class="form-group col-xs-7">
-								<label for="teamName">팀 명:</label> <input type="text"
-									value="${team.name}" class="form-control input-lg"
-									id="teamName" size="7" readonly>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="form-group col-xs-7">
-								<label for="cycle">팀원 평가주기:</label> <input type="number"
-									value="${team.cycle}" class="form-control input-lg" id="cycle"
-									readonly>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="form-group col-xs-7">
-								<label for="endDate">평가 만료기간:</label> <input type="date"
-									value="${team.endDate}" class="form-control input-lg"
-									id="endDate" readonly>
-							</div>
-
-						</div>
-
-					</form>
-
-					<div class="row list-member">
-
-
-						<p>
-							<label>팀원 목록:</label>
-						</p>
-
-
-						<ul class="list-group col-xs-7">
-
-							<c:forEach items="${memberList}" var="member"
-								varStatus="cntOfMembers">
-
-								<li class="list-group-item list-group-item-info">${member.alias}</li>
-							</c:forEach>
-
-						</ul>
-
-						<button class="btn-link col-xs-7" data-toggle="modal"
-							data-target="#myModal">팀원초대</button>
-
+					<div class="content float-right">
+						<a class="btn btn-info btn-lg">등록</a>
 					</div>
-
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog">
-
-							<form action="${pageContext.request.contextPath}/team/invite.do"
-								method="post">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">팀원 초대</h4>
-									</div>
-									<div class="modal-body">
-										<p>
-											<input type="email" class="form-control" name="e_mail_1"
-												placeholder="팀원 e-mail  ex) prattler@gmail.com">
-										</p>
-
-
-									</div>
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-info btn-lg">초대</button>
-										<button type="button" class="btn btn-info btn-lg"
-											data-dismiss="modal">취소</button>
-									</div>
-								</div>
-
-							</form>
-
-						</div>
+					<div class="content float-left">
+						<c:choose>
+							<c:when test="${postList eq null || empty postList }">
+								<p>게시물이 존재하지 않습니다. 팀원들과 공유하고 싶은 자료를 올려보세요.</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${postList}" var="post" varStatus="status">
+									<a class="card"
+										href="${pageContext.request.contextPath}/post/searchByPostId.do?postId=${post.id}">
+										<p>${post.contents }</p>
+									</a>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</div>
-
-
-					<div class="col-xs-7">
-
-						<a href="${pageContext.request.contextPath}/team/revise.do">
-							<button class="btn-primary btn-lg col-xs-3"
-								style="margin-left: 5%; margin-right: 5%;" id="withdrawBtn">
-								수정</button>
-						</a> <a href="${pageContext.request.contextPath}/team/erase.do">
-							<button class="btn-primary btn-lg col-xs-3" id="withdrawBtn">
-								삭제</button>
-						</a>
-
-					</div>
-
-
 				</div>
-				<!-- /page content -->
-
-
-				<!-- footer content -->
-				<footer> </footer>
-				<!-- /footer content -->
-
 			</div>
 		</div>
 	</div>

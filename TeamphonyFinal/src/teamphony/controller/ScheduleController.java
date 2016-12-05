@@ -64,9 +64,8 @@ public class ScheduleController {
 		schedule.setStartDate(start);
 		schedule.setEndDate(end);
 		
-//		schedule.setTeamCode((int) session.getAttribute("teamCode"));
+		schedule.setTeamCode((int) session.getAttribute("teamCode"));
 		
-		schedule.setTeamCode(2);
 		scheduleService.registerSchedule(schedule);
 		return "redirect:/schedule/calendar.do";
 	}
@@ -109,10 +108,9 @@ public class ScheduleController {
 	
 	@RequestMapping("calendar.do")
 	public String searchSchedulesByTeamCode(HttpSession session, Model model){
-//		int teamCode = (int) session.getAttribute("teamCode");
-//		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(teamCode);
+		int teamCode = (int) session.getAttribute("teamCode");
+		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(teamCode);
 		
-		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(2);
 		model.addAttribute("teamSchedules", teamSchedules);
 		return "schedule/calendar";
 	}

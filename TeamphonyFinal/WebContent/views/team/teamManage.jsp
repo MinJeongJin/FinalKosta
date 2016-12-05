@@ -99,43 +99,7 @@
 					<br />
 
 					<!-- sidebar menu -->
-					<div id="sidebar-menu"
-						class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-
-							<ul class="nav side-menu">
-								<li><a><i class="fa fa-home"></i> 팀 관리 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-
-									</ul></li>
-								<li><a><i class="fa fa-edit"></i> 게시판 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-
-									</ul></li>
-								<li><a><i class="fa fa-desktop"></i> 과제 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-
-									</ul></li>
-								<li><a><i class="fa fa-table"></i> 일정관리 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-
-									</ul></li>
-								<li><a><i class="fa fa-bar-chart-o"></i> 팀원평가 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-
-									</ul></li>
-								<li><a><i class="fa fa-clone"></i>장소정보 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-									</ul></li>
-							</ul>
-						</div>
-					</div>
+						<%@ include file="/views/common/sideMenu.jspf" %>
 					<!-- /sidebar menu -->
 
 
