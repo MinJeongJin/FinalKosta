@@ -1,6 +1,7 @@
 package teamphony.store.mapper;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +18,5 @@ public interface TeamMapper {
 	List<Team> selectTeamsByMemberId(String memberId);
 	void insertBelong(@Param("teamCode") int teamCode, @Param("memberId") String memberId);
 	void deleteBelong(@Param("teamCode") int teamCode, @Param("memberId") String memberId);
+	Set<Integer> selectAllTeamCodes();
 }

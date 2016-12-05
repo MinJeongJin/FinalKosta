@@ -1,6 +1,9 @@
 package teamphony.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -22,72 +25,85 @@ import teamphony.service.facade.TeamService;
 @RequestMapping("team")
 public class TeamController {
 
-	private static int TEAM_CODE = 1000;
+	public static final int MAX_TEAM = 9999;
+	public static final int NORMAL = 1;
+	public static final int WARNNING_NONE = 0;
+	public static final int WARNNING_REDUNDANCY = -1;
+	public static final int WARNNING_EXCESS = -9999;
 
 	@Autowired
-	private TeamService teamService;
+	private TeamService service;
 
 	@RequestMapping("create.do")
-	public String createTeam(Team team, HttpSession session) {
+	public String createTeam(Team team, HttpSession session, Model model) {
 
-		// Member로 임시 테스트
 		Member member = (Member) session.getAttribute("member");
 		String leaderId = member.getMemberId();
 		int teamCode = getTeamCode();
 
 		team.setLeaderId(leaderId);
-
-		// code 임시 generate
 		team.setCode(teamCode);
+
+		if (session.getAttribute("teamCode") != null)
+			session.removeAttribute("teamCode");
+
 		session.setAttribute("teamCode", teamCode);
 
 		// Leader는 생성과 동시에 그 팀에 속하는 팀원임
-		teamService.registerTeam(team);
-		teamService.belongToTeam(teamCode, leaderId);
+		service.registerTeam(team);
+		service.belongToTeam(teamCode, leaderId);
 
-		return "redirect:/team/main.do";
+		return "redirect:/team/main.do?flag=" + NORMAL;
 	}
 
 	private int getTeamCode() {
 
-		if (TEAM_CODE > 9999) {
+		Set<Integer> codeSet = new HashSet<Integer>();
+		codeSet = service.findAllTeamCodes();
+		int codeSetSize = codeSet.size();
 
-			System.out.println("팀 수에 한계가 발생했습니다.");
-			return -1;
+		if (codeSetSize >= MAX_TEAM) {
+
+			System.out.println("팀수 초과");
+			return WARNNING_EXCESS;
 		}
 
-		return TEAM_CODE++;
-	}
+		int genCode;
+		Random codeGenerator = new Random(System.currentTimeMillis());
 
-	@RequestMapping(value = "revise.do", method = RequestMethod.GET)
-	public String reviseTeam() {
+		while (true) {
 
+			genCode = codeGenerator.nextInt(9000) + 1000;
+			codeSet.add(genCode);
 
-		return "redirect:/team/search.do?flag=-1";
+			if (codeSetSize < codeSet.size()) {
+
+				return genCode;
+
+			}
+		}
 	}
 
 	@RequestMapping(value = "revise.do", method = RequestMethod.POST)
-	public String reviseTeam(Team team, Model model) {
+	public String reviseTeam(HttpSession session, Team team, Model model) {
 
-		model.addAttribute("flag", -1);
+		team.setCode((Integer) session.getAttribute("teamCode"));
+		service.modifyTeam(team);
 
-		return "team/teamManageForLeader";
+		return "redirect:/team/search.do";
 	}
 
 	@RequestMapping("erase.do")
 	public String eraseTeam(HttpSession session) {
 
 		int teamCode = (Integer) session.getAttribute("teamCode");
-		List<Member> memberList = teamService.findMembersByTeamCode(teamCode);
+		List<Member> memberList = service.findMembersByTeamCode(teamCode);
 
 		for (Member member : memberList) { // 모든 팀원들을 내보냄
-
-			System.out.println(teamCode);
-			System.out.println(member.getMemberId());
-			teamService.leaveTeam(teamCode, member.getMemberId());
+			service.leaveTeam(teamCode, member.getMemberId());
 		}
 
-		teamService.removeTeam(teamCode);
+		service.removeTeam(teamCode);
 
 		return "redirect:/team/main.do";
 	}
@@ -95,28 +111,40 @@ public class TeamController {
 	@RequestMapping("join.do")
 	public String joinTeam(int teamCode, HttpSession session) {
 
-		Team team = teamService.findTeamByTeamCode(teamCode);
+		Team team = service.findTeamByTeamCode(teamCode);
 
 		if (team == null) {
 
-			return "redirect:/team/main.do";
+			return "redirect:/team/main.do?flag=" + WARNNING_NONE;
 
 		} else {
 
 			Member member = (Member) session.getAttribute("member");
 			String memberId = member.getMemberId();
+			List<Member> memberList = service.findMembersByTeamCode(teamCode);
 
-			teamService.belongToTeam(teamCode, memberId);
+			for (Member mem : memberList) {
 
-			return "redirect:/team/main.do";
+				if (memberId.equals(mem.getMemberId())) {
+
+					return "redirect:/team/main.do?flag=" + WARNNING_REDUNDANCY;
+				}
+
+			}
+
+			service.belongToTeam(teamCode, memberId);
+
+			return "redirect:/team/main.do?flag=" + NORMAL;
 		}
 	}
 
-	@RequestMapping(value = "search.do", method = RequestMethod.GET)
+	@RequestMapping(value = "search.do", method = RequestMethod.POST)
 	public String searchTeamByCode(int teamCode, HttpSession session, Model model) {
 
-		Team team = teamService.findTeamByTeamCode(teamCode);
-		List<Member> memberList = teamService.findMembersByTeamCode(teamCode);
+		System.out.println(teamCode);
+
+		Team team = service.findTeamByTeamCode(teamCode);
+		List<Member> memberList = service.findMembersByTeamCode(teamCode);
 		Member member = (Member) session.getAttribute("member");
 		String id = null, leaderId = null;
 
@@ -138,6 +166,29 @@ public class TeamController {
 		return "team/teamManage";
 	}
 
+	@RequestMapping(value = "search.do", method = RequestMethod.GET)
+	public String searchTeamByCode(HttpSession session, Model model) {
+
+		int teamCode = (Integer) session.getAttribute("teamCode");
+
+		Team team = service.findTeamByTeamCode(teamCode);
+		List<Member> memberList = service.findMembersByTeamCode(teamCode);
+		Member member = (Member) session.getAttribute("member");
+		String id = null, leaderId = null;
+
+		team.setMemberList(memberList);
+		model.addAttribute("team", team);
+		model.addAttribute("memberList", memberList);
+
+		id = member.getMemberId();
+		leaderId = team.getLeaderId();
+
+		if (id.equals(leaderId))
+			return "team/teamManageForLeader";
+
+		return "team/teamManage";
+	}
+
 	public String searchMembersByCode(HttpSession session) {
 
 		return null;
@@ -150,7 +201,7 @@ public class TeamController {
 		String memberId = member.getMemberId();
 		int teamCode = (Integer) session.getAttribute("teamCode");
 
-		teamService.leaveTeam(teamCode, memberId);
+		service.leaveTeam(teamCode, memberId);
 
 		return "redirect:/team/main.do";
 	}
@@ -159,7 +210,7 @@ public class TeamController {
 	public String inviteMember(String e_mail_1, HttpSession session) {
 		int teamCode = (Integer) session.getAttribute("teamCode");
 		try {
-			GoogleMail.Send("tnghsla13", "tlqkf9464", e_mail_1, "Welcom to teamphony", teamCode + "");
+			GoogleMail.Send("tnghsla13", "tlqkf9464", e_mail_1, "Welcome to teamphony", teamCode + "");
 
 		} catch (AddressException e) {
 			e.printStackTrace();
@@ -170,15 +221,16 @@ public class TeamController {
 		return "redirect:/team/search.do?teamCode=" + teamCode;
 	}
 
-	@RequestMapping("main.do")
-	public String searchTeamsByMemberId(HttpSession session, Model model) {
+	@RequestMapping(value = "main.do", method = RequestMethod.GET)
+	public String searchTeamsByMemberId(int flag, HttpSession session, Model model) {
 
 		Member member = (Member) session.getAttribute("member");
 		String memberId = member.getMemberId();
 
-		List<Team> teamList = teamService.findTeamsByMemberId(memberId);
+		List<Team> teamList = service.findTeamsByMemberId(memberId);
 
 		model.addAttribute("teamList", teamList);
+		model.addAttribute("flag", flag);
 
 		return "team/main";
 

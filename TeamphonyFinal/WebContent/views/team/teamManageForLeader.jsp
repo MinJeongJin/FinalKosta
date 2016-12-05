@@ -68,9 +68,22 @@
 
 <script type="text/javascript">
 	var reviseInfo = function myFunction() {
+
 		document.getElementById("teamName").readOnly = false;
-		document.getElementById("cyle").readOnly = false;
+		document.getElementById("cycle").readOnly = false;
 		document.getElementById("endDate").readOnly = false;
+
+		document.getElementById("reviseBtn").hidden = true;
+		document.getElementById("removeBtn").hidden = true;
+
+		document.getElementById("confirmBtn").hidden = false;
+		document.getElementById("cancelBtn").hidden = false;
+
+	}
+
+	var reviseTeamDetail = function() {
+
+		document.getElementById("teamDetail").submit();
 
 	}
 </script>
@@ -78,7 +91,7 @@
 </head>
 
 
-<body class="nav-md" onload="reviseInfo()">
+<body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 
@@ -109,8 +122,9 @@
 					<br />
 
 					<!-- sidebar menu -->
-					<%@ include file="/views/common/sideMenu.jspf" %>
+					<%@ include file="/views/common/sideMenu.jspf"%>
 					<!-- /sidebar menu -->
+
 
 
 				</div>
@@ -152,13 +166,14 @@
 				<div class="container" id="teamManage">
 					<h2 id="menuTitle">팀 관리</h2>
 
-					<form>
+					<form id="teamDetail" method="POST"
+						action="${pageContext.request.contextPath}/team/revise.do">
 
 						<div class="row">
 							<div class="form-group col-xs-7">
 								<label for="teamName">팀 명:</label> <input type="text"
 									value="${team.name}" class="form-control input-lg"
-									id="teamName" size="7" readonly>
+									id="teamName" name="name" size="7" readonly>
 							</div>
 						</div>
 
@@ -166,7 +181,7 @@
 							<div class="form-group col-xs-7">
 								<label for="cycle">팀원 평가주기:</label> <input type="number"
 									value="${team.cycle}" class="form-control input-lg" id="cycle"
-									readonly>
+									name="cycle" readonly>
 							</div>
 						</div>
 
@@ -174,7 +189,7 @@
 							<div class="form-group col-xs-7">
 								<label for="endDate">평가 만료기간:</label> <input type="date"
 									value="${team.endDate}" class="form-control input-lg"
-									id="endDate" readonly>
+									name="endDate" id="endDate" readonly>
 							</div>
 
 						</div>
@@ -238,13 +253,33 @@
 
 					<div class="col-xs-7">
 
-						<a href="${pageContext.request.contextPath}/team/revise.do">
-							<button class="btn-primary btn-lg col-xs-3"
-								style="margin-left: 5%; margin-right: 5%;" id="withdrawBtn">
-								수정</button>
-						</a> <a href="${pageContext.request.contextPath}/team/erase.do">
-							<button class="btn-primary btn-lg col-xs-3" id="withdrawBtn">
+
+						<button class="btn-primary btn-lg col-xs-3" id="reviseBtn"
+							style="margin-left: 5%; margin-right: 5%;"
+							onclick="reviseInfo();">수정</button>
+
+
+
+						<a href="${pageContext.request.contextPath}/team/erase.do">
+							<button class="btn-primary btn-lg col-xs-3" id="removeBtn">
 								삭제</button>
+						</a>
+
+
+
+
+
+
+						<button type="submit" class="btn-primary btn-lg col-xs-3"
+							id="confirmBtn" style="margin-left: 5%; margin-right: 5%;"
+							onclick="reviseTeamDetail();" hidden>확인</button>
+
+
+
+
+						<a href="${pageContext.request.contextPath}/team/search.do">
+							<button class="btn-primary btn-lg col-xs-3" id="cancelBtn" hidden>
+								취소</button>
 						</a>
 
 					</div>

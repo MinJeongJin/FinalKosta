@@ -1,6 +1,7 @@
 package teamphony.service.logic;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,6 @@ public class TeamServiceLogic implements TeamService {
 	@Override
 	public List<Team> findTeamsByMemberId(String memberId) {
 
-		
 		return store.selectTeamsByMemberId(memberId);
 	}
 
@@ -64,6 +64,12 @@ public class TeamServiceLogic implements TeamService {
 	public void leaveTeam(int teamCode, String memberId) {
 		
 		store.deleteBelong(teamCode, memberId);
+	}
+	
+	@Override
+	public Set<Integer> findAllTeamCodes() {
+		
+		return store.selectAllTeamCodes();
 	}
 
 }

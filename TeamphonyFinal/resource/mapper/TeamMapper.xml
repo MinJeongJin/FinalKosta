@@ -10,7 +10,7 @@
 
 		SELECT CODE, CYCLE, ENDDATE, LEADERID, NAME
 		FROM TEAM_TB
-		WHERE CODE in (SELECT TEAMCODE FROM BELONG_TB WHERE MEMBERID =
+		WHERE CODE IN (SELECT TEAMCODE FROM BELONG_TB WHERE MEMBERID =
 		#{memberId})
 
 
@@ -31,14 +31,23 @@
 
 
 		SELECT ID AS memberId, PASSWORD, ALIAS, IMAGEPATH
-		FROM MEMBER_TB
+		FROM
+		MEMBER_TB
 		WHERE ID IN
-		( SELECT MEMBERID FROM BELONG_TB WHERE TEAMCODE = #{teamCode})
+		( SELECT MEMBERID FROM BELONG_TB WHERE TEAMCODE =
+		#{teamCode})
 
 
 	</select>
 
 
+	<select id="selectAllTeamCodes" resultType="int">
+
+		SELECT CODE
+		FROM
+		TEAM_TB
+
+	</select>
 
 	<insert id="insertTeam" parameterType="Team">
 		INSERT INTO TEAM_TB(CODE,
@@ -55,20 +64,29 @@
 		VALUES(#{teamCode}, #{memberId})
 
 	</insert>
-	
+
+
 	<delete id="deleteBelong">
-	
+
 		DELETE FROM BELONG_TB
-		WHERE MEMBERID = #{memberId} AND TEAMCODE = #{teamCode}
-	
+		WHERE MEMBERID = #{memberId} AND
+		TEAMCODE = #{teamCode}
+
 	</delete>
-	
+
 	<delete id="deleteTeam">
-	
+
 		DELETE FROM TEAM_TB
 		WHERE CODE = #{teamCode}
-	
+
 	</delete>
+
+	<update id="updateTeam" parameterType="Team">
+
+		UPDATE TEAM_TB 
+		SET NAME = #{name}, CYCLE = #{cycle}, ENDDATE = #{endDate} 
+		WHERE CODE = #{code}
+	</update>
 
 
 

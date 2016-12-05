@@ -44,7 +44,7 @@ public class MemberController {
 			return "/common/login";
 		} else {
 			session.setAttribute("member", result);
-			return "redirect:/team/main.do";
+			return "redirect:/team/main.do?flag=1";
 		}
 
 	}
@@ -318,7 +318,6 @@ public class MemberController {
 		} else {
 
 		}
-		
 
 		System.out.println(password + " " + alias);
 		if (!session.isNew()) {

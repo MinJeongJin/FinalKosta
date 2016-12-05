@@ -3,6 +3,7 @@ package teamphony.store.logic;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -52,17 +53,28 @@ public class TeamStoreLogic implements TeamStore {
 	@Override
 	public void updateTeam(Team team) {
 
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+
+			mapper.updateTeam(team);
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
 	}
 
 	@Override
 	public void deleteTeam(int teamCode) {
-		
+
 		SqlSession session = getSessionFactory().openSession();
 		try {
 			TeamMapper mapper = session.getMapper(TeamMapper.class);
-			
-			
-			
+			mapper.deleteTeam(teamCode);
 			session.commit();
 		} catch (Exception e) {
 
@@ -147,7 +159,7 @@ public class TeamStoreLogic implements TeamStore {
 
 	@Override
 	public void deleteBelong(int teamCode, String memberId) {
-		
+
 		SqlSession session = getSessionFactory().openSession();
 		try {
 			TeamMapper mapper = session.getMapper(TeamMapper.class);
@@ -160,6 +172,25 @@ public class TeamStoreLogic implements TeamStore {
 			session.close();
 		}
 
+	}
+
+	@Override
+	public Set<Integer> selectAllTeamCodes() {
+
+		SqlSession session = getSessionFactory().openSession();
+		Set<Integer> codeSet = null;
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			codeSet = mapper.selectAllTeamCodes();
+			session.commit();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return codeSet;
 	}
 
 }

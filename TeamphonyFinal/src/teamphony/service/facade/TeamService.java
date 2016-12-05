@@ -1,6 +1,7 @@
 package teamphony.service.facade;
 
 import java.util.List;
+import java.util.Set;
 
 import teamphony.domain.Member;
 import teamphony.domain.Team;
@@ -15,5 +16,5 @@ public interface TeamService {
 	List<Member> findMembersByTeamCode(int teamCode);
 	void belongToTeam(int teamCode, String memberId);
 	void leaveTeam(int teamCode, String memberId);
-	
+	Set<Integer> findAllTeamCodes();
 }
