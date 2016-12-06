@@ -71,17 +71,26 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-
+			System.out.println("================store================");
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-//			mapper.updatdeTask(task);
+			
+				if(task.getPoint() != 0){
+					System.out.println("getPoint= "+task.getPoint());
+					System.out.println("getTaskId= "+task.getTaskId());
 					
+					int point = task.getPoint();
+					System.out.println("===========mapper Strat==============");
+					mapper.updateTaskPoint(task); // taskId 이거 때문에 그래  수정 했어
+					System.out.println("===========mapper End==============");
+					session.commit();
+					System.out.println("===========committed==============");
+				}
+//			mapper.updatdeTask(task);
 //			List<TaskFile> taskFileList = task.getTaskFileList();
-
 //			for (TaskFile taskFile : taskFileList) {
 //				taskFile.setSubmissionId(task.getTaskId());
 //				mapper.updateTaskFile(taskFile);
 //			}
-//
 //			session.commit();
 
 		} catch (Exception e) {

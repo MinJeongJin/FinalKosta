@@ -104,12 +104,10 @@
 			WHERE ID = #{taskId}
 	</update>
 	
-	<update id="updateTaskPoint">
+	<update id="updateTaskPoint" parameterType="task">
 			UPDATE TASK_TB
-				SET point			=7
-				WHERE ID			= 122;
-			
-	
+				SET POINT			= POINT+ #{point, jdbcType=INTEGER}
+				WHERE ID			= #{taskId}
 	</update>
 	
 	<delete id="deleteTask"  parameterType="int">
@@ -121,7 +119,6 @@
 	<delete id="deleteTaskFile" parameterType="int">
 		DELETE FROM
 		TASKFILE_TB
-		WHERE 1=1
 		AND SUBMISSIONID = #{taskId}
 	</delete>
 

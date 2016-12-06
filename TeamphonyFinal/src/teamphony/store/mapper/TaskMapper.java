@@ -13,6 +13,8 @@ public interface TaskMapper {
 	void insertTaskFile(TaskFile task);
 
 	void updateTask(Task task);
+//  추가했음
+	void updateTaskPoint(Task point);
 //	//  추가했음
 //	void updateTaskFile(TaskFile task);
 //

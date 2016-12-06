@@ -169,9 +169,8 @@ public class SubmissionController {
 	@RequestMapping("/evaluate.do")
 	public String evaluateAssignment(String taskId, Model model){
 		
-		;
 		model.addAttribute("task", service.findTaskByTaskId(Integer.parseInt(taskId)));
-		return "/task/submission/submissionEvaluation";
+		return "/task/submission/submissionEvaluate";
 	}
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
@@ -183,6 +182,7 @@ public class SubmissionController {
 		task.setPoint(Integer.parseInt(point));
 		
 		service.modifyTask(task);
+		System.out.println("================controller================");
 		
 		return "redirect:searchByTaskId.do?taskId="+task.getTaskId();
 	}
