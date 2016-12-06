@@ -90,13 +90,11 @@ h1 {
 										<td>
 											<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
 										</td>
-										
 										<td>
 											<c:forEach items="${task.taskFileList}" var="taskFile">
 											${taskFile.filePath}<br>
 											</c:forEach>
 										</td>
-							
 									</tr>
 						</c:forEach>
 									<tr>

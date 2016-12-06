@@ -195,6 +195,6 @@
 	function evalutate_click() {
 		$('input[name=point]').show();
 	}
-</script>
+</script>																																	
 </body>
 </html>

@@ -153,12 +153,25 @@ public class SubmissionController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(HttpSession session, Model model) {
+// submissionRegister.jsp 에서 flag 값을 준다. 
+//현재는 test 중이라서 임의로 flag 값을 부여 하였다
+		session.setAttribute("flag", 1);
 		int flag = (int)session.getAttribute("flag");
+		
 		
 		List<Task> taskList = service.findAllTaskByFlag(flag);
 		model.addAttribute("taskList", taskList);
 		
 		return "/task/submission/submissionList";
+	}
+	
+	
+	@RequestMapping("/evaluate.do")
+	public String evaluateAssignment(String taskId, Model model){
+		
+		;
+		model.addAttribute("task", service.findTaskByTaskId(Integer.parseInt(taskId)));
+		return "/task/submission/submissionEvaluation";
 	}
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
