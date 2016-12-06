@@ -2,6 +2,7 @@ package teamphony.store.logic;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -51,14 +52,36 @@ public class PostStoreLogic implements PostStore {
 
 	@Override
 	public void updatePost(Post post) {
-		// TODO Auto-generated method stub
-		
+		SqlSession session = getSessionFactory().openSession();
+
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			mapper.updatePost(post);
+			session.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public void deletePost(int postId) {
-		// TODO Auto-generated method stub
-		
+		SqlSession session = getSessionFactory().openSession();
+
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			mapper.deletePost(postId);
+			session.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
@@ -80,14 +103,36 @@ public class PostStoreLogic implements PostStore {
 
 	@Override
 	public List<Post> selectPostByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = getSessionFactory().openSession();
+		List<Post> list = new ArrayList<>();
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			list=mapper.selectPostByMemberId(memberId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 	@Override
-	public List<Post> selectPostByContents(String content) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Post> selectPostByContents(String contents) {
+		SqlSession session = getSessionFactory().openSession();
+		List<Post> list = new ArrayList<>();
+		try {
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			list=mapper.selectPostByContents(contents);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 	
 	@Override

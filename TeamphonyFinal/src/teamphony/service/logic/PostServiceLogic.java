@@ -32,26 +32,22 @@ public class PostServiceLogic implements PostService {
 
 	@Override
 	public List<Post> findPostByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectPostByMemberId(memberId);
 	}
 
 	@Override
 	public List<Post> findPostByContents(String contents) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectPostByContents(contents);
 	}
 
 	@Override
 	public void modifyPost(Post post) {
-		// TODO Auto-generated method stub
-		
+		store.updatePost(post);
 	}
 
 	@Override
-	public void removePost(Post post) {
-		// TODO Auto-generated method stub
-		
+	public void removePost(int postId) {
+		store.deletePost(postId);
 	}
 
 }

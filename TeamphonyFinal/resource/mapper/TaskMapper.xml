@@ -104,6 +104,16 @@
 			WHERE ID = #{taskId}
 	</update>
 	
+	<update id="updateTaskFile" parameterType="taskFile">
+		UPDATE TASKFILE_TB 
+			SET FILEPATH =${task.taskFile}
+			WHERE SUBMISSIONID = 123
+			AND FILEPATH = 'c:/upload\06_UML_SequenceDiagram.pdf';
+	
+	
+	
+	</update>
+	
 	<update id="updateTaskPoint" parameterType="task">
 			UPDATE TASK_TB
 				SET POINT			= POINT+ #{point, jdbcType=INTEGER}
@@ -117,9 +127,9 @@
 	</delete>
 	
 	<delete id="deleteTaskFile" parameterType="int">
-		DELETE FROM
-		TASKFILE_TB
-		AND SUBMISSIONID = #{taskId}
+		DELETE 
+		FROM TASKFILE_TB
+		WHERE SUBMISSIONID			= #{taskId}
 	</delete>
 
 	<!-- <resultMap type="Task" id="taskDetail">

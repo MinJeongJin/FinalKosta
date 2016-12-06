@@ -26,15 +26,14 @@ public class TaskServiceLogic implements TaskService {
 
 	@Override
 	public void modifyTask(Task task) {
-		System.out.println("================service================");
 		store.updateTask(task);
 
 	}
 	
 
 	@Override
-	public void removeTask(int taskId) {
-		store.deleteTask(taskId);
+	public void removeTask(int taskId, int flag) {
+		store.deleteTask(taskId,flag);
 	}
 	
 

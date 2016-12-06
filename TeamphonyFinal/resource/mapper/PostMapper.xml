@@ -12,12 +12,28 @@
 	</insert>
 
 	<select id="selectAllPost" parameterType="int" resultMap="PostMap">
-		Select id,contents,teamCode,memberId, videoLink from Post_tb where teamCode=#{teamCode}
+		Select id,contents,teamCode,memberId, videoLink from Post_tb where teamCode=#{teamCode} order By id
 	</select>
 	
 	<select id="selectPostByPostId" parameterType="int" resultMap="PostMap">
-		Select id,contents,teamCode,memberId, videoLink from Post_tb where id=#{postId}
+		Select id,contents,teamCode,memberId, videoLink, filePath, imagePath from Post_tb where id=#{postId}
 	</select>
+	
+	<select id="selectPostByMemberId" parameterType="String" resultMap="PostMap">
+		Select id,contents,teamCode,memberId, videoLink, filePath, imagePath from Post_tb where memberId=#{memberId}
+	</select>
+	
+	<select id="selectPostByContents" parameterType="String" resultMap="PostMap">
+		Select id,contents,teamCode,memberId, videoLink, filePath, imagePath from Post_tb where contents like '%'||#{contents}||'%' order By id
+	</select>
+	
+	<update id="updatePost" parameterType="post">
+		update post_tb set contents=#{contents}, videoLink=#{videoLink}, filePath=#{filePath}, imagePath=#{imagePath} where id = #{id}
+	</update>
+	
+	<delete id="deletePost" parameterType="int">
+		delete from post_tb where id = #{id}
+	</delete>
 
 	<resultMap type="Post" id="PostMap">
 		<id property="id" column="id" />
@@ -26,9 +42,7 @@
 		<result property="imagePath" column="imagePath" />
 		<result property="videoLink" column="videoLink" />
 		<result property="filePath" column="filePath" />
-		<association property="member" column="memberId"
-			select="teamphony.store.mapper.MemberMapper.selectMemberByMemberId" javaType="Member"
-			jdbcType="VARCHAR" />
+		<association property="member" column="memberId" select="teamphony.store.mapper.MemberMapper.selectMemberByMemberId" javaType="Member" jdbcType="VARCHAR" />
 	</resultMap>
 
 </mapper>

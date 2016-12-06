@@ -14,8 +14,8 @@
 	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
 </head>
 <body>
-	<a href="assignmentList.do">과제리스트 돌아가기</a>
-	<h3>부여 과제 수정</h3>
+	<a href="${pageContext.request.contextPath}/submission/searchAll.do">과제리스트 돌아가기</a>
+	<h3>제출 과제 수정</h3>
 
 	<br>
 	<form action="${pageContext.request.contextPath}/submission/revise.do" method="post" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
 					</ul>
 				</td>
 			</tr>
-			
+			 
 			<tr>
 				<th>내용</th>	
 					<td>
@@ -54,9 +54,34 @@
 			<tr>
 				<th>첨부파일</th>
 				<td>
-					<input style="width: 250px" ; type="file" name="attchFile" class="form-control">
-					아직 미구현
-					<input type="hidden" name="flag" value="1" />
+					<c:forEach items="${task.taskFileList }" var="taskFile">
+						${taskFile.filePath }<br>
+					</c:forEach>
+					<input type="hidden" id="flag" name="flag" value="${task.flag }"  />
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 				</td>
 			</tr>
 		</table>

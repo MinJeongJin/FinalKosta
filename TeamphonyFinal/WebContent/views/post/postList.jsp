@@ -69,7 +69,9 @@
 	border: 1px solid #AAA;
 	border-bottom: 3px solid #BBB;
 	padding: 0px;
-	margin: 15px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 15px;
 	overflow: hidden;
 }
 
@@ -124,16 +126,38 @@
 }
 
 .float-left .card {
+	float: left;
 	width: 300px;
 	height: 270px;
 }
 
+.header {
+	background-color: darkgrey;
+}
+
 .float-right {
 	float: right;
-	width: 300px;
-	height: 270px;
+	width: 100%;
+}
+
+.float-right .right {
+	float: right;
+	display: inline-block; 
+}
+
+.float-right .right  a{
+	float: right;
+	display: inline-block; 
+}
+
+.float-right .right form {
+	float: right;
+	display: inline-block; 
 }
 </style>
+
+
+
 
 </head>
 
@@ -195,7 +219,7 @@
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
 									<li><a href="javascript:;">Help</a></li>
-									<li><a href="login.html"><i
+									<li><a href="${pageContext.request.contextPath}/member/logout.do"><i
 											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul></li>
 						</ul>
@@ -203,14 +227,20 @@
 				</div>
 			</div>
 			<!-- /top navigation -->
-
+			<div class="content float-right">
+				<div class="right" inline-block>
+					<a class="btn btn-success btn-lg"
+						href="${pageContext.request.contextPath}/views/post/createPost.jsp" >등록</a>
+					<form
+						action="${pageContext.request.contextPath}/post/searchBycontents.do">
+						<input type="text" name="search">
+						<button type="submit" class="btn btn-info btn-lg">검색</button>
+					</form>
+				</div>
+			</div>
 			<!-- page content -->
 			<div class="right_col" role="main">
-
 				<div class="container" id="teamManage">
-					<div class="content float-right">
-						<a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/views/post/createPost.jsp">등록</a>
-					</div>
 					<div class="content float-left">
 						<c:choose>
 							<c:when test="${listPost eq null || empty listPost }">
@@ -219,8 +249,13 @@
 							<c:otherwise>
 								<c:forEach items="${listPost}" var="post" varStatus="status">
 									<a class="card"
-										href="${pageContext.request.contextPath}/post/searchByPostId.do?postId=${post.id}">
-										<p>${post.contents }</p>
+										href="${pageContext.request.contextPath}/post/detail.do?postId=${post.id}">
+										<div class="header">
+											<h2>${post.member.memberId }</h2>
+										</div>
+										<div class="body">
+											<p>${post.contents }</p>
+										</div>
 									</a>
 								</c:forEach>
 							</c:otherwise>

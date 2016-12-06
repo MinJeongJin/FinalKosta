@@ -63,6 +63,22 @@
 .profile {
 	margin-bottom: 80px;
 }
+
+#check {
+	display: none;
+}
+
+#imagView{
+	dispaly: none;
+}
+
+#videoView {
+	dispaly: none;
+}
+
+#fileView {
+	dispaly: none;
+}
 </style>
 
 </head>
@@ -116,18 +132,17 @@
 						</div>
 
 						<ul class="nav navbar-nav navbar-right">
-							<li class=""><a href="javascript:;"
-								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="${pageContext.request.contextPath}/resources/images/avatar.png"
-									alt="">tnghsla13 <span class=" fa fa-angle-down"></span>
-							</a>
+							<li class="">
+								<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
+									<img src="${pageContext.request.contextPath}/resources/images/avatar.png" alt="">${member.alias}
+									<span class=" fa fa-angle-down"></span>
+								</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
 									<li><a href="javascript:;">Help</a></li>
-									<li><a href="login.html"><i
-											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-								</ul></li>
+									<li><a href="${pageContext.request.contextPath}/member/logout.do"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+								</ul>
+							</li>
 						</ul>
 					</nav>
 				</div>
@@ -140,44 +155,135 @@
 				<div class="container" id="teamManage">
 					<h2 id="menuTitle">게시물</h2>
 
+					<div align="right">
+						<button type="submit" class="btn btn-info" onclick="revise();">수정</button>
+					</div>
+
 					<form enctype="multipart/form-data" method="post"
-						action="${pageContext.request.contextPath}/post/create.do">
+						action="${pageContext.request.contextPath}/post/revise.do">
+						<input type="hidden" value="${post.id }" name="postId">
 
 						<div class="row">
 							<div class="form-group col-xs-7">
-								<label for="contents">내용 : </label> <input
-									class="form-control input-lg" name="contents" id="contents"
-									style="width: 675px; height: 300px;" readonly="readonly"
-									value="${post.contents}">
+								<label for="contents">내용 : </label>
+								<textarea class="form-control input-lg" name="contents" id="contents" style="width: 100%; height: 150px;" readOnly>${post.contents }</textarea>
+							</div>
+						</div>
+
+						<div id="player"></div>
+
+						<div class="row videoView">
+							<div class="form-group col-xs-7 videoView">
+								<label for="contents">영상 링크 : </label> 
+								<input type="text" class="form-control input-lg" name="videoLink" id="videoLink" value="https://www.youtu.be/${post.videoLink }" readOnly>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group col-xs-7">
-								<a href="${post.videoLink }">동영상 링크</a>
+								<label for="contents">사진 : </label> 
+								<img class="form-control input-lg" id="imageView" name="imagePath" src="${post.imagePath }">
 							</div>
 						</div>
 
-						<div class="row">
-							<div class="form-group col-xs-7">
-								<input type="hidden" id="filePath" value="${post.filePath }">
-								<a href="#this" name="file">${row.ORIGINAL_FILE_NAME }</a>
-								(${post.filePath.FILE_SIZE  }kb)
+						<div class="row imageView">
+							<div class="form-group col-xs-7 imageView">
+								<label for="contents">사진 첨부 : </label> 
+								<input type="file" class="form-control input-lg imageView" id="imagePath" name="imagePath" value="${post.imagePath }" readOnly>
 							</div>
 						</div>
+
+						<div class="row fileView">
+							<div class="form-group col-xs-7">
+								<label for="contents">파일 첨부 : </label> 
+								<input type="file" class="form-control input-lg" id="filePath" name="filePath" value="${post.filePath }" readOnly>
+							</div>
+						</div>
+
 
 						<div>
-							<button type="submit" class="btn btn-info btn-lg">등록</button>
-							<a
-								href="${pageContext.request.contextPath}/post/postList.do?teamCode=${teamCode}"
-								class="btn btn-warning btn-lg">취소</a>
+							<c:if test="${post.member.memberId eq member.memberId }">
+
+								<button type="submit" class="btn btn-info btn-lg" id="check">확인</button>
+								<a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/post/delete.do?postId=${post.id}">삭제</a>
+							</c:if>
+							<a href="${pageContext.request.contextPath}/post/postList.do?teamCode=${teamCode}" class="btn btn-warning btn-lg">뒤로</a>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script>
+		// 2. This code loads the IFrame Player API code asynchronously.
+		var tag = document.createElement('script');
+
+		var change = function() {
+			document.getElementById("player")
+		};
+
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		// 3. This function creates an <iframe> (and YouTube player)
+		//    after the API code downloads.
+		var player;
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+				height : '360',
+				width : '640',
+				videoId : '${post.videoLink}',
+				events : {
+					'onReady' : onPlayerReady,
+					'onStateChange' : onPlayerStateChange
+				}
+			});
+		};
+
+		// 4. The API will call this function when the video player is ready.
+		function onPlayerReady(event) {
+			event.target.playVideo();
+		}
+
+		// 5. The API calls this function when the player's state changes.
+		//    The function indicates that when playing a video (state=1),
+		//    the player should play for six seconds and then stop.
+		var done = false;
+		function onPlayerStateChange(event) {
+			if (event.data == YT.PlayerState.PLAYING && !done) {
+			}
+		};
+		function stopVideo() {
+			player.stopVideo();
+		};
+
+		function revise() {
+			$('#contents, #videoLink, #imagePath, #filePath').attr('readonly', false);
+			$('#check').show();
+		};
+
+		function change() {
+
+			var videoLink = ${post.videoLink};
+			var imagePath = ${post.imagePath};
+			var filePath = ${post.filePath};
+			
+
+			if (!videoLink === "pass") {
+				$('#videoView').show();
+			}
+			if (!(imagePath === "pass")) {
+				$('#imageView').show();
+			}
+			if (!filePath === "pass") {
+				$('#fileView').show();
+			}
+		};
+	</script>
 </body>
+
 
 
 </html>

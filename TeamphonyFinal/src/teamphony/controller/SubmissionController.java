@@ -83,17 +83,17 @@ public class SubmissionController {
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
 	public String reviseSubmission(HttpServletRequest request, HttpSession session,
-			@RequestParam("attchFile") MultipartFile[] attchFileList, int taskId, String title, String contents,
+			@RequestParam("attchFile") MultipartFile[] attchFileList, String taskId, String title, String contents,
 			String flag) {
-
-		int flagNo = Integer.parseInt(flag);
-		System.out.println("flagNo= " + flagNo);
-
+		
 		Task task = new Task();
-		task.setTaskId(taskId);
+		
+		task.setTaskId(Integer.parseInt(taskId));
 		task.setTitle(title);
 		task.setContents(contents);
-		task.setFlag(flagNo);
+		task.setFlag(Integer.parseInt(flag));
+		
+		
 		System.out.println("taskId = " + task.getTaskId());
 		System.out.println("title = " + task.getTitle());
 		System.out.println(("contens= " + task.getContents()));
@@ -103,15 +103,19 @@ public class SubmissionController {
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
 
+			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
 
 			System.out.println("저장 경로 =" + filePath);
 
 			File f = new File(filePath);
+			
 			try {
+				
 				attchFile.transferTo(f);
 				taskFileList.add(taskFile);
+				
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -127,10 +131,9 @@ public class SubmissionController {
 	}
 
 	@RequestMapping("/erase.do")
-	public String eraseSubmission(String taskId) {
-		int taskIdNo = Integer.parseInt(taskId);
-		taskIdNo = 62;
-		service.removeTask(taskIdNo);
+	public String eraseSubmission(String taskId, String flag) {
+		
+		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
 
 		return "redirect:searchAll.do";
 	}
@@ -139,7 +142,7 @@ public class SubmissionController {
 	public String searchSubmissionByTaskId(String taskId, Model model) {
 		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-		
+
 		model.addAttribute("task", task);
 		
 		return "/task/submission/submissionDetail";
@@ -182,8 +185,9 @@ public class SubmissionController {
 		task.setPoint(Integer.parseInt(point));
 		
 		service.modifyTask(task);
-		System.out.println("================controller================");
 		
-		return "redirect:searchByTaskId.do?taskId="+task.getTaskId();
+		System.out.println("taskGetTaskId= "+ task.getTaskId());
+		
+		return "redirect:searchAll.do";
 	}
 }

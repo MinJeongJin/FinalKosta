@@ -9,6 +9,21 @@ public class Post {
 	private Member member;
 	private int teamCode;
 	private int id;
+	
+	public Post(){}
+	
+	public Post(String contents, Member member, int teamCode){
+		this.contents = contents;
+		this.teamCode = teamCode;
+		this.member = member;
+	}
+	
+	public Post(String contents,  Member member, int teamCode, int id){
+		this.contents = contents;
+		this.teamCode = teamCode;
+		this.member = member;
+		this.id = id;
+	}
 
 	public int getTeamCode() {
 		return teamCode;

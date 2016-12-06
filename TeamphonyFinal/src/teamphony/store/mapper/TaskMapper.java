@@ -16,11 +16,11 @@ public interface TaskMapper {
 //  추가했음
 	void updateTaskPoint(Task point);
 //	//  추가했음
-//	void updateTaskFile(TaskFile task);
+	void updateTaskFile(TaskFile taskFile);
 //
 	void deleteTask(int taskId);
 //	// 추가했음
-//	void deleteTaskFile(int taskId);
+	void deleteTaskFile(int taskId);
 	//변경했음
 	List<Task> selectAllTaskByFlag(int flag);
 	//추가했음
