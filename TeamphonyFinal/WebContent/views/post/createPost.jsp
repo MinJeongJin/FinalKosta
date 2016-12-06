@@ -125,7 +125,7 @@
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
 									<li><a href="javascript:;">Help</a></li>
-									<li><a href="login.html"><i
+									<li><a href="${pageContext.request.contextPath}/member/logout.do"><i
 											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul></li>
 						</ul>
@@ -146,21 +146,39 @@
 						<div class="row">
 							<div class="form-group col-xs-7">
 								<label for="contents">내용 : </label>
-								<textarea class="form-control input-lg" name="contents" id="contents"
-									style="width: 675px; height: 300px;"></textarea>
+								<textarea class="form-control input-lg" name="contents"
+									id="contents" style="width: 675px; height: 300px;"></textarea>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group col-xs-7">
-								<label for="contents">첨부 파일 : </label> <input type="file"
-									class="form-control input-lg" id="contents">
+								<label for="contents">영상 링크 : </label> <input type="text"
+									class="form-control input-lg" name="videoLink" id="contents">
 							</div>
 						</div>
+						
+						<div class="row">
+							<div class="form-group col-xs-7">
+								<label for="contents">사진 첨부 : </label> <input type="file"
+									class="form-control input-lg" id="imagePath" name="imagePath">
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group col-xs-7">
+								<label for="contents">파일 첨부 : </label> <input type="file"
+									class="form-control input-lg" id="filePath" name="filePath">
+							</div>
+						</div>
+						
+						
 
 						<div>
 							<button type="submit" class="btn btn-info btn-lg">등록</button>
-							<a href="${pageContext.request.contextPath}/post/postList.do?teamCode=${teamCode}" class="btn btn-warning btn-lg">취소</a>
+							<a
+								href="${pageContext.request.contextPath}/post/postList.do?teamCode=${teamCode}"
+								class="btn btn-warning btn-lg">취소</a>
 						</div>
 					</form>
 				</div>

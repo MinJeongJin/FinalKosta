@@ -27,7 +27,7 @@ import teamphony.service.facade.MemberService;
 @RequestMapping("member")
 public class MemberController {
 	private static final int MAX_SIZE = 1024 * 1024 * 20;
-	private static final String filePath = "C:\\fileUploadTest\\";
+	private static final String filePath = "fileUploadTest\\";
 
 	@Autowired
 	private MemberService service;
@@ -62,9 +62,12 @@ public class MemberController {
 		// 필요한 변수 선언
 		MultipartFile multipartFile = null;
 		String originalFileName = null;
+		
+		String root = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(root+filePath + memberId);
 
 		// 파일을 저장할 폴더 설정
-		File file = new File(filePath + memberId + "\\");
+		File file = new File(root+filePath + memberId + "\\");
 		// 폴더가 없으면 폴더 생성
 		if (file.exists() == false) {
 			file.mkdirs();
@@ -80,8 +83,8 @@ public class MemberController {
 				originalFileName = multipartFile.getOriginalFilename();
 
 				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
-				file = new File(filePath + memberId + "\\" + originalFileName);
-				member.setImagePath(filePath + memberId + "\\" + originalFileName);
+				file = new File(root+filePath + memberId + "\\" + originalFileName);
+				member.setImagePath(root+filePath + memberId + "\\" + originalFileName);
 				try {
 					// 파일 전송
 					multipartFile.transferTo(file);
@@ -367,6 +370,12 @@ public class MemberController {
 		service.removeMember(member.getMemberId());
 
 		return "/common/login";
+	}
+	
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/views/common/login.jsp";
 	}
 
 }

@@ -1,76 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html lang="en">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<html>
+<head>
+
+<title>Welcome to teamphony</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/main.css" />
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+	href="${pageContext.request.contextPath}/resources/css/mainStyle.css"
+	rel="stylesheet">
 
-<style type="text/css">
-.date {
-	height: 100px;
-	width: 100px;
-}
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<script type="text/javascript">
+	var click = new function() {
+		fn_openBoardList();
+	}
+	
+	function fn_openBoardList(){
+        var comSubmit = new ComSubmit();
+        comSubmit.setUrl("<c:url value='${pageContext.request.contextPath}/views/team/main.do?flag=0'/>");
+        comSubmit.submit();
+    }
+	
+	
+	function readURL(input) {
 
-table tr td {
-	text-align: left;
-	vertical-align: top;
-}
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
 
-.red {
-	color: red;
-}
+	        reader.onload = function (e) {
+	            $('#blah').attr('src', e.target.result);
+	        }
 
-.blue {
-	color: blue;
-}
-</style>
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+
+	$("#imgInp").change(function(){
+	    readURL(${member.imagePath});
+	});
+</script>
 
 </head>
-<body>
 
-	<!-- Header -->
-	<section id="header">
-		<header>
-			<span class="image avatar"> 
-				<img src="${member.imagePath }" alt="사진없음" width="90" height="110" />
-			</span>
-			<h1 id="logo">${member.memberId}</h1>
-			<p>${member.alias}</p>
-		</header>
-		<nav id="nav">
-			<ul>
-				<li><a href="#one" class="active">마이페이지</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/revise.do">회원 정보 수정</a></li>
-				<li><a href="#three">팀 관리</a></li>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<label class="navbar-brand" onclick="">Teamphony</label>
+			</div>
+
+			<ul class="nav navbar-nav">
+
+				<li><a href="${pageContext.request.contextPath}/views/member/myPage.jsp">마이 페이지</a></li>
+				<li><a href="${pageContext.request.contextPath}/views/member/reviseMember.jsp">회원 수정</a></li>
 				<li><a href="${pageContext.request.contextPath}/member/delete.do">회원 탈퇴</a></li>
-				<li><a href="">개발자</a></li>
+
 			</ul>
-		</nav>
-	</section>
-	<!-- Wrapper -->
-	<div id="wrapper">
-		<!-- Main -->
-		<div id="main">
-			<!-- One -->
-			<section id="one">
-				회원 수정 페이지!!!!
-			</section>
+
 		</div>
+	</nav>
+
+	<div id="wrapper-container">
+
+		<div id="contents">
+
+			<div>
+				<div><img id="blah" alt="사진 없음" src="${member.imagePath}"></div>
+			</div>
+
+		</div>
+
 	</div>
 
-	<!-- Scripts -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.scrolly.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/skel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
 </body>
+
 </html>

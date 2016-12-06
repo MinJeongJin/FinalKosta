@@ -12,5 +12,5 @@ public interface PostService {
 	List<Post> findPostByMemberId(String memberId);
 	List<Post> findPostByContents(String contents);
 	void modifyPost(Post post);
-	void removePost(Post post);
+	void removePost(int postId);
 }

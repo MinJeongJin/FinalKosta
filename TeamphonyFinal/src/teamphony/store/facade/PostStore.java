@@ -11,6 +11,6 @@ public interface PostStore {
 	void deletePost(int postId);
 	List<Post> selectAllPost(int teamId);
 	List<Post> selectPostByMemberId(String memberId);
-	List<Post> selectPostByContents(String content);
+	List<Post> selectPostByContents(String contents);
 	Post selectPostByPostId(int postId);
 }
