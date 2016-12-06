@@ -10,7 +10,7 @@ public interface TaskService {
 
 	 void modifyTask(Task task);
 
-	 void removeTask(int taskId);
+	 void removeTask(int taskId, int flag);
 
 	 List<Task> findAllTaskByFlag(int flag);
 

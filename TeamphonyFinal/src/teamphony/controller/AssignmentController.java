@@ -105,9 +105,8 @@ public class AssignmentController {
 	}
 
 	@RequestMapping("/erase.do")
-	public String eraseAssignment(String taskId) {
-		System.out.println("deleteTaskId = "+Integer.parseInt(taskId));
-		service.removeTask(Integer.parseInt(taskId));
+	public String eraseAssignment(String taskId,String flag) {
+		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
 		
 		return "redirect:searchAll.do";
 	}

@@ -98,12 +98,12 @@ public class TaskStoreLogic implements TaskStore {
 	}
 
 	@Override
-	public void deleteTask(int taskId) {
+	public void deleteTask(int taskId, int flag) {
 
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-
+				//if()
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 //			mapper.deleteTaskFile(taskId);
 			mapper.deleteTask(taskId);
@@ -135,7 +135,6 @@ public class TaskStoreLogic implements TaskStore {
 				for(Task task : taskList){
 					
 						fileList = mapper.selectFileListByTaskId(task.getTaskId());
-						System.out.println("fileListSize= "+fileList.size());
 						task.setTaskFileList(fileList);
 				}
 			return taskList;

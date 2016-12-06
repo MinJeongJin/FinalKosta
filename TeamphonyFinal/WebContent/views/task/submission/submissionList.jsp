@@ -204,7 +204,7 @@ h1 {
 									${sts.count }
 								</td>
 								<td>
-									<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=122">${task.title }</a>
+									<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}">${task.title }</a>
 								</td>
 								<td>
 									제출자 미구현
@@ -223,10 +223,15 @@ h1 {
 							</tr>
 						</c:forEach>
 						<tr>
+							<th></th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 							<td>
-								<a href=""><input class="btn" type="reset" value="이전 단계"></a> 
-								<a href="assignmentRegister.do ">
-								<input class="btn btn-success" type="submit" value="부여과제 등록"></a>
+								<a href="${pageContext.request.contextPath}/assignment/searchAll.do"><input class="btn" type="button" value="부여과제 리스트"></a> 
+								<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp ">
+								<input class="btn btn-success" type="submit" value="제출과제 등록"></a>
 							</td>
 						</tr>
 					</tbody>

@@ -14,7 +14,7 @@
 </head>
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="submissionList.do">과제리스트 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/submission/searchAll.do">과제리스트 돌아가기</a>
 	<h3>과제 제출</h3>
 
 	<br>
@@ -70,7 +70,7 @@
 			
 		</table>
 		<div align="center">
-			<a href="submissionList.do"><input class="btn" type="reset" value="취소"></a> 
+			<a href="${pageContext.request.contextPath}/submission/searchAll.do"><input class="btn" type="button" value="취소"></a> 
 			<input class="btn btn-success" type="submit" value="저장">
 		</div>
 		</form>

@@ -175,7 +175,7 @@ h1 {
 	<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
 					
 	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="submissionList.do">과제리스트 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/submission/searchAll.do">과제리스트 돌아가기</a>
 	<h3>제출 과제 상세</h3>
 
 	<br>
@@ -232,15 +232,17 @@ h1 {
 						${task.point}점
 					</td>
 			</tr>
+			<tr>
+			<th></th>
+				<td>
+					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId}" >수정</a>
+					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.task}&flag=${task.flag}  " >삭제</a>
+					<a onclick="evalutate_click();" id="evalutate" class="btn btn-success" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >평가</a>
+				</td>
+			</tr>
 	</table>
 	</form>
-		<br>
-		<div align="center">
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId}" >수정</a>
-			<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId}" >삭제</a>
-			<a onclick="evalutate_click();" id="evalutate" class="btn btn-success" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >평가</a>
-		</div>
-	<br>
+		
 	
 <script type="text/javascript">
 		
