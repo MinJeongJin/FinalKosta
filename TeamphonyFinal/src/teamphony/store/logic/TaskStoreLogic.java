@@ -71,7 +71,6 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-			System.out.println("================store================");
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			
 				if(task.getPoint() != 0){
@@ -79,11 +78,8 @@ public class TaskStoreLogic implements TaskStore {
 					System.out.println("getTaskId= "+task.getTaskId());
 					
 					int point = task.getPoint();
-					System.out.println("===========mapper Strat==============");
-					mapper.updateTaskPoint(task); // taskId 이거 때문에 그래  수정 했어
-					System.out.println("===========mapper End==============");
+					mapper.updateTaskPoint(task); 
 					session.commit();
-					System.out.println("===========committed==============");
 				}
 //			mapper.updatdeTask(task);
 //			List<TaskFile> taskFileList = task.getTaskFileList();

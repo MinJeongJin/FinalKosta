@@ -182,8 +182,9 @@ public class SubmissionController {
 		task.setPoint(Integer.parseInt(point));
 		
 		service.modifyTask(task);
-		System.out.println("================controller================");
 		
-		return "redirect:searchByTaskId.do?taskId="+task.getTaskId();
+		System.out.println("taskGetTaskId= "+ task.getTaskId());
+		
+		return "redirect:searchAll.do";
 	}
 }

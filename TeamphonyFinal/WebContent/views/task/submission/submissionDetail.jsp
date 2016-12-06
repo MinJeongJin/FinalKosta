@@ -113,6 +113,61 @@
     vertical-align: middle;
 }
 
+.starRating,
+.starRating span{
+    display:inline-block;
+    height:10px;
+    background:transparent url(../views/img/fullStar.png) no-repeat;
+    overflow:hidden;
+}
+.starRating{
+    width:64px;
+    vertical-align:middle;
+}
+.starRating span{
+    font-size:0;
+    line-height:0;
+    vertical-align:top;
+    text-indent:-100px;
+    *text-indent:0;
+    background-position:0 -10px;
+}
+
+body {
+	padding: 50px;
+}
+
+h1 {
+	font-weight: bold;
+	color: #A0B0DB;
+}
+
+.ranking {
+	text-align: center;
+	font-size: 28pt;
+}
+
+.spanTitle {
+	font-size: 18pt;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.pAlbum {
+	color: gray;
+	margin-left: 5px;
+}
+
+.imgAlbum {
+	width: 80px;
+	height: 80px;
+	margin-right: 10px;
+}
+
+.btnPlay {
+	margin-top: 40%
+}
+
 
 </style>
 
@@ -171,13 +226,10 @@
 			<tr>
 				<th>평점</th>
 					<td>
-						<td>
 						<p>
-							<span class="starRating">
-								<span style="width:${task.getPointStar()}%">${task.point }점
-								</span>
-							</span>
+							<span class="starRating"><span style="width:${task.getPointStar() }%"></span></span>
 						</p>
+						${task.point}점
 					</td>
 			</tr>
 	</table>

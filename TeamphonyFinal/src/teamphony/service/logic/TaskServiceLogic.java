@@ -26,7 +26,6 @@ public class TaskServiceLogic implements TaskService {
 
 	@Override
 	public void modifyTask(Task task) {
-		System.out.println("================service================");
 		store.updateTask(task);
 
 	}
