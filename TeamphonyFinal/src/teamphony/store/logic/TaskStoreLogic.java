@@ -46,8 +46,6 @@ public class TaskStoreLogic implements TaskStore {
 			if (task.getFlag() == 1) {
 				
 				int taskId = task.getTaskId();
-				System.out.println("======================");
-				System.out.println("taskId= "+taskId);
 				List<TaskFile> taskFileList = task.getTaskFileList();
 
 				for (TaskFile taskFile : taskFileList) {
@@ -78,16 +76,26 @@ public class TaskStoreLogic implements TaskStore {
 					System.out.println("getTaskId= "+task.getTaskId());
 					
 					int point = task.getPoint();
-					mapper.updateTaskPoint(task); 
+					mapper.updateTaskPoint(task);
 					session.commit();
+					
+				}else if(task.getFlag() == 1){
+					
+					mapper.updateTask(task);
+					mapper.deleteTaskFile(task.getTaskId());
+					
+					session.commit();
+					
+					List<TaskFile> taskFileList = task.getTaskFileList();
+
+					for (TaskFile taskFile : taskFileList) {
+						
+						taskFile.setSubmissionId(task.getTaskId());
+						mapper.insertTaskFile(taskFile);
+						session.commit();
+					}
+						session.commit();
 				}
-//			mapper.updatdeTask(task);
-//			List<TaskFile> taskFileList = task.getTaskFileList();
-//			for (TaskFile taskFile : taskFileList) {
-//				taskFile.setSubmissionId(task.getTaskId());
-//				mapper.updateTaskFile(taskFile);
-//			}
-//			session.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,12 +109,9 @@ public class TaskStoreLogic implements TaskStore {
 	public void deleteTask(int taskId, int flag) {
 
 		SqlSession session = getSessionFactory().openSession();
-		System.out.println("==============storeStart===========================");
 		try {
 				if(flag == 1){
-					System.out.println("==============flagStart===========================");
 					TaskMapper mapper = session.getMapper(TaskMapper.class);
-					System.out.println("==============deleteFileStart===========================");
 					mapper.deleteTaskFile(taskId);
 					mapper.deleteTask(taskId);
 					session.commit();

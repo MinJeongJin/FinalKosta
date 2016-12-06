@@ -240,15 +240,7 @@ h1 {
 					<a onclick="evalutate_click();" id="evalutate" class="btn btn-success" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >평가</a>
 				</td>
 			</tr>
-	</table>
+		</table>
 	</form>
-		
-	
-<script type="text/javascript">
-		
-	function evalutate_click() {
-		$('input[name=point]').show();
-	}
-</script>																																	
 </body>
 </html>

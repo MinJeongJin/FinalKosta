@@ -16,7 +16,7 @@ public interface TaskMapper {
 //  추가했음
 	void updateTaskPoint(Task point);
 //	//  추가했음
-//	void updateTaskFile(TaskFile task);
+	void updateTaskFile(TaskFile taskFile);
 //
 	void deleteTask(int taskId);
 //	// 추가했음
