@@ -129,6 +129,9 @@ public class SubmissionController {
 	@RequestMapping("/erase.do")
 	public String eraseSubmission(String taskId, String flag) {
 		
+		System.out.println(Integer.parseInt(taskId));
+		System.out.println(Integer.parseInt(flag));
+		
 		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
 		
 

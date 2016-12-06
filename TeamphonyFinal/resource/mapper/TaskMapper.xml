@@ -117,9 +117,9 @@
 	</delete>
 	
 	<delete id="deleteTaskFile" parameterType="int">
-		DELETE FROM
-		TASKFILE_TB
-		AND SUBMISSIONID = #{taskId}
+		DELETE 
+		FROM TASKFILE_TB
+		WHERE SUBMISSIONID			= #{taskId}
 	</delete>
 
 	<!-- <resultMap type="Task" id="taskDetail">

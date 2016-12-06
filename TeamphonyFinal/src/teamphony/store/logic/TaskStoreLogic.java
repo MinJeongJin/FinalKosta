@@ -101,15 +101,19 @@ public class TaskStoreLogic implements TaskStore {
 	public void deleteTask(int taskId, int flag) {
 
 		SqlSession session = getSessionFactory().openSession();
-
+		System.out.println("==============storeStart===========================");
 		try {
-				//if()
-			TaskMapper mapper = session.getMapper(TaskMapper.class);
-//			mapper.deleteTaskFile(taskId);
-			mapper.deleteTask(taskId);
-
-			session.commit();
-
+				if(flag == 1){
+					System.out.println("==============flagStart===========================");
+					TaskMapper mapper = session.getMapper(TaskMapper.class);
+					System.out.println("==============deleteFileStart===========================");
+					mapper.deleteTaskFile(taskId);
+					mapper.deleteTask(taskId);
+					session.commit();
+				}
+					TaskMapper mapper = session.getMapper(TaskMapper.class);
+					mapper.deleteTask(taskId);
+					session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -117,7 +121,6 @@ public class TaskStoreLogic implements TaskStore {
 		} finally {
 			session.close();
 		}
-
 	}
 
 	@Override

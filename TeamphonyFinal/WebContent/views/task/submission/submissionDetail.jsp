@@ -236,7 +236,7 @@ h1 {
 			<th></th>
 				<td>
 					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId}" >수정</a>
-					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.task}&flag=${task.flag}  " >삭제</a>
+					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId}&flag=${task.flag}  " >삭제</a>
 					<a onclick="evalutate_click();" id="evalutate" class="btn btn-success" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >평가</a>
 				</td>
 			</tr>

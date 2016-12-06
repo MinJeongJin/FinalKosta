@@ -20,7 +20,7 @@ public interface TaskMapper {
 //
 	void deleteTask(int taskId);
 //	// 추가했음
-//	void deleteTaskFile(int taskId);
+	void deleteTaskFile(int taskId);
 	//변경했음
 	List<Task> selectAllTaskByFlag(int flag);
 	//추가했음
