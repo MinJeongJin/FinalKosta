@@ -44,7 +44,7 @@ public class MemberController {
 			return "/common/login";
 		} else {
 			session.setAttribute("member", result);
-			return "redirect:/team/main.do?flag=1";
+			return "redirect:/team/main.do";
 		}
 
 	}
