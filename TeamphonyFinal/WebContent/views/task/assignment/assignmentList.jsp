@@ -99,7 +99,6 @@ h1 {
 							<th>제목</th>
 							<th>제출자</th>
 							<th>제출기한</th>
-							<th>평점</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -109,17 +108,8 @@ h1 {
 								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=109">${task.title }</a></td>
 								<td></td>
 								<td><fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/></td>
-								<td><p><span class="starRating">
-								<%-- <span style="width:${task.pointStar }%">${task.point }점</span></span></p> --%>
-								<span style="width:${task.getPointStar()}%">${task.point }점</span></span></p>
 								</td>
 								<%-- <td>${task.meberList.meber.id }제출자</td> --%>
-								
-								<td>
-									<a href="${pageContext.request.contextPath}/assignment/searchByAssignmentId.do?taskId=${task.taskId}">
-										<input class="btn" type="submit" value="평가"/>
-									</a>
-								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

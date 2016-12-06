@@ -162,37 +162,24 @@
 			</tr>
 			<tr>
 				<th>첨부파일</th>
-						<td>
-							<c:forEach items="${task.taskFileList }" var="taskFile">
-							${taskFile.filePath }<br>
-							</c:forEach>
-						</td>
+					<td>
+						<c:forEach items="${task.taskFileList }" var="taskFile">
+						${taskFile.filePath }<br>
+						</c:forEach>
+					</td>
 			</tr>
-		<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
 			<tr>
-				<td>	
-					<span class="point">
-						<span class="input">
-							<input type="hidden" name="taskId" id="id" value="${task.taskId} }">
-							<input type="radio" name="point" id="p1" value="1"><label for="p1">1</label>
-							<input type="radio" name="point" id="p2" value="2"><label for="p2">2</label>
-							<input type="radio" name="point" id="p3" value="3"><label for="p3">3</label>
-							<input type="radio" name="point" id="p4" value="4"><label for="p4">4</label>
-							<input type="radio" name="point" id="p5" value="5"><label for="p5">5</label>
-							<input type="radio" name="point" id="p6" value="6"><label for="p6">6</label>
-							<input type="radio" name="point" id="p7" value="7"><label for="p7">7</label>
-							<input type="radio" name="point" id="p8" value="8"><label for="p8">8</label>
-							<input type="radio" name="point" id="p9" value="9"><label for="p9">9</label>
-							<input type="radio" name="point" id="p10" value="10"><label for="p10">10</label>
-						</span>
-							<output for="point"><b></b>점</output>
-						</span>
-				</td>
-				<td>
-					<button type="submit" class="btn btn-primary pull-left">평가완료</button>
-				</td>
+				<th>평점</th>
+					<td>
+						<td>
+						<p>
+							<span class="starRating">
+								<span style="width:${task.getPointStar()}%">${task.point }점
+								</span>
+							</span>
+						</p>
+					</td>
 			</tr>
-		</form>
 	</table>
 	</form>
 		<br>
@@ -204,37 +191,6 @@
 	<br>
 	
 <script type="text/javascript">
-	var starRating = function(){
-		  var $star = $(".point"),
-		      $result = $star.find("output>b");
-		  $(document)
-		    .on("focusin", ".point>.input", function(){
-		    $(this).addClass("focus");
-		  })
-		    .on("focusout", ".point>.input", function(){
-		    var $this = $(this);
-		    setTimeout(function(){
-		      if($this.find(":focus").length === 0){
-		        $this.removeClass("focus");
-		      }
-		    }, 100);
-		  })
-		    .on("change", ".point :radio", function(){
-		    $result.text($(this).next().text());
-		  })
-		    .on("mouseover", ".point label", function(){
-		    $result.text($(this).text());
-		  })
-		    .on("mouseleave", ".point>.input", function(){
-		    var $checked = $star.find(":checked");
-		    if($checked.length === 0){
-		      $result.text("0");
-		    } else {
-		      $result.text($checked.next().text());
-		    }
-		  });
-		};
-		starRating();
 		
 	function evalutate_click() {
 		$('input[name=point]').show();
