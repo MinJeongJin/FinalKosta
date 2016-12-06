@@ -4,13 +4,59 @@
 
 <mapper namespace="teamphony.store.mapper.PlaceMapper">
 
+	<delete id="deletePlace" parameterType="int">
+		DELETE place_tb
+		WHERE id = #{id}
+	</delete>
+
 	<select id="selectAllPlace" resultType="Place">
 		SELECT id AS placeId,
 			   name, 
 			   address,
 			   phoneNumber AS phoneNum,
 			   imagePath,
-			   contents
+			   contents,
+			   holiday,
+			   businessHour
 		FROM place_tb
+	</select>
+	
+	<select id="selectPlaceByPlaceId" resultType="Place" parameterType="int">
+		SELECT id AS placeId,
+			   name, 
+			   address,
+			   phoneNumber AS phoneNum,
+			   imagePath,
+			   contents,
+			   holiday,
+			   businessHour
+		FROM place_tb
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectPlaceByPlaceName" resultType="Place" parameterType="String">
+		SELECT id AS placeId,
+			   name, 
+			   address,
+			   phoneNumber AS phoneNum,
+			   imagePath,
+			   contents,
+			   holiday,
+			   businessHour
+		FROM place_tb
+		WHERE name LIKE '%' || #{name} || '%'
+	</select>
+	
+	<select id="selectPlaceByPlaceAddress" resultType="Place" parameterType="String">
+		SELECT id AS placeId,
+			   name, 
+			   address,
+			   phoneNumber AS phoneNum,
+			   imagePath,
+			   contents,
+			   holiday,
+			   businessHour
+		FROM place_tb
+		WHERE address LIKE '%' || #{address} || '%'
 	</select>
 </mapper>

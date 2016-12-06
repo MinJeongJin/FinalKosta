@@ -36,10 +36,14 @@
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <select id="sel">
+				    <option value="1">상호명</option>
+				    <option value="2">지역명</option>
+				</select>
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input id="searchText" type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
+                        <button class="btn btn-default" type="button" onclick="search();">Go!</button>
                     </span>
                   </div>
                 </div>
@@ -80,19 +84,13 @@
 	                      <div class="col-md-4">
 	                        <div class="thumbnail" style="height: 500%;">
 	                          <div class="image view view-first" style="height: 160px;">
-	                          <a href="${pageContext.request.contextPath}/schedule/calendar.do"></a>
+	                          <a href="${pageContext.request.contextPath}/place/detail.do?placeId=${place.placeId}">
 	                            <img style="width: 100%; display: block;" src="${pageContext.request.contextPath}/resources/place/img/${place.imagePath }" alt="image"/>
-	                          <!--   <div class="mask">
-	                              <p><br></p>
-	                              <div class="tools tools-bottom">
-	                                <a href="#"><i class="fa fa-link"></i></a>
-	                                <a href="#"><i class="fa fa-pencil"></i></a>
-	                                <a href="#"><i class="fa fa-times"></i></a>
-	                              </div> 
-	                            </div> -->
+	                       	  </a>
 	                          </div>
 	                          <div class="caption">
-	                           <h2> <p>${place.name }</p> </h2>
+	                           <h2> <strong><p>${place.name }</p></strong> </h2>
+	                           <img src="${pageContext.request.contextPath}/resources/images/location-icon.png" style="width: 20px;"/>${place.address }
 	                          </div>
 	                        </div>
 	                      </div>
@@ -120,5 +118,18 @@
 
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/resources/schedule/build/js/custom.min.js"></script>
+    
+    <script>
+    function search(){
+    	var searchText = document.getElementById('searchText').value;
+    	
+    	if($('#sel option:selected').val() == ('1')){
+    		location.href="${pageContext.request.contextPath}/place/searchByName.do?placeName=" + searchText;
+    	} else {
+    		location.href="${pageContext.request.contextPath}/place/searchByAddress.do?placeAddress=" + searchText;
+    	}
+    	
+    }
+    </script>
   </body>
 </html>

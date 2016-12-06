@@ -25,6 +25,18 @@
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
 
+	 <style>
+	    .screen_out {display:block;overflow:hidden;position:absolute;left:-9999px;width:1px;height:1px;font-size:0;line-height:0;text-indent:-9999px}
+	    .wrap_content {overflow:hidden;height:330px}
+	    .wrap_map {width:50%;height:300px;float:left;position:relative}
+	    .wrap_roadview {width:50%;height:300px;float:left;position:relative}
+	    .wrap_button {position:absolute;left:15px;top:12px;z-index:2}
+	    .btn_comm {float:left;display:block;width:70px;height:27px;background:url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/sample_button_control.png) no-repeat}
+	    .btn_linkMap {background-position:0 0;}
+	    .btn_resetMap {background-position:-69px 0;}
+	    .btn_linkRoadview {background-position:0 0;}
+	    .btn_resetRoadview {background-position:-69px 0;}
+	</style>
   </head>
 
   <body class="nav-md">
@@ -63,9 +75,9 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
+                          <li><a href="${pageContext.request.contextPath}/place/revise.do?placeId=${place.placeId}">수정</a>
                           </li>
-                          <li><a href="#">Settings 2</a>
+                          <li><a href="${pageContext.request.contextPath}/place/erase.do?placeId=${place.placeId}">삭제</a>
                           </li>
                         </ul>
                       </li>
@@ -78,32 +90,26 @@
 
                     <div class="col-md-7 col-sm-7 col-xs-12">
                       <div class="product-image">
-                        <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/img_1.jpg" alt="이미지" />
-                        <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/img_3.jpg" alt="이미지" />
-                        <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/img_5.jpg" alt="이미지" />
+                        <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/${place.imagePath}" alt="이미지" />
+                        <%-- <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/img_3.jpg" alt="이미지" />
+                        <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/img_5.jpg" alt="이미지" /> --%>
                       </div>
                       <div class="product_gallery">
                       	<a>
-                          <img class="demo" src="${pageContext.request.contextPath}/resources/place/img/img_1.jpg" alt="이미지" onclick="currentDiv(1)"/>
+                          <img class="demo" src="${pageContext.request.contextPath}/resources/place/img/${place.imagePath}" alt="이미지" onclick="currentDiv(1)"/>
                         </a>
-                        <a>
+                        <%-- <a>
                           <img class="demo" src="${pageContext.request.contextPath}/resources/place/img/img_3.jpg" alt="이미지" onclick="currentDiv(2)"/>
                         </a>
                         <a>
                           <img class="demo" src="${pageContext.request.contextPath}/resources/place/img/img_5.jpg" alt="이미지" onclick="currentDiv(3)"/>
-                        </a>
-                        <!-- <a>
-                          <img src="images/prod-4.jpg" alt="..." />
-                        </a>
-                        <a>
-                          <img src="images/prod-5.jpg" alt="..." />
-                        </a> -->
+                        </a> --%>
                       </div>
                     </div>
 
                     <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
 
-                      <h3 class="prod_title">장소 주소</h3>
+                      <h3 class="prod_title">${place.address }</h3>
                       <br>
 <!-- 
                       <p>장소 주소</p>
@@ -113,9 +119,9 @@
  -->
                       <div class="">
                         <div class="product_price">
-                          <h1 class="price">장소 이름</h1>
+                          <h1 class="price">${place.name }</h1>
                           <br /><br>
-                          <span class="price-tax">장소 전화번호</span>
+                          <span class="price-tax">${place.phoneNum }</span>
                           <br>
                         </div>
                       </div>
@@ -136,19 +142,13 @@
                         <div id="myTabContent" class="tab-content">
                           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                             <div class="text_box">
-								<h2 class="h_copy">댄스&#44; 연기&#44; 회의 등등 을 할수 있는 공간</h2>
+								<!-- <h2 class="h_copy">댄스&#44; 연기&#44; 회의 등등 을 할수 있는 공간</h2> -->
 								<h3 class="h_intro">공간 소개</h3>
-								<p class="p_intro">
-									시간대 별로 가격 다릅니다<br /> <br />A홀 7000~14000원<br />
-									<br />B홀 5000~8000원<br /> <br />충격을 흡수해수는 댄스플로어
-									시공<br /> <br /> <br />홍대역도보 4분거리 <br /> <br />넓은
-									주차공간<br /> <br />카드결제가 안되시는 010-7762-6788로 연락주세요<br />
-									<br />1시간대관도 연락주세요
-								</p>
+								<p class="p_intro">${place.contents }</p>
 
 								<ul class="info_list officehours">
-									<li><span class="tit">이용시간</span> <span class="data">0~24시</span></li>
-									<li><span class="tit">휴무일</span> <span class="data"> 없음 </span></li>
+									<li><span class="tit">이용시간</span> <span class="data">${place.businessHour }</span></li>
+									<li><span class="tit">휴무일</span> <span class="data"> ${place.holiday } </span></li>
 								</ul>
 							</div>
                           </div>
@@ -180,11 +180,8 @@
 										<div class="sp_location">
 											<input type="hidden" name="spcLat" id="spcLat" value="37.560177" /> 
 											<input type="hidden" name="spcLng" id="spcLng" value="126.92085" />
-											<p class="sp_name">이야호연습실 홍대점 -큰홀&#44;작은홀</p>
-											<p class="sp_address">서울특별시 마포구 연남동 565-15&nbsp;지하 (사우나 있는 건물)</p>
-											<p class="sp_homepage">
-												<a href="" target="_blank" alt="새창열기"></a>
-											</p>
+											<p class="sp_name">${place.name }</p>
+											<p class="sp_address">${place.address }</p>
 										</div>
 
 										<div class="row" id="_contact">
@@ -216,22 +213,23 @@
 									</div>
 								</div>
 								
-								<!-- daum map api -->
-								<div id="map" style="width:100%;height:350px;"></div>
-								
-								
-								<!-- 스페이스 쉐어 -->
-								<!-- 지도영역  -->
-								<ul class="mapArea"> 
-								<li class="normalMap">
-								<div id="mapArea" alt="지도" style="width:50%;height:300px; margin-right:1px;"></div>
-								<button id="mapAreaLink">지도 크게보기</button>
-								</li> 
-								<li class="roadMap"><div id="roadviewArea" alt="로드맵" style="width:50%;height:300px;">
+								<div class="wrap_content">
+								    <div class="wrap_map">
+								        <div id="map" style="width:100%;height:100%"></div> <!-- 지도를 표시할 div 입니다 -->
+								        <div class="wrap_button">
+								            <a href="javascript:;" class="btn_comm btn_linkMap" target="_blank" onclick="moveDaumMap(this)"><span class="screen_out">지도 크게보기</span></a> <!-- 지도 크게보기 버튼입니다 -->
+								            <a href="javascript:;" class="btn_comm btn_resetMap" onclick="resetDaumMap()"><span class="screen_out">지도 초기화</span></a> <!-- 지도 크게보기 버튼입니다 -->
+								        </div>
+								    </div>
+								    <div class="wrap_roadview">
+								        <div id="roadview" style="width:100%;height:100%"></div> <!-- 로드뷰를 표시할 div 입니다 -->
+								        <div class="wrap_button">
+								            <a href="javascript:;" class="btn_comm btn_linkRoadview" target="_blank" onclick="moveDaumRoadview(this)"><span class="screen_out">로드뷰 크게보기</span></a> <!-- 로드뷰 크게보기 버튼입니다 -->
+								            <a href="javascript:;" class="btn_comm btn_resetRoadview" onclick="resetRoadview()"><span class="screen_out">로드뷰 크게보기</span></a> <!-- 로드뷰 리셋 버튼입니다 -->
+								        </div>
+								    </div>
 								</div>
-								<button id="roadviewAreaLink">로드뷰 크게보기</button></li> </ul>
-								<!-- 지도끝 -->
-								 
+								
 							</div>
                           </div>
                         </div>
@@ -249,6 +247,7 @@
       </div>
     </div>
 
+	
 
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/schedule/vendors/jquery/dist/jquery.min.js"></script>
@@ -262,115 +261,155 @@
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/resources/schedule/build/js/custom.min.js"></script>
     
-
-	    <!-- Daum map API -->
-    <script src="//apis.daum.net/maps/maps3.js?apikey=ab42606eabf146a2840ea3e9b21a2ac0"></script>
+	<!-- Daum map API -->
+    <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=ab42606eabf146a2840ea3e9b21a2ac0&libraries=services"></script>
 	
-  <!-- <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div의 id
-    	mapOption = { 
+	<!-- 지도 script -->
+ 	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
 	        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };
+	        level: 4 // 지도의 확대 레벨
+	    };  
 	
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성.
+	// 지도를 생성합니다    
 	var map = new daum.maps.Map(mapContainer, mapOption); 
 	
-	map.relayout();
-	</script> -->
-    
-    
-   <script type="text/javascript">
-		var position = new daum.maps.LatLng('37.5593135185', '127.004993467');
-		var daum_map_x = '37.5593135185';
-		var daum_map_y = '127.004993467';
-		var roadview_data = '';
-		var roadview_update_flag = 'N';
-			
-		var map = new daum.maps.Map(document.getElementById('mapArea'), {
-			center: position
-			,level: 6
-		});
-		var zoomControl = new daum.maps.ZoomControl();
-		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-		var mapTypeControl = new daum.maps.MapTypeControl();
-		map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
-		
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new daum.maps.services.Geocoder();
 	
-		var marker = new daum.maps.Marker({
-			position: position
-		});
-		marker.setMap(map);	
+	var coords;
+	// 주소로 좌표를 검색합니다
+	geocoder.addr2coord('${place.address}', function(status, result) {
 	
-		var roadview_obj = {};
-		if(roadview_data != "" && roadview_update_flag == "Y") {
-			var roadview_arr = roadview_data.split(",");
-			var roadview_length = roadview_arr.length;
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
+	
+	        coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var mMarker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var mLabel = new daum.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${place.name}</div>'
+	        });
+	        mLabel.open(map, mMarker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	    
+	    var rvContainer = document.getElementById('roadview'); // 로드뷰를 표시할 div
+	 	var rv = new daum.maps.Roadview(rvContainer); // 로드뷰 객체 생성
+	 	var rc = new daum.maps.RoadviewClient(); // 좌표를 통한 로드뷰의 panoid를 추출하기 위한 로드뷰 help객체 생성
+	 	var rvResetValue = {} //로드뷰의 초기화 값을 저장할 변수
+	 	rc.getNearestPanoId(coords, 50, function(panoId) {
+	 	    rv.setPanoId(panoId, coords);//좌표에 근접한 panoId를 통해 로드뷰를 실행합니다.
+	 	    rvResetValue.panoId = panoId;
+	 	});
+	 	
+	 // 로드뷰 초기화 이벤트
+		daum.maps.event.addListener(rv, 'init', function() {
 
-			switch(roadview_length) {
-			case 5:
-				roadview_obj = {pan:roadview_arr[2], tilt:roadview_arr[3], zoom:roadview_arr[4]};
-				position = new daum.maps.LatLng(roadview_arr[0], roadview_arr[1]);
-				break;
-			default:
-				roadview_obj = {pan:roadview_arr[0], tilt:roadview_arr[1], zoom:roadview_arr[2]};
-				break;
-			}
-			
-		}else {
-			roadview_obj = {pan:0, tilt:0, zoom:0};
-		}
-		
-		var rc = new daum.maps.RoadviewClient();
-		var rv = new daum.maps.Roadview(document.getElementById("roadviewArea"), roadview_obj);
-	
-		rc.getNearestPanoId(position, 50, function(panoid) {
-			rv.setPanoId(panoid);
-		});		
-		
-		
-		$("#mapAreaLink").click(function(){
-			var url = 'http://map.daum.net/link/map/' + encodeURIComponent(spaceShareObj.spaceInfo.space_title.replace(/,/g,'')) + ','+daum_map_x+','+daum_map_y;
-			var openNewWindow = window.open("about:blank");
-			openNewWindow.location.href = url;
-		});
-		
-		$("#roadviewAreaLink").click(function(){
-		    var panoId = rv.getPanoId(); //현 로드뷰의 panoId값을 가져옵니다.
-		    var viewpoint = rv.getViewpoint(); //현 로드뷰의 viewpoint(pan,tilt,zoom)값을 가져옵니다.
+		    // 로드뷰에 올릴 마커를 생성합니다.
+		    var rMarker = new daum.maps.Marker({
+		        position: coords,
+		        map: rv //map 대신 rv(로드뷰 객체)로 설정하면 로드뷰에 올라갑니다.
+		    });
+
+		    // 로드뷰에 올릴 장소명 인포윈도우를 생성합니다.
+		    var rLabel = new daum.maps.InfoWindow({
+		        position: coords,
+		        content: '${place.name}'
+		    });
+		    rLabel.open(rv, rMarker);
+
+		    // 로드뷰 마커가 중앙에 오도록 로드뷰의 viewpoint 조정 합니다.
+		    var projection = rv.getProjection(); // viewpoint(화면좌표)값을 추출할 수 있는 projection 객체를 가져옵니다.
 		    
-		    var openNewWindow = window.open("about:blank");
-		    openNewWindow.location.href = 'http://map.daum.net/?panoid='+panoId+'&pan='+viewpoint.pan+'&tilt='+viewpoint.tilt+'&zoom='+viewpoint.zoom; // Daum 지도 로드뷰로 보내는 링크		
-		});	
-		
-		var slideIndex = 1;
-		showDivs(slideIndex);
+		    // 마커의 position과 altitude값을 통해 viewpoint값(화면좌표)를 추출합니다.
+		    var viewpoint = projection.viewpointFromCoords(rMarker.getPosition(), rMarker.getAltitude());
+		    rv.setViewpoint(viewpoint); //로드뷰에 뷰포인트를 설정합니다.
 
-		function plusDivs(n) {
-		  showDivs(slideIndex += n);
-		}
+		    //각 뷰포인트 값을 초기화를 위해 저장해 놓습니다.
+		    rvResetValue.pan = viewpoint.pan;
+		    rvResetValue.tilt = viewpoint.tilt;
+		    rvResetValue.zoom = viewpoint.zoom;
+		});
+	 
+	});  
+	
+	/* var rvContainer = document.getElementById('roadview'); // 로드뷰를 표시할 div
+ 	var rv = new daum.maps.Roadview(rvContainer); // 로드뷰 객체 생성
+ 	var rc = new daum.maps.RoadviewClient(); // 좌표를 통한 로드뷰의 panoid를 추출하기 위한 로드뷰 help객체 생성
+ 	var rvResetValue = {} //로드뷰의 초기화 값을 저장할 변수
+ 	rc.getNearestPanoId(coords, 50, function(panoId) {
+ 	    rv.setPanoId(panoId, coords);//좌표에 근접한 panoId를 통해 로드뷰를 실행합니다.
+ 	    rvResetValue.panoId = panoId;
+ 	});  */
+	
+	//지도 이동 이벤트 핸들러
+	function moveDaumMap(self){
+	    
+	    var center = map.getCenter(), 
+	        lat = center.getLat(),
+	        lng = center.getLng();
 
-		function currentDiv(n) {
-		  showDivs(slideIndex = n);
-		}
+	    self.href = 'http://map.daum.net/link/map/' + encodeURIComponent('${place.name}') + ',' + lat + ',' + lng; //Daum 지도로 보내는 링크
+	}
 
-		function showDivs(n) {
-		  var i;
-		  var x = document.getElementsByClassName("mySlides");
-		  var dots = document.getElementsByClassName("demo");
-		  if (n > x.length) {slideIndex = 1}
-		  if (n < 1) {slideIndex = x.length}
-		  for (i = 0; i < x.length; i++) {
-		     x[i].style.display = "none";
-		  }
-		   x[slideIndex-1].style.display = "block";
-		}
-		
+	//지도 초기화 이벤트 핸들러
+	function resetDaumMap(){
+	    map.setCenter(coords); //지도를 초기화 했던 값으로 다시 셋팅합니다.
+	    map.setLevel(mapOption.level);
+	}
+
+	//로드뷰 이동 이벤트 핸들러
+	function moveDaumRoadview(self){
+	    var panoId = rv.getPanoId(); //현 로드뷰의 panoId값을 가져옵니다.
+	    var viewpoint = rv.getViewpoint(); //현 로드뷰의 viewpoint(pan,tilt,zoom)값을 가져옵니다.
+	    self.href = 'http://map.daum.net/?panoid='+panoId+'&pan='+viewpoint.pan+'&tilt='+viewpoint.tilt+'&zoom='+viewpoint.zoom; //Daum 지도 로드뷰로 보내는 링크
+	}
+
+	//로드뷰 초기화 이벤트 핸들러
+	function resetRoadview(){
+	    //초기화를 위해 저장해둔 변수를 통해 로드뷰를 초기상태로 돌립니다.
+	    rv.setViewpoint({
+	        pan: rvResetValue.pan, tilt: rvResetValue.tilt, zoom: rvResetValue.zoom
+	    });
+	    rv.setPanoId(rvResetValue.panoId);
+	} 
+	</script>
+   
+	<!-- image 슬라이드 -->
+	<script>
+	var slideIndex = 1;
+	showDivs(slideIndex);
+
+	function plusDivs(n) {
+	  showDivs(slideIndex += n);
+	}
+
+	function currentDiv(n) {
+	  showDivs(slideIndex = n);
+	}
+
+	function showDivs(n) {
+	  var i;
+	  var x = document.getElementsByClassName("mySlides");
+	  var dots = document.getElementsByClassName("demo");
+	  if (n > x.length) {slideIndex = 1}
+	  if (n < 1) {slideIndex = x.length}
+	  for (i = 0; i < x.length; i++) {
+	     x[i].style.display = "none";
+	  }
+	   x[slideIndex-1].style.display = "block";
+	}
 	</script>
 	
-	<script>
-	</script>
-    
-
   </body>
 </html>

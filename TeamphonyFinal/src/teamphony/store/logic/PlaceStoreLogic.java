@@ -46,8 +46,15 @@ public class PlaceStoreLogic implements PlaceStore {
 
 	@Override
 	public void deletePlace(int placeId) {
-		// TODO Auto-generated method stub
+		SqlSession session = getSessionFactory().openSession();
 		
+		try {
+			PlaceMapper mapper = session.getMapper(PlaceMapper.class);
+			mapper.deletePlace(placeId);
+			session.commit();
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
@@ -66,20 +73,42 @@ public class PlaceStoreLogic implements PlaceStore {
 
 	@Override
 	public Place selectPlaceByPlaceId(int placeId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = getSessionFactory().openSession();
+		
+		try {
+			PlaceMapper mapper = session.getMapper(PlaceMapper.class);
+			return mapper.selectPlaceByPlaceId(placeId);
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public List<Place> selectPlaceByPlaceName(String placeName) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = getSessionFactory().openSession();
+		List<Place> list = new ArrayList<>();
+		
+		try {
+			PlaceMapper mapper = session.getMapper(PlaceMapper.class);
+			list = mapper.selectPlaceByPlaceName(placeName);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 	@Override
 	public List<Place> selectPlaceByPlaceAddress(String placeAddress) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = getSessionFactory().openSession();
+		List<Place> list = new ArrayList<>();
+		
+		try {
+			PlaceMapper mapper = session.getMapper(PlaceMapper.class);
+			list = mapper.selectPlaceByPlaceAddress(placeAddress);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 }

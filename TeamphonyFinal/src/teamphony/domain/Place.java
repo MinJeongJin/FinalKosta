@@ -8,6 +8,8 @@ public class Place {
 	private String phoneNum;
 	private String imagePath;
 	private String contents;
+	private String holiday;
+	private String businessHour;
 
 	public int getPlaceId() {
 		return placeId;
@@ -55,6 +57,22 @@ public class Place {
 
 	public void setContents(String contents) {
 		this.contents = contents;
+	}
+	
+	public String getHoliday() {
+		return holiday;
+	}
+
+	public void setHoliday(String holiday) {
+		this.holiday = holiday;
+	}
+
+	public String getBusinessHour() {
+		return businessHour;
+	}
+
+	public void setBusinessHour(String businessHour) {
+		this.businessHour = businessHour;
 	}
 
 }

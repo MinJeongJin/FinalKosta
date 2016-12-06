@@ -29,14 +29,12 @@ public class PlaceServiceLogic implements PlaceService {
 
 	@Override
 	public void removePlace(int placeId) {
-		// TODO Auto-generated method stub
-		
+		placeStore.deletePlace(placeId);
 	}
 
 	@Override
 	public Place findPlaceByPlaceId(int placeId) {
-		// TODO Auto-generated method stub
-		return null;
+		return placeStore.selectPlaceByPlaceId(placeId);
 	}
 
 	@Override
@@ -46,14 +44,13 @@ public class PlaceServiceLogic implements PlaceService {
 
 	@Override
 	public List<Place> findPlaceByPlaceName(String placeName) {
-		// TODO Auto-generated method stub
-		return null;
+		return placeStore.selectPlaceByPlaceName(placeName);
 	}
 
 	@Override
 	public List<Place> findPlaceByPlaceAddress(String placeAddress) {
 		// TODO Auto-generated method stub
-		return null;
+		return placeStore.selectPlaceByPlaceAddress(placeAddress);
 	}
 
 }
