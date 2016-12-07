@@ -4,11 +4,18 @@
 
 <mapper namespace="teamphony.store.mapper.MemberMapper">
 
+	<resultMap type="Member" id="memberMap">
+		<result property="alias" column="alias" />
+		<result property="password" column="paaword" />
+		<result property="imagePath" column="imagePath" />
+		<association property="starPoint" column="id" select="teamphony.store.mapper.MemberMapper.getStarPoint" javaType="double" jdbcType="DOUBLE" />
+	</resultMap>
+	
 	<insert id="insertMember" parameterType="Member">
 		insert into Member_tb(id, password, alias, imagePath) values(#{memberId}, #{password}, #{alias}, #{imagePath})
 	</insert>
 	
-	<select id="selectMemberByMemberId" parameterType="String" resultType="Member">
+	<select id="selectMemberByMemberId" parameterType="String" resultMap="memberMap">
 		select id As memberId, password, alias, imagePath
 		from member_tb
 		where id = #{memberId}
@@ -19,7 +26,15 @@
 	</update>
 	
 	<delete id="deleteMember" parameterType="String">
-		delete from Member_tb where id = #{memberId}
+		delete from Member_tb where id = #{memberId} cv
 	</delete>
+	
+	<insert id="evaluation" parameterType="map">
+		insert into evalution_tb(memberId, starPoint) values(#{memberId},#{starPoint})
+	</insert>
+	
+	<select id="getStarPoint" parameterType="String" resultType="double">
+		select sum(starPoint)/count(starPoint) As starPoint from evaluation_tb where memberId = #{id}
+	</select>
 
 </mapper>

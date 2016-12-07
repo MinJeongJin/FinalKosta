@@ -6,21 +6,19 @@ public class Member {
 	private String password;
 	private String alias;
 	private String imagePath;
-	private int starPoint;
+	private double starPoint;
 
-	public Member() {
-	}
+	public Member() {}
 
 	public Member(String memberId, String password) {
 		this.memberId = memberId;
 		this.password = password;
 	}
 
-	public Member(String memberId, String password, String alias) {
+	public Member(String memberId, String alias, String password) {
 		this.memberId = memberId;
 		this.password = password;
 		this.alias = alias;
-		this.starPoint = 0;
 	}
 
 	public String getMemberId() {
@@ -55,11 +53,11 @@ public class Member {
 		this.imagePath = imagePath;
 	}
 
-	public int getStarPoint() {
+	public double getStarPoint() {
 		return starPoint;
 	}
 
-	public void setStarPoint(int starPoint) {
+	public void setStarPoint(double starPoint) {
 		this.starPoint = starPoint;
 	}
 

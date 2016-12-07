@@ -26,13 +26,13 @@
 <script type="text/javascript">
 	var click = new function() {
 		fn_openBoardList();
-	}
+	};
 	
 	function fn_openBoardList(){
         var comSubmit = new ComSubmit();
-        comSubmit.setUrl("<c:url value='${pageContext.request.contextPath}/views/team/main.do?flag=0'/>");
+        comSubmit.setUrl("<c:url value='${pageContext.request.contextPath}/views/team/main.do'/>");
         comSubmit.submit();
-    }
+    };
 	
 	
 	function readURL(input) {
@@ -46,7 +46,7 @@
 
 	        reader.readAsDataURL(input.files[0]);
 	    }
-	}
+	};
 
 	$("#imgInp").change(function(){
 	    readURL(${member.imagePath});
