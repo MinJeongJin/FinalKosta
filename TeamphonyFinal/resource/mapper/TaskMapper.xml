@@ -26,10 +26,10 @@
 				#{taskId},
 				#{title},
 				#{contents, jdbcType=VARCHAR},
-				#{deadline, jdbcType=DATE},
+				#{deadline, jdbcType=INTEGER},
 				#{flag, jdbcType=INTEGER},
-				#{evaluationPeriodStart, jdbcType=DATE},
-				#{evaluationPeriodEnd, jdbcType=DATE},
+				#{evaluationPeriodStart, jdbcType=INTEGER},
+				#{evaluationPeriodEnd, jdbcType=INTEGER},
 				#{point, jdbcType=INTEGER}
 			)
 	</insert>  
@@ -102,16 +102,6 @@
 				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=DATE}
 				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
 			WHERE ID = #{taskId}
-	</update>
-	
-	<update id="updateTaskFile" parameterType="taskFile">
-		UPDATE TASKFILE_TB 
-			SET FILEPATH =${task.taskFile}
-			WHERE SUBMISSIONID = 123
-			AND FILEPATH = 'c:/upload\06_UML_SequenceDiagram.pdf';
-	
-	
-	
 	</update>
 	
 	<update id="updateTaskPoint" parameterType="task">

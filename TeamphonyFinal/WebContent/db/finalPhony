@@ -52,6 +52,8 @@ create Sequence Task_seq start with 1 Increment By 1 Maxvalue 1000000;
 create Sequence Post_seq start with 1 Increment By 1 Maxvalue 1000000;
 create Sequence Schedule_seq start with 1 Increment By 1 Maxvalue 1000000;
 
+<<DB table 수정 query>>
+
 ALTER TABLE TASK_TB RENAME COLUMN EVALUATIONPERIOD TO evaluationPeriodStart;
 ALTER TABLE TASK_TB ADD (evaluationPeriodEnd DATE);
 ALTER TABLE TASK_TB

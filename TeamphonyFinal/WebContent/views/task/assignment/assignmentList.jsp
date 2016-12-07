@@ -105,13 +105,23 @@ h1 {
 						<c:forEach items="${list }" var="task" varStatus="sts">
 							<tr>
 								<td>${sts.count }</td>
-								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=109">${task.title }</a></td>
+								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
 								<td></td>
 								<td><fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/></td>
 								</td>
 								<%-- <td>${task.meberList.meber.id }제출자</td> --%>
 							</tr>
 						</c:forEach>
+							<tr>
+							<th></th>
+							<td></td>
+							<td></td>
+							<td>
+								<a href="${pageContext.request.contextPath}/submission/searchAll.do"><input class="btn" type="button" value="제출 과제 리스트"></a> 
+								<a href="${pageContext.request.contextPath}/views/task/assignment/assignmentRegister.jsp ">
+								<input class="btn btn-success" type="submit" value="부여 과제 등록"></a>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

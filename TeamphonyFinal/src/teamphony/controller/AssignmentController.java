@@ -1,5 +1,7 @@
 package teamphony.controller;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,19 +30,23 @@ public class AssignmentController {
 		String submitDay = deadlineDay + " " + deadlineHour;
 		String evaluationStart = evalDayStart + " " + evalHourStart;
 		String evaluationEnd = evalDayEnd + " " + evalHourEnd;
+		
+		System.out.println("submitDay= "+submitDay);
+		System.out.println("evaluationStart= "+evaluationStart);
+		System.out.println("evaluationEn "+evaluationEnd);
+		System.out.println("======================================================");
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
-
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:MM");
+		
 		Date deadline = null;
 		Date evaluationPeriodStart = null;
 		Date evaluationPeriodEnd = null;
 		
-		
 		try {
 
-			deadline = sdf.parse(submitDay);
-			evaluationPeriodStart = sdf.parse(evaluationStart);
-			evaluationPeriodEnd = sdf.parse(evaluationEnd);
+			deadline = dateFormat.parse(submitDay);
+			evaluationPeriodStart = dateFormat.parse(evaluationStart);
+			evaluationPeriodEnd = dateFormat.parse(evaluationEnd);
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -56,6 +62,7 @@ public class AssignmentController {
 		task.setEvaluationPeriodEnd(evaluationPeriodEnd);
 		
 		System.out.println(task.toString());
+		System.out.println("====================================================");
 
 		service.registerTask(task);
 

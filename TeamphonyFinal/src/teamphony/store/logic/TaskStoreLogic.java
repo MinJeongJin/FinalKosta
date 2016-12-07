@@ -41,8 +41,15 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			
+			
+			System.out.println("deadline= " + task.getDeadline());
+			System.out.println("EvaluationPeriodStart= " + task.getEvaluationPeriodStart());
+			System.out.println("EvaluationPeriodEnd= " + task.getEvaluationPeriodEnd());
+			
 			mapper.insertTask(task);
-
+			session.commit();
+			
 			if (task.getFlag() == 1) {
 				
 				int taskId = task.getTaskId();
@@ -52,9 +59,23 @@ public class TaskStoreLogic implements TaskStore {
 					taskFile.setSubmissionId(taskId);
 					mapper.insertTaskFile(taskFile);
 					session.commit();
+					
 				}
-			}
-			session.commit();
+				
+				
+				
+				
+			}/*else if(task.getFlag() == 0){
+				System.out.println("deadline= " + task.getDeadline());
+				System.out.println("EvaluationPeriodStart= " + task.getEvaluationPeriodStart());
+				System.out.println("EvaluationPeriodEnd= " + task.getEvaluationPeriodEnd());
+				
+				mapper.insertTask(task);
+				session.commit();
+			}*/
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
