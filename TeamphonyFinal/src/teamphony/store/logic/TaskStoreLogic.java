@@ -41,17 +41,10 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			
-			
-			System.out.println("deadline= " + task.getDeadline());
-			System.out.println("EvaluationPeriodStart= " + task.getEvaluationPeriodStart());
-			System.out.println("EvaluationPeriodEnd= " + task.getEvaluationPeriodEnd());
-			
 			mapper.insertTask(task);
 			session.commit();
 			
 			if (task.getFlag() == 1) {
-				
 				int taskId = task.getTaskId();
 				List<TaskFile> taskFileList = task.getTaskFileList();
 
@@ -59,22 +52,8 @@ public class TaskStoreLogic implements TaskStore {
 					taskFile.setSubmissionId(taskId);
 					mapper.insertTaskFile(taskFile);
 					session.commit();
-					
 				}
-				
-				
-				
-				
-			}/*else if(task.getFlag() == 0){
-				System.out.println("deadline= " + task.getDeadline());
-				System.out.println("EvaluationPeriodStart= " + task.getEvaluationPeriodStart());
-				System.out.println("EvaluationPeriodEnd= " + task.getEvaluationPeriodEnd());
-				
-				mapper.insertTask(task);
-				session.commit();
-			}*/
-			
-			
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,40 +61,31 @@ public class TaskStoreLogic implements TaskStore {
 		} finally {
 			session.close();
 		}
-
 	}
 
 	@Override
 	public void updateTask(Task task) {
 		SqlSession session = getSessionFactory().openSession();
-
+			
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			mapper.updateTask(task);
+			session.commit();
 			
-				if(task.getPoint() != 0){
-					System.out.println("getPoint= "+task.getPoint());
-					System.out.println("getTaskId= "+task.getTaskId());
-					
+				if(task.getFlag() == 1){
 					int point = task.getPoint();
 					mapper.updateTaskPoint(task);
-					session.commit();
 					
-				}else if(task.getFlag() == 1){
-					
-					mapper.updateTask(task);
 					mapper.deleteTaskFile(task.getTaskId());
-					
 					session.commit();
 					
 					List<TaskFile> taskFileList = task.getTaskFileList();
-
 					for (TaskFile taskFile : taskFileList) {
 						
 						taskFile.setSubmissionId(task.getTaskId());
 						mapper.insertTaskFile(taskFile);
 						session.commit();
 					}
-						session.commit();
 				}
 
 		} catch (Exception e) {
@@ -142,7 +112,6 @@ public class TaskStoreLogic implements TaskStore {
 					session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			session.rollback();
 		} finally {
 			session.close();
@@ -158,20 +127,17 @@ public class TaskStoreLogic implements TaskStore {
 		
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			
 			taskList = mapper.selectAllTaskByFlag(flag);
 			
 				for(Task task : taskList){
-					
-						fileList = mapper.selectFileListByTaskId(task.getTaskId());
-						task.setTaskFileList(fileList);
+					fileList = mapper.selectFileListByTaskId(task.getTaskId());
+					task.setTaskFileList(fileList);
 				}
 			return taskList;
 		} finally {
 			session.close();
 		}
 	}
-	
 	
 
 	@Override
@@ -185,7 +151,6 @@ public class TaskStoreLogic implements TaskStore {
 				task = mapper.selectTaskByTaskId(taskId);
 				
 				if(task.getFlag() == 1){
-					
 					List<TaskFile> fileList = new ArrayList<>();
 					fileList = mapper.selectFileListByTaskId(task.getTaskId());
 					task.setTaskFileList(fileList);

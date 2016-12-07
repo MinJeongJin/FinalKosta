@@ -14,7 +14,7 @@
 	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
 </head>
 <body>
-	<input id="taskId" name="taskId" type="hidden" value="">
+	
 	<a href="${pageContext.request.contextPath}/assignment/searchAll.do">과제리스트 돌아가기</a>
 	<h3>부여 과제 수정</h3>
 
@@ -28,8 +28,10 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><input id="title" name="title"
-					class="form-control" type="text" value="" placeholder="${task.title } 입력된 제목"></td>
+				<td>
+					<input id="title" name="title" class="form-control" type="text" value="" placeholder="${task.title } ">
+					<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
+				</td>
 			</tr>
 			<tr style="horizontal-align: left;">
 				<th>제출자</th>
@@ -45,23 +47,30 @@
 			<tr>
 				<th>제출 기한</th>
 				<td>
-					  
-					<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/><br>
+					<h6 style="color: red"> 
+						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/><br>
+					</h6> 
+						<input type="date" min="" id="deadlineDay" name="deadlineDay" value= "">
+						<input type="time" id="deadlineHour" name="deadlineHour" value= "">  
 				</td>
 			</tr>
 			<tr>
-			<th>수정 기한</th>
+				<th>평가 기간</th>
 				<td>
-					<input type="date" min="2016-02-01" id="deadlineDay" name="deadlineDay" value= "">
-					<input type="time" id="deadlineHour" name="deadlineHour" value= "">  
-				
+					<h6 style="color: red"> 
+						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodStart }"/>-
+						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodEnd }"/>
+					</h6> 
+						<input type="date" min="" id="evalDayStart" name="evalDayStart">
+						<input type="time" id="evalHourStart" name="evalHourStart" >-  
+						<input type="date" min="" id="evalDayEnd" name="evalDayEnd">
+						<input type="time" id="evalHourEnd" name="evalHourEnd">
 				</td>
 			</tr>
-			
 			<tr>
 				<th>내용</th>
 					<td>
-						<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="${task.contents } 입력된 내용"></textarea>
+						<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="${task.contents } "></textarea>
 					</td>
 			</tr>
 		</table>
