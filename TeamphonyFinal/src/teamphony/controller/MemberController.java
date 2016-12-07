@@ -53,7 +53,7 @@ public class MemberController {
 		} else {
 			System.out.println(result.getStarPoint());
 			session.setAttribute("member", result);
-			return "redirect:/team/main.do?flag=1";
+			return "redirect:/team/main.do";
 		}
 
 	}

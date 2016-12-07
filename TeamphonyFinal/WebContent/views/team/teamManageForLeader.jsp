@@ -7,7 +7,6 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Teamphony</title>
@@ -54,7 +53,7 @@
 	margin-top: 60px;
 }
 
-#teamManage {
+#teamDetail {
 	padding-top: 7%;
 	padding-left: 10%;
 	margin-right: 0px;
@@ -81,10 +80,21 @@
 
 	}
 
-	var reviseTeamDetail = function() {
+	var getMinDate = function() {
 
-		document.getElementById("teamDetail").submit();
+		var date = new Date();
+		var year = date.getFullYear(); // 년도
+		var month = (1 + date.getMonth()); // 월
+		month = month >= 10 ? month : '0' + month; // 월 두자리로 변경 작업
+		var day = date.getDate(); // 일 
+		day = day >= 10 ? day : '0' + day; //일 두자리로 변경 작업
 
+		document.getElementById('endDate').min = year + '-' + month + '-' + day;// yyyy-mm-dd format 변경
+	}
+
+	window.onload = function() {
+
+		getMinDate();
 	}
 </script>
 
@@ -94,15 +104,12 @@
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
 						<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
 							<span>Teamphony</span></a>
 					</div>
-
-					<div class="clearfix"></div>
 
 
 					<!-- menu profile quick info -->
@@ -124,8 +131,6 @@
 					<!-- sidebar menu -->
 					<%@ include file="/views/common/sideMenu.jspf"%>
 					<!-- /sidebar menu -->
-
-
 
 				</div>
 			</div>
@@ -159,21 +164,20 @@
 
 			<!-- /top navigation -->
 
-
 			<!-- page content -->
 			<div class="right_col" role="main">
 
-				<div class="container" id="teamManage">
-					<h2 id="menuTitle">팀 관리</h2>
+				<div class="container" id="teamDetail">
+					<h1 id="menuTitle">팀 관리</h1>
 
-					<form id="teamDetail" method="POST"
+					<form method="POST"
 						action="${pageContext.request.contextPath}/team/revise.do">
 
 						<div class="row">
 							<div class="form-group col-xs-7">
 								<label for="teamName">팀 명:</label> <input type="text"
 									value="${team.name}" class="form-control input-lg"
-									id="teamName" name="name" size="7" readonly>
+									id="teamName" name="name" maxlength="15" readonly required>
 							</div>
 						</div>
 
@@ -181,7 +185,7 @@
 							<div class="form-group col-xs-7">
 								<label for="cycle">팀원 평가주기:</label> <input type="number"
 									value="${team.cycle}" class="form-control input-lg" id="cycle"
-									name="cycle" readonly>
+									min="0" max="3" name="cycle" readonly required>
 							</div>
 						</div>
 
@@ -189,36 +193,49 @@
 							<div class="form-group col-xs-7">
 								<label for="endDate">평가 만료기간:</label> <input type="date"
 									value="${team.endDate}" class="form-control input-lg"
-									name="endDate" id="endDate" readonly>
+									name="endDate" id="endDate" readonly required>
 							</div>
-
 						</div>
 
+						<div class="row list-member">
+
+							<p>
+								<label>팀원 목록:</label>
+							</p>
+
+							<ul class="list-group col-xs-7">
+								<c:forEach items="${memberList}" var="member"
+									varStatus="cntOfMembers">
+
+									<li class="list-group-item list-group-item-info">${member.alias}</li>
+								</c:forEach>
+							</ul>
+						</div>
+
+						<div class="col-xs-7">
+
+							<button class="btn-primary btn-lg col-xs-3" id="reviseBtn"
+								style="margin-left: 5%; margin-right: 5%;"
+								onclick="reviseInfo();">수정</button>
+
+							<a href="${pageContext.request.contextPath}/team/erase.do">
+								<button class="btn-primary btn-lg col-xs-3" id="removeBtn">
+									삭제</button>
+							</a>
+
+							<button type="submit" class="btn-primary btn-lg col-xs-3"
+								id="confirmBtn" style="margin-left: 5%; margin-right: 5%;"
+								hidden>확인</button>
+
+							<a href="${pageContext.request.contextPath}/team/search.do">
+								<button class="btn-primary btn-lg col-xs-3" id="cancelBtn"
+									hidden>취소</button>
+							</a>
+						</div>
 					</form>
 
-					<div class="row list-member">
-
-
-						<p>
-							<label>팀원 목록:</label>
-						</p>
-
-
-						<ul class="list-group col-xs-7">
-
-							<c:forEach items="${memberList}" var="member"
-								varStatus="cntOfMembers">
-
-								<li class="list-group-item list-group-item-info">${member.alias}</li>
-							</c:forEach>
-
-						</ul>
-
-						<button class="btn-link col-xs-7" data-toggle="modal"
-							data-target="#myModal">팀원초대</button>
-
-					</div>
-
+					<button class="btn-link col-xs-7" data-toggle="modal"
+						data-target="#myModal">팀원초대</button>
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">
 
@@ -235,8 +252,6 @@
 											<input type="email" class="form-control" name="e_mail_1"
 												placeholder="팀원 e-mail  ex) prattler@gmail.com">
 										</p>
-
-
 									</div>
 									<div class="modal-footer">
 										<button type="submit" class="btn btn-info btn-lg">초대</button>
@@ -244,47 +259,9 @@
 											data-dismiss="modal">취소</button>
 									</div>
 								</div>
-
 							</form>
-
 						</div>
 					</div>
-
-
-					<div class="col-xs-7">
-
-
-						<button class="btn-primary btn-lg col-xs-3" id="reviseBtn"
-							style="margin-left: 5%; margin-right: 5%;"
-							onclick="reviseInfo();">수정</button>
-
-
-
-						<a href="${pageContext.request.contextPath}/team/erase.do">
-							<button class="btn-primary btn-lg col-xs-3" id="removeBtn">
-								삭제</button>
-						</a>
-
-
-
-
-
-
-						<button type="submit" class="btn-primary btn-lg col-xs-3"
-							id="confirmBtn" style="margin-left: 5%; margin-right: 5%;"
-							onclick="reviseTeamDetail();" hidden>확인</button>
-
-
-
-
-						<a href="${pageContext.request.contextPath}/team/search.do">
-							<button class="btn-primary btn-lg col-xs-3" id="cancelBtn" hidden>
-								취소</button>
-						</a>
-
-					</div>
-
-
 				</div>
 				<!-- /page content -->
 

@@ -1,5 +1,6 @@
 package teamphony.controller;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -7,6 +8,7 @@ import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,7 @@ public class TeamController {
 	@Autowired
 	private TeamService service;
 
-	@RequestMapping("create.do")
+	@RequestMapping(value = "create.do", method = RequestMethod.POST)
 	public String createTeam(Team team, HttpSession session, Model model) {
 
 		Member member = (Member) session.getAttribute("member");
@@ -53,13 +55,12 @@ public class TeamController {
 		service.registerTeam(team);
 		service.belongToTeam(teamCode, leaderId);
 
-		return "redirect:/team/main.do?flag=" + NORMAL;
+		return "redirect:/team/main.do";
 	}
 
 	private int getTeamCode() {
 
-		Set<Integer> codeSet = new HashSet<Integer>();
-		codeSet = service.findAllTeamCodes();
+		Set<Integer> codeSet = service.findAllTeamCodes();
 		int codeSetSize = codeSet.size();
 
 		if (codeSetSize >= MAX_TEAM) {
@@ -93,7 +94,7 @@ public class TeamController {
 		return "redirect:/team/search.do";
 	}
 
-	@RequestMapping("erase.do")
+	@RequestMapping(value = "erase.do", method = RequestMethod.GET)
 	public String eraseTeam(HttpSession session) {
 
 		int teamCode = (Integer) session.getAttribute("teamCode");
@@ -108,14 +109,16 @@ public class TeamController {
 		return "redirect:/team/main.do";
 	}
 
-	@RequestMapping("join.do")
-	public String joinTeam(int teamCode, HttpSession session) {
+	@RequestMapping(value = "join.do", method = RequestMethod.POST)
+	public void joinTeam(int teamCode, HttpSession session, HttpServletResponse res) {
 
 		Team team = service.findTeamByTeamCode(teamCode);
+		String resObj = null;
+		boolean stamp = true;
 
 		if (team == null) {
 
-			return "redirect:/team/main.do?flag=" + WARNNING_NONE;
+			resObj = "{\"flag\":\"" + WARNNING_NONE + "\"}";
 
 		} else {
 
@@ -127,21 +130,42 @@ public class TeamController {
 
 				if (memberId.equals(mem.getMemberId())) {
 
-					return "redirect:/team/main.do?flag=" + WARNNING_REDUNDANCY;
+					stamp = !stamp;
+					resObj = "{\"flag\":\"" + WARNNING_REDUNDANCY + "\"}";
+
+					break;
 				}
 
 			}
 
-			service.belongToTeam(teamCode, memberId);
+			if (stamp) {
 
-			return "redirect:/team/main.do?flag=" + NORMAL;
+				service.belongToTeam(teamCode, memberId);
+				resObj = "{\"flag\":\"" + NORMAL + "\"}";
+			}
+
 		}
+
+		try {
+			res.getWriter().write(resObj);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
+	
+	
+	private String redirect(String resObj){
+		
+		
+		
+		return null;
+	}
+	
+	
 
 	@RequestMapping(value = "search.do", method = RequestMethod.POST)
 	public String searchTeamByCode(int teamCode, HttpSession session, Model model) {
-
-		System.out.println(teamCode);
 
 		Team team = service.findTeamByTeamCode(teamCode);
 		List<Member> memberList = service.findMembersByTeamCode(teamCode);
@@ -194,7 +218,7 @@ public class TeamController {
 		return null;
 	}
 
-	@RequestMapping("withdraw.do")
+	@RequestMapping(value = "withdraw.do", method = RequestMethod.GET)
 	public String withdrawTeam(HttpSession session) {
 
 		Member member = (Member) session.getAttribute("member");
@@ -206,11 +230,18 @@ public class TeamController {
 		return "redirect:/team/main.do";
 	}
 
-	@RequestMapping("invite.do")
+	@RequestMapping(value = "invite.do", method = RequestMethod.POST)
 	public String inviteMember(String e_mail_1, HttpSession session) {
 		int teamCode = (Integer) session.getAttribute("teamCode");
 		try {
-			GoogleMail.Send("tnghsla13", "tlqkf9464", e_mail_1, "Welcome to teamphony", teamCode + "");
+
+			StringBuilder strBuild = new StringBuilder();
+			strBuild.append("Welcome to Teamphony\n").append("Teamphony 홈페이지 주소 및 설명이 들어갈 예정\n")
+					.append("귀하에게 전송된 Team Code : ").append(teamCode).append("\n")
+					.append("로그인 후 팀코드를 검색하여 초대된 팀을 방문하세요.\n");
+			String msg = strBuild.toString();
+
+			GoogleMail.Send("tnghsla13", "tlqkf9464", e_mail_1, "Teamphony에 초대 되셨습니다.", msg);
 
 		} catch (AddressException e) {
 			e.printStackTrace();
@@ -222,7 +253,7 @@ public class TeamController {
 	}
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-	public String searchTeamsByMemberId(int flag, HttpSession session, Model model) {
+	public String searchTeamsByMemberId(HttpSession session, Model model) {
 
 		Member member = (Member) session.getAttribute("member");
 		String memberId = member.getMemberId();
@@ -230,7 +261,6 @@ public class TeamController {
 		List<Team> teamList = service.findTeamsByMemberId(memberId);
 
 		model.addAttribute("teamList", teamList);
-		model.addAttribute("flag", flag);
 
 		return "team/main";
 
