@@ -68,17 +68,8 @@ display: none;
 		<tr>
 			<th>평가 기간</th>
 			<td>
-				<input type="date" id="evalDayStart" name="evalDayStart" value=""  hidden="true">
-				<input type="time" id="evalHourStart" name="evalHourStart" value="" hidden="true">
 				시작: 
-				<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodStart }"/>
-			</td>
-		</tr>
-		<tr>
-			<th></th>
-			<td>
-				<input type="date" id="evalDayEnd" name="evalDayEnd" value="" hidden="true">
-				<input type="time" id="evalHourEnd" name="evalHourEnd" value="" hidden="true">
+				<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodStart }"/><br>
 				종료: 
 				<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodEnd }"/>
 			</td>
@@ -98,38 +89,9 @@ display: none;
 </form>
 	<br>
 	<div align="center">
-	<a href="#" onclick="revise_click();return false;" class="btn btn-success">수정</a>
+	<a href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId }&flag=${task.flag }"  class="btn btn-success">수정</a>
 	<a class="btn btn-success"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }">삭제</a>
 	</div>
 	
-	
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-
-	function revise_click() {
-		$('#title, #contents').attr('readonly',false);
-
-		$('#reset, #okay').show();
-		 document.getElementById(deadlineDay).style.display ='block';
-		
-		/* $('#deadlineDay, #deadlineHour, #evalDayStart, #evalHourStart, #evalDayEnd, #evalHourEnd,').hi; */
-	}
-</script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>

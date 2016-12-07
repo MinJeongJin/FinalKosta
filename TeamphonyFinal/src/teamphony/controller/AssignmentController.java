@@ -30,11 +30,6 @@ public class AssignmentController {
 		String submitDay = deadlineDay + " " + deadlineHour;
 		String evaluationStart = evalDayStart + " " + evalHourStart;
 		String evaluationEnd = evalDayEnd + " " + evalHourEnd;
-		
-		System.out.println("submitDay= "+submitDay);
-		System.out.println("evaluationStart= "+evaluationStart);
-		System.out.println("evaluationEn "+evaluationEnd);
-		System.out.println("======================================================");
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:MM");
 		
@@ -51,9 +46,8 @@ public class AssignmentController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 		Task task = new Task();
-
+		
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setDeadline(deadline);
@@ -61,27 +55,21 @@ public class AssignmentController {
 		task.setEvaluationPeriodStart(evaluationPeriodStart);
 		task.setEvaluationPeriodEnd(evaluationPeriodEnd);
 		
-		System.out.println(task.toString());
-		System.out.println("====================================================");
-
 		service.registerTask(task);
-
 		return "redirect:searchAll.do";
 	}
 
-//	@RequestMapping("/revise.do")
-//	public String reviseAssignment(String taskId, Model model) {
-//		int taskIdNo;
-//		taskIdNo = Integer.parseInt(taskId);
-//
-//		Task task = service.findTaskByTaskId(taskIdNo);
-//		model.addAttribute("task", task);
-//
-//		return "task/assignment/assignmentModify";
-//	}
+	@RequestMapping("/revise.do")
+	public String reviseAssignment(String taskId, Model model) {
+
+		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
+		model.addAttribute("task", task);
+
+		return "task/assignment/assignmentModify";
+	}
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
-	public String reviseAssignment(String title, String contents, String deadlineDay, String deadlineHour, 
+	public String reviseAssignment(String taskId, String title, String contents, String deadlineDay, String deadlineHour, 
 									String evalDayStart, String evalHourStart, String evalDayEnd, String evalHourEnd, Model model) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
@@ -89,7 +77,6 @@ public class AssignmentController {
 		String submitDay = deadlineDay + " " + deadlineHour;
 		String evaluationStart = evalDayStart + " " + evalHourStart;
 		String evaluationEnd = evalDayEnd + " " + evalHourEnd;
-
 		
 		Date deadline =null;
 		Date evaluationPeriodStart = null;
@@ -103,10 +90,7 @@ public class AssignmentController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		int taskId = 109;
-		Task task = new Task(taskId, title, contents, deadline, evaluationPeriodStart,evaluationPeriodEnd);
-		
+		Task task = new Task(Integer.parseInt(taskId), title, contents, deadline, evaluationPeriodStart,evaluationPeriodEnd);
 		service.modifyTask(task);
 		return "redirect:searchAll.do";
 	}
@@ -115,7 +99,6 @@ public class AssignmentController {
 	public String eraseAssignment(String taskId,String flag) {
 		
 		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
-		
 		return "redirect:searchAll.do";
 	}
 
@@ -123,10 +106,9 @@ public class AssignmentController {
 	public String searchAssignmentByTaskId(String taskId, Model model) {
 		
 		Task task = new Task();
-
 		task = service.findTaskByTaskId(Integer.parseInt(taskId));
 		model.addAttribute("task", task);
-
+		
 		return "/task/assignment/assignmentDetail";
 	}
 
