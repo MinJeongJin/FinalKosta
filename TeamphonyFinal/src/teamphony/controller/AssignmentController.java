@@ -113,6 +113,7 @@ public class AssignmentController {
 
 	@RequestMapping("/erase.do")
 	public String eraseAssignment(String taskId,String flag) {
+		
 		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
 		
 		return "redirect:searchAll.do";

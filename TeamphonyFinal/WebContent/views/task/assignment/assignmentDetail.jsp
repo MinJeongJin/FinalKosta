@@ -99,8 +99,7 @@ display: none;
 	<br>
 	<div align="center">
 	<a href="#" onclick="revise_click();return false;" class="btn btn-success">수정</a>
-	<a class="btn btn-success"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=103">삭제</a>
-	<a class="btn btn-success"  href="${pageContext.request.contextPath}/assignment/evaluate.do?taskId=${task.taskId}">평가</a>
+	<a class="btn btn-success"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }">삭제</a>
 	</div>
 	
 	

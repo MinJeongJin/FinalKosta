@@ -179,14 +179,17 @@ public class TaskStoreLogic implements TaskStore {
 		
 		SqlSession session = getSessionFactory().openSession();
 		Task task = new Task();
-		List<TaskFile> fileList = new ArrayList<>();
 		
 			try{
 				TaskMapper mapper = session.getMapper(TaskMapper.class);
 				task = mapper.selectTaskByTaskId(taskId);
 				
-				fileList = mapper.selectFileListByTaskId(task.getTaskId());
-				task.setTaskFileList(fileList);
+				if(task.getFlag() == 1){
+					
+					List<TaskFile> fileList = new ArrayList<>();
+					fileList = mapper.selectFileListByTaskId(task.getTaskId());
+					task.setTaskFileList(fileList);
+				}
 			}finally {
 				session.close();
 			}
