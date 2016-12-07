@@ -23,10 +23,9 @@ import teamphony.service.facade.TaskService;
 @Controller
 @RequestMapping("submission")
 public class SubmissionController {
-	private static final int MAX_SIZE = 1024 * 1024 * 20;
+	
 	@Autowired
 	private TaskService service;
-	private File folder;
 
 	private static final String filePathOnly = "c:/upload";
 
@@ -46,16 +45,15 @@ public class SubmissionController {
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
 			
-			int taskId = task.getTaskId();
-			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
 
 			System.out.println("저장 경로 =" + filePath);
 			
-			File f = new File(filePath);
 			
+			File f = new File(filePath);
 			try {
+				
 				attchFile.transferTo(f);
 				taskFileList.add(taskFile);
 			} catch (IllegalStateException e) {
@@ -66,9 +64,9 @@ public class SubmissionController {
 		}
 		
 		task.setTaskFileList(taskFileList);
+		
 		service.registerTask(task); // task_tb 저장
 		
-		session.setAttribute("flag",1);
 		return "redirect:searchAll.do";
 	}
 
@@ -160,7 +158,6 @@ public class SubmissionController {
 		return "/task/submission/submissionList";
 	}
 	
-	
 	@RequestMapping("/evaluate.do")
 	public String evaluateAssignment(String taskId, Model model){
 		
@@ -173,12 +170,10 @@ public class SubmissionController {
 		
 		Task task = new Task();
 		
-		task= service.findTaskByTaskId(Integer.parseInt(taskId));
+		task.setTaskId(Integer.parseInt(taskId));
 		task.setPoint(Integer.parseInt(point));
 		
 		service.modifyTask(task);
-		
-		System.out.println("taskGetTaskId= "+ task.getTaskId());
 		
 		return "redirect:searchAll.do";
 	}

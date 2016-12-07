@@ -39,27 +39,32 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-
+//flag 1==submission   flag 0==assignment
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			mapper.insertTask(task);
-			session.commit();
-			
-			if (task.getFlag() == 1) {
-				int taskId = task.getTaskId();
-				List<TaskFile> taskFileList = task.getTaskFileList();
-
-				for (TaskFile taskFile : taskFileList) {
-					taskFile.setSubmissionId(taskId);
-					mapper.insertTaskFile(taskFile);
+			if(task.getFlag() == 0){
+				mapper.insertAssignment(task);
+				session.commit();
+				
+			}else if (task.getFlag() == 1) {
+					System.out.println("flagElseIf(1)=" + task.getFlag());
+					mapper.insertSubmission(task);
 					session.commit();
-				}
+					
+					int taskId = task.getTaskId();
+					List<TaskFile> taskFileList = task.getTaskFileList();
+	
+					for (TaskFile taskFile : taskFileList) {
+						taskFile.setSubmissionId(taskId);
+						
+						mapper.insertTaskFile(taskFile);
+						session.commit();
+					}
 			}
-			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
-		} finally {
-			session.close();
+		}finally{
+				session.close();
 		}
 	}
 
@@ -70,11 +75,12 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.updateTask(task);
-			session.commit();
+			
+//flag 1==submission   flag 0==assignment
 			
 				if(task.getFlag() == 1){
-					int point = task.getPoint();
-					mapper.updateTaskPoint(task);
+					mapper.updateTaskPoint(task.getPoint());
+					session.commit();
 					
 					mapper.deleteTaskFile(task.getTaskId());
 					session.commit();
@@ -87,6 +93,7 @@ public class TaskStoreLogic implements TaskStore {
 						session.commit();
 					}
 				}
+					session.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();

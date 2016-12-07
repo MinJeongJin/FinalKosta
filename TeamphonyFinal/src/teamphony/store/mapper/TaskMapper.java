@@ -7,14 +7,16 @@ import teamphony.domain.TaskFile;
 
 public interface TaskMapper {
 
-	
-	void insertTask(Task task);
+//수정했음
+	void insertAssignment(Task task);
+//추가했음
+	void insertSubmission(Task task);
 	
 	void insertTaskFile(TaskFile task);
 
 	void updateTask(Task task);
 //  추가했음
-	void updateTaskPoint(Task point);
+	void updateTaskPoint(int point);
 //	//  추가했음
 	void updateTaskFile(TaskFile taskFile);
 //

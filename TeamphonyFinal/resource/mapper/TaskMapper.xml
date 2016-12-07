@@ -4,7 +4,7 @@
 
 <mapper namespace="teamphony.store.mapper.TaskMapper">
 
-	<insert id="insertTask" parameterType="task">
+<insert id="insertAssignment" parameterType="task">
 		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
 			SELECT TASK_TB_ID_SEQ.NEXTVAL
 			FROM DUAL
@@ -33,6 +33,31 @@
 				#{point, jdbcType=INTEGER}
 			)
 	</insert>  
+	
+	<insert id="insertSubmission" parameterType="task">
+		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
+			SELECT TASK_TB_ID_SEQ.NEXTVAL
+			FROM DUAL
+		</selectKey>
+			INSERT
+			INTO TASK_TB
+			(
+				ID,
+				TITLE,
+				CONTENTS,
+				FLAG,
+				POINT
+			)
+			VALUES
+			(
+				#{taskId},
+				#{title},
+				#{contents, jdbcType=VARCHAR},
+				#{flag, jdbcType=INTEGER},
+				#{point, jdbcType=INTEGER}
+			)
+	</insert>  
+	
 
 	<insert id="insertTaskFile" parameterType="taskFile">
 			INSERT INTO
@@ -95,16 +120,16 @@
 	<update id="updateTask" parameterType="task">
 			UPDATE TASK_TB		
 				SET
-				ID =						#{taskId}
-				,TITLE =					#{title}
-				,CONTENTS =					#{contents}
-				,DEADLINE =					#{deadline , jdbcType=INTEGER}
-				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=INTEGER}
-				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=INTEGER}
+				ID =						#{taskId, jdbcType=INTEGER}
+				,TITLE =					#{title, jdbcType=VARCHAR}
+				,CONTENTS =					#{contents, jdbcType=VARCHAR}
+				,DEADLINE =					#{deadline , jdbcType=DATE}
+				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=DATE}
+				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
 			WHERE ID = #{taskId}
 	</update>
 	
-	<update id="updateTaskPoint" parameterType="task">
+	<update id="updateTaskPoint" parameterType="int">
 			UPDATE TASK_TB
 				SET POINT			= POINT+ #{point, jdbcType=INTEGER}
 				WHERE ID			= #{taskId}
