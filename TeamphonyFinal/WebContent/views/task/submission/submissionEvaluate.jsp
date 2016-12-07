@@ -117,8 +117,7 @@
 </style>
 
 <body>
-	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="submissionList.do">과제리스트 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/submission/searchAll.do">과제리스트 돌아가기</a>
 	<h3>과제 평가</h3>
 
 	<table class="table">
@@ -176,14 +175,13 @@
 						</p>
 					</td>
 			</tr>
-			
-		<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
+	<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
 			<tr>
 				<th> </th>
 				<td>	
 					<span class="point">
 						<span class="input">
-							<input type="hidden" name="taskId" id="id" value="122">
+							<input type="hidden" name="taskId" id="id" value=${task.taskId } >
 							<input type="radio" name="point" id="p1" value="1"><label for="p1">1</label>
 							<input type="radio" name="point" id="p2" value="2"><label for="p2">2</label>
 							<input type="radio" name="point" id="p3" value="3"><label for="p3">3</label>
@@ -207,6 +205,8 @@
 			</tr>
 	</form>
 	</table>
+
+
 <script type="text/javascript">
 var starRating = function(){
 	  var $star = $(".point"),

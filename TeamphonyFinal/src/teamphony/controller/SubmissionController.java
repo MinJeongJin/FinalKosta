@@ -93,12 +93,6 @@ public class SubmissionController {
 		task.setContents(contents);
 		task.setFlag(Integer.parseInt(flag));
 		
-		
-		System.out.println("taskId = " + task.getTaskId());
-		System.out.println("title = " + task.getTitle());
-		System.out.println(("contens= " + task.getContents()));
-		System.out.println(("flag= " + task.getFlag()));
-
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
@@ -106,8 +100,6 @@ public class SubmissionController {
 			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
-
-			System.out.println("저장 경로 =" + filePath);
 
 			File f = new File(filePath);
 			

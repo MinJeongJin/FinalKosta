@@ -173,7 +173,7 @@ h1 {
 				<h1>Submission List</h1>
 				<div align="right">
 					<form action="searchByName.do">
-						<input name="musicName" type="text" placeholder="검색어를 입력 하세요"
+						<input name="musicName" type="text" placeholder="제출자를 입력 하세요"
 							value=""> <input class="btn btn-xs btn-default"
 							type="submit" value="검색">
 					</form>
