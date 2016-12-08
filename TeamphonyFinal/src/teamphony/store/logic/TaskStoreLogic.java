@@ -81,7 +81,7 @@ public class TaskStoreLogic implements TaskStore {
 //flag 1==submission   flag 0==assignment
 			
 				if(task.getFlag() == 1){
-					mapper.updateTaskPoint(task.getPoint());
+					
 					session.commit();
 					
 					mapper.deleteTaskFile(task.getTaskId());
@@ -94,6 +94,9 @@ public class TaskStoreLogic implements TaskStore {
 						mapper.insertTaskFile(taskFile);
 						session.commit();
 					}
+				}else if(task.isEvaluated()){
+					// ture == 1 , flase == 0 
+					mapper.updateTaskPoint(task.getPoint());
 				}
 					session.commit();
 

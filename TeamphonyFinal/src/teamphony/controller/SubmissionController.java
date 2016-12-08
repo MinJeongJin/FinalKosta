@@ -186,7 +186,7 @@ public class SubmissionController {
 		
 		
 		
-//		service.modifyTask(task);
+		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";
 	}

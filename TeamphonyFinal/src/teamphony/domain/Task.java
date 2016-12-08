@@ -18,7 +18,7 @@ public class Task {
 //추가했음
 	private TaskFile taskFile;
 	private Task task;
-//평가 여부를 위한 변수 선언
+//평가 여부를 위한 변수 선언// ture == 1 , flase == 0 
 	private boolean evaluated;
 //평가 횟수를 위한 변수 선언
 	private int evaluationCnt;
@@ -34,6 +34,7 @@ public class Task {
 
 	public Task() {
 		evaluated= false;
+		evaluationCnt=0;
 	}
 	
 //평가를 위한 task 생성자 

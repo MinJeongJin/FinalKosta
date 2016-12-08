@@ -132,6 +132,8 @@
 	<update id="updateTaskPoint" parameterType="int">
 			UPDATE TASK_TB
 				SET POINT			= POINT+ #{point, jdbcType=INTEGER}
+					,EVALUATIONCNT = EVALUATIONCNT +1
+					,EVALUATED = 1
 				WHERE ID			= #{taskId}
 	</update>
 	
