@@ -112,6 +112,7 @@ public class TeamController {
 	@RequestMapping(value = "join.do", method = RequestMethod.POST)
 	public void joinTeam(int teamCode, HttpSession session, HttpServletResponse res) {
 
+		
 		Team team = service.findTeamByTeamCode(teamCode);
 		String resObj = null;
 		boolean stamp = true;
@@ -145,6 +146,7 @@ public class TeamController {
 			}
 
 		}
+		
 
 		try {
 			res.getWriter().write(resObj);
@@ -249,7 +251,7 @@ public class TeamController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/team/search.do?teamCode=" + teamCode;
+		return "redirect:/team/search.do";
 	}
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
@@ -262,7 +264,7 @@ public class TeamController {
 
 		model.addAttribute("teamList", teamList);
 
-		return "team/main";
+		return "team/main2";
 
 	}
 }
