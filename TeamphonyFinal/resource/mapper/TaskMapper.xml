@@ -123,9 +123,9 @@
 				ID =						#{taskId, jdbcType=INTEGER}
 				,TITLE =					#{title, jdbcType=VARCHAR}
 				,CONTENTS =					#{contents, jdbcType=VARCHAR}
-				,DEADLINE =					#{deadline , jdbcType=DATE}
-				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=DATE}
-				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=DATE}
+				,DEADLINE =					#{deadline , jdbcType=INTEGER}
+				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=INTEGER}
+				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=INTEGER}
 			WHERE ID = #{taskId}
 	</update>
 	

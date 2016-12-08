@@ -74,6 +74,8 @@ public class TaskStoreLogic implements TaskStore {
 			
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			System.out.println("===================update Store===================");
+			System.out.println(task.toString());
 			mapper.updateTask(task);
 			
 //flag 1==submission   flag 0==assignment
