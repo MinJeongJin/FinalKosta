@@ -199,8 +199,12 @@ public class Task {
 	@Override
 	public String toString() {
 		return "taskId=" + taskId + "\n" + "title= " + title + "\n" + "contents= " + contents + "\n" + "deadline= "
-				+ deadline + "\n" + "flag= " + flag + "\n" + "taskFileList= " + taskFileList+ "\n" + "evaluationPeriodStart= " + evaluationPeriodStart
-				+ "\n" + "evaluationPeriodEnd= " + evaluationPeriodEnd + "\n"+"evaluated= " + evaluated + "\n"+"evaluationCnt= " + evaluationCnt + "\n" ;
+				+ deadline + "\n" + "flag= " + flag + "\n" + "taskFileList= " + taskFileList+ "\n" 
+				+ "evaluationPeriodStart= " + evaluationPeriodStart + "\n" + "evaluationPeriodEnd= " 
+				+ evaluationPeriodEnd + "\n"+ "evaluated= " + evaluated + "\n"+"evaluationCnt= " + evaluationCnt + "\n" 
+				+ "point= " + point;
+	
+	
 	}
 	
 

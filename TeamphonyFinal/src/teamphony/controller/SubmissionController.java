@@ -176,6 +176,7 @@ public class SubmissionController {
 		System.out.println("point= "+ point);
 		System.out.println("evaluationCnt= "+ evaluationCnt);
 		System.out.println("evaluated= "+ evaluated);
+		System.out.println("=============================================");
 		
 		Task task = new Task(id,evalute,count,poin);
 		
