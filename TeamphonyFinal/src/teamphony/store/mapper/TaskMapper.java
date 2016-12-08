@@ -2,6 +2,8 @@ package teamphony.store.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
 
@@ -13,6 +15,8 @@ public interface TaskMapper {
 	void insertSubmission(Task task);
 	
 	void insertTaskFile(TaskFile task);
+	
+	void insertTaskMember(@Param("taskId") int taskId, @Param("memberId") String memberId );
 
 	void updateTask(Task task);
 //  추가했음
@@ -32,7 +36,9 @@ public interface TaskMapper {
 	
 	//추가 했음
 	TaskFile selectFileList(int taskId);
-
+//추가 했음
+	String[] selectMemberIdByTaskId(int taskId);
+	
 	Task selectTaskByTaskId(int taskId);
 //	//추가 했음
 //	Task selectTaskDetail(int taskId);

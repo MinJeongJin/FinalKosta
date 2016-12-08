@@ -33,6 +33,18 @@
 				#{point, jdbcType=INTEGER}
 			)
 	</insert>  
+	<insert id="insertTaskMember">
+			INSERT
+			INTO TASKMEMBER
+			(
+				ASSIGNMENTID,
+				MEMBERID
+			)
+			VALUES
+			(	#{taskId},
+				#{memberId }
+			)
+	</insert>
 	
 	<insert id="insertSubmission" parameterType="task">
 		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
@@ -86,6 +98,14 @@
 				FROM TASK_TB            
 				WHERE FLAG = #{flag}
 				ORDER BY ID ASC
+	</select>
+	
+	<select id="selectMemberIdByTaskId" parameterType="int"  resultType="String">
+			SELECT 
+				MEMBERID 
+				FROM TASKMEMBER 
+				WHERE ASSIGNMENTID = #{taskId}
+				ORDER BY ASSIGNMENTID ASC
 	</select>
 	
 	<select id="selectAllFileList" resultType="TaskFile">

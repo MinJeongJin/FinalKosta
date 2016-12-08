@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
 </head>
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="assignmentList.do">과제리스트 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/assignment/searchAll.do">과제리스트 돌아가기</a>
 	<h3>과제 부여</h3>
 
 	<br>
@@ -27,30 +27,18 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><input id="title" name="title"
-					class="form-control" type="text" value="" placeholder="제목을 입력하세요."></td>
+				<td>
+					<input id="title" name="title" class="form-control" type="text" value="" placeholder="제목을 입력하세요.">
+				</td>
 			</tr>
 			<tr style="horizontal-align: left;">
 				<th>제출자</th>
-				<td>
-					<ul>
-						<li style="float: left; width: 70px;"><input type="checkbox"
-							name="memberId" class="form-control"
-							style="width: 20px; margin: 0px;" value="" />이은채</li>
-						<li style="float: left; width: 70px;"><input type="checkbox"
-							name="memberId" class="form-control"
-							style="width: 20px; margin: 0px;" value="" />진민정</li>
-						<li style="float: left; width: 70px;"><input type="checkbox"
-							name="memberId" class="form-control"
-							style="width: 20px; margin: 0px;" value="" />현대경</li>
-						<li style="float: left; width: 70px;"><input type="checkbox"
-							name="memberId" class="form-control"
-							style="width: 20px; margin: 0px;" value="" />김수호</li>
-						<li style="float: left; width: 70px;"><input type="checkbox"
-							name="memberId" class="form-control"
-							style="width: 20px; margin: 0px;" value="" />윤영민</li>
-					</ul>
-				</td>
+					<c:forEach items="${memberList }" var="member">
+						<td style="float: left; width: 70px;">
+								<input type="checkbox" name="memberIdList" class="form-control" style="width: 20px; margin: 0px;" value="${member.memberId }" >
+								${member.memberId }
+						</td>
+					</c:forEach>
 			</tr>
 			<tr>
 				<th>제출 기한</th>

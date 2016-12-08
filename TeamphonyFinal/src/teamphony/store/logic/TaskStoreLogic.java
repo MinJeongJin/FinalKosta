@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Repository;
 import org.w3c.dom.ls.LSInput;
 
+import teamphony.domain.Member;
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
 import teamphony.store.facade.TaskStore;
@@ -41,8 +42,18 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 //flag 1==submission   flag 0==assignment
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			
 			if(task.getFlag() == 0){
 				mapper.insertAssignment(task);
+				System.out.println("===========mapperStart==========");
+				System.out.println(task.getTaskId());
+				System.out.println("====================================");
+				
+				for(String memberId: task.getMemberIdList()){
+					System.out.println("memberId= " + memberId);
+					System.out.println("====================================");
+					mapper.insertTaskMember(task.getTaskId(), memberId);
+				}
 				session.commit();
 				
 			}else if (task.getFlag() == 1) {
@@ -134,16 +145,25 @@ public class TaskStoreLogic implements TaskStore {
 	public List<Task> selectAllTaskByFlag(int flag) {
 
 		SqlSession session = getSessionFactory().openSession();
+		
 		List<Task> taskList= new ArrayList<>();
 		List<TaskFile> fileList = new ArrayList<>();
 		
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			
 			taskList = mapper.selectAllTaskByFlag(flag);
+			
+			
+			
 			
 				for(Task task : taskList){
 					fileList = mapper.selectFileListByTaskId(task.getTaskId());
 					task.setTaskFileList(fileList);
+					task.setMemberIdList(mapper.selectMemberIdByTaskId(task.getTaskId()));
+					
+					System.out.println("===========mapperEnd============");
+					System.out.println(task.getMemberIdList().length);
 				}
 			return taskList;
 		} finally {
@@ -154,15 +174,17 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public Task selectTaskByTaskId(int taskId) {
-		
 		SqlSession session = getSessionFactory().openSession();
 		Task task = new Task();
 		
 			try{
 				TaskMapper mapper = session.getMapper(TaskMapper.class);
-				task = mapper.selectTaskByTaskId(taskId);
 				
+				task = mapper.selectTaskByTaskId(taskId);
+				task.setMemberIdList( mapper.selectMemberIdByTaskId(taskId));
+//flag 1==submission   flag 0==assignment		
 				if(task.getFlag() == 1){
+					
 					List<TaskFile> fileList = new ArrayList<>();
 					fileList = mapper.selectFileListByTaskId(task.getTaskId());
 					task.setTaskFileList(fileList);

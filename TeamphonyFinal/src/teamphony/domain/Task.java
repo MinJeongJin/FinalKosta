@@ -9,6 +9,8 @@ public class Task {
 	private String title;
 	private String contents;
 	private List<Member> memberList;
+////부여 과제 명단을 위한 변수 선언
+	private String[] memberIdList;
 	private int point;
 	private Date evaluationPeriodStart;
 	private Date evaluationPeriodEnd;
@@ -196,6 +198,16 @@ public class Task {
 	public void setEvaluationCnt(int evaluationCnt) {
 		this.evaluationCnt = evaluationCnt;
 	}
+	
+
+
+	public String[] getMemberIdList() {
+		return memberIdList;
+	}
+
+	public void setMemberIdList(String[] memberIdList) {
+		this.memberIdList = memberIdList;
+	}
 
 	@Override
 	public String toString() {
@@ -204,7 +216,6 @@ public class Task {
 				+ "evaluationPeriodStart= " + evaluationPeriodStart + "\n" + "evaluationPeriodEnd= " 
 				+ evaluationPeriodEnd + "\n"+ "evaluated= " + evaluated + "\n"+"evaluationCnt= " + evaluationCnt + "\n" 
 				+ "point= " + point;
-	
 	
 	}
 	

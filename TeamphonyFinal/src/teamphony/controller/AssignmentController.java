@@ -1,11 +1,12 @@
 package teamphony.controller;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import teamphony.domain.Member;
 import teamphony.domain.Task;
+import teamphony.domain.Team;
 import teamphony.service.facade.TaskService;
+import teamphony.service.facade.TeamService;
 
 @Controller
 @RequestMapping("assignment")
@@ -22,11 +26,38 @@ public class AssignmentController {
 
 	@Autowired
 	private TaskService service;
-
+	@Autowired
+	private TeamService teamService;
+	
 	@RequestMapping("/create.do")
-	public String createAssignment(String title, String contents, String deadlineDay, String deadlineHour
-									,String evalDayStart, String evalHourStart, String evalDayEnd, String evalHourEnd, String flag) {
+	public String createAssignment(HttpSession session, Model model){
+		Team team = new Team();
+		
+		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
+		
+		model.addAttribute("memberList", memberList);
+		
+		return "task/assignment/assignmentRegister";
+	}
 
+	@RequestMapping(value="/create.do", method= RequestMethod.POST)
+	public String createAssignment(Task task
+									,String deadlineDay, String deadlineHour
+									,String evalDayStart, String evalHourStart
+									,String evalDayEnd, String evalHourEnd
+									,String[] memberIdList) {
+		System.out.println("==========createDoPost===========");
+		System.out.println(task.toString());
+		System.out.println("=====================================");
+		System.out.println(task.getMemberIdList().length);
+		System.out.println("=====================================");
+		
+//		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
+		
+		
+//		Member member = new Member();
+//		List<Member> memberList = new ArrayList<>();
+		
 		String submitDay = deadlineDay + " " + deadlineHour;
 		String evaluationStart = evalDayStart + " " + evalHourStart;
 		String evaluationEnd = evalDayEnd + " " + evalHourEnd;
@@ -46,16 +77,13 @@ public class AssignmentController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		Task task = new Task();
-		
-		task.setTitle(title);
-		task.setContents(contents);
 		task.setDeadline(deadline);
-		task.setFlag(Integer.parseInt(flag));
 		task.setEvaluationPeriodStart(evaluationPeriodStart);
 		task.setEvaluationPeriodEnd(evaluationPeriodEnd);
 		
+		System.out.println(task.getMemberIdList()[1].trim());
 		service.registerTask(task);
+		
 		return "redirect:searchAll.do";
 	}
 
@@ -90,10 +118,12 @@ public class AssignmentController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
 		Task task = new Task(Integer.parseInt(taskId), title, contents, deadline, evaluationPeriodStart,evaluationPeriodEnd);
 		service.modifyTask(task);
 		return "redirect:searchAll.do";
 	}
+	
 
 	@RequestMapping("/erase.do")
 	public String eraseAssignment(String taskId,String flag) {
@@ -101,6 +131,7 @@ public class AssignmentController {
 		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
 		return "redirect:searchAll.do";
 	}
+	
 
 	@RequestMapping("/searchByTaskId.do")
 	public String searchAssignmentByTaskId(String taskId, Model model) {
@@ -113,9 +144,19 @@ public class AssignmentController {
 	}
 
 	@RequestMapping("/searchAll.do")
-	public String searchAllAssignment(Model model) {
-
+	public String searchAllAssignment(HttpSession session, Model model) {
+//test 를 위하여 임의로 session에 팀 코드를 부여 하였다.
+		
+		Team team = new Team();
+		Task task = new Task();
+		team.setCode(1111);
+		session.setAttribute("code", team.getCode());
+		
+		System.out.println("code="+ (int)session.getAttribute("code"));
+		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
 		List<Task> list = service.findAllTaskByFlag(0);
+		
+		task.setMemberList(memberList);
 		model.addAttribute("list", list);
 		
 		return "/task/assignment/assignmentList";

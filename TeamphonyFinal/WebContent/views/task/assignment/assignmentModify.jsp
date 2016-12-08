@@ -35,14 +35,22 @@
 			</tr>
 			<tr style="horizontal-align: left;">
 				<th>제출자</th>
-				<td>
-					<ul>
-						<li style="float: left; width: 70px;">이은채</li>
-						<li style="float: left; width: 70px;">진민정</li>
-						<li style="float: left; width: 70px;">김수호</li>
-						<li style="float: left; width: 70px;">윤영민</li>
-					</ul>
-				</td>
+					<td>
+						<h6 style="color: blue;">
+							<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
+								${memberId }
+							</c:forEach>
+						</h6>
+					</td>
+			</tr>
+			<tr>
+				<th></th>
+					<c:forEach items="${task.memberIdList }" var="memberId">
+						<td style="float: left; width: 70px;">
+							<input type="checkbox" name="memberIdList" class="form-control" style="width: 20px; margin: 0px;" value="${member.memberId }" >
+							${memberId }
+						</td>
+					</c:forEach>
 			</tr>
 			<tr>
 				<th>제출 기한</th>

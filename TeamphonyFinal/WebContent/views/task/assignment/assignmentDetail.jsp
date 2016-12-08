@@ -45,15 +45,11 @@ display: none;
 		</tr>
 		<tr>
 			<th>제출자</th>
-			<td>
-				<ul>
-					<li style="float: left; width: 70px;">이은채</li>
-					<li style="float: left; width: 70px;">진민정</li>
-					<li style="float: left; width: 70px;">현대경</li>
-					<li style="float: left; width: 70px;">김수호</li>
-					<li style="float: left; width: 70px;">윤영민</li>
-				</ul>
-			</td>
+				<td>
+					<c:forEach items="${task.memberIdList }" var="memberId">
+						${memberId }
+					</c:forEach>
+				</td>
 		</tr>
 		<tr>
 			<th>제출 기한</th>
