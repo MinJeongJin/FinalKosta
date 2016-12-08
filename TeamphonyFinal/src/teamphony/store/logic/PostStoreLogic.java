@@ -85,12 +85,12 @@ public class PostStoreLogic implements PostStore {
 	}
 
 	@Override
-	public List<Post> selectAllPost(int teamId) {
+	public List<Post> selectAllPost(int teamCode) {
 		SqlSession session = getSessionFactory().openSession();
 		List<Post> list = null;
 		try {
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			list=mapper.selectAllPost(teamId);
+			list=mapper.selectAllPost(teamCode);
 
 		} catch (Exception e) {
 			e.printStackTrace();
