@@ -178,15 +178,15 @@ public class SubmissionController {
 		System.out.println("evaluated= "+ evaluated);
 		System.out.println("=============================================");
 		
-		Task task = new Task(id,evalute,count,poin);
+//		Task task = new Task(id,evalute,count,poin);
 		
-		System.out.println(task.toString());
-		
-		
+//		System.out.println(task.toString());
 		
 		
 		
-		service.modifyTask(task);
+		
+		
+//		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";
 	}

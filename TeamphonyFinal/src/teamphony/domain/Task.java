@@ -17,14 +17,15 @@ public class Task {
 	private Date deadline;
 	private int flag;
 	private List<TaskFile> taskFileList;
-//추가했음
-	private TaskFile taskFile;
-	private Task task;
 //평가 여부를 위한 변수 선언// ture == 1 , flase == 0 
 	private boolean evaluated;
 //평가 횟수를 위한 변수 선언
 	private int evaluationCnt;
 	
+	
+	public int getTaskId() {
+		return taskId;
+	}
 	
 	public List<TaskFile> getTaskFileList() {
 		return taskFileList;
@@ -39,58 +40,7 @@ public class Task {
 		evaluationCnt=0;
 	}
 	
-//평가를 위한 task 생성자 
-	public Task(int taskId, boolean evaluated, int evaluationCnt, int point ){
-		this.evaluated= evaluated;
-		this.evaluationCnt= evaluationCnt;
-		this.point= point;
-		this.taskId= taskId;
-	}
-//부여 과제를 위한 task 생성자
-	public Task(int taskId, String title, String contents, Date deadline, Date evaluationPeriodStart, Date evaluationPeriodEnd) {
-		this.taskId = taskId;
-		this.title = title;
-		this.contents = contents;
-		this.deadline = deadline;
-		this.evaluationPeriodStart = evaluationPeriodStart;
-		this.evaluationPeriodEnd = evaluationPeriodEnd;
-	}
 	
-//제출 과제를 위한 task 생성자
-	public Task(int taskId, String title, String contents, String filePath) {
-		this.taskId = taskId;
-		this.title = title;
-		this.contents = contents;
-	}
-
-	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
-			Date evaluationPeriodStart,Date evaluationPeriodEnd, Date deadline) {
-		this.taskId = taskId;
-		this.title = title;
-		this.contents = contents;
-		this.memberList = memberList;
-		this.point = point;
-		this.evaluationPeriodStart = evaluationPeriodStart;
-		this.evaluationPeriodEnd = evaluationPeriodEnd;
-		this.deadline = deadline;
-	}
-
-	public Task(int taskId, String title, String contents, List<Member> memberList, String filePath, int point,
-			Date evaluationPeriodStart,Date evaluationPeriodEnd, Date deadline, int flag) {
-		this.taskId = taskId;
-		this.title = title;
-		this.contents = contents;
-		this.memberList = memberList;
-		this.point = point;
-		this.evaluationPeriodStart = evaluationPeriodStart;
-		this.evaluationPeriodEnd = evaluationPeriodEnd;
-		this.deadline = deadline;
-		this.flag = flag;
-	}
-
-	public int getTaskId() {
-		return taskId;
-	}
 
 	public void setTaskId(int taskId) {
 		this.taskId = taskId;
@@ -148,24 +98,6 @@ public class Task {
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
-
-	public TaskFile getTaskFile() {
-		return taskFile;
-	}
-
-	public void setTaskFile(TaskFile taskFile) {
-		this.taskFile = taskFile;
-	}
-
-	public Task getTask() {
-		return task;
-	}
-
-	public void setTask(Task task) {
-		this.task = task;
-	}
-	
-	
 
 	public Date getEvaluationPeriodStart() {
 		return evaluationPeriodStart;

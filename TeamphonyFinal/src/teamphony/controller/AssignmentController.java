@@ -32,7 +32,6 @@ public class AssignmentController {
 	@RequestMapping("/create.do")
 	public String createAssignment(HttpSession session, Model model){
 		Team team = new Team();
-		
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
 		
 		model.addAttribute("memberList", memberList);
@@ -46,17 +45,6 @@ public class AssignmentController {
 									,String evalDayStart, String evalHourStart
 									,String evalDayEnd, String evalHourEnd
 									,String[] memberIdList) {
-		System.out.println("==========createDoPost===========");
-		System.out.println(task.toString());
-		System.out.println("=====================================");
-		System.out.println(task.getMemberIdList().length);
-		System.out.println("=====================================");
-		
-//		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
-		
-		
-//		Member member = new Member();
-//		List<Member> memberList = new ArrayList<>();
 		
 		String submitDay = deadlineDay + " " + deadlineHour;
 		String evaluationStart = evalDayStart + " " + evalHourStart;
@@ -81,24 +69,30 @@ public class AssignmentController {
 		task.setEvaluationPeriodStart(evaluationPeriodStart);
 		task.setEvaluationPeriodEnd(evaluationPeriodEnd);
 		
-		System.out.println(task.getMemberIdList()[1].trim());
 		service.registerTask(task);
 		
 		return "redirect:searchAll.do";
 	}
 
 	@RequestMapping("/revise.do")
-	public String reviseAssignment(String taskId, Model model) {
+	public String reviseAssignment(HttpSession session, String taskId, Model model) {
+		Team team = new Team();
 
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
+		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
+		
+		task.setMemberList(memberList);
 		model.addAttribute("task", task);
 
 		return "task/assignment/assignmentModify";
 	}
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
-	public String reviseAssignment(String taskId, String title, String contents, String deadlineDay, String deadlineHour, 
-									String evalDayStart, String evalHourStart, String evalDayEnd, String evalHourEnd, Model model) {
+	public String reviseAssignment(Task task
+									,String deadlineDay, String deadlineHour
+									,String evalDayStart, String evalHourStart
+									,String evalDayEnd, String evalHourEnd
+									,String[] memberIdList) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
 		
@@ -119,7 +113,10 @@ public class AssignmentController {
 			e.printStackTrace();
 		}
 		
-		Task task = new Task(Integer.parseInt(taskId), title, contents, deadline, evaluationPeriodStart,evaluationPeriodEnd);
+		task.setDeadline(deadline);
+		task.setEvaluationPeriodStart(evaluationPeriodStart);
+		task.setEvaluationPeriodEnd(evaluationPeriodEnd);
+		
 		service.modifyTask(task);
 		return "redirect:searchAll.do";
 	}
@@ -152,7 +149,6 @@ public class AssignmentController {
 		team.setCode(1111);
 		session.setAttribute("code", team.getCode());
 		
-		System.out.println("code="+ (int)session.getAttribute("code"));
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
 		List<Task> list = service.findAllTaskByFlag(0);
 		

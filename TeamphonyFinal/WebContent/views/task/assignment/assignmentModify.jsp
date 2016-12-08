@@ -24,7 +24,6 @@
 			<colgroup>
 				<col width="150">
 				<col width="*">
-
 			</colgroup>
 			<tr>
 				<th>제목</th>
@@ -43,14 +42,14 @@
 						</h6>
 					</td>
 			</tr>
-			<tr>
-				<th></th>
-					<c:forEach items="${task.memberIdList }" var="memberId">
-						<td style="float: left; width: 70px;">
-							<input type="checkbox" name="memberIdList" class="form-control" style="width: 20px; margin: 0px;" value="${member.memberId }" >
-							${memberId }
-						</td>
-					</c:forEach>
+			<tr>		
+			<th></th>
+				<c:forEach items="${task.memberList }" var="member">
+					<td style="float: left; width: 70px;">
+						<input type="checkbox" name="memberIdList" class="form-control" style="width: 20px; margin: 0px;" value="${member.memberId }" >
+						${member.memberId }
+					</td>
+				</c:forEach>
 			</tr>
 			<tr>
 				<th>제출 기한</th>

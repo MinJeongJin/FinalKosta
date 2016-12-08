@@ -169,43 +169,10 @@
 		WHERE SUBMISSIONID			= #{taskId}
 	</delete>
 
-	<!-- <resultMap type="Task" id="taskDetail">
-
-		<id property="taskId" column="TASK_ID" />
-		<result property="title" column="TASK_TITLE" />
-		<result property="contents" column="TASK_CONTENTS" />
-		<result property="deadline" column="TASK_DEADLINE" />
-		<result property="evaluationPeriod" column="TASK_EVALUATIONPERIOD" />
-		<result property="flag" column="TASK_FLAG" />
-		<result property="point" column="TASK_POINT" />
-		 <collection property="taskFileList" column="TASK_ID" ofType="TaskFile" 
-			select="teamphony.store.mapper.TaskMapper.selectTaskDetail" javaType="ArrayList" 
-			jdbcType="NUMERIC"> </collection> 
-	</resultMap>
-
-	<select id="selectTaskDetail" resultMap="taskDetail">
-
-		SELECT
-		T.ID AS TASK_ID
-		,T.TITLE AS TASK_TITLE
-		,T.CONTENTS AS TASK_CONTENTS
-		,T.DEADLINE AS
-		TASK_DEADLINE
-		,T.EVALUATIONPERIOD AS TASK_EVALUATIONPERIOD
-		,T.FLAG AS
-		TASK_FLAG
-		,T.POINT AS TASK_POINT
-		,TF.SUBMISSIONID AS
-		TASKFILE_SUBMISSIONID
-		,TF.FILEPATH AS TASKFILE_FILEPATH
-		FROM TASK_TB T ,
-		TASKFILE_TB TF
-		WHERE T.ID =
-		TF.SUBMISSIONID
-		AND T.ID = #{taskId}
-
-	</select>
- -->
-	
+	<delete id="deleteMemberIdByTaskId" >
+		DELETE 
+		FROM TASKMEMBER
+		WHERE ASSIGNMENTID = 		#{taskId}
+	</delete>	
 
 </mapper>
