@@ -14,7 +14,7 @@
 </head>
 <body>
 	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="${pageContext.request.contextPath}/submission/searchAll.do">과제리스트 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/submission/searchAll.do">제출 과제 리스트 돌아가기</a>
 	<h3>과제 제출</h3>
 
 	<br>
@@ -37,11 +37,18 @@
 			</tr>
 			<tr>
 				<th>첨부파일</th>
+					<td>
+						<h6 style="color: red">**첨부파일은 최대 5개 입니다.</h6>
+					</td>
+			</tr>
+			<tr>
+				<th></th>
 				<td>
 					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 					<input type="hidden" name="flag" value="1" />
 				</td>
 			</tr>
+			
 			<tr>
 				<th></th>
 				<td>

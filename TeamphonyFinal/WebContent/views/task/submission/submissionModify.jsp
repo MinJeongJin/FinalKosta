@@ -14,7 +14,7 @@
 	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/submission/searchAll.do">과제리스트 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/submission/searchAll.do">제출 과제 리스트 돌아가기</a>
 	<h3>제출 과제 수정</h3>
 
 	<br>
@@ -63,6 +63,18 @@
 			<tr>
 				<th></th>
 				<td>
+					<h6 style="color: red">**첨부파일은 최대 5개 입니다.</h6>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
 					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 				</td>
 			</tr>
@@ -87,7 +99,7 @@
 		</table>
 		<br>
 		<div align="center">
-				<a href="assignmentList.do"><input class="btn" type="reset" value="취소"></a> 
+				<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}"><input class="btn" type="button" value="취소"></a> 
 				<input class="btn btn-success" type="submit" value="완료">
 		</div>
 	</form>

@@ -6,7 +6,7 @@
 
 <head>
 
-<title>Welcome to teamphony</title>
+<title>Welcome to Teamphony</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,29 +18,157 @@
 	href="${pageContext.request.contextPath}/resources/css/mainStyle.css"
 	rel="stylesheet">
 
+
+<style>
+#snackbar {
+	visibility: hidden;
+	min-width: 250px;
+	margin-left: -125px;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	bottom: 30px;
+	font-size: 17px;
+}
+
+#snackbar.show {
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@
+-webkit-keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
+}
+
+to {
+	bottom: 30px;
+	opacity: 1;
+}
+
+}
+@
+keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
+}
+
+to {
+	bottom: 30px;
+	opacity: 1;
+}
+
+}
+@
+-webkit-keyframes fadeout {
+	from {bottom: 30px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
+
+}
+@
+keyframes fadeout {
+	from {bottom: 30px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
+}
+</style>
+
+
+
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+
+
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
+<script>
+	"use strict";
 	
-	var submit = function(num) {
+	
+	var showSnackBar = function(msg) {
+	    var x = document.getElementById("snackbar");
+	    x.innerHTML = msg;
+	    x.className = "show";
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+	}
+	
 
-		document.getElementsByName("teamLink")[num-1].submit();
+	var loadData = function(url) {
 
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var data = JSON.parse(xhttp.responseText);
+				var flag = data['flag'];
+
+				console.log("success");
+				switch (flag) {
+
+				case '0':
+
+					showSnackBar('존재하지 않는 팀 입니다.');
+				
+
+					break;
+
+				case '-1':
+
+					showSnackBar('이미 가입 되어 있는 팀 입니다.');
+				
+					break;
+
+				default:
+					window.location.href = "/TeamphonyFinal/team/main.do";
+
+					break;
+
+				}
+			}
+		};
+
+		xhttp.open("POST", url, true);
+		xhttp.setRequestHeader("Content-type",
+				"application/x-www-form-urlencoded");
+		xhttp.send("teamCode=" + document.getElementById('teamCode').value);
+		document.getElementById('myForm').reset();
+	}
+
+	var submitWithScript = function(num) {
+
+		var element = document.getElementsByName("teamLink")[num - 1];
+		element.target = "_blank";
+		element.submit();
 	}
 
 	var getMinDate = function() {
 
 		var date = new Date();
-		var year = date.getFullYear(); //yyyy
-		var month = (1 + date.getMonth()); //M
-		month = month >= 10 ? month : '0' + month; // month 두자리로 저장
-		var day = date.getDate(); //d
-		day = day >= 10 ? day : '0' + day; //day 두자리로 저장
+		var year = date.getFullYear(); // 년도
+		var month = (1 + date.getMonth()); // 월
+		month = month >= 10 ? month : '0' + month; // 월 두자리로 변경 작업
+		var day = date.getDate(); // 일 
+		day = day >= 10 ? day : '0' + day; //일 두자리로 변경 작업
 
-		document.getElementById('endDate').min = year + '-' + month + '-' + day;
+		document.getElementById('endDate').min = year + '-' + month + '-' + day;// yyyy-mm-dd format 변경
 	}
 
 	var checkNameLength = function() {
@@ -48,7 +176,7 @@
 		var teamList = document.getElementsByName("part-info");
 		var len = teamList.length;
 
-		for (i = 0; i < len; i++) {
+		for (var i = 0; i < len; i++) {
 
 			var teamName = teamList[i].getAttribute("value");
 
@@ -62,25 +190,39 @@
 
 	}
 
-	var warnningMsg = function(flag) {
+	var setOnlyNumber = function(event) {
 
-		if (flag == 0) {
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if ((keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105)
+				|| keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39)
+			return;
+		else
+			return false;
+	}
 
-			window.alert("존재하지 않는 팀 입니다.");
+	var removeChar = function(event) {
 
-		} else if (flag == -1) {
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39)
+			return;
+		else
+			event.target.value = event.target.value.replace(/[^0-9]/g, "");
 
-			window.alert("이미 가입 되어 있는 팀 입니다.");
+	}
 
-		}
+	window.onload = function() {
+
+		checkNameLength();
+		getMinDate();
 
 	}
 </script>
 
 </head>
 
-<body onload="checkNameLength(); getMinDate(); warnningMsg(${flag});">
-
+<body>
 
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -97,13 +239,16 @@
 
 			</ul>
 
-			<form class="navbar-form navbar-right" method="post"
+			<form id="myForm" class="navbar-form navbar-right" method="post"
 				action="${pageContext.request.contextPath}/team/join.do">
 				<div class="form-group">
-					<input type="number" class="form-control" name="teamCode"
-						maxlength="4" placeholder="팀 코드 입력" min="1000" max="9999">
+					<input type="text" class="form-control" name="teamCode"
+						onkeydown="return setOnlyNumber();" onkeyup="removeChar();"
+						maxlength="4" id="teamCode" placeholder="팀 코드 입력">
 				</div>
-				<button type="submit" class="btn btn-default">검색</button>
+				<button type="button"
+					onclick="loadData('${pageContext.request.contextPath}/team/join.do');"
+					class="btn btn-default">검색</button>
 			</form>
 
 		</div>
@@ -122,7 +267,9 @@
 
 					<figure class="white">
 						<input type="text" value="${team.code}" name="teamCode" hidden>
-						<a href="javascript:submit(${cntOfTeam.count});">
+						<a href="javascript:submitWithScript(${cntOfTeam.count});">
+
+
 							<div id="wrapper-part-info">
 
 								<div class="part-info-image">
@@ -140,6 +287,8 @@
 		</div>
 
 	</div>
+	
+	<div id="snackbar">Some text some message..</div>
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
@@ -161,7 +310,7 @@
 						</p>
 						<p>
 							<input type="number" class="form-control" name="cycle" min="0"
-								max="5" maxlength="1" placeholder="평가주기" required>
+								max="3" placeholder="평가주기" required>
 						</p>
 						<p>
 							<input type="date" class="form-control" name="endDate"

@@ -39,63 +39,63 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
-
+//flag 1==submission   flag 0==assignment
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			mapper.insertTask(task);
-
-			if (task.getFlag() == 1) {
+			if(task.getFlag() == 0){
+				mapper.insertAssignment(task);
+				session.commit();
 				
-				int taskId = task.getTaskId();
-				List<TaskFile> taskFileList = task.getTaskFileList();
-
-				for (TaskFile taskFile : taskFileList) {
-					taskFile.setSubmissionId(taskId);
-					mapper.insertTaskFile(taskFile);
+			}else if (task.getFlag() == 1) {
+					System.out.println("flagElseIf(1)=" + task.getFlag());
+					mapper.insertSubmission(task);
 					session.commit();
-				}
+					
+					int taskId = task.getTaskId();
+					List<TaskFile> taskFileList = task.getTaskFileList();
+	
+					for (TaskFile taskFile : taskFileList) {
+						taskFile.setSubmissionId(taskId);
+						
+						mapper.insertTaskFile(taskFile);
+						session.commit();
+					}
 			}
-			session.commit();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
-		} finally {
-			session.close();
+		}finally{
+				session.close();
 		}
-
 	}
 
 	@Override
 	public void updateTask(Task task) {
 		SqlSession session = getSessionFactory().openSession();
-
+			
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			System.out.println("===================update Store===================");
+			System.out.println(task.toString());
+			mapper.updateTask(task);
 			
-				if(task.getPoint() != 0){
-					System.out.println("getPoint= "+task.getPoint());
-					System.out.println("getTaskId= "+task.getTaskId());
-					
-					int point = task.getPoint();
-					mapper.updateTaskPoint(task);
+//flag 1==submission   flag 0==assignment
+			
+				if(task.getFlag() == 1){
+					mapper.updateTaskPoint(task.getPoint());
 					session.commit();
 					
-				}else if(task.getFlag() == 1){
-					
-					mapper.updateTask(task);
 					mapper.deleteTaskFile(task.getTaskId());
-					
 					session.commit();
 					
 					List<TaskFile> taskFileList = task.getTaskFileList();
-
 					for (TaskFile taskFile : taskFileList) {
 						
 						taskFile.setSubmissionId(task.getTaskId());
 						mapper.insertTaskFile(taskFile);
 						session.commit();
 					}
-						session.commit();
 				}
+					session.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,7 +121,6 @@ public class TaskStoreLogic implements TaskStore {
 					session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			session.rollback();
 		} finally {
 			session.close();
@@ -137,13 +136,11 @@ public class TaskStoreLogic implements TaskStore {
 		
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
-			
 			taskList = mapper.selectAllTaskByFlag(flag);
 			
 				for(Task task : taskList){
-					
-						fileList = mapper.selectFileListByTaskId(task.getTaskId());
-						task.setTaskFileList(fileList);
+					fileList = mapper.selectFileListByTaskId(task.getTaskId());
+					task.setTaskFileList(fileList);
 				}
 			return taskList;
 		} finally {
@@ -151,21 +148,22 @@ public class TaskStoreLogic implements TaskStore {
 		}
 	}
 	
-	
 
 	@Override
 	public Task selectTaskByTaskId(int taskId) {
 		
 		SqlSession session = getSessionFactory().openSession();
 		Task task = new Task();
-		List<TaskFile> fileList = new ArrayList<>();
 		
 			try{
 				TaskMapper mapper = session.getMapper(TaskMapper.class);
 				task = mapper.selectTaskByTaskId(taskId);
 				
-				fileList = mapper.selectFileListByTaskId(task.getTaskId());
-				task.setTaskFileList(fileList);
+				if(task.getFlag() == 1){
+					List<TaskFile> fileList = new ArrayList<>();
+					fileList = mapper.selectFileListByTaskId(task.getTaskId());
+					task.setTaskFileList(fileList);
+				}
 			}finally {
 				session.close();
 			}

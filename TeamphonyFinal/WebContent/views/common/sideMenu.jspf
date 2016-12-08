@@ -11,28 +11,36 @@
 							class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
-						</ul></li>
+						</ul>
+					</li>
 					<li><a href="${pageContext.request.contextPath}/post/list.do"><i
 							class="fa fa-edit"></i> 게시판 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
-						</ul></li>
+						</ul>
+					</li>
 					<li><a href="${pageContext.request.contextPath}"><i
 							class="fa fa-desktop"></i> 과제 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
-						</ul></li>
+						</ul>
+					</li>
 					<li><a
 						href="${pageContext.request.contextPath}/schedule/calendar.do"><i
 							class="fa fa-table"></i> 일정관리 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
-						</ul></li>
-					<li><a href=""><i class="fa fa-bar-chart-o"></i> 팀원평가 <span
-							class="fa fa-chevron-down"></span></a>
+						</ul>
+					</li>
+					<li>
+						<a href="${pageContext.request.contextPath}/member/evaluation.do">
+							<i class="fa fa-bar-chart-o"></i> 팀원평가 
+							<span class="fa fa-chevron-down"></span>
+						</a>
 						<ul class="nav child_menu">
 
-						</ul></li>
+						</ul>
+					</li>
 					<li><a
 						href="${pageContext.request.contextPath}/place/searchAll.do"><i
 							class="fa fa-clone"></i>장소정보 <span class="fa fa-chevron-down"></span></a>
@@ -67,7 +75,7 @@
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a href=""><i class="fa fa-bar-chart-o"></i> 팀원평가 <span
+					<li><a href="${pageContext.request.contextPath}/member/evaluation.do"><i class="fa fa-bar-chart-o"></i> 팀원평가 <span
 							class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 

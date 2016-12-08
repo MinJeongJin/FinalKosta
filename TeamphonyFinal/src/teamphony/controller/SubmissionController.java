@@ -23,10 +23,9 @@ import teamphony.service.facade.TaskService;
 @Controller
 @RequestMapping("submission")
 public class SubmissionController {
-	private static final int MAX_SIZE = 1024 * 1024 * 20;
+	
 	@Autowired
 	private TaskService service;
-	private File folder;
 
 	private static final String filePathOnly = "c:/upload";
 
@@ -46,16 +45,15 @@ public class SubmissionController {
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
 			
-			int taskId = task.getTaskId();
-			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
 
 			System.out.println("저장 경로 =" + filePath);
 			
-			File f = new File(filePath);
 			
+			File f = new File(filePath);
 			try {
+				
 				attchFile.transferTo(f);
 				taskFileList.add(taskFile);
 			} catch (IllegalStateException e) {
@@ -66,9 +64,9 @@ public class SubmissionController {
 		}
 		
 		task.setTaskFileList(taskFileList);
+		
 		service.registerTask(task); // task_tb 저장
 		
-		session.setAttribute("flag",1);
 		return "redirect:searchAll.do";
 	}
 
@@ -93,12 +91,6 @@ public class SubmissionController {
 		task.setContents(contents);
 		task.setFlag(Integer.parseInt(flag));
 		
-		
-		System.out.println("taskId = " + task.getTaskId());
-		System.out.println("title = " + task.getTitle());
-		System.out.println(("contens= " + task.getContents()));
-		System.out.println(("flag= " + task.getFlag()));
-
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
@@ -106,8 +98,6 @@ public class SubmissionController {
 			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
-
-			System.out.println("저장 경로 =" + filePath);
 
 			File f = new File(filePath);
 			
@@ -168,7 +158,6 @@ public class SubmissionController {
 		return "/task/submission/submissionList";
 	}
 	
-	
 	@RequestMapping("/evaluate.do")
 	public String evaluateAssignment(String taskId, Model model){
 		
@@ -177,16 +166,26 @@ public class SubmissionController {
 	}
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
-	public String evaluateAssignment(String point, String taskId) {
+	public String evaluateAssignment(String taskId, String point, String evaluated,String evaluationCnt ) {
+		int id=Integer.parseInt(taskId);
+		int poin = Integer.parseInt(point);
+		int count = Integer.parseInt(evaluationCnt);
+		boolean evalute = Boolean.valueOf(evaluated);
 		
-		Task task = new Task();
+		System.out.println("taskId= "+ taskId);
+		System.out.println("point= "+ point);
+		System.out.println("evaluationCnt= "+ evaluationCnt);
+		System.out.println("evaluated= "+ evaluated);
 		
-		task= service.findTaskByTaskId(Integer.parseInt(taskId));
-		task.setPoint(Integer.parseInt(point));
+		Task task = new Task(id,evalute,count,poin);
 		
-		service.modifyTask(task);
+		System.out.println(task.toString());
 		
-		System.out.println("taskGetTaskId= "+ task.getTaskId());
+		
+		
+		
+		
+//		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";
 	}
