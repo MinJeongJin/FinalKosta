@@ -4,291 +4,117 @@
 
 <!DOCTYPE html>
 
+<html>
+
 <head>
 
 <title>Welcome to Teamphony</title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- CSS -->
 <link rel="stylesheet"
-	href="../../resources/css/bootstrap.min.css">
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="${pageContext.request.contextPath}/resources/css/mainStyle.css"
-	rel="stylesheet">
+	href="${pageContext.request.contextPath}/resources/css/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Tangerine">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainCustomStyle.css">
+<!-- /CSS -->
 
-
-<style>
-#snackbar {
-	visibility: hidden;
-	min-width: 250px;
-	margin-left: -125px;
-	background-color: #333;
-	color: #fff;
-	text-align: center;
-	border-radius: 2px;
-	padding: 16px;
-	position: fixed;
-	z-index: 1;
-	left: 50%;
-	bottom: 30px;
-	font-size: 17px;
-}
-
-#snackbar.show {
-	visibility: visible;
-	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-	animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@
--webkit-keyframes fadein {
-	from {bottom: 0;
-	opacity: 0;
-}
-
-to {
-	bottom: 30px;
-	opacity: 1;
-}
-
-}
-@
-keyframes fadein {
-	from {bottom: 0;
-	opacity: 0;
-}
-
-to {
-	bottom: 30px;
-	opacity: 1;
-}
-
-}
-@
--webkit-keyframes fadeout {
-	from {bottom: 30px;
-	opacity: 1;
-}
-
-to {
-	bottom: 0;
-	opacity: 0;
-}
-
-}
-@
-keyframes fadeout {
-	from {bottom: 30px;
-	opacity: 1;
-}
-
-to {
-	bottom: 0;
-	opacity: 0;
-}
-}
-</style>
-
-
-
+<!-- Script -->
+<script
+	src="${pageContext.request.contextPath}/resources/js/mainCustomScript.js">
+	
+</script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 
-
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script>
-	"use strict";
-	
-	
-	var showSnackBar = function(msg) {
-	    var x = document.getElementById("snackbar");
-	    x.innerHTML = msg;
-	    x.className = "show";
-	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-	}
-	
-
-	var loadData = function(url) {
-
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var data = JSON.parse(xhttp.responseText);
-				var flag = data['flag'];
-
-				console.log("success");
-				switch (flag) {
-
-				case '0':
-
-					showSnackBar('존재하지 않는 팀 입니다.');
-				
-
-					break;
-
-				case '-1':
-
-					showSnackBar('이미 가입 되어 있는 팀 입니다.');
-				
-					break;
-
-				default:
-					window.location.href = "/TeamphonyFinal/team/main.do";
-
-					break;
-
-				}
-			}
-		};
-
-		xhttp.open("POST", url, true);
-		xhttp.setRequestHeader("Content-type",
-				"application/x-www-form-urlencoded");
-		xhttp.send("teamCode=" + document.getElementById('teamCode').value);
-		document.getElementById('myForm').reset();
-	}
-
-	var submitWithScript = function(num) {
-
-		var element = document.getElementsByName("teamLink")[num - 1];
-		element.target = "_blank";
-		element.submit();
-	}
-
-	var getMinDate = function() {
-
-		var date = new Date();
-		var year = date.getFullYear(); // 년도
-		var month = (1 + date.getMonth()); // 월
-		month = month >= 10 ? month : '0' + month; // 월 두자리로 변경 작업
-		var day = date.getDate(); // 일 
-		day = day >= 10 ? day : '0' + day; //일 두자리로 변경 작업
-
-		document.getElementById('endDate').min = year + '-' + month + '-' + day;// yyyy-mm-dd format 변경
-	}
-
-	var checkNameLength = function() {
-
-		var teamList = document.getElementsByName("part-info");
-		var len = teamList.length;
-
-		for (var i = 0; i < len; i++) {
-
-			var teamName = teamList[i].getAttribute("value");
-
-			if (teamName.length > 6) {
-
-				teamList[i].innerHTML = teamName.substring(0, 6) + " ...";
-
-			}
-
-		}
-
-	}
-
-	var setOnlyNumber = function(event) {
-
-		event = event || window.event;
-		var keyID = (event.which) ? event.which : event.keyCode;
-		if ((keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105)
-				|| keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39)
-			return;
-		else
-			return false;
-	}
-
-	var removeChar = function(event) {
-
-		event = event || window.event;
-		var keyID = (event.which) ? event.which : event.keyCode;
-		if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39)
-			return;
-		else
-			event.target.value = event.target.value.replace(/[^0-9]/g, "");
-
-	}
-
-	window.onload = function() {
-
-		checkNameLength();
-		getMinDate();
-
-	}
-</script>
+<!-- /Script -->
 
 </head>
 
-<body>
+<body class="w3-light-gray">
 
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<label class="navbar-brand">Teamphony</label>
-			</div>
+	<header id="mainHeader">
+		<div class="w3-container">
 
-			<ul class="nav navbar-nav">
-
+			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
+				<li class="w3-navitem w3-tangerine">Teamphony</li>
 				<li><a href="#myModal" data-toggle="modal">팀 생성</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">마이페이지</a></li>
 				<li><a href="#">로그아웃</a></li>
 
+				<div class="w3-right" style="margin-right: 10px;">
+					<li><input type="text" class="w3-input w3-white"
+						name="teamCode" onkeydown="return setOnlyNumber();"
+						onkeyup="removeChar();" maxlength="4" id="teamCode"
+						placeholder="팀 코드 입력"></li>
+
+					<li>
+						<button class="w3-btn w3-brown"
+							onclick="loadData('${pageContext.request.contextPath}/team/join.do');">검색</button>
+					</li>
+				</div>
+
+
 			</ul>
 
-			<form id="myForm" class="navbar-form navbar-right" method="post"
-				action="${pageContext.request.contextPath}/team/join.do">
-				<div class="form-group">
-					<input type="text" class="form-control" name="teamCode"
-						onkeydown="return setOnlyNumber();" onkeyup="removeChar();"
-						maxlength="4" id="teamCode" placeholder="팀 코드 입력">
-				</div>
-				<button type="button"
-					onclick="loadData('${pageContext.request.contextPath}/team/join.do');"
-					class="btn btn-default">검색</button>
-			</form>
-
 		</div>
-	</nav>
+	</header>
 
-	<div id="wrapper-container">
+	<div class="w3-container">
+		<div class="w3-panel w3-sand w3-leftbar w3-card-12"
+			style="padding: 20px">
+			<p>
+				<i class="w3-serif w3-xlarge">조직을 승리로 이끄는 힘의 25%는 실력이고 나머지 75%는
+					팀워크이다.&nbsp&nbsp&nbsp by 딕 버메일</i>
+			</p>
 
-		<div id="contents">
-
-			<h2 id="title" style="margin-bottom: 20px">팀 목록</h2>
-
-			<c:forEach items="${teamList}" var="team" varStatus="cntOfTeam">
-
-				<form name="teamLink" method="post"
-					action="${pageContext.request.contextPath}/team/search.do">
-
-					<figure class="white">
-						<input type="text" value="${team.code}" name="teamCode" hidden>
-						<a href="javascript:submitWithScript(${cntOfTeam.count});">
-
-
-							<div id="wrapper-part-info">
-
-								<div class="part-info-image">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/team.png"
-										alt="np" style="width: 24px; height: 24px">
-								</div>
-								<div id="part-info" value="${team.name}" name="part-info">${team.name}</div>
-							</div>
-						</a>
-					</figure>
-				</form>
-			</c:forEach>
-
+			<p>
+				<strong>당신의 일을 성공적으로 수행하게 도와줄 팀을 찾아보세요.</strong>
+			</p>
 		</div>
 
 	</div>
-	
-	<div id="snackbar">Some text some message..</div>
+
+	<div class="w3-container w3-padding-xxlarge">
+
+
+		<div class="w3-bottombar" style="margin-bottom: 30px;">
+			<h2>팀 목록</h2>
+		</div>
+
+		<c:forEach items="${teamList}" var="team" varStatus="cntOfTeam">
+			<form name="teamLink" method="post" style="display: inline-block;"
+				action="${pageContext.request.contextPath}/team/search.do">
+
+				<figure class="w3-card-12 w3-red w3-hover-Khaki">
+
+					<input type="text" value="${team.code}" name="teamCode" hidden>
+
+					<div class="imgContainer">
+						<img
+							src="${pageContext.request.contextPath}/resources/images/team.png">
+					</div>
+
+					<a href="javascript:submitWithScript(${cntOfTeam.count});"
+						style="text-decoration: none">
+						<div class="teamNameContainer" value="${team.name}">
+							<strong>${team.name}</strong>
+						</div>
+					</a>
+
+				</figure>
+
+			</form>
+		</c:forEach>
+	</div>
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
@@ -319,8 +145,8 @@ to {
 					</div>
 					<div class="modal-footer">
 
-						<button type="submit" class="btn btn-info btn-lg">생성</button>
-						<button type="button" class="btn btn-info btn-lg">취소</button>
+						<button type="submit" class="w3-btn w3-brown w3-xlarge w3-round">생성</button>
+						<button type="button" class="w3-btn w3-brown w3-xlarge w3-round" data-dismiss="modal">취소</button>
 					</div>
 				</div>
 
@@ -330,6 +156,12 @@ to {
 
 	</div>
 
+
+	<div id="snackbar">Some text some message..</div>
 </body>
+
+
+<footer> </footer>
+
 
 </html>

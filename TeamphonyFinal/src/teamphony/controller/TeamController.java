@@ -264,7 +264,7 @@ public class TeamController {
 
 		model.addAttribute("teamList", teamList);
 
-		return "team/main2";
+		return "team/main";
 
 	}
 }
