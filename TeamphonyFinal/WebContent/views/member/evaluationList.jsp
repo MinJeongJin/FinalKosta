@@ -64,61 +64,27 @@
 	margin-bottom: 80px;
 }
 
-.card {
-	background: #FFF;
-	border: 1px solid #AAA;
-	border-bottom: 3px solid #BBB;
-	padding: 0px;
-	margin-left: 15px;
-	margin-right: 15px;
-	margin-bottom: 15px;
-	overflow: hidden;
+#check {
+	display: none;
 }
 
-.card h1 {
-	margin: 0px;
-	padding: 10px;
-	padding-bottom: 0px;
+#imagView{
+	dispaly: none;
 }
 
-.card p {
-	margin: 0px;
-	padding: 10px;
+#videoView {
+	dispaly: none;
 }
 
-.float-left .card {
-	float: left;
-	width: 300px;
-	height: 270px;
+#fileView {
+	dispaly: none;
 }
 
-.header {
-	background-color: darkgrey;
-}
-
-.float-right {
-	float: right;
-	width: 100%;
-}
-
-.float-right .right {
-	float: right;
-	display: inline-block; 
-}
-
-.float-right .right  a{
-	float: right;
-	display: inline-block; 
-}
-
-.float-right .right form {
-	float: right;
-	display: inline-block; 
+.evaluationProfile{
+	witdh : 240px;
+	height : 160px;
 }
 </style>
-
-
-
 
 </head>
 
@@ -171,61 +137,58 @@
 						</div>
 
 						<ul class="nav navbar-nav navbar-right">
-							<li class=""><a href="javascript:;"
-								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="${pageContext.request.contextPath}/resources/images/avatar.png"
-									alt="">tnghsla13 <span class=" fa fa-angle-down"></span>
-							</a>
+							<li class="">
+								<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
+									<img src="${pageContext.request.contextPath}/resources/images/avatar.png" alt="">${member.alias}
+									<span class=" fa fa-angle-down"></span>
+								</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
 									<li><a href="javascript:;">Help</a></li>
-									<li><a href="${pageContext.request.contextPath}/member/logout.do"><i
-											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-								</ul></li>
+									<li><a href="${pageContext.request.contextPath}/member/logout.do"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+								</ul>
+							</li>
 						</ul>
 					</nav>
 				</div>
 			</div>
 			<!-- /top navigation -->
-			<div class="content float-right">
-				<div class="right" inline-block>
-					<a class="btn btn-success btn-lg"
-						href="${pageContext.request.contextPath}/views/post/createPost.jsp" >등록</a>
-					<form
-						action="${pageContext.request.contextPath}/post/searchBycontents.do">
-						<input type="text" name="search">
-						<button type="submit" class="btn btn-info btn-lg">검색</button>
-					</form>
-				</div>
-			</div>
+
 			<!-- page content -->
 			<div class="right_col" role="main">
+
 				<div class="container" id="teamManage">
-					<div class="content float-left">
-						<c:choose>
-							<c:when test="${listPost eq null || empty listPost }">
-								<p>게시물이 존재하지 않습니다. 팀원들과 공유하고 싶은 자료를 올려보세요.</p>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${listPost}" var="post" varStatus="status">
-									<a class="card"
-										href="${pageContext.request.contextPath}/post/detail.do?postId=${post.id}">
-										<div class="header">
-											<h2>${post.member.memberId }</h2>
-										</div>
-										<div class="body">
-											<p>${post.contents }</p>
-										</div>
-									</a>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</div>
+					<h2 id="menuTitle">평가 회원 리스트</h2>
+					<table>
+						<colgroup>
+							<col width="100" align="center">
+							<col width="100" align="center">
+							<col width="100" align="center">
+							<col width="100" align="center">
+						</colgroup>
+						<thead>
+							<tr>
+								<td>프로필</td>
+								<td>아이디</td>
+								<td>별명</td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${memberList}" var="evaluationMember" varStatus="status" >
+								<c:if test="${evaluationMember.memberId ne member.memberId }">
+									<tr>
+										<td><img class="evaluationProfile" alt="사진 없음" src="${evaluationMember.imagePath}"></td>
+										<td>${evaluationMember.memberId}</td>
+										<td>${evaluationMember.alias}</td>
+										<td><a href="${pageContext.request.contextPath}/member/evaluation.do?memberId=${evaluationMember.memberId}"  class="btn btn-success btn-lg">평가하기</a></td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-
 </html>

@@ -9,5 +9,5 @@ public interface MemberService {
 	void removeMember(String memberId);
 	boolean checkMember(Member member);
 	Member findMemberByMemberId(String memberId);
-	void saveStarPoint(Member member);
+	void saveStarPoint(String memberId, int starPoint);
 }

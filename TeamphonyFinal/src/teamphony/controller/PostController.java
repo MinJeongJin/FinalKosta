@@ -242,7 +242,7 @@ public class PostController {
 	}
 	
 	@RequestMapping("delete.do")
-	public String deletePost(int postId, HttpSession session){
+	public String erasePost(int postId, HttpSession session){
 		postService.removePost(postId);
 		int teamCode = (int)session.getAttribute("teamCode");
 		return "redirect:/post/list.do?teamId="+teamCode;

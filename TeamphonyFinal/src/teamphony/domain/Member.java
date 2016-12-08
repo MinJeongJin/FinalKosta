@@ -7,6 +7,7 @@ public class Member {
 	private String alias;
 	private String imagePath;
 	private double starPoint;
+	private double star;
 
 	public Member() {}
 
@@ -59,6 +60,10 @@ public class Member {
 
 	public void setStarPoint(double starPoint) {
 		this.starPoint = starPoint;
+	}
+	
+	public double getStar(){
+		return Math.round(starPoint/2.0);
 	}
 
 }

@@ -1,7 +1,9 @@
 package teamphony.store.logic;
 
+
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -87,12 +89,31 @@ public class MemberStoreLogic implements MemberStore {
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			member = mapper.selectMemberByMemberId(memberId);
+			List<Integer> list = mapper.getStarPoint(memberId);
+			int sum=0;
+			for (Integer starPoint : list) {
+				sum+=starPoint;
+			}
+			member.setStarPoint((double)sum/list.size());
 		} catch (Exception e) {
 		}finally{
 			session.close();
 		}
-		
 		return member;
+	}
+
+	@Override
+	public void insertStarPoint(String memberId, int starPoint) {
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			mapper.insertStarPoint(memberId, starPoint);
+			System.out.println(memberId+" "+starPoint);
+			session.commit();
+		} catch (Exception e) {
+		}finally{
+			session.close();
+		}
 	}
 
 }

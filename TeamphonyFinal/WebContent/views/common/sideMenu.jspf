@@ -33,7 +33,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath}/member/evaluation.do">
+						<a href="${pageContext.request.contextPath}/member/evaluationList.do">
 							<i class="fa fa-bar-chart-o"></i> 팀원평가 
 							<span class="fa fa-chevron-down"></span>
 						</a>
@@ -75,7 +75,7 @@
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a href="${pageContext.request.contextPath}/member/evaluation.do"><i class="fa fa-bar-chart-o"></i> 팀원평가 <span
+					<li><a href="${pageContext.request.contextPath}/member/evaluationList.do"><i class="fa fa-bar-chart-o"></i> 팀원평가 <span
 							class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 

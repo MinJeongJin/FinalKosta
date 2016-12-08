@@ -47,9 +47,8 @@ public class MemberServiceLogic implements MemberService {
 	}
 
 	@Override
-	public void saveStarPoint(Member member) {
-		// TODO Auto-generated method stub
-
+	public void saveStarPoint(String memberId, int starPoint) {
+		store.insertStarPoint(memberId, starPoint);
 	}
 
 }

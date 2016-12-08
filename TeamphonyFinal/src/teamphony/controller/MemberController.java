@@ -1,8 +1,6 @@
 package teamphony.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -15,12 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import teamphony.domain.Member;
 import teamphony.service.facade.MemberService;
@@ -29,7 +23,6 @@ import teamphony.service.facade.TeamService;
 @Controller
 @RequestMapping("member")
 public class MemberController {
-	private static final int MAX_SIZE = 1024 * 1024 * 20;
 	private static final String filePath = "resources\\images\\";
 
 	@Autowired
@@ -220,26 +213,34 @@ public class MemberController {
 		return "redirect:/views/common/login.jsp";
 	}
 	
-	@RequestMapping(value="evaluation", method=RequestMethod.GET)
-	public String EvaluationMember(HttpSession session, Model model){
+	@RequestMapping(value="evaluationList", method=RequestMethod.GET)
+	public String EvaluationMemberList(HttpSession session, Model model){
 		int teamCode = (int)session.getAttribute("teamCode");
 		
 		List<Member> list=teamService.findMembersByTeamCode(teamCode);
 		
 		model.addAttribute("memberList",list);
 		
+		return "/member/evaluationList";
+	}
+	
+	@RequestMapping(value="evaluation", method=RequestMethod.GET)
+	public String EvaluationMember(String memberId, Model model){
+		
+		Member member = service.findMemberByMemberId(memberId);
+		
+		model.addAttribute("evaluationMember",member);
+		
 		return "/member/evaluationMember";
 	}
 	
 	@RequestMapping(value="evaluation", method=RequestMethod.POST)
-	public String EvaluationMember(HttpSession session, @RequestParam("memberId") List<String> memberList, @RequestParam("starPoint") List<Integer> starPointList ){
+	public String EvaluationMember(String memberId, int starPoint){
+		System.out.println(memberId);
+		System.out.println(starPoint);
+		service.saveStarPoint(memberId, starPoint);
 		
-		System.out.println("memberController");
-		
-		System.out.println(starPointList.size());
-		System.out.println(memberList.size());
-		
-		return "redirect:/view/team/main.jsp?teamCode="+(int)session.getAttribute("teamCode");
+		return "redirect:/team/main.do";
 	}
 
 
