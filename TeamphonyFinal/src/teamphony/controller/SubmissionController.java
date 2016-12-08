@@ -166,14 +166,26 @@ public class SubmissionController {
 	}
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
-	public String evaluateAssignment(String point, String taskId) {
+	public String evaluateAssignment(String taskId, String point, String evaluated,String evaluationCnt ) {
+		int id=Integer.parseInt(taskId);
+		int poin = Integer.parseInt(point);
+		int count = Integer.parseInt(evaluationCnt);
+		boolean evalute = Boolean.valueOf(evaluated);
 		
-		Task task = new Task();
+		System.out.println("taskId= "+ taskId);
+		System.out.println("point= "+ point);
+		System.out.println("evaluationCnt= "+ evaluationCnt);
+		System.out.println("evaluated= "+ evaluated);
 		
-		task.setTaskId(Integer.parseInt(taskId));
-		task.setPoint(Integer.parseInt(point));
+		Task task = new Task(id,evalute,count,poin);
 		
-		service.modifyTask(task);
+		System.out.println(task.toString());
+		
+		
+		
+		
+		
+//		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";
 	}
