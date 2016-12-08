@@ -2,13 +2,14 @@ package teamphony.domain;
 
 public class Post {
 
+	private int postId;
 	private String contents;
 	private String imagePath;
 	private String videoLink;
 	private String filePath;
 	private Member member;
 	private int teamCode;
-	private int id;
+	
 	
 	public Post(){}
 	
@@ -18,11 +19,11 @@ public class Post {
 		this.member = member;
 	}
 	
-	public Post(String contents,  Member member, int teamCode, int id){
+	public Post(String contents,  Member member, int teamCode, int postId){
 		this.contents = contents;
 		this.teamCode = teamCode;
 		this.member = member;
-		this.id = id;
+		this.postId = postId;
 	}
 
 	public int getTeamCode() {
@@ -33,12 +34,12 @@ public class Post {
 		this.teamCode = teamCode;
 	}
 
-	public int getId() {
-		return id;
+	public int getPostId() {
+		return postId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
 
 	public String getContents() {

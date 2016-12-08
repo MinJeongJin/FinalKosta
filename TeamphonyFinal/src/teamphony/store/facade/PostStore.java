@@ -8,7 +8,7 @@ public interface PostStore {
 
 	void insertPost(Post post);
 	void updatePost(Post post);
-	void deletePost(int postId);
+	void deletePost(int postCode);
 	List<Post> selectAllPost(int teamId);
 	List<Post> selectPostByMemberId(String memberId);
 	List<Post> selectPostByContents(String contents);

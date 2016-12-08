@@ -15,9 +15,6 @@ public class MemberServiceLogic implements MemberService {
 
 	@Override
 	public void registerMember(Member member) {
-		System.out.println(member.getMemberId());
-		System.out.println(member.getPassword());
-		System.out.println(member.getAlias());
 		store.insertMember(member);
 	}
 
@@ -32,16 +29,6 @@ public class MemberServiceLogic implements MemberService {
 	}
 
 	@Override
-	public boolean checkMember(Member member) {
-
-		Member loginMember = store.selectMemberByMemberId(member.getMemberId());
-		if (!loginMember.getMemberId().isEmpty() && loginMember.getPassword().equals(member.getPassword())) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
 	public Member findMemberByMemberId(String memberId) {
 		return store.selectMemberByMemberId(memberId);
 	}
@@ -50,5 +37,4 @@ public class MemberServiceLogic implements MemberService {
 	public void saveStarPoint(String memberId, int starPoint) {
 		store.insertStarPoint(memberId, starPoint);
 	}
-
 }

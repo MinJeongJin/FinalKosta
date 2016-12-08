@@ -26,17 +26,14 @@ public class MemberController {
 	private static final String filePath = "resources\\images\\";
 
 	@Autowired
-	private MemberService service;
+	private MemberService memberService;
 	
 	@Autowired
 	private TeamService teamService;
 
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
-		System.out.println(loginId);
-		Member result = service.findMemberByMemberId(loginId);
-		System.out.println(result.getMemberId());
-		
+		Member result = memberService.findMemberByMemberId(loginId);
 		if (result.getAlias() == null || result.getPassword().length() == 0) {
 			model.addAttribute("result", "notId");
 			return "/common/login";
@@ -53,7 +50,7 @@ public class MemberController {
 
 	@RequestMapping(value = "create.do", method = RequestMethod.POST)
 	public String createMember(String memberId, String password, String alias, HttpServletRequest request) {
-		Member member = new Member(memberId, alias, password);
+		Member member = new Member(memberId, password, alias);
 
 		// http://addio3305.tistory.com/83 참조
 
@@ -66,7 +63,6 @@ public class MemberController {
 		String originalFileName = null;
 		
 		String root = request.getSession().getServletContext().getRealPath("/");
-		System.out.println(root+filePath + memberId);
 
 		// 파일을 저장할 폴더 설정
 		File file = new File(root+filePath + memberId + "\\");
@@ -99,22 +95,9 @@ public class MemberController {
 				}
 			}
 		}
-		service.registerMember(member);
+		memberService.registerMember(member);
 
 		return "/common/login";
-	}
-
-	@RequestMapping("check.do")
-	public String checkMember(HttpSession session, String password, String flag) {
-
-		Member member = (Member) session.getAttribute("member");
-		System.out.println(password);
-		System.out.println(member.getPassword());
-		System.out.println(flag);
-		if (member.getPassword().equals(password)) {
-			return "/member/myPage";
-		}
-		return null;
 	}
 
 	@RequestMapping(value = "revise", method = RequestMethod.POST)
@@ -177,7 +160,7 @@ public class MemberController {
 			member.setAlias(alias);
 		}
 
-		service.modifyMember(member);
+		memberService.modifyMember(member);
 		session.setAttribute("member", member);
 
 		return "/member/myPage";
@@ -190,7 +173,7 @@ public class MemberController {
 
 		System.out.println(member.getMemberId());
 
-		Member reviseMember = service.findMemberByMemberId(member.getMemberId());
+		Member reviseMember = memberService.findMemberByMemberId(member.getMemberId());
 
 		model.addAttribute("member", reviseMember);
 		System.out.println("ok");
@@ -198,11 +181,11 @@ public class MemberController {
 	}
 
 	@RequestMapping("delete.do")
-	public String delete(HttpSession session) {
+	public String eraseMember(HttpSession session) {
 
 		Member member = (Member) session.getAttribute("member");
 		System.out.println(member.getMemberId());
-		service.removeMember(member.getMemberId());
+		memberService.removeMember(member.getMemberId());
 
 		return "/common/login";
 	}
@@ -214,7 +197,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="evaluationList", method=RequestMethod.GET)
-	public String EvaluationMemberList(HttpSession session, Model model){
+	public String evaluationMemberList(HttpSession session, Model model){
 		int teamCode = (int)session.getAttribute("teamCode");
 		
 		List<Member> list=teamService.findMembersByTeamCode(teamCode);
@@ -225,9 +208,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="evaluation", method=RequestMethod.GET)
-	public String EvaluationMember(String memberId, Model model){
+	public String evaluationMember(String memberId, Model model){
 		
-		Member member = service.findMemberByMemberId(memberId);
+		Member member = memberService.findMemberByMemberId(memberId);
 		
 		model.addAttribute("evaluationMember",member);
 		
@@ -235,10 +218,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="evaluation", method=RequestMethod.POST)
-	public String EvaluationMember(String memberId, int starPoint){
-		System.out.println(memberId);
-		System.out.println(starPoint);
-		service.saveStarPoint(memberId, starPoint);
+	public String evaluationMember(String memberId, int starPoint){
+		memberService.saveStarPoint(memberId, starPoint);
 		
 		return "redirect:/team/main.do";
 	}

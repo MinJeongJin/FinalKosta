@@ -249,7 +249,7 @@ public class PostController {
 	}
 	
 	@RequestMapping("searchBycontents.do")
-	public String searchByContents(String search, Model model){
+	public String searchPostByContents(String search, Model model){
 		List<Post> list = postService.findPostByContents(search);
 		model.addAttribute("listPost", list);
 		return "/post/postList"; 

@@ -7,7 +7,6 @@ public class Member {
 	private String alias;
 	private String imagePath;
 	private double starPoint;
-	private double star;
 
 	public Member() {}
 
@@ -16,7 +15,7 @@ public class Member {
 		this.password = password;
 	}
 
-	public Member(String memberId, String alias, String password) {
+	public Member(String memberId, String password, String alias) {
 		this.memberId = memberId;
 		this.password = password;
 		this.alias = alias;
