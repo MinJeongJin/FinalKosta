@@ -36,6 +36,7 @@ public class Task {
 	}
 
 	public Task() {
+		point= 0;
 		evaluated= false;
 		evaluationCnt=0;
 	}

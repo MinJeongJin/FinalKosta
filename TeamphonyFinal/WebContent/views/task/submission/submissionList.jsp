@@ -207,7 +207,7 @@ h1 {
 									<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}">${task.title }</a>
 								</td>
 								<td>
-									제출자 미구현
+									${loginedMember.memberId }
 								</td>
 								<td>
 									<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>

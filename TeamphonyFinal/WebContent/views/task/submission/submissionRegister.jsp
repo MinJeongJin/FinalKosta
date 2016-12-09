@@ -32,8 +32,11 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea id="contents" name="contents"
-						class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요."></textarea></td>
+				<td>
+					<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요."></textarea>
+					<input type="hidden" name="memberId" value="${loginedMember.memberId }"/>
+				</td>
+							
 			</tr>
 			<tr>
 				<th>첨부파일</th>

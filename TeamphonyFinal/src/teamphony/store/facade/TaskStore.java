@@ -2,11 +2,13 @@ package teamphony.store.facade;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import teamphony.domain.Task;
 
 public interface TaskStore {
 
-	void insertTask(Task task);
+	void insertTask(Task task, HttpSession httpSession);
 
 	void updateTask(Task task);
 

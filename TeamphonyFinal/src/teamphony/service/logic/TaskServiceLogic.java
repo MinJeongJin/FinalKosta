@@ -2,6 +2,8 @@ package teamphony.service.logic;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,9 @@ public class TaskServiceLogic implements TaskService {
 	
 
 	@Override
-	public void registerTask(Task task) {
+	public void registerTask(Task task, HttpSession httpSession) {
 		
-		store.insertTask(task);
+		store.insertTask(task, httpSession);
 	}
 	
 

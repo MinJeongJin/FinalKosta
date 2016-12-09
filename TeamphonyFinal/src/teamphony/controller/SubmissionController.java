@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import teamphony.domain.Member;
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
 import teamphony.service.facade.TaskService;
@@ -65,7 +66,8 @@ public class SubmissionController {
 		
 		task.setTaskFileList(taskFileList);
 		
-		service.registerTask(task); // task_tb 저장
+		System.out.println(task.toString());
+//		service.registerTask(task); // task_tb 저장
 		
 		return "redirect:searchAll.do";
 	}
@@ -114,6 +116,8 @@ public class SubmissionController {
 		}
 
 		task.setTaskFileList(taskFileList);
+		
+		
 		service.modifyTask(task);
 		; // task_tb 저장
 
@@ -146,9 +150,13 @@ public class SubmissionController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(HttpSession session, Model model) {
+		Member loginedMember = new Member();
+		loginedMember.setMemberId("hiyogils");
+		
 // submissionRegister.jsp 에서 flag 값을 준다. 
 //현재는 test 중이라서 임의로 flag 값을 부여 하였다
 		session.setAttribute("flag", 1);
+		session.setAttribute("loginedMember", loginedMember);
 		int flag = (int)session.getAttribute("flag");
 		
 		

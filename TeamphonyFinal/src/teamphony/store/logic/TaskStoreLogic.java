@@ -5,6 +5,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,7 +38,7 @@ public class TaskStoreLogic implements TaskStore {
 	
 
 	@Override
-	public void insertTask(Task task) {
+	public void insertTask(Task task, HttpSession httpSession) {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
@@ -52,7 +54,10 @@ public class TaskStoreLogic implements TaskStore {
 				session.commit();
 				
 			}else if (task.getFlag() == 1) {
+				
+					Member loginedMember = (Member)httpSession.getAttribute("loginedMember");
 					mapper.insertSubmission(task);
+					mapper.insertTaskMember(task.getTaskId(), loginedMember.getMemberId());
 					session.commit();
 					
 					int taskId = task.getTaskId();
