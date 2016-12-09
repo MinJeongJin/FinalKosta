@@ -12,15 +12,15 @@ public class Task {
 ////부여 과제 명단을 위한 변수 선언
 	private String[] memberIdList;
 	private int point;
-	private Date evaluationPeriodStart;
-	private Date evaluationPeriodEnd;
-	private Date deadline;
 	private int flag;
 	private List<TaskFile> taskFileList;
 //평가 여부를 위한 변수 선언// ture == 1 , flase == 0 
 	private boolean evaluated;
 //평가 횟수를 위한 변수 선언
 	private int evaluationCnt;
+	private Date deadline;
+	private Date evaluationPeriodStart;
+	private Date evaluationPeriodEnd;
 	
 	
 	public int getTaskId() {
