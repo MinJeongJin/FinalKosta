@@ -64,30 +64,17 @@
 	margin-bottom: 80px;
 }
 
-#check {
+#okay, #reset{
 	display: none;
-}
-
-#imagView{
-	dispaly: none;
-}
-
-#videoView {
-	dispaly: none;
-}
-
-#fileView {
-	dispaly: none;
 }
 </style>
 
 </head>
 
 
-<body class="nav-md">
+<body class="nav-md" onload="showInput();">
 	<div class="container body">
 		<div class="main_container">
-
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
@@ -154,60 +141,44 @@
 
 				<div class="container" id="teamManage">
 					<h2 id="menuTitle">게시물</h2>
-
-					<div align="right">
-						<a class="btn btn-info" onclick="revise();">수정</a>
-					</div>
-
-					<form enctype="multipart/form-data" method="post"
-						action="${pageContext.request.contextPath}/post/revise.do">
-						<input type="hidden" value="${post.postId }" name="postId">
-
-						<div class="row">
-							<div class="form-group col-xs-7">
-								<label for="contents">내용 : </label>
-								<textarea class="form-control input-lg" name="contents" id="contents" style="width: 100%; height: 150px;" readOnly>${post.contents }</textarea>
-							</div>
-						</div>
-
-						<div id="player"></div>
-
-						<div class="row videoView">
-							<div class="form-group col-xs-7 videoView">
-								<label for="contents">영상 링크 : </label> 
-								<input type="text" class="form-control input-lg" name="videoLink" id="videoLink" value="https://www.youtu.be/${post.videoLink }" readOnly>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="form-group col-xs-7">
-								<label for="contents">사진 : </label> 
-								<img class="form-control input-lg" id="imageView" name="imagePath" src="${post.imagePath }">
-							</div>
-						</div>
-
-						<div class="row imageView">
-							<div class="form-group col-xs-7 imageView">
-								<label for="contents">사진 첨부 : </label> 
-								<input type="file" class="form-control input-lg imageView" id="imagePath" name="imagePath" value="${post.imagePath }" readOnly>
-							</div>
-						</div>
-
-						<div class="row fileView">
-							<div class="form-group col-xs-7">
-								<label for="contents">파일 첨부 : </label> 
-								<input type="file" class="form-control input-lg" id="filePath" name="filePath" value="${post.filePath }" readOnly>
-							</div>
-						</div>
-
-
-						<div>
-							<c:if test="${post.member.memberId eq member.memberId }">
-
-								<button type="submit" class="btn btn-info btn-lg" id="check">확인</button>
-								<a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/post/delete.do?postId=${post.postId}">삭제</a>
-							</c:if>
-							<a href="${pageContext.request.contextPath}/post/postList.do?teamCode=${teamCode}" class="btn btn-warning btn-lg">뒤로</a>
+					<form action="${pageContext.request.contextPath}/post/revise.do" method="post">
+						<table class="table">
+							<colgroup>
+								<col width="150">
+								<col width="*">
+							</colgroup>
+							<a href="${pageContext.request.contextPath}/post/erase.do?postId=${post.postId}" class="glyphicon glyphicon-trash pull-right" style="padding:10px">삭제</a>
+							<a onclick="revise();" href="#" id="revise" class="glyphicon glyphicon-cog pull-right" style="padding:10px">수정</a>
+							<tbody>
+								<tr>
+									<th>내용</th>
+									<td><textarea id="contents" name="contents" class="form-control" readonly>${post.contents}</textarea></td>
+								</tr>
+								<tr id="videoView" hidden>
+									<th>영상</th>
+									<td>
+										<div id="player">asdfgadad</div>
+										<input type="text" name="videoLink" id="videoLink" value="${post.videoLink}" > 
+									</td>
+								</tr>
+								<tr id="imageView" hidden>
+									<th>이미지</th>
+									<td>
+										<img src="${post.imagePath}">
+										<input type="text" id="imagePath" name="imagePath" value="${post.imagePath}" >
+									</td>
+								</tr>
+								<tr id="fileView" hidden>
+									<th>첨부파일</th>
+									<td><input type="file" id="filePath" name="filePath" value="${post.filePath }"><input type="text" value="${post.filePath}"> </td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<div align="center">
+							<a id="back" class="btn" type="reset" href="${pageContext.request.contextPath}/post/list.do?teamCode=${teamCode}">목록으로</a>
+							<input type="button" id="reset" class="btn" type="reset" value="취소" onclick="cancle()">
+							<a id="okay" class="btn btn-success" type="submit" hidden>저장</a>
 						</div>
 					</form>
 				</div>
@@ -261,25 +232,63 @@
 
 		function revise() {
 			$('#contents, #videoLink, #imagePath, #filePath').attr('readonly', false);
-			$('#check').show();
+			$('#okay, #reset, #videoView, #imageView, #fileView').show();
+			document.getElementById("back").style.display="none";
 		};
+		
+		$(document).ready(function(){
+			if ($("#videoLink").value !== "pass") {
+				$("#videoView").show();
+			}
+			if (document.getElementById("imagePath").value !== "pass") {
+				$("#imageView").show();
+			}
+			if (document.getElementById("filePath").value !== "pass") {
+				$("#fileView").show();
+			}
+		})
 
-		function change() {
-
-			var videoLink = ${post.videoLink};
-			var imagePath = ${post.imagePath};
-			var filePath = ${post.filePath};
+		function showInput() {
+			if (document.getElementById("videoLink").value !== "pass") {
+				$("#videoView").show();
+			}
+			if (document.getElementById("imagePath").value !== "pass") {
+				$("#imageView").show();
+			}
+			if (document.getElementById("filePath").value !== "pass") {
+				$("#fileView").show();
+			}
+		};
+		
+		function cancle(){
 			
-
-			if (!videoLink === "pass") {
-				$('#videoView').show();
+			var contents = document.getElementById("contents");
+			var videoLink = document.getElementById("videoLink");
+			var imagePath = document.getElementById("imagePath");
+			var filePath = document.getElementById("filePath");
+			
+			contents.readOnly = true;
+			videoLink.readOnly = true;
+			imagePath.readOnly = true;
+			filePath.readOnly = true;
+			
+			contents.value = "${post.contents}";
+			videoLink.value = "${post.videoLink}";
+			imagePath.value = "${post.imagePath}";
+			filePath.value = "${post.filePath}";
+			
+			if (videoLink.value == "pass") {
+				$("#videoView").hide();
 			}
-			if (!(imagePath === "pass")) {
-				$('#imageView').show();
+			
+			if (imagePath.value == "pass") {
+				$("#imageView").hide();
 			}
-			if (!filePath === "pass") {
-				$('#fileView').show();
+			
+			if (filePath.value == "pass") {
+				$("#fileView").hide();
 			}
+			
 		};
 	</script>
 </body>

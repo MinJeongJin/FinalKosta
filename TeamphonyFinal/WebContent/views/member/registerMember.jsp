@@ -103,7 +103,7 @@
 						<img src="resources/images/default.png" alt="사진없음"
 							id="profileImage" width="90" height="110"> <br> <input
 							type="file" id="imagePath" name="imagePath" />
-						<button type="button" onclick="myFunction()">등록</button>
+						<button type="button" onclick="myFunction();">등록</button>
 						<span class="input input--hoshi"> <input
 							class="input__field input__field--hoshi" type="text"
 							id="memberId" name="memberId" /> <label

@@ -1,120 +1,89 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html lang="en">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<html>
+<head>
+<title>Welcome to Teamphony</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- CSS -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/main.css" />
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Tangerine">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainCustomStyle.css">
+<!-- /CSS -->
 
-<!--Google Fonts-->
-<link href='https://fonts.googleapis.com/css?family=Playfair+Display'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Lato:400,700'
-	rel='stylesheet' type='text/css'>
-
-<script type="text/javascript">
-	function myFunction() {
-
-		var path = document.getElementById("imagePath").value;
-		document.getElementById("profileImage").src = path;
-	}
+<!-- Script -->
+<script
+	src="${pageContext.request.contextPath}/resources/js/mainCustomScript.js">
+	
 </script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 
-<style type="text/css">
-.date {
-	height: 100px;
-	width: 100px;
-}
-
-table tr td {
-	text-align: left;
-	vertical-align: top;
-}
-
-.red {
-	color: red;
-}
-
-.blue {
-	color: blue;
-}
-</style>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- /Script -->
 
 </head>
-<body>
-
-	<!-- Header -->
-	<section id="header">
-		<header>
-			<span class="image avatar"> <img src="${member.imagePath }"
-				alt="사진없음" width="90" height="110" />
-			</span>
-			<h1 id="logo">${member.memberId}</h1>
-			<p>${member.alias}</p>
-		</header>
-		<nav id="nav">
-			<ul>
+<body class="w3-light-gray">
+	<header id="mainHeader">
+		<div class="w3-container">
+			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
+				<li class="w3-navitem w3-tangerine">Teamphony</li>
+				<li><a href="#myModal" data-toggle="modal">회원 정보</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/resources/views/member/myPage.jsp"
-					>마이페이지</a></li>
-				<li><a href="#two" class="active">회원 정보 수정</a></li>
-				<li><a href="#three">팀 탈퇴</a></li>
-				<li><a href="#four">회원 탈퇴</a></li>
-				<li><a href="#four">개발자</a></li>
+					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">회원 수정</a></li>
+				<li><a href="#">회원 탈퇴</a></li>
 			</ul>
-		</nav>
-	</section>
-	<!-- Wrapper -->
-	<div id="wrapper">
-		<!-- Main -->
-		<div id="main">
-			<!-- One -->
-			<section id="one">
-				<form action="${pageContext.request.contextPath}/member/revise.do" method="Post" enctype="multipart/form-data">
-					<table>
-						<tr>
-							<td>비밀번호</td>
-							<td><input type="password" name="password" /></td>
-						</tr>
-						<tr>
-							<td>비밀번호 확인</td>
-							<td><input type="password" /></td>
-						</tr>
-						<tr>
-							<td>별명</td>
-							<td><input type="text" name="alias" value="${member.alias }" ></td>
-						</tr>
-						<tr>
-							<td>사진</td>
-							<td><input type="file" name="imagePath" /></td>
-						</tr>
-					</table>
-					<button type="submit">수정</button>
-				</form>
-			</section>
 		</div>
+	</header>
+	<div class="w3-container w3-padding-xxlarge">
+		<div class="w3-bottombar" style="margin-bottom: 30px;">
+			<h2>회원 수정</h2>
+		</div>
+		<img alt="사진 없음" style="border-radius: 100%; display: block; overflow: hidden;" width="90" height="110" src="${pageContext.request.contextPath}/resources/images/avatar_g2.jpg">
+		<br>
+		<form action="${pageContext.request.contextPath}/member/revice.do" method="post"  enctype="multipart/form-data">
+			<table class="table table-bordered">
+				<colgroup>
+					<col width="60" />
+					<col width="100" />
+					<col width="*" />
+					<col width="150" />
+					<col width="120" />
+				</colgroup>
+				
+				<tr>
+					<th>프로필</th>
+					<td><input id="imagePath" type="file" name="imagePath" class="form-control" value=""></td>
+				</tr>
+				<tr>
+					<th>별명</th>
+					<td><input id="alias" type="text" name="alias" class="form-control" value=""></td>
+				</tr>
+				<tr>
+					<th>비밀번호</th>
+					<td><input id="password" type="password" name="password" class="form-control" value=""></td>
+				</tr>
+				<tr>
+					<th>비밀 번호 확인</th>
+					<td><input id="passwordCheck" type="password" name="passwordCheck" class="form-control" value=""></td>
+				</tr>
+			</table>
+			<div>
+				<div style="display: inline-block;"><button class="btn btn-info btn-lg">확인</button></div>
+				<div style="display: inline-block;"><button class="btn btn-danger btn-lg">취소</button></div>
+			</div>
+		</form>
 	</div>
-
-	<!-- Scripts -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.scrolly.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/skel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	<!-- Scripts -->
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/classie.js"></script>
-
 	<script>
 		(function() {
 			// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
@@ -151,6 +120,6 @@ table tr td {
 			}
 		})();
 	</script>
-
+	
 </body>
 </html>

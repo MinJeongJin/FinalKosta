@@ -1,88 +1,68 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html lang="en">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<html>
+<head>
+<title>Welcome to Teamphony</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- CSS -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/main.css" />
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Tangerine">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainCustomStyle.css">
+<!-- /CSS -->
 
-<style type="text/css">
-.date {
-	height: 100px;
-	width: 100px;
-}
+<!-- Script -->
+<script
+	src="${pageContext.request.contextPath}/resources/js/mainCustomScript.js">
+	
+</script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 
-table tr td {
-	text-align: left;
-	vertical-align: top;
-}
-
-.red {
-	color: red;
-}
-
-.blue {
-	color: blue;
-}
-</style>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- /Script -->
 
 </head>
-<body>
-
-	<!-- Header -->
-	<section id="header">
-		<header>
-			<span class="image avatar"> 
-				<img src="${member.imagePath }" alt="사진없음" width="90" height="110" />
-			</span>
-			<h1 id="logo">${member.memberId}</h1>
-			<p>${member.alias}</p>
-		</header>
-		<nav id="nav">
-			<ul>
-				<li><a href="${pageContext.request.contextPath}/resources/views/member/myPage.jsp">마이페이지</a></li>
-				<li><a href="#two" class="active">회원 정보 수정</a></li>
-				<li><a href="#three">팀 탈퇴</a></li>
-				<li><a href="#four">회원 탈퇴</a></li>
-				<li><a href="#four">개발자</a></li>
+<body class="w3-light-gray">
+	<header id="mainHeader">
+		<div class="w3-container">
+			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
+				<li class="w3-navitem w3-tangerine">Teamphony</li>
+				<li><a href="#myModal" data-toggle="modal">회원 정보</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">회원 수정</a></li>
+				<li><a href="#">회원 탈퇴</a></li>
 			</ul>
-		</nav>
-	</section>
-	<!-- Wrapper -->
-	<div id="wrapper">
-		<!-- Main -->
-		<div id="main">
-			<!-- One -->
-			<section id="one">
-			<form action="${pageContext.request.contextPath}/member/check.do">
-			
-				<table>
-					<tr>
-						<th>비밀 번호</th>
-						<td><input id="password" name="password" type="password"/></td>
-					</tr>
-					<tr>
-						<th>비밀 번호 확인</th>
-						<td><input id="passwordCheck" name="passwordCheck" type="password"/></td>
-					</tr>
-				</table>
-				<Button type="submit">확인</Button>
-				</form>
-			</section>
+		</div>
+	</header>
+	<div class="w3-container w3-padding-xxlarge">
+		<div class="w3-bottombar" style="margin-bottom: 30px;">
+			<h2>회원 확인</h2>
+		</div>
+		<table>
+			<tr>
+				<td>패스워드</td>
+				<td><input id="password" name = "password" type="password"></td>
+			</tr>
+			<tr>
+				<td>패스워드 확인</td>
+				<td><input type="password" id="passwordCheck" name="passwordCheck"></td>
+			</tr>
+		</table>
+		<div>
+			<div style="display: inline-block;"><button class="btn btn-info btn-lg">확인</button></div>
+			<div style="display: inline-block;"><button class="btn btn-danger btn-lg">취소</button></div>
 		</div>
 	</div>
-
-	<!-- Scripts -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.scrolly.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/skel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
 </body>
 </html>

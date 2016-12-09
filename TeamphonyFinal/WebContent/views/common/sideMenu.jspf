@@ -5,13 +5,13 @@
 <c:choose>
 	<c:when test="${leaderId ne memberId }">
 		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-			<div class="menu_section">
+			<div class="menu_section dropdown">
 				<ul class="nav side-menu">
 					<li><a href=""><i class="fa fa-home"></i> 팀 관리 <span
 							class="fa fa-chevron-down"></span></a>
-						<ul class="nav child_menu">
-
-						</ul>
+						<ul class="nav child_menu">test</ul>
+						<ul class="nav child_menu">test</ul>
+						<ul class="nav child_menu">test</ul>
 					</li>
 					<li><a href="${pageContext.request.contextPath}/post/list.do"><i
 							class="fa fa-edit"></i> 게시판 <span class="fa fa-chevron-down"></span></a>
@@ -19,10 +19,11 @@
 
 						</ul>
 					</li>
-					<li><a href="${pageContext.request.contextPath}"><i
-							class="fa fa-desktop"></i> 과제 <span class="fa fa-chevron-down"></span></a>
-						<ul class="nav child_menu">
-
+					<li data-brackets-id='850'><a data-brackets-id='851'><i data-brackets-id='852' class="fa fa-home"></i> Home <span data-brackets-id='853' class="fa fa-chevron-down"></span></a>
+	                    <ul data-brackets-id='854' class="nav child_menu">
+							<li data-brackets-id='855'><a data-brackets-id='856' href="index.html">Dashboard</a></li>
+							<li data-brackets-id='857'><a data-brackets-id='858' href="index2.html">Dashboard2</a></li>
+							<li data-brackets-id='859'><a data-brackets-id='860' href="index3.html">Dashboard3</a></li>
 						</ul>
 					</li>
 					<li><a
@@ -54,21 +55,34 @@
 		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 			<div class="menu_section">
 				<ul class="nav side-menu">
-					<li><a href=""><i class="fa fa-home"></i> 팀 관리 <span
+					<li><a ><i class="fa fa-home"></i> 팀 관리 <span
 							class="fa fa-chevron-down"></span></a>
-						<ul class="nav child_menu">
-
-						</ul></li>
+						<ul class="nav child_menu">test</ul>
+						<ul class="nav child_menu">test</ul>
+						<ul class="nav child_menu">test</ul>
+					</li>
 					<li><a
 						href="${pageContext.request.contextPath}/post/list.do"><i
 							class="fa fa-edit"></i> 게시판 <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 
 						</ul></li>
-					<li><a><i class="fa fa-desktop"></i> 과제 <span
-							class="fa fa-chevron-down"></span></a>
-						<ul class="nav child_menu">부여 과제</ul>
-						<ul class="nav child_menu">부여 과제 등록</ul></li>
+						
+					<li data-brackets-id='850'><a data-brackets-id='851'><i data-brackets-id='852' class="fa fa-home"></i> Home <span data-brackets-id='853' class="fa fa-chevron-down"></span></a>
+	                    <ul data-brackets-id='854' class="nav child_menu">
+							<li data-brackets-id='855'><a data-brackets-id='856' href="index.html">Dashboard</a></li>
+							<li data-brackets-id='857'><a data-brackets-id='858' href="index2.html">Dashboard2</a></li>
+							<li data-brackets-id='859'><a data-brackets-id='860' href="index3.html">Dashboard3</a></li>
+						</ul>
+					</li>
+					<li><a id="leaderTask" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-desktop"></i> 과제 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu dropdown-menu" aria-labelledby="leaderTask">
+							<li>과제 부여</li>
+							<li>과제 리스트</li>
+							<li>과제 평가</li>
+							<li>과제 수정</li>
+						</ul>
+					</li>
 					<li><a
 						href="${pageContext.request.contextPath}/schedule/calendar.do"><i
 							class="fa fa-table"></i> 일정 <span class="fa fa-chevron-down"></span></a>

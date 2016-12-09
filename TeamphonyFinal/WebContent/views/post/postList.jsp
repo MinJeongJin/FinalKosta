@@ -21,6 +21,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+<!-- w3 css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/w3.css">
 
 <!-- Custom Theme Style -->
 <link
@@ -64,28 +66,6 @@
 	margin-bottom: 80px;
 }
 
-.card {
-	background: #FFF;
-	border: 1px solid #AAA;
-	border-bottom: 3px solid #BBB;
-	padding: 0px;
-	margin-left: 15px;
-	margin-right: 15px;
-	margin-bottom: 15px;
-	overflow: hidden;
-}
-
-.card h1 {
-	margin: 0px;
-	padding: 10px;
-	padding-bottom: 0px;
-}
-
-.card p {
-	margin: 0px;
-	padding: 10px;
-}
-
 .float-left .card {
 	float: left;
 	width: 300px;
@@ -116,32 +96,22 @@
 	display: inline-block; 
 }
 </style>
-
-
-
-
 </head>
-
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
 						<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
 							<span>Teamphony</span></a>
 					</div>
-
 					<div class="clearfix"></div>
-
-
 					<!-- menu profile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
 							<img
-								src="${pageContext.request.contextPath}/resources/images/avatar.png"
+								src="${member.imagePath }"
 								alt="..." class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
@@ -150,19 +120,13 @@
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
-
 					<br />
-
 					<!-- sidebar menu -->
 					<%@ include file="/views/common/sideMenu.jspf"%>
 					<!-- /sidebar menu -->
-
-
 				</div>
 			</div>
-
 			<!-- top navigation -->
-
 			<div class="top_nav">
 				<div class="nav_menu">
 					<nav>
@@ -171,18 +135,17 @@
 						</div>
 
 						<ul class="nav navbar-nav navbar-right">
-							<li class=""><a href="javascript:;"
-								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="${pageContext.request.contextPath}/resources/images/avatar.png"
-									alt="">tnghsla13 <span class=" fa fa-angle-down"></span>
-							</a>
+							<li class=""><a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
+								<img src="${pageContext.request.contextPath}/resources/images/avatar.png"
+									alt="">tnghsla13 <span class=" fa fa-angle-down"></span> </a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="javascript:;"> Profile</a></li>
 									<li><a href="javascript:;">Help</a></li>
-									<li><a href="${pageContext.request.contextPath}/member/logout.do"><i
-											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-								</ul></li>
+									<li><a href="${pageContext.request.contextPath}/member/logout.do">
+										<i class="fa fa-sign-out pull-right"></i> Log Out</a>
+									</li>
+								</ul>
+							</li>
 						</ul>
 					</nav>
 				</div>
@@ -209,15 +172,26 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${listPost}" var="post" varStatus="status">
-									<a class="card"
-										href="${pageContext.request.contextPath}/post/detail.do?postId=${post.postId}">
-										<div class="header">
-											<h2>${post.member.memberId }</h2>
-										</div>
-										<div class="body">
-											<p>${post.contents }</p>
+									<a href="${pageContext.request.contextPath}/post/detail.do?postId=${post.postId}" class="w3-card-4 w3-hover-shadow" style="width:40%">
+										<header class="w3-container w3-light-grey">
+											<img src="${post.member.imagePath }" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:30px">
+											<h3>${post.member.memberId }</h3>
+										</header>
+										<div class="w3-container">
+											<c:if test="${post.imagePath ne pass}">
+												<b class="glyphicon glyphicon-paperclip"></b>
+											</c:if>
+											<c:if test="${post.videoLink ne pass}">
+												<b class="glyphicon glyphicon-hd-video"></b>
+											</c:if>
+											<c:if test="${post.imagePath ne pass}">
+												<b class="glyphicon glyphicon-picture"></b>
+											</c:if>
+											<hr>
+											<p>${post.contents}</p><br>
 										</div>
 									</a>
+									<br>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>

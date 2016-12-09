@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,14 +35,13 @@ public class MemberController {
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
 		Member result = memberService.findMemberByMemberId(loginId);
-		if (result.getAlias() == null || result.getPassword().length() == 0) {
+		if (ObjectUtils.isEmpty(result)) {
 			model.addAttribute("result", "notId");
 			return "/common/login";
 		} else if (!result.getPassword().equals(loginPw)) {
 			model.addAttribute("result", "true");
 			return "/common/login";
 		} else {
-			System.out.println(result.getStarPoint());
 			session.setAttribute("member", result);
 			return "redirect:/team/main.do";
 		}
