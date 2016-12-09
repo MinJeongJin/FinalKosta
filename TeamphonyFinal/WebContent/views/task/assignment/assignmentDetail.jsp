@@ -54,20 +54,16 @@ display: none;
 		<tr>
 			<th>제출 기한</th>
 			<td>
-				<input type="date" id="deadlineDay" name="deadlineDay" value="" hidden="true">
-				<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
-			</td>
-			<td>
-				<input type="date" id="deadlineHour" name="deadlineHour" value="" hidden="true">
+				${task.deadline }
 			</td>
 		</tr>
 		<tr>
 			<th>평가 기간</th>
 			<td>
-				시작: 
-				<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodStart }"/><br>
-				종료: 
-				<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodEnd }"/>
+				시작<br> 
+				${task.evaluationPeriodStart }<br>
+				종료<br> 
+				${task.evaluationPeriodEnd }
 			</td>
 		</tr>
 		<tr>

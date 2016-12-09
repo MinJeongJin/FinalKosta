@@ -18,9 +18,9 @@ public class Task {
 	private boolean evaluated;
 //평가 횟수를 위한 변수 선언
 	private int evaluationCnt;
-	private Date deadline;
-	private Date evaluationPeriodStart;
-	private Date evaluationPeriodEnd;
+	private String deadline;
+	private String evaluationPeriodStart;
+	private String evaluationPeriodEnd;
 	
 	
 	public int getTaskId() {
@@ -70,13 +70,6 @@ public class Task {
 		this.memberList = memberList;
 	}
 
-	public Date getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
-	}
 
 	public int getPointStar() {
 		int percent = point * 100 / 5;
@@ -99,21 +92,6 @@ public class Task {
 		this.flag = flag;
 	}
 
-	public Date getEvaluationPeriodStart() {
-		return evaluationPeriodStart;
-	}
-
-	public void setEvaluationPeriodStart(Date evaluationPeriodStart) {
-		this.evaluationPeriodStart = evaluationPeriodStart;
-	}
-
-	public Date getEvaluationPeriodEnd() {
-		return evaluationPeriodEnd;
-	}
-
-	public void setEvaluationPeriodEnd(Date evaluationPeriodEnd) {
-		this.evaluationPeriodEnd = evaluationPeriodEnd;
-	}
 //평가 여부를 위한 메소드
 	public boolean isEvaluated() {
 		return evaluated;
@@ -132,13 +110,36 @@ public class Task {
 	}
 	
 
-
 	public String[] getMemberIdList() {
 		return memberIdList;
 	}
 
 	public void setMemberIdList(String[] memberIdList) {
 		this.memberIdList = memberIdList;
+	}
+	
+	public String getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
+
+	public String getEvaluationPeriodStart() {
+		return evaluationPeriodStart;
+	}
+
+	public void setEvaluationPeriodStart(String evaluationPeriodStart) {
+		this.evaluationPeriodStart = evaluationPeriodStart;
+	}
+
+	public String getEvaluationPeriodEnd() {
+		return evaluationPeriodEnd;
+	}
+
+	public void setEvaluationPeriodEnd(String evaluationPeriodEnd) {
+		this.evaluationPeriodEnd = evaluationPeriodEnd;
 	}
 
 	@Override

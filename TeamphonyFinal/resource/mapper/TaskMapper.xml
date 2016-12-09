@@ -26,10 +26,10 @@
 				#{taskId},
 				#{title},
 				#{contents, jdbcType=VARCHAR},
-				#{deadline, jdbcType=INTEGER},
+				#{deadline, jdbcType=VARCHAR},
 				#{flag, jdbcType=INTEGER},
-				#{evaluationPeriodStart, jdbcType=INTEGER},
-				#{evaluationPeriodEnd, jdbcType=INTEGER},
+				#{evaluationPeriodStart, jdbcType=VARCHAR},
+				#{evaluationPeriodEnd, jdbcType=VARCHAR},
 				#{point, jdbcType=INTEGER}
 			)
 	</insert>  
@@ -137,15 +137,23 @@
 			WHERE ID= #{taskId}  
 	</select>
 	
+	<select id="selectTaskIdByMemberId" parameterType="String" resultType="int">
+			SELECT 
+				ASSIGNMENTID
+				FROM TASKMEMBER
+				WHERE MEMBERID = #{memberId}
+	</select>
+	
+	
 	<update id="updateTask" parameterType="task">
 			UPDATE TASK_TB		
 				SET
-				ID =						#{taskId, jdbcType=INTEGER}
-				,TITLE =					#{title, jdbcType=VARCHAR}
-				,CONTENTS =					#{contents, jdbcType=VARCHAR}
-				,DEADLINE =					#{deadline , jdbcType=INTEGER}
-				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType=INTEGER}
-				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType=INTEGER}
+				ID =						#{taskId, jdbcType= INTEGER}
+				,TITLE =					#{title, jdbcType= VARCHAR}
+				,CONTENTS =					#{contents, jdbcType= VARCHAR}
+				,DEADLINE =					#{deadline , jdbcType= VARCHAR}
+				,EVALUATIONPERIODSTART =	#{evaluationPeriodStart ,jdbcType= VARCHAR}
+				,EVALUATIONPERIODEND =		#{evaluationPeriodEnd ,jdbcType= VARCHAR}
 			WHERE ID = #{taskId}
 	</update>
 	

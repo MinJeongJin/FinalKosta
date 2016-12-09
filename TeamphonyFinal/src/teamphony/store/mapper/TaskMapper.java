@@ -42,6 +42,8 @@ public interface TaskMapper {
 	String[] selectMemberIdByTaskId(int taskId);
 	
 	Task selectTaskByTaskId(int taskId);
+//추가 했음
+	List<Integer> selectTaskIdByMemberId(String memberId);
 	
 	
 }

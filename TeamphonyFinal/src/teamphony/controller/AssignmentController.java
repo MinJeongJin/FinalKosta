@@ -46,28 +46,9 @@ public class AssignmentController {
 									,String evalDayEnd, String evalHourEnd
 									,String[] memberIdList) {
 		
-		String submitDay = deadlineDay + " " + deadlineHour;
-		String evaluationStart = evalDayStart + " " + evalHourStart;
-		String evaluationEnd = evalDayEnd + " " + evalHourEnd;
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:MM");
-		
-		Date deadline = null;
-		Date evaluationPeriodStart = null;
-		Date evaluationPeriodEnd = null;
-		
-		try {
-
-			deadline = dateFormat.parse(submitDay);
-			evaluationPeriodStart = dateFormat.parse(evaluationStart);
-			evaluationPeriodEnd = dateFormat.parse(evaluationEnd);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		task.setDeadline(deadline);
-		task.setEvaluationPeriodStart(evaluationPeriodStart);
-		task.setEvaluationPeriodEnd(evaluationPeriodEnd);
+		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
+		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
+		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
 		
 		service.registerTask(task);
 		
@@ -94,28 +75,10 @@ public class AssignmentController {
 									,String evalDayEnd, String evalHourEnd
 									,String[] memberIdList) {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:MM");
 		
-		String submitDay = deadlineDay + " " + deadlineHour;
-		String evaluationStart = evalDayStart + " " + evalHourStart;
-		String evaluationEnd = evalDayEnd + " " + evalHourEnd;
-		
-		Date deadline =null;
-		Date evaluationPeriodStart = null;
-		Date evaluationPeriodEnd = null;
-		
-		try {
-			deadline = sdf.parse(submitDay);
-			evaluationPeriodStart = sdf.parse(evaluationStart);
-			evaluationPeriodEnd = sdf.parse(evaluationEnd);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		task.setDeadline(deadline);
-		task.setEvaluationPeriodStart(evaluationPeriodStart);
-		task.setEvaluationPeriodEnd(evaluationPeriodEnd);
+		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
+		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
+		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
 		
 		service.modifyTask(task);
 		return "redirect:searchAll.do";
@@ -145,17 +108,31 @@ public class AssignmentController {
 //test 를 위하여 임의로 session에 팀 코드를 부여 하였다.
 		
 		Team team = new Team();
-		Task task = new Task();
-		team.setCode(1111);
+		team.setCode(9642);
 		session.setAttribute("code", team.getCode());
 		
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
 		List<Task> list = service.findAllTaskByFlag(0);
 		
-		task.setMemberList(memberList);
+		for(Task task : list){
+			task.setMemberList(memberList);
+			System.out.println(task.getMemberList().size());
+		}
 		model.addAttribute("list", list);
 		
 		return "/task/assignment/assignmentList";
 	}
+	
+	@RequestMapping(value="/searchByMemberId.do", method= RequestMethod.POST)
+	public String searchAssignmentByMemberId(String memberId, Model model){
+		List<Task> list = service.findTaskByMemberId(memberId);
+		model.addAttribute("memberId",memberId);
+		model.addAttribute("list",list);
+		
+		return "/task/assignment/memberAssignmentList";
+	}
+	
+	
+	
 
 }

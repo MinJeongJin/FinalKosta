@@ -173,6 +173,7 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 		Task task = new Task();
 		
+		
 			try{
 				TaskMapper mapper = session.getMapper(TaskMapper.class);
 				
@@ -193,7 +194,21 @@ public class TaskStoreLogic implements TaskStore {
 
 	@Override
 	public List<Task> selectTaskByMemberId(String memberId) {
-		return null;
+		SqlSession session = getSessionFactory().openSession();
+		List<Integer> taskIdList= new ArrayList<>();
+		List<Task> taskList = new ArrayList<>();
+		
+			try{
+				TaskMapper mapper= session.getMapper(TaskMapper.class);
+				
+				taskIdList = mapper.selectTaskIdByMemberId(memberId);
+					for(int taskId : taskIdList){
+						taskList.add(mapper.selectTaskByTaskId(taskId));
+					}
+			}finally{
+				session.close();
+			}
+		return taskList;
 	}
 
 }

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>부여 과제 리스트</title>
+<title>멤버의 부여받은 과제 리스트</title>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <style type="text/css">
@@ -77,7 +77,7 @@ h1 {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Assignment List</h1>
+				<h1>${memberId } 님의 Assignment List</h1>
 				<div align="right">
 					<form action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
 						<input name="memberId" id="memberId" type="text" class="btn btn-xs btn-default" value="" placeholder="팀원 아이디를 입력 하세요"/>
@@ -90,13 +90,11 @@ h1 {
 						<col width="400" align="center">
 						<col width="400" align="center">
 						<col width="400" align="center">
-						<col width="400" align="center">
 					</colgroup>
 					<thead>
 						<tr>
 							<th>순번</th>
 							<th>제목</th>
-							<th>제출자</th>
 							<th>제출기한</th>
 						</tr>
 					</thead>
@@ -105,22 +103,16 @@ h1 {
 							<tr>
 								<td>${sts.count }</td>
 								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
-								<td>
-									<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
-										${memberId }
-									</c:forEach>
-								</td>
 								<td>${task.deadline }</td>
 							</tr>
 						</c:forEach>
 							<tr>
 							<th></th>
 							<td></td>
-							<td></td>
-							<td>
-								<a href="${pageContext.request.contextPath}/submission/searchAll.do"><input class="btn" type="button" value="제출 과제 리스트"></a> 
-								<a href="${pageContext.request.contextPath}/assignment/create.do">
-								<input class="btn btn-success" type="submit" value="부여 과제 등록"></a>
+							<td>																	
+								<a href="${pageContext.request.contextPath}/assignment/searchAll.do"><input class="btn" type="button" value="부여 과제 리스트"></a> 
+								<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp">
+								<input class="btn btn-success" type="submit" value="제출 과제 등록"></a>
 							</td>
 						</tr>
 					</tbody>
