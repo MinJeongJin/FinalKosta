@@ -79,7 +79,6 @@
 							<span>Teamphony</span></a>
 					</div>
 
-					<div class="clearfix"></div>
 
 
 					<!-- menu profile quick info -->
@@ -194,7 +193,25 @@
 
 					</div>
 
-					<div class="modal fade" id="myModal" role="dialog">
+					<a href="${pageContext.request.contextPath}/team/withdraw.do"><button
+							class="btn-primary btn-lg col-xs-7" id="withdrawBtn">팀
+							탈퇴</button></a>
+
+				</div>
+				<!-- /page content -->
+
+
+				<!-- footer content -->
+				<footer> </footer>
+				<!-- /footer content -->
+
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">
 
 							<form action="${pageContext.request.contextPath}/team/invite.do"
@@ -224,23 +241,7 @@
 
 						</div>
 					</div>
-
-
-					<a href="${pageContext.request.contextPath}/team/withdraw.do"><button
-							class="btn-primary btn-lg col-xs-7" id="withdrawBtn">팀
-							탈퇴</button></a>
-
-				</div>
-				<!-- /page content -->
-
-
-				<!-- footer content -->
-				<footer> </footer>
-				<!-- /footer content -->
-
-			</div>
-		</div>
-	</div>
+	
 </body>
 
 </html>

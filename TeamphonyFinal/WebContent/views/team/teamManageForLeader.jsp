@@ -41,16 +41,6 @@
 
 
 <style type="text/css">
-html {
-	width: 100%;
-	height: 100%;
-}
-
-body {
-	width: 100%;
-	height: 100%;
-}
-
 .list-member {
 	padding: 14px;
 }
@@ -63,29 +53,10 @@ body {
 	margin-top: 60px;
 }
 
-.outer {
-	display: table;
-	width: 100%;
-	height: 100%;
-}
-
-.inner {
-	display: table-cell;
-	text-align: center;
-}
-
-.centered {
-	position: relative;
-	display: inline-block;
-	width: 50%;
-	padding: 1em;
-	color: black;
-}
-
-#teamDetail {
-	width: 1000px;
-	height: 550px;
-	margin: 10px auto;
+#teamManage {
+	padding-top: 7%;
+	padding-left: 10%;
+	margin-right: 0px;
 }
 
 .profile {
@@ -198,116 +169,115 @@ body {
 
 				<div id="teamDetail">
 
-					<div class="outer">
+					<h1 id="menuTitle">팀 관리</h1>
 
-						<div class="inner">
+					<form method="POST"
+						action="${pageContext.request.contextPath}/team/revise.do">
 
-							<div class="centered">
-
-
-								<h1 id="menuTitle">팀 관리</h1>
-
-								<form method="POST"
-									action="${pageContext.request.contextPath}/team/revise.do">
-
-									<div class="form-group">
-										<label for="teamName">팀 명:</label> <input type="text"
-											value="${team.name}" class="form-control input-lg"
-											id="teamName" name="name" maxlength="15" readonly required>
-									</div>
-
-
-									<div class="form-group">
-										<label for="cycle">팀원 평가주기:</label> <input type="number"
-											value="${team.cycle}" class="form-control input-lg"
-											id="cycle" min="0" max="3" name="cycle" readonly required>
-									</div>
-
-
-									<div class="form-group">
-										<label for="endDate">평가 만료기간:</label> <input type="date"
-											value="${team.endDate}" class="form-control input-lg"
-											name="endDate" id="endDate" readonly required>
-									</div>
-
-
-									<div class="row list-member">
-
-										<p>
-											<label>팀원 목록:</label>
-										</p>
-
-										<ul class="list-group col-xs-7">
-											<c:forEach items="${memberList}" var="member"
-												varStatus="cntOfMembers">
-
-												<li class="list-group-item list-group-item-info">${member.alias}</li>
-											</c:forEach>
-										</ul>
-									</div>
-
-
-									<button class="btn-primary btn-lg col-xs-3" id="reviseBtn"
-										style="margin-left: 5%; margin-right: 5%;"
-										onclick="reviseInfo();">수정</button>
-
-									<a href="${pageContext.request.contextPath}/team/erase.do">
-										<button class="btn-primary btn-lg col-xs-3" id="removeBtn">
-											삭제</button>
-									</a>
-
-									<button type="submit" class="btn-primary btn-lg col-xs-3"
-										id="confirmBtn" style="margin-left: 5%; margin-right: 5%;"
-										hidden>확인</button>
-
-									<a href="${pageContext.request.contextPath}/team/search.do">
-										<button class="btn-primary btn-lg col-xs-3" id="cancelBtn"
-											hidden>취소</button>
-									</a>
-
-								</form>
-
-
-								<button class="btn-link col-xs-7" data-toggle="modal"
-									data-target="#myModal">팀원초대</button>
-							</div>
-
-
+						<div class="form-group">
+							<label for="teamName">팀 명:</label> <input type="text"
+								value="${team.name}" class="form-control input-lg" id="teamName"
+								name="name" maxlength="15" readonly required>
 						</div>
 
+
+						<div class="form-group">
+							<label for="cycle">팀원 평가주기:</label> <input type="number"
+								value="${team.cycle}" class="form-control input-lg" id="cycle"
+								min="0" max="3" name="cycle" readonly required>
+						</div>
+
+
+						<div class="form-group">
+							<label for="endDate">평가 만료기간:</label> <input type="date"
+								value="${team.endDate}" class="form-control input-lg"
+								name="endDate" id="endDate" readonly required>
+						</div>
+						
+						
+						<button type="submit" class="btn-primary btn-lg col-xs-3"
+						id="confirmBtn" style="margin-left: 5%; margin-right: 5%;" hidden>확인</button>
+
+					<a href="${pageContext.request.contextPath}/team/search.do">
+						<button class="btn-primary btn-lg col-xs-3" id="cancelBtn" hidden>취소</button>
+					</a>
+
+					</form>
+					
+					<div class="row list-member">
+
+						<p>
+							<label>팀원 목록:</label>
+						</p>
+
+						<ul class="list-group col-xs-7">
+							<c:forEach items="${memberList}" var="member"
+								varStatus="cntOfMembers">
+
+								<li class="list-group-item list-group-item-info">${member.alias}</li>
+							</c:forEach>
+						</ul>
+						
+						
+						
+						<button class="btn-link col-xs-7" data-toggle="modal"
+						data-target="#myModal">팀원초대</button>
 					</div>
 
 
+					<button class="btn-primary btn-lg col-xs-3" id="reviseBtn"
+						style="margin-left: 5%; margin-right: 5%;" onclick="reviseInfo();">수정</button>
 
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog">
+					<a href="${pageContext.request.contextPath}/team/erase.do">
+						<button class="btn-primary btn-lg col-xs-3" id="removeBtn">
+							삭제</button>
+					</a>
 
-							<form action="${pageContext.request.contextPath}/team/invite.do"
-								method="post">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">팀원 초대</h4>
-									</div>
-									<div class="modal-body">
-										<p>
-											<input type="email" class="form-control" name="e_mail_1"
-												placeholder="팀원 e-mail  ex) prattler@gmail.com">
-										</p>
-									</div>
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-info btn-lg">초대</button>
-										<button type="button" class="btn btn-info btn-lg"
-											data-dismiss="modal">취소</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
+					
+
+
+
+
+					
+
+
+
+
+
+
+
+
 				</div>
 				<!-- /page content -->
 
+
+
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog">
+
+						<form action="${pageContext.request.contextPath}/team/invite.do"
+							method="post">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">팀원 초대</h4>
+								</div>
+								<div class="modal-body">
+									<p>
+										<input type="email" class="form-control" name="e_mail_1"
+											placeholder="팀원 e-mail  ex) prattler@gmail.com">
+									</p>
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-info btn-lg">초대</button>
+									<button type="button" class="btn btn-info btn-lg"
+										data-dismiss="modal">취소</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 
 				<!-- footer content -->
 				<footer> </footer>
