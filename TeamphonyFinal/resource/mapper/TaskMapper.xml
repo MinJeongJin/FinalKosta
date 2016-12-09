@@ -165,7 +165,15 @@
 				WHERE ID			= #{taskId}
 	</update>
 	
-	<delete id="deleteTask"  parameterType="int">
+	<delete id="deleteTaskMember" parameterType="int">
+			DELETE
+			FROM TASKMEMBER 
+			WHERE ASSIGNMENTID		= #{taskId}
+	
+	
+	</delete>
+	
+	<delete id="deleteTask" parameterType="int">
 			DELETE
 			FROM TASK_TB
 			WHERE ID	= #{taskId}
