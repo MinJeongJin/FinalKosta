@@ -151,7 +151,9 @@ public class PostController {
 		
 		Post post = new Post(contents,memberService.findMemberByMemberId(((Member) session.getAttribute("member")).getMemberId()),(int) session.getAttribute("teamCode"), postId);
 
-		if (videoLink == null || videoLink.isEmpty()) {
+		System.out.println(videoLink);
+		
+		if (videoLink == null || videoLink.length()==0) {
 			post.setVideoLink("pass");
 		} else {
 			videoLink= videoLink.substring(17);

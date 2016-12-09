@@ -156,12 +156,12 @@
 					<h2 id="menuTitle">게시물</h2>
 
 					<div align="right">
-						<button type="submit" class="btn btn-info" onclick="revise();">수정</button>
+						<a class="btn btn-info" onclick="revise();">수정</a>
 					</div>
 
 					<form enctype="multipart/form-data" method="post"
 						action="${pageContext.request.contextPath}/post/revise.do">
-						<input type="hidden" value="${post.id }" name="postId">
+						<input type="hidden" value="${post.postId }" name="postId">
 
 						<div class="row">
 							<div class="form-group col-xs-7">
@@ -205,7 +205,7 @@
 							<c:if test="${post.member.memberId eq member.memberId }">
 
 								<button type="submit" class="btn btn-info btn-lg" id="check">확인</button>
-								<a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/post/delete.do?postId=${post.id}">삭제</a>
+								<a class="btn btn-info btn-lg" href="${pageContext.request.contextPath}/post/delete.do?postId=${post.postId}">삭제</a>
 							</c:if>
 							<a href="${pageContext.request.contextPath}/post/postList.do?teamCode=${teamCode}" class="btn btn-warning btn-lg">뒤로</a>
 						</div>
