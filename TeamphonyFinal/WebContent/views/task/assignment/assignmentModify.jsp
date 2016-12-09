@@ -55,7 +55,7 @@
 				<th>제출 기한</th>
 				<td>
 					<h6 style="color: red"> 
-						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/><br>
+						${task.deadline }<br>
 					</h6> 
 						<input type="date" min="" id="deadlineDay" name="deadlineDay" value= "">
 						<input type="time" id="deadlineHour" name="deadlineHour" value= "">  
@@ -65,8 +65,8 @@
 				<th>평가 기간</th>
 				<td>
 					<h6 style="color: red"> 
-						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodStart }"/>-
-						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.evaluationPeriodEnd }"/>
+						${task.evaluationPeriodStart }-
+						${task.evaluationPeriodEnd }
 					</h6> 
 						<input type="date" min="" id="evalDayStart" name="evalDayStart">
 						<input type="time" id="evalHourStart" name="evalHourStart" >-  
