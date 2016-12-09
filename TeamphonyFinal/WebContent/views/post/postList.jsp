@@ -210,7 +210,7 @@
 							<c:otherwise>
 								<c:forEach items="${listPost}" var="post" varStatus="status">
 									<a class="card"
-										href="${pageContext.request.contextPath}/post/detail.do?postId=${post.id}">
+										href="${pageContext.request.contextPath}/post/detail.do?postId=${post.postId}">
 										<div class="header">
 											<h2>${post.member.memberId }</h2>
 										</div>
