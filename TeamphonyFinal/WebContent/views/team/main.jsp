@@ -73,7 +73,7 @@
 			style="padding: 20px">
 			<p>
 				<i class="w3-serif w3-xlarge">조직을 승리로 이끄는 힘의 25%는 실력이고 나머지 75%는
-					팀워크이다.&nbsp&nbsp&nbsp by 딕 버메일</i>
+					팀워크이다.&nbsp &nbsp &nbsp by 딕 버메일</i>
 			</p>
 
 			<p>
@@ -96,7 +96,7 @@
 
 				<figure class="w3-card-12 w3-red w3-hover-Khaki">
 
-					<input type="text" value="${team.code}" name="teamCode" hidden>
+					<input type="text" value="${team.code}" name="teamCode" hidden="true">
 
 					<div class="imgContainer">
 						<img
@@ -105,9 +105,9 @@
 
 					<a href="javascript:submitWithScript(${cntOfTeam.count});"
 						style="text-decoration: none">
-						<div class="teamNameContainer" value="${team.name}">
+						<span class="teamNameContainer">
 							<strong>${team.name}</strong>
-						</div>
+						</span>
 					</a>
 
 				</figure>
