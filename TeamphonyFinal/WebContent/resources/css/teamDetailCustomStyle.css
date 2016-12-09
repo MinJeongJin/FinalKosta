@@ -1,0 +1,40 @@
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", sans-serif
+    }
+    
+    .w3-sidenav a,
+    .w3-sidenav h4 {
+        font-weight: bold
+    }
+    
+    a {
+        margin-bottom: 8px;
+    }
+    
+    .myContents {
+        padding-left: calc(20%);
+        padding-right: calc(20%);
+        padding-top: 20px;
+        margin-bottom: 100px;
+    }
+    
+    .w3-row {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .active {
+        background: lightgray;
+    }
+    
+    .active_sub {
+        background: teal;
+    }
+</style>
