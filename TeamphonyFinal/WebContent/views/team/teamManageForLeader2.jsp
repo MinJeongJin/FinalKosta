@@ -21,6 +21,16 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
 
+<style>
+a[name=aInBtn] {
+	text-decoration: none;
+}
+
+a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]:visited {
+	text-decoration: none;
+	color: white;
+}
+</style>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
@@ -63,15 +73,7 @@
 	}
 </script>
 
-
-
 <body class="w3-light-grey w3-content" style="max-width: 1600px;">
-
-
-
-
-
-
 
 	<!-- modal -->
 	<div class="modal fade" id="myModal" role="dialog">
@@ -167,8 +169,11 @@
 				<div class="w3-row">
 
 					<div id="selectBtnGr" class="w3-right">
-						<a href="${pageContext.request.contextPath}/team/erase.do"
-							class="w3-btn w3-large"> 삭제 </a>
+
+						<button class="w3-btn w3-large">
+							<a href="${pageContext.request.contextPath}/team/erase.do" name="aInBtn">
+								삭제 </a>
+						</button>
 						<button type="button" class="w3-btn w3-large"
 							onclick="reviseInfo();">수정</button>
 					</div>
@@ -177,8 +182,8 @@
 
 
 						<button type="submit" class="w3-btn w3-large">확인</button>
-						<button class="w3-btn w3-large">
-							<a href="${pageContext.request.contextPath}/team/search.do">
+						<button class="w3-btn w3-large" >
+							<a href="${pageContext.request.contextPath}/team/search.do" name="aInBtn">
 								취소 </a>
 						</button>
 						<!-- required 속성 지워주는 작업 필요 -->
@@ -211,12 +216,7 @@
 			<div class="w3-row">
 				<button class="w3-btn-floating-large w3-right " data-toggle="modal"
 					data-target="#myModal">+</button>
-
-
 			</div>
-
-
-
 		</div>
 
 		<div class="w3-black w3-center w3-padding-24 w3-card-12">

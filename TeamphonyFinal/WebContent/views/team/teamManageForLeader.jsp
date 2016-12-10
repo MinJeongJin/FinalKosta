@@ -100,7 +100,6 @@
 
 </head>
 
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -110,7 +109,6 @@
 						<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
 							<span>Teamphony</span></a>
 					</div>
-
 
 					<!-- menu profile quick info -->
 					<div class="profile">
@@ -232,20 +230,6 @@
 						<button class="btn-primary btn-lg col-xs-3" id="removeBtn">
 							삭제</button>
 					</a>
-
-					
-
-
-
-
-					
-
-
-
-
-
-
-
 
 				</div>
 				<!-- /page content -->

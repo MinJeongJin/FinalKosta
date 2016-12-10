@@ -70,16 +70,15 @@
 
 	var checkNameLength = function() {
 
-		var teamList = document.getElementsByName("part-info");
+		var teamList = document.getElementsByName("teamName");
 		var len = teamList.length;
 
 		for (var i = 0; i < len; i++) {
 
 			var teamName = teamList[i].getAttribute("value");
-
 			if (teamName.length > 6) {
 
-				teamList[i].innerHTML = teamName.substring(0, 6) + " ...";
+				teamList[i].innerHTML = teamName.substring(0, 8) + " ...";
 
 			}
 

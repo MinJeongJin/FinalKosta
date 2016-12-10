@@ -103,10 +103,10 @@
 							src="${pageContext.request.contextPath}/resources/images/team.png">
 					</div>
 
-					<a href="javascript:submitWithScript(${cntOfTeam.count});"
-						style="text-decoration: none">
-						<span class="teamNameContainer">
-							<strong>${team.name}</strong>
+					<a href="javascript:submitWithScript(${cntOfTeam.count});" 
+						style="text-decoration: none" >
+						<span class="teamNameContainer" >
+							<strong name="teamName" value="${team.name}">${team.name}</strong>
 						</span>
 					</a>
 

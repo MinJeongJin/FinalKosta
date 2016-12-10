@@ -1,7 +1,6 @@
 package teamphony.controller;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -156,13 +155,6 @@ public class TeamController {
 
 	}
 	
-	
-	private String redirect(String resObj){
-		
-		
-		
-		return null;
-	}
 	
 	
 

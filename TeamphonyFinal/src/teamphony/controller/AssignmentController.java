@@ -46,11 +46,11 @@ public class AssignmentController {
 									,String evalDayEnd, String evalHourEnd
 									,String[] memberIdList) {
 		
-		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
-		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
-		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
+		task.setDeadline("�궇吏�: "+ deadlineDay +"   �떆媛�: "+ deadlineHour );
+		task.setEvaluationPeriodStart("�궇吏�: "+evalDayStart +"   �떆媛�: "+ evalHourStart);
+		task.setEvaluationPeriodEnd("�궇吏�: "+evalDayEnd +"   �떆媛�: " +evalHourEnd);
 		
-		service.registerTask(task);
+//		/service.registerTask(task);
 		
 		return "redirect:searchAll.do";
 	}
@@ -76,9 +76,9 @@ public class AssignmentController {
 									,String[] memberIdList) {
 
 		
-		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
-		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
-		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
+		task.setDeadline("�궇吏�: "+ deadlineDay +"   �떆媛�: "+ deadlineHour );
+		task.setEvaluationPeriodStart("�궇吏�: "+evalDayStart +"   �떆媛�: "+ evalHourStart);
+		task.setEvaluationPeriodEnd("�궇吏�: "+evalDayEnd +"   �떆媛�: " +evalHourEnd);
 		
 		service.modifyTask(task);
 		return "redirect:searchAll.do";
@@ -105,7 +105,7 @@ public class AssignmentController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(HttpSession session, Model model) {
-//test 를 위하여 임의로 session에 팀 코드를 부여 하였다.
+//test 瑜� �쐞�븯�뿬 �엫�쓽濡� session�뿉 �� 肄붾뱶瑜� 遺��뿬 �븯���떎.
 		
 		Team team = new Team();
 		team.setCode(9642);

@@ -28,10 +28,14 @@
 			<p class="w3-text-grey">육식중인초식남</p>
 		</div>
 
-		<a href="#" id="menu1" name="menuItem"
+		<a href="${pageContext.request.contextPath}/team/search.do" id="menu1" name="menuItem"
 			onclick="clickCheck('menu1');closeAcc();"
 			class="w3-padding w3-card-4"><i
-			class="fa fa-wrench fa-fw w3-margin-right"></i>팀 관리</a> <a href="#"
+			class="fa fa-wrench fa-fw w3-margin-right"></i>팀 관리</a> 
+			
+			
+			
+			<a href="${pageContext.request.contextPath}/post/list.do"
 			id="menu2" name="menuItem" onclick="clickCheck('menu2');closeAcc()"
 			class="w3-padding w3-card-4"><i
 			class="fa fa-clipboard fa-fw w3-margin-right"></i>게시판</a>

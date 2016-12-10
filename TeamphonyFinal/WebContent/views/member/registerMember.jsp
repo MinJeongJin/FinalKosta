@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!doctype html>
@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title></title>
+<title>Teamphony 가입</title>
 
 <!-- Stylesheets -->
 <link rel="stylesheet"
@@ -100,9 +100,10 @@
 					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="starPoint">
 					<div class="col-md-6 right-side">
-						<img src="resources/images/default.png" alt="사진없음"
-							id="profileImage" width="90" height="110"> <br> <input
-							type="file" id="imagePath" name="imagePath" />
+						<img
+							src="${pageContext.request.contextPath}/resources/images/avatar.png"
+							alt="사진없음" id="profileImage" width="90" height="110"> <br>
+						<input type="file" id="imagePath" name="imagePath" />
 						<button type="button" onclick="myFunction();">등록</button>
 						<span class="input input--hoshi"> <input
 							class="input__field input__field--hoshi" type="text"
