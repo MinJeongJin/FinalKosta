@@ -175,7 +175,8 @@ h1 {
 	<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
 					
 	<input id="taskId" name="taskId" type="hidden" value="">
-	<a href="${pageContext.request.contextPath}/submission/searchAll.do">제출 과제 리스트 돌아가기</a>
+		<a class="btn btn-success" href="${pageContext.request.contextPath}/submission/searchAll.do">
+		  제출 과제 리스트 </a>
 	<h3>제출 과제 상세</h3>
 
 	<br>

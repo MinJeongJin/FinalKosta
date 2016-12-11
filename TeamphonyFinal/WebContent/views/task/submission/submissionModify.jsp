@@ -14,7 +14,7 @@
 	src="${pageContext.request.contextPath}/resources/js/schedule/schedule.js"></script>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/submission/searchAll.do">제출 과제 리스트 돌아가기</a>
+	<a class="btn btn-success" href="${pageContext.request.contextPath}/submission/searchAll.do">제출 과제 리스트</a>
 	<h3>제출 과제 수정</h3>
 
 	<br>
