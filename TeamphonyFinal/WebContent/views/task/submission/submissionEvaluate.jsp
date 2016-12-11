@@ -169,8 +169,7 @@
 					<td>
 						<p>
 							<span class="starRating">
-								<span style="width:${task.getPointStar()}%">${task.point }점
-								</span>
+								<fmt:formatNumber value="${task.getAverage() }" type="pattern" pattern="0.0" /> 점
 							</span>
 						</p>
 					</td>

@@ -70,10 +70,15 @@ public class Task {
 	public void setMemberList(List<Member> memberList) {
 		this.memberList = memberList;
 	}
+	
+	public float getAverage(){
+		float average = (float) point/ evaluationCnt;
+		return average;
+	}
 
-
-	public int getPointStar() {
-		int percent = point * 100 / 5;
+//10점 만점의 percentage 계산 
+	public double getPointStar() {
+		double percent = ( point *1.0 / evaluationCnt ) * 10 ;
 		return percent;
 	}
 
@@ -146,11 +151,18 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "taskId=" + taskId + "\n" + "title= " + title + "\n" + "contents= " + contents + "\n" + "deadline= "
-				+ deadline + "\n" + "flag= " + flag + "\n" + "taskFileList= " + taskFileList+ "\n" 
-				+ "evaluationPeriodStart= " + evaluationPeriodStart + "\n" + "evaluationPeriodEnd= " 
-				+ evaluationPeriodEnd + "\n"+ "evaluated= " + evaluated + "\n"+"evaluationCnt= " + evaluationCnt + "\n" 
-				+ "point= " + point;
+		return "taskId=" + taskId + "\n" 
+				+ "title= " + title + "\n" 
+				+ "contents= " + contents + "\n" 
+				+ "deadline= " + deadline + "\n" 
+				+ "flag= " + flag + "\n" 
+				+ "taskFileList= " + taskFileList+ "\n" 
+				+ "evaluationPeriodStart= " + evaluationPeriodStart + "\n" 
+				+ "evaluationPeriodEnd= " + evaluationPeriodEnd + "\n"
+				+ "evaluated= " + evaluated + "\n"
+				+ "point= " + point + "\n"
+				+ "evaluationCnt= " + evaluationCnt + "\n" 
+				+ "pointStar= " + getPointStar() + "%" + "\n" ;
 	
 	}
 	

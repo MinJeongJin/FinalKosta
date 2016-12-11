@@ -39,7 +39,6 @@ public class SubmissionController {
 									,String flag) { // attchFile
 		
 		httpSession.setAttribute("loginedMember", "aaaa");
-		System.out.println("session loginedMember" + httpSession.getAttribute("loginedMember"));
 		
 		Task task = new Task();
 		
@@ -122,10 +121,8 @@ public class SubmissionController {
 
 		task.setTaskFileList(taskFileList);
 		
-		
 		service.modifyTask(task);
 		; // task_tb 저장
-
 		return "redirect:searchAll.do";
 	}
 
@@ -142,7 +139,7 @@ public class SubmissionController {
 	public String searchSubmissionByTaskId(String taskId, Model model) {
 		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-
+		System.out.println("getPointStar= " + task.getPointStar() + "%");
 		model.addAttribute("task", task);
 		
 		return "/task/submission/submissionDetail";
@@ -167,11 +164,6 @@ public class SubmissionController {
 		
 		List<Task> taskList = service.findAllTaskByFlag(flag);
 		
-		
-		for(Task task : taskList){
-			System.out.println(task.getMemberIdList().length);
-			System.out.println("====================================");
-		}
 		model.addAttribute("taskList", taskList);
 		
 		return "/task/submission/submissionList";
@@ -194,22 +186,16 @@ public class SubmissionController {
 		int count = Integer.parseInt(evaluationCnt);
 		boolean evalute = Boolean.valueOf(evaluated);
 		
-		System.out.println("taskId= "+ taskId);
-		System.out.println("point= "+ point);
-		System.out.println("evaluationCnt= "+ evaluationCnt);
-		System.out.println("evaluated= "+ evaluated);
-		System.out.println("=============================================");
 		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-		System.out.println("============find Task=================");
 		
-		System.out.println("============controller  TaskSet=================");
+		System.out.println("============fint task=================");
+		System.out.println("getPointStar"+ task.getPointStar());
+		
 		task.setPoint(Integer.parseInt(point));
 		task.setEvaluationCnt(Integer.parseInt(evaluationCnt));
 		task.setEvaluated(Boolean.valueOf(evaluated));
 		
-		System.out.println(task.toString());
-		System.out.println("=========================================");
 		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";

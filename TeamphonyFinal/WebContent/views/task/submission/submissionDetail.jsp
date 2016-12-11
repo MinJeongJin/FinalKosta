@@ -220,10 +220,10 @@ h1 {
 			<tr>
 				<th>평점</th>
 					<td>
-						<p>
-							<span class="starRating"><span style="width:${task.getPointStar() }%"></span></span>
-						</p>
-						${task.point}점
+						<span class="starRating">
+							<span style="width:${task.getPointStar() }%"></span>
+						</span><br>
+						<fmt:formatNumber value="${task.getAverage() }" type="pattern" pattern="0.0" /> 점 
 					</td>
 			</tr>
 			<tr>

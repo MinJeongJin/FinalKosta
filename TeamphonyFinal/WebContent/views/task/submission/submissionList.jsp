@@ -173,9 +173,8 @@ h1 {
 				<h1>Submission List</h1>
 				<div align="right">
 					<form action="searchByName.do">
-						<input name="musicName" type="text" placeholder="제출자를 입력 하세요"
-							value=""> <input class="btn btn-xs btn-default"
-							type="submit" value="검색">
+						<input name="musicName" type="text" placeholder="제출자를 입력 하세요" value=""> 
+						<input class="btn btn-xs btn-default" type="submit" value="검색">
 					</form>
 				</div>
 				<table class="table table-hover table-condensed" >
@@ -224,7 +223,9 @@ h1 {
 									</c:forEach>
 								</td>
 								<td >
-									<p><span class="starRating"><span style="width:${task.getPointStar() }%">${task.point}점</span></span></p>
+									<p><span class="starRating">
+										<span style="width:${task.getPointStar() }%"></span>
+									</span></p>
 								</td>
 							</tr>
 						</c:forEach>

@@ -94,8 +94,10 @@
 				,EVALUATIONPERIODSTART 
 				,EVALUATIONPERIODEND    
 				,FLAG                   
-				,POINT                  
-				FROM TASK_TB            
+				,POINT
+				,EVALUATIONCNT      
+				              
+			FROM TASK_TB            
 				WHERE FLAG = #{flag}
 				ORDER BY ID ASC
 	</select>
