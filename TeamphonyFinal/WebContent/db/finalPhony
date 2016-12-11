@@ -48,7 +48,8 @@ create table Place_tb(id int Primary key, name varchar2(20), address varchar2(20
 phoneNumber varchar2(50), imagePath varchar2(50));
 
 create Sequence Place_seq start with 1 Increment By 1 Maxvalue 1000000;
-create Sequence Task_seq start with 1 Increment By 1 Maxvalue 1000000;
+//TASK_TB SEQ 변경 사항
+create Sequence Task_TB_ID_seq start with 1 Increment By 1 Maxvalue 1000000;
 create Sequence Post_seq start with 1 Increment By 1 Maxvalue 1000000;
 create Sequence Schedule_seq start with 1 Increment By 1 Maxvalue 1000000;
 
@@ -75,23 +76,15 @@ ALTER TABLE TEAM_TB ADD(NAME VARCHAR2(30));
 ALTER TABLE MEMBER_TB MODIFY(IMAGEPATH VARCHAR2 500):
 
 //task_tb 수정
-ALTER TABLE TASK_TB
-DROP COLUMN deadlineTime   ;
 
 ALTER TABLE TASK_TB
-DROP COLUMN evaluateTimeStart;
+DROP COLUMN DEADLINE   ;
 
 ALTER TABLE TASK_TB
-DROP COLUMN evaluateTimeEnd  ;
+DROP COLUMN EVALUATIONPERIODSTART;
 
 ALTER TABLE TASK_TB
-DROP COLUMN deadlineDay   ;
-
-ALTER TABLE TASK_TB
-DROP COLUMN evaluateDayStart;
-
-ALTER TABLE TASK_TB
-DROP COLUMN evaluateDayEnd  ;
+DROP COLUMN EVALUATIONPERIODEND  ;
 
 ALTER TABLE TASK_TB
 ADD (deadline VARCHAR2(50));

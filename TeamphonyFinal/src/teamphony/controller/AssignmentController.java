@@ -44,13 +44,17 @@ public class AssignmentController {
 									,String deadlineDay, String deadlineHour
 									,String evalDayStart, String evalHourStart
 									,String evalDayEnd, String evalHourEnd
-									,String[] memberIdList) {
+									,String[] memberIdList
+									,HttpSession httpSession) {
 		
 		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
 		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
 		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
 		
-//		/service.registerTask(task);
+		System.out.println("==============================");
+		System.out.println(task.toString());
+		System.out.println("==============================");
+		service.registerTask(task, httpSession);
 		
 		return "redirect:searchAll.do";
 	}
@@ -76,9 +80,9 @@ public class AssignmentController {
 									,String[] memberIdList) {
 
 		
-		task.setDeadline("�궇吏�: "+ deadlineDay +"   �떆媛�: "+ deadlineHour );
-		task.setEvaluationPeriodStart("�궇吏�: "+evalDayStart +"   �떆媛�: "+ evalHourStart);
-		task.setEvaluationPeriodEnd("�궇吏�: "+evalDayEnd +"   �떆媛�: " +evalHourEnd);
+		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
+		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
+		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
 		
 		service.modifyTask(task);
 		return "redirect:searchAll.do";
@@ -108,7 +112,7 @@ public class AssignmentController {
 //test 중 이라서 임의로 팀 코드를 부여 하였다
 		
 		Team team = new Team();
-		team.setCode(9642);
+		team.setCode(9606);
 		session.setAttribute("code", team.getCode());
 		
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
