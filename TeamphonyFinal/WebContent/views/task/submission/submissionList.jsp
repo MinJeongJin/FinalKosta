@@ -190,6 +190,7 @@ h1 {
 					<thead>
 						<tr>
 							<th>순번</th>
+							<th>부여과제</th>
 							<th>제목</th>
 							<th>제출자</th>
 							<th>제출기한</th>
@@ -204,10 +205,15 @@ h1 {
 									${sts.count }
 								</td>
 								<td>
+									${param.AssignmentTitle}
+								</td>
+								<td>
 									<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}">${task.title }</a>
 								</td>
 								<td>
-									${loginedMember.memberId }
+									<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
+										${memberId }
+									</c:forEach>
 								</td>
 								<td>
 									<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>

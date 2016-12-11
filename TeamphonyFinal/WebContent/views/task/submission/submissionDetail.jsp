@@ -191,22 +191,16 @@ h1 {
 			</tr>
 			<tr>
 				<th>제출자</th>
-				<td>
-					<ul>
-						<li style="float: left; width: 70px;">이은채</li>
-						<li style="float: left; width: 70px;">진민정</li>
-						<li style="float: left; width: 70px;">현대경</li>
-						<li style="float: left; width: 70px;">김수호</li>
-						<li style="float: left; width: 70px;">윤영민</li>
-						<li style="float: left; width: 70px;">미구현</li>
-						
-					</ul>
+					<td>
+					<c:forEach items="${task.memberIdList }" var="memberId">
+						${memberId }
+					</c:forEach>
 				</td>
+				
 			</tr>
 			<tr>
 				<th>제출 기한</th>
 					<td>
-						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
 					</td>
 			</tr>
 			<tr>
@@ -236,7 +230,7 @@ h1 {
 			<th></th>
 				<td>
 					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId}" >수정</a>
-					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId}&flag=${task.flag}  " >삭제</a>
+					<a class="btn btn-success"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId}&flag=${task.flag}" >삭제</a>
 					<a onclick="evalutate_click();" id="evalutate" class="btn btn-success" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >평가</a>
 				</td>
 			</tr>

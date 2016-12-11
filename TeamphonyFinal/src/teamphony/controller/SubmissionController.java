@@ -31,10 +31,15 @@ public class SubmissionController {
 	private static final String filePathOnly = "c:/upload";
 
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
-	public String createSubmission(HttpServletRequest request, HttpSession session,
-			@RequestParam("attchFile") MultipartFile[] attchFileList, String title, String contents, String flag) { // attchFile
+	public String createSubmission(HttpServletRequest request
+									,HttpSession httpSession,
+									@RequestParam("attchFile") MultipartFile[] attchFileList
+									,String title
+									,String contents
+									,String flag) { // attchFile
 		
-		System.out.println("flag= " + flag);
+		httpSession.setAttribute("loginedMember", "aaaa");
+		System.out.println("session loginedMember" + httpSession.getAttribute("loginedMember"));
 		
 		Task task = new Task();
 		
@@ -67,7 +72,7 @@ public class SubmissionController {
 		task.setTaskFileList(taskFileList);
 		
 		System.out.println(task.toString());
-//		service.registerTask(task); // task_tb 저장
+		service.registerTask(task, httpSession); // task_tb 저장
 		
 		return "redirect:searchAll.do";
 	}
@@ -127,6 +132,7 @@ public class SubmissionController {
 	@RequestMapping("/erase.do")
 	public String eraseSubmission(String taskId, String flag) {
 		
+		System.out.println("taskId= "+ Integer.parseInt(taskId)+ "\n" + "flag= "+ Integer.parseInt(flag));
 		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
 
 		return "redirect:searchAll.do";
@@ -150,17 +156,22 @@ public class SubmissionController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(HttpSession session, Model model) {
-		Member loginedMember = new Member();
-		loginedMember.setMemberId("hiyogils");
+//		Member loginedMember = new Member();
+//		loginedMember.setMemberId("hiyogils");
 		
 // submissionRegister.jsp 에서 flag 값을 준다. 
 //현재는 test 중이라서 임의로 flag 값을 부여 하였다
 		session.setAttribute("flag", 1);
-		session.setAttribute("loginedMember", loginedMember);
+//		session.setAttribute("loginedMember", loginedMember);
 		int flag = (int)session.getAttribute("flag");
 		
-		
 		List<Task> taskList = service.findAllTaskByFlag(flag);
+		
+		
+		for(Task task : taskList){
+			System.out.println(task.getMemberIdList().length);
+			System.out.println("====================================");
+		}
 		model.addAttribute("taskList", taskList);
 		
 		return "/task/submission/submissionList";
@@ -172,6 +183,9 @@ public class SubmissionController {
 		model.addAttribute("task", service.findTaskByTaskId(Integer.parseInt(taskId)));
 		return "/task/submission/submissionEvaluate";
 	}
+	
+	
+	
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
 	public String evaluateAssignment(String taskId, String point, String evaluated,String evaluationCnt ) {

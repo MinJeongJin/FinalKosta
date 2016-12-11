@@ -100,25 +100,78 @@ h1 {
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="task" varStatus="sts">
-							<tr>
+							<c:if test="${task.flag eq 0 }"  >
+								<tr>
 								<td>${sts.count }</td>
 								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
 								<td>${task.deadline }</td>
-							</tr>
+								<td>
+									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?AssignmentTitle=${task.title }">
+									<input class="btn btn-success" type="button" value="과제 제출 하기">
+									</a>
+								</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 							<tr>
 							<th></th>
-							<td></td>
-							<td>																	
-								<a href="${pageContext.request.contextPath}/assignment/searchAll.do"><input class="btn" type="button" value="부여 과제 리스트"></a> 
-								<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp">
-								<input class="btn btn-success" type="submit" value="제출 과제 등록"></a>
-							</td>
-						</tr>
+								<td></td>
+								<td>																	
+									<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+										<input class="btn" type="button" value="부여 과제 리스트">
+									</a> 
+									<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+										<input class="btn" type="button" value="제출 과제 리스트">
+									</a> 
+								</td>
+							</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
-	</div>
-</body>
+				
+<h1>${memberId } 님의 Submission List</h1>
+	<table class="table table-hover table-condensed" text-align:center;>
+		<colgroup>
+			<col width="100" align="center">
+			<col width="400" align="center">
+			<col width="400" align="center">
+			<col width="400" align="center">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>순번</th>
+				<th>제목</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list }" var="task" varStatus="sts">
+				<c:if test="${task.flag eq 1 }"  >
+					<tr>
+					<td>${sts.count }</td>
+					<td><a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
+					<td>${task.deadline }</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId }&memberId=${memberId }">
+							<input class="btn btn-success" type="button" value="수정">
+						</a>
+						<a href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }">
+							<input class="btn btn-success" type="button" value="삭제">
+						</a>
+					</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+				<tr>
+				<th></th>
+					<td></td>
+					<td>																	
+						<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+							<input class="btn" type="button" value="부여 과제 리스트">
+						</a> 
+						<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+							<input class="btn" type="button" value="제출 과제 리스트">
+						</a> 
+					</td>
+				</tr>
+		</tbody>
+	</table>
 </html>

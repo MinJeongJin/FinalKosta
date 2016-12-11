@@ -26,6 +26,14 @@
 				<col width="*">
 			</colgroup>
 			<tr>
+				<th>부여 과제 제목</th>
+				<td>
+					<h6 style="color: red;">
+						${param.AssignmentTitle}
+					</h6>
+				</td>
+			</tr>
+			<tr>
 				<th>제목</th>
 				<td><input id="title" name="title"
 					class="form-control" type="text" value="" placeholder="제목을 입력하세요."></td>
@@ -80,8 +88,10 @@
 			
 		</table>
 		<div align="center">
-			<a href="${pageContext.request.contextPath}/submission/searchAll.do"><input class="btn" type="button" value="취소"></a> 
-			<input class="btn btn-success" type="submit" value="저장">
+			<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+				<input class="btn" type="button" value="취소">
+			</a> 
+				<input class="btn btn-success" type="submit" value="저장">
 		</div>
 		</form>
 </body>

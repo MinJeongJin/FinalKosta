@@ -32,19 +32,6 @@
 					<input id="title" name="title" class="form-control" type="text" value="" placeholder="${task.title }">
 				</td>
 			</tr>
-			<tr style="horizontal-align: left;">
-				<th>제출자</th>
-				<td>
-					<ul>
-						<li style="float: left; width: 70px;">이은채</li>
-						<li style="float: left; width: 70px;">진민정</li>
-						<li style="float: left; width: 70px;">김수호</li>
-						<li style="float: left; width: 70px;">윤영민</li>
-						<li style="float: left; width: 70px;">미구현</li>
-					</ul>
-				</td>
-			</tr>
-			 
 			<tr>
 				<th>내용</th>	
 					<td>
@@ -99,7 +86,7 @@
 		</table>
 		<br>
 		<div align="center">
-				<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}"><input class="btn" type="button" value="취소"></a> 
+				<input class="btn" type="reset" value="취소">
 				<input class="btn btn-success" type="submit" value="완료">
 		</div>
 	</form>

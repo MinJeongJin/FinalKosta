@@ -104,7 +104,9 @@ h1 {
 						<c:forEach items="${list }" var="task" varStatus="sts">
 							<tr>
 								<td>${sts.count }</td>
-								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
+								<td>
+									<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+								</td>
 								<td>
 									<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
 										${memberId }
