@@ -157,12 +157,15 @@
 			WHERE ID = #{taskId}
 	</update>
 	
-	<update id="updateTaskPoint" parameterType="int">
+	<update id="updateTaskPoint" parameterType="task">
 			UPDATE TASK_TB
-				SET POINT			= POINT+ #{point, jdbcType=INTEGER}
-					,EVALUATIONCNT = EVALUATIONCNT +1
+				SET POINT				= #{point, jdbcType=INTEGER}
+					,EVALUATIONCNT		= #{evaluationCnt, jdbcType=INTEGER}
+					
+			<if test="#{evaluated}">
 					,EVALUATED = 1
-				WHERE ID			= #{taskId}
+			</if>
+			WHERE ID					= #{taskId}
 	</update>
 	
 	<delete id="deleteTaskMember" parameterType="int">

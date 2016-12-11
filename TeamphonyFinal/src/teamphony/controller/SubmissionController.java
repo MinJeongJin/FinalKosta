@@ -189,7 +189,7 @@ public class SubmissionController {
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
 	public String evaluateAssignment(String taskId, String point, String evaluated,String evaluationCnt ) {
-		int id=Integer.parseInt(taskId);
+		int id= Integer.parseInt(taskId);
 		int poin = Integer.parseInt(point);
 		int count = Integer.parseInt(evaluationCnt);
 		boolean evalute = Boolean.valueOf(evaluated);
@@ -200,15 +200,15 @@ public class SubmissionController {
 		System.out.println("evaluated= "+ evaluated);
 		System.out.println("=============================================");
 		
-//		Task task = new Task(id,evalute,count,poin);
 		
-//		System.out.println(task.toString());
+		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
+		task.setPoint(Integer.parseInt(point));
+		task.setEvaluationCnt(Integer.parseInt(evaluationCnt));
+		task.setEvaluated(Boolean.valueOf(evaluated));
 		
-		
-		
-		
-		
-//		service.modifyTask(task);
+		System.out.println(task.toString());
+		System.out.println("=========================================");
+		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";
 	}

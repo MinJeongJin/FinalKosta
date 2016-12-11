@@ -20,7 +20,7 @@ public interface TaskMapper {
 
 	void updateTask(Task task);
 //	추가했음
-	void updateTaskPoint(int point);
+	void updateTaskPoint(Task task);
 //	추가했음
 	void updateTaskFile(TaskFile taskFile);
 

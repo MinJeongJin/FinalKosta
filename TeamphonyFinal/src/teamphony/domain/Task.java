@@ -80,9 +80,9 @@ public class Task {
 	public int getPoint() {
 		return point;
 	}
-
+//평가시 획득한 점수를 기존의 점수와 더해서 점수 합산을 한다.
 	public void setPoint(int point) {
-		this.point = point;
+		this.point = this.point + point;
 	}
 
 	public int getFlag() {
@@ -106,10 +106,10 @@ public class Task {
 		return evaluationCnt;
 	}
 //평가 횟수를 위한 메소드
+//평가를 할 때 마다 횟수를 1씩 증가 시킨다.
 	public void setEvaluationCnt(int evaluationCnt) {
-		this.evaluationCnt = evaluationCnt;
+		this.evaluationCnt = this.evaluationCnt + evaluationCnt;
 	}
-	
 
 	public String[] getMemberIdList() {
 		return memberIdList;

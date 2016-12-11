@@ -85,9 +85,18 @@ public class TaskStoreLogic implements TaskStore {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			mapper.updateTask(task);
 			
+//ture == 1 , flase == 0 
+				if(task.isEvaluated()){
+					mapper.updateTaskPoint(task);
 //flag 1==submission   flag 0==assignment
-				if(task.getFlag() == 1){
+				}else if(task.getFlag() == 0){
+
+					mapper.deleteMemberIdByTaskId(task.getTaskId());
 					
+						for(String memberId : task.getMemberIdList()){
+							mapper.insertTaskMember(task.getTaskId(), memberId);
+						}
+				}else if(task.getFlag() == 1){
 					mapper.deleteTaskFile(task.getTaskId());
 					
 					List<TaskFile> taskFileList = task.getTaskFileList();
@@ -96,16 +105,6 @@ public class TaskStoreLogic implements TaskStore {
 						taskFile.setSubmissionId(task.getTaskId());
 						mapper.insertTaskFile(taskFile);
 					}
-				}else if(task.getFlag() == 0){
-
-					mapper.deleteMemberIdByTaskId(task.getTaskId());
-					
-						for(String memberId : task.getMemberIdList()){
-							mapper.insertTaskMember(task.getTaskId(), memberId);
-						}
-				}else if(task.isEvaluated()){
-// ture == 1 , flase == 0 
-					mapper.updateTaskPoint(task.getPoint());
 				}
 					session.commit();
 

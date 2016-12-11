@@ -195,14 +195,16 @@
 							<input type="radio" name="point" id="p9" value="9"><label for="p9">9</label>
 							<input type="radio" name="point" id="p10" value="10"><label for="p10">10</label>
 						</span>
-							<output for="point"><b></b>점</output>
+							<output for="point"><b></b>점
+								<button type="submit" class="btn btn-primary pull-left">평가완료</button>
+							</output>
 					</span>
 				</td>
 			</tr>
 			<tr>
 				<th></th>
 				<td>
-					<button type="submit" class="btn btn-primary pull-left">평가완료</button>
+					
 				</td>
 			</tr>
 	</form>

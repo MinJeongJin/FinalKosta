@@ -95,5 +95,12 @@ ADD (evaluationPeriodStart VARCHAR2(50));
 ALTER TABLE TASK_TB
 ADD (evaluationPeriodEnd VARCHAR2(50));
 
+//task_tb 수정사항
+ALTER TABLE TASK_TB
+ADD (evaluated NUMBER);
+
+ALTER TABLE TASK_TB
+ADD (evaluationcnt NUMBER);
+
 
 commit;
