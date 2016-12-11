@@ -200,8 +200,10 @@ public class SubmissionController {
 		System.out.println("evaluated= "+ evaluated);
 		System.out.println("=============================================");
 		
-		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
+		System.out.println("============find Task=================");
+		
+		System.out.println("============controller  TaskSet=================");
 		task.setPoint(Integer.parseInt(point));
 		task.setEvaluationCnt(Integer.parseInt(evaluationCnt));
 		task.setEvaluated(Boolean.valueOf(evaluated));

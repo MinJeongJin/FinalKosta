@@ -87,14 +87,14 @@
 	
 	<select id="selectAllTaskByFlag" parameterType="int" resultType="Task">
 			SELECT 
-				ID							AS taskId,
-				TITLE,                  
-				CONTENTS,               
-				DEADLINE,               
-				EVALUATIONPERIODSTART,  
-				EVALUATIONPERIODEND,    
-				FLAG,                   
-				POINT                  
+				ID							AS taskId
+				,TITLE                  
+				,CONTENTS              
+				,DEADLINE              
+				,EVALUATIONPERIODSTART 
+				,EVALUATIONPERIODEND    
+				,FLAG                   
+				,POINT                  
 				FROM TASK_TB            
 				WHERE FLAG = #{flag}
 				ORDER BY ID ASC
@@ -112,7 +112,7 @@
 		SELECT 
 			SUBMISSIONID
 			,FILEPATH 
-			FROM TASKFILE_TB
+		FROM TASKFILE_TB
 	</select>
 	
 	<select id="selectFileListByTaskId" parameterType="int" resultType="TaskFile">
@@ -125,14 +125,15 @@
 	
 	<select id="selectTaskByTaskId" parameterType="int" resultType="Task">
 			SELECT 
-				ID						AS taskId,
-				TITLE,                  
-				CONTENTS,               
-				DEADLINE,               
-				EVALUATIONPERIODSTART,  
-				EVALUATIONPERIODEND,    
-				FLAG,                   
-				POINT                  
+				ID						AS taskId
+				,TITLE                  
+				,CONTENTS              
+				,DEADLINE               
+				,EVALUATIONPERIODSTART 
+				,EVALUATIONPERIODEND 
+				,EVALUATIONCNT   
+				,FLAG                   
+				,POINT                  
        			FROM TASK_TB 
 			WHERE ID= #{taskId}  
 	</select>

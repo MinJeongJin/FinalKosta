@@ -178,6 +178,7 @@ public class TaskStoreLogic implements TaskStore {
 				task = mapper.selectTaskByTaskId(taskId);
 				task.setMemberIdList(mapper.selectMemberIdByTaskId(taskId));
 //flag 1==submission   flag 0==assignment		
+				
 				if(task.getFlag() == 1){
 					
 					List<TaskFile> fileList = new ArrayList<>();

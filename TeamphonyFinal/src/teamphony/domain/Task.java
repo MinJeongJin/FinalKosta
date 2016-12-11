@@ -109,6 +109,7 @@ public class Task {
 //평가를 할 때 마다 횟수를 1씩 증가 시킨다.
 	public void setEvaluationCnt(int evaluationCnt) {
 		this.evaluationCnt = this.evaluationCnt + evaluationCnt;
+		
 	}
 
 	public String[] getMemberIdList() {
