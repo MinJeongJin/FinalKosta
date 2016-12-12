@@ -113,6 +113,10 @@ h1 {
 									</c:forEach>
 								</td>
 								<td>${task.deadline }</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?AssignmentTitle=${task.title}"><input class="btn btn-success" type="submit" value="과제 제출하기"></a>
+								
+								</td>
 							</tr>
 						</c:forEach>
 							<tr>

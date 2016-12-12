@@ -102,5 +102,10 @@ ADD (evaluated NUMBER);
 ALTER TABLE TASK_TB
 ADD (evaluationcnt NUMBER);
 
+//12.12 taskfile_tb 수정 사항
+
+ALTER TABLE TASKFILE_TB 
+MODIFY (FILEPATH VARCHAR2(500));
+
 
 commit;
