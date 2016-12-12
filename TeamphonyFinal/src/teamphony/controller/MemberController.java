@@ -223,6 +223,16 @@ public class MemberController {
 		
 		return "redirect:/team/main.do";
 	}
+	
+	@RequestMapping(value="check.do", method=RequestMethod.POST)
+	public String CheckMember(HttpSession session, String password ){
+		
+		Member member = (Member)session.getAttribute("member");	
+		if(member.getPassword().equals(password)){
+			return "redirect:/views/member/myPage.jsp";
+		}
+		return "redirect:/team/main.do";
+	}
 
 
 }

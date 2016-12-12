@@ -49,6 +49,7 @@
 		<div class="w3-bottombar" style="margin-bottom: 30px;">
 			<h2>회원 확인</h2>
 		</div>
+		<form action="${pageContext.request.contextPath}/member/check.do" method="post">
 		<table>
 			<tr>
 				<td>패스워드</td>
@@ -60,9 +61,10 @@
 			</tr>
 		</table>
 		<div>
-			<div style="display: inline-block;"><button class="btn btn-info btn-lg">확인</button></div>
-			<div style="display: inline-block;"><button class="btn btn-danger btn-lg">취소</button></div>
+			<div style="display: inline-block;"><button type="submit" class="btn btn-info btn-lg">확인</button></div>
+			<div style="display: inline-block;"><a href="${pageContext.request.contextPath}/team/main.do" class="btn btn-danger btn-lg">취소</a></div>
 		</div>
+		</form>
 	</div>
 </body>
 </html>
