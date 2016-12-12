@@ -224,7 +224,7 @@ h1 {
 						<span class="starRating">
 							<span style="width:${task.getPointStar() }%"></span>
 						</span><br>
-						<fmt:formatNumber value="${task.getAverage() }" type="pattern" pattern="0.0" /> 점 
+						<fmt:formatNumber value="${task.getAverage() }" type="pattern" pattern="0.0" /> 점
 					</td>
 			</tr>
 			<tr>

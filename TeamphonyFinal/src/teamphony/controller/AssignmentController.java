@@ -112,7 +112,7 @@ public class AssignmentController {
 //test 중 이라서 임의로 팀 코드를 부여 하였다
 		
 		Team team = new Team();
-		team.setCode(9606);
+		team.setCode(9642);
 		session.setAttribute("code", team.getCode());
 		
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
