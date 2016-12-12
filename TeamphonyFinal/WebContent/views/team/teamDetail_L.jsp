@@ -192,7 +192,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			</div>
 
 			<!-- /modal -->
-			<!-- <%@ include file="/views/team/memberInvite.jspf"%> -->
+			<%@ include file="/views/team/memberInvite.jspf"%>
 
 
 		</div>

@@ -45,7 +45,9 @@
 
 			<ul class="w3-navbar w3-black w3-large w3-card-4 w3-padding-12">
 				<li class="w3-navitem w3-tangerine">Teamphony</li>
-				<li><a href="#" onclick="document.getElementById('id01').style.display='block'">팀 생성</a></li>
+				<li><a href="#"
+					onclick="document.getElementById('id01').style.display='block'">팀
+						생성</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">마이페이지</a></li>
 				<li><a href="#">로그아웃</a></li>
@@ -105,9 +107,8 @@
 					</div>
 
 					<a href="javascript:submitWithScript(${cntOfTeam.count});"
-						style="text-decoration: none"> <span
-						class="teamNameContainer"> <strong name="teamName"
-							value="${team.name}">${team.name}</strong>
+						style="text-decoration: none"> <span class="teamNameContainer">
+							<strong name="teamName" value="${team.name}">${team.name}</strong>
 					</span>
 					</a>
 
@@ -117,8 +118,8 @@
 		</c:forEach>
 	</div>
 
-<!--<%@ include file="/views/team/teamCreate.jspf"%>  -->
-	
+	<%@ include file="/views/team/teamCreate.jspf"%>
+
 
 
 	<div id="snackbar" class="w3-opacity"></div>
