@@ -66,6 +66,7 @@ public class MemberController {
 		String originalFileName = null;
 		
 		String root = request.getSession().getServletContext().getRealPath("/");
+		
 
 		// 파일을 저장할 폴더 설정
 		File file = new File(root+filePath + memberId + "\\");
@@ -85,7 +86,7 @@ public class MemberController {
 
 				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
 				file = new File(root+filePath + memberId + "\\" + originalFileName);
-				member.setImagePath(root+filePath + memberId + "\\" + originalFileName);
+				member.setImagePath(originalFileName);
 				try {
 					// 파일 전송
 					multipartFile.transferTo(file);

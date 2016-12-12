@@ -37,47 +37,36 @@ function myFunction() {
 	
 	
 	
-	$(document)
-			.ready(
-					function() {
-						$("#memberId").keyup(
-								function() {
-									if ($("#memberId").val().length > 5) {
-										var id = $(this).val();
-										$.ajax({
-											type : 'POST',
-											url : 'checkId.do',
-											data : {
-												id : id
-											},
-											success : function(result) {
-												if ($.trim(result) == "ok") {
-													$("#idCheckResult").html(
-															"사용 가능한 ID입니다.");
-												} else {
-													$("#idCheckResult").html(
-															"사용 중인 ID입니다.");
-												}
-											}
-										});
-									} else {
-										$("#idCheckResult").html(
-												"ID는 5자 이상입니다.");
-									}
-								});
-						$("#password")
-								.keyup(
-										function() {
-											if ($("#password").val().length > 8
-													&& $("#password").val().length < 11) {
-												$("#idCheckResult").html(
-														"사용 가능한 Password입니다.");
-											} else {
-												$("#idCheckResult").html(
-														"Password는 8자 이상입니다.");
-											}
-										});
-					});
+	$(document).ready(function() {
+		$("#memberId").keyup(function() {
+			if ($("#memberId").val().length > 5) {
+				var id = $(this).val();
+				$.ajax({
+					type : 'POST',
+					url : 'checkId.do',
+					data : {
+					id : id
+				},
+				success : function(result) {
+					if ($.trim(result) == "ok") {
+						$("#idCheckResult").html("사용 가능한 ID입니다.");
+					} else {
+						$("#idCheckResult").html("사용 중인 ID입니다.");
+					}
+				}
+			});
+			} else {
+				$("#idCheckResult").html("ID는 5자 이상입니다.");
+			}
+		});
+		$("#password").keyup(function() {
+			if ($("#password").val().length > 8 && $("#password").val().length < 11) {
+				$("#idCheckResult").html("사용 가능한 Password입니다.");
+			} else {
+				$("#idCheckResult").html("Password는 8자 이상입니다.");
+			}
+		});
+	});
 </script>
 
 <style type="text/css">

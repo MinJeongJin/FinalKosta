@@ -13,6 +13,48 @@
 	<context:component-scan base-package="teamphony"/>
 	<mvc:annotation-driven/>
 	
+	<bean id="memberXmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Members" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="placeXmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Places" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="postXmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Posts" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="scheduleXmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Schedule" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="taskXmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Tasks" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="taskFileXmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.TaskFiles" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="teamXmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<constructor-arg>
+			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Teams" />
+		</constructor-arg>
+	</bean>
+	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/views/"/>
 		<property name="suffix" value=".jsp"/>
@@ -25,36 +67,6 @@
 		<bean class="teamphony.interceptor.CharacterEncodingInterceptor"/>
 	</mvc:interceptors>
 	
-	<bean id="xmlViewer" class="org.springframework.web.servlet.view.xml.MarshallingView">
-	
-		<constructor-arg>
-			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Members" />
-		</constructor-arg>
-		
-		<constructor-arg>
-			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Places" />
-		</constructor-arg>
-		
-		<constructor-arg>
-			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Posts" />
-		</constructor-arg>
-		
-		<constructor-arg>
-			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Schedules" />
-		</constructor-arg>
-		
-		<constructor-arg>
-			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Tasks" />
-		</constructor-arg>
-		
-		<constructor-arg>
-			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.TaskFiles" />
-		</constructor-arg>
-		
-		<constructor-arg>
-			<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="teamphony.domain.Teams" />
-		</constructor-arg>
-		
-	</bean>
+
 	
 </beans>

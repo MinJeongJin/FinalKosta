@@ -78,7 +78,7 @@
 		<div id="contents">
 
 			<div>
-				<div><img id="blah" alt="사진 없음" src="${member.imagePath}"></div>
+				<div><img id="blah" alt="사진 없음" src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"></div>
 			</div>
 
 		</div>
