@@ -112,7 +112,7 @@ public class ScheduleController {
 		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(teamCode);
 		
 		model.addAttribute("teamSchedules", teamSchedules);
-		return "schedule/calendar";
+		return "schedule/calendar2";
 	}
 	
 }

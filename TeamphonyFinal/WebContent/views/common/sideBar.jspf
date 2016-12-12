@@ -1,6 +1,7 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- 
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 <body>
 
 
-<!-- Sidenav/menu -->
+	<!-- Sidenav/menu -->
 	<nav class="w3-sidenav w3-collapse w3-white w3-animate-left "
 		style="z-index: 3; width: 300px;" id="mySidenav">
 		<br>
@@ -28,15 +29,12 @@
 			<p class="w3-text-grey">육식중인초식남</p>
 		</div>
 
-		<a href="${pageContext.request.contextPath}/team/search.do" id="menu1" name="menuItem"
-			onclick="clickCheck('menu1');closeAcc();"
+		<a href="${pageContext.request.contextPath}/team/search.do" id="menu1"
+			name="menuItem" onclick="clickCheck('menu1');closeAcc();"
 			class="w3-padding w3-card-4"><i
-			class="fa fa-wrench fa-fw w3-margin-right"></i>팀 관리</a> 
-			
-			
-			
-			<a href="${pageContext.request.contextPath}/post/list.do"
-			id="menu2" name="menuItem" onclick="clickCheck('menu2');closeAcc()"
+			class="fa fa-wrench fa-fw w3-margin-right"></i>팀 관리</a> <a
+			href="${pageContext.request.contextPath}/post/list.do" id="menu2"
+			name="menuItem" onclick="clickCheck('menu2');closeAcc()"
 			class="w3-padding w3-card-4"><i
 			class="fa fa-clipboard fa-fw w3-margin-right"></i>게시판</a>
 
@@ -57,10 +55,13 @@
 
 		</div>
 
-		<a href="#" id="menu4" name="menuItem"
-			onclick="clickCheck('menu4');closeAcc();"
+		<a href="${pageContext.request.contextPath}/schedule/calendar.do"
+			id="menu4" name="menuItem" onclick="clickCheck('menu4');closeAcc();"
 			class="w3-padding w3-card-4"><i
-			class="fa fa-calendar fa-fw w3-margin-right"></i>일정관리</a> <a href="#"
+			class="fa fa-calendar fa-fw w3-margin-right"></i>일정관리</a> 
+			
+			
+			<a href="${pageContext.request.contextPath}/member/evaluationList.do"
 			id="menu5" name="menuItem" onclick="clickCheck('menu5');closeAcc();"
 			class="w3-padding w3-card-4"><i
 			class="fa fa-check-square-o fa-fw w3-margin-right"></i>팀원평가</a> <a
@@ -69,9 +70,7 @@
 			class="w3-padding w3-card-4"><i
 			class="fa fa-info fa-fw w3-margin-right"></i>장소정보</a>
 
-
 	</nav>
 
- 
 </body>
 </html>
