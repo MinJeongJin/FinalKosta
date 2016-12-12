@@ -98,21 +98,75 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>팀 관리</b>
+				<b>과제부여 상세</b>
 			</h1>
-			<h4>팀 정보를 확인하고 관리해 보세요.</h4>
+			<h4>과제부여 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
+<!--  Start Page  -->
 
+<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
+	<table class="w3-table">
+		<colgroup>
+			<col width="150">
+			<col width="*">
+		</colgroup>
+		<tr class="w3-padding w3-card-2 ">
+			<th>제목</th>
+				<td class="">
+					${task.title } 
+				</td>
+		</tr>
+		<tr class="w3-padding w3-card-2 ">
+			<th>제출자</th>
+				<td>
+					<c:forEach items="${task.memberIdList }" var="memberId">
+						${memberId }
+					</c:forEach>
+				</td>
+		</tr>
+		<tr class="w3-padding w3-card-2 ">
+			<th>제출 기한</th>
+			<td>
+				${task.deadline }
+			</td>
+		</tr>
+		<tr class="w3-padding w3-card-2 ">
+			<th>평가 기간</th>
+			<td>
+				시작<br> 
+				${task.evaluationPeriodStart }<br>
+				종료<br> 
+				${task.evaluationPeriodEnd }
+			</td>
+		</tr>
+		<tr class="w3-padding w3-card-2">
+			<th>내용</th>
+				<td class="w3-animate-input">
+					${task.contents }
+				</td>
+		</tr>
+	</table>
+</form>
+	<br>
+	<div align="right">
 	
-
-		<div class="w3-black w3-center w3-padding-24 w3-card-12">
-			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">Suho</a>
-		</div>
+	<a  class="w3-btn w3-white w3-border" href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId }&flag=${task.flag }" >수정</a>
+	<a class="w3-btn w3-white w3-border"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }">삭제</a>
 	</div>
 	<!-- End page content -->
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
-
 </html>

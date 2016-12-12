@@ -98,20 +98,91 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>팀 관리</b>
+				<b>과제 부여</b>
 			</h1>
-			<h4>팀 정보를 확인하고 관리해 보세요.</h4>
+			<h4>과제부여 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 
+<!--  Start Page  -->
+<table>
+	<colgroup>
+			<col width="400" align="center">
+			<col width="400" align="left">
+			<col width="400" align="center">
+			<col width="400" align="center">
+			<col width="400" align="center">
+	</colgroup>
+	<form class="w3-container" action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
+	<tr>
+		<td align="center">
+			<input name="memberId" id="memberId" type="text" class="w3-input" value="" placeholder="팀원 아이디를 입력 하세요"/>
+		</td>
+		<td align="left">
+			<input type="submit" class="w3-btn w3-light-grey w3-border w3-round-large" name="searchByMemberId" value="검색"/>
+		</td>
+	</tr>
+	</form>
 	
-
-		<div class="w3-black w3-center w3-padding-24 w3-card-12">
-			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">Suho</a>
-		</div>
-	</div>
-	<!-- End page content -->
+</table>
+	
+	<table class="table table-hover table-condensed" text-align:center;>
+		<colgroup>
+			<col width="100" align="center">
+			<col width="400" align="center">
+			<col width="400" align="center">
+			<col width="400" align="center">
+			<col width="400" align="right">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>제출자</th>
+				<th>제출기한</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list }" var="task" varStatus="sts">
+				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+					<td>${sts.count }</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+					</td>
+					<td>
+						<c:forEach items="${task.memberIdList }" var="memberId">
+							${memberId }
+						</c:forEach>
+					</td>
+					<td colspan="2">${task.deadline }</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&taskId=${task.taskId }">
+							<button class="w3-btn w3-white w3-border w3-border-pale-red w3-text-red w3-round-large">제출</button>
+						</a>
+					</td>
+				</tr>
+			</c:forEach>
+				<tr>
+				<th></th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td align="right">
+					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+						<input class="w3-btn w3-light-grey w3-border" type="submit" value="제출과제 리스트">
+					</a> 
+				</td>	
+				<td>			
+					<a href="${pageContext.request.contextPath}/assignment/create.do">
+						<input  class="w3-btn w3-light-grey w3-border" type="submit" value="부여과제 등록">
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- End page content -->
 
 </body>
 

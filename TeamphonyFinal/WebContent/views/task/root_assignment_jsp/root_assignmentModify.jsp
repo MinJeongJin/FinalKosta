@@ -103,8 +103,64 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<h4>팀 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
+<!--  Start Page  -->
 
-	
+
+
+
+
+		<form action="${pageContext.request.contextPath}/assignment/create.do"
+			method="post">
+			<table class="table">
+				<colgroup>
+					<col width="150">
+					<col width="*">
+
+				</colgroup>
+				<tr>
+					<th>제목</th>
+					<td><input id="title" name="title" class="form-control"
+						type="text" value="" placeholder="제목을 입력하세요."></td>
+				</tr>
+				<tr style="horizontal-align: left;">
+					<th>제출자</th>
+					<c:forEach items="${memberList }" var="member">
+						<td style="float: left; width: 70px;"><input type="checkbox"
+							name="memberIdList" class="form-control"
+							style="width: 20px; margin: 0px;" value="${member.memberId }">
+							${member.memberId }</td>
+					</c:forEach>
+				</tr>
+				<tr>
+					<th>제출 기한</th>
+					<td><input type="date" id="deadlineDay" name="deadlineDay">
+						<input type="time" id="deadlineHour" name="deadlineHour">
+
+					</td>
+				</tr>
+				<tr>
+					<th>평가 기한</th>
+					<td><input type="date" id="evalDayStart" name="evalDayStart">
+						<input type="time" id="evalHourStart" name="evalHourStart">-
+						<input type="date" id="evalDayEnd" name="evalDayEnd"> <input
+						type="time" id="evalHourEnd" name="evalHourEnd"></td>
+				</tr>
+
+				<tr>
+					<th>내용</th>
+					<td><textarea id="contents" name="contents"
+							class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요.">
+						</textarea> <input type="hidden" name="flag" value="0" /></td>
+				</tr>
+			</table>
+			<br>
+			<div align="center">
+				<a href="assignmentList.do"><input class="btn" type="reset"
+					value="취소"></a> <input class="btn btn-success" type="submit"
+					value="저장">
+			</div>
+		</form>
+
 
 		<div class="w3-black w3-center w3-padding-24 w3-card-12">
 			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
