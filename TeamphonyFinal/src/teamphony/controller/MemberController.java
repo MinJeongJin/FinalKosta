@@ -2,6 +2,7 @@ package teamphony.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,10 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import teamphony.domain.Member;
+import teamphony.domain.Members;
 import teamphony.service.facade.MemberService;
 import teamphony.service.facade.TeamService;
 
@@ -232,6 +235,19 @@ public class MemberController {
 			return "redirect:/views/member/myPage.jsp";
 		}
 		return "redirect:/team/main.do";
+	}
+	
+	@RequestMapping(value="xml.do", produces="application/xml")
+	public @ResponseBody Members getMembersToXml(){
+		
+		List<Member> list  = new ArrayList<>();
+		Members members = new Members();
+		
+		list = memberService.findAllMember();
+		
+		members.setMembers(list);
+		
+		return members;
 	}
 
 

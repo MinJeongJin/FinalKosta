@@ -3,6 +3,7 @@ package teamphony.store.logic;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -114,6 +115,19 @@ public class MemberStoreLogic implements MemberStore {
 		}finally{
 			session.close();
 		}
+	}
+	
+	public List<Member> selectAllMember() {
+		List<Member> list = new ArrayList<>();
+		SqlSession session = getSessionFactory().openSession();
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			list = mapper.selectAllMember();
+		} catch (Exception e) {
+		}finally{
+			session.close();
+		}
+		return list;
 	}
 
 }

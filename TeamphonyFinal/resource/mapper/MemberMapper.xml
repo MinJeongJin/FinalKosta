@@ -36,5 +36,9 @@
 	<select id="getStarPoint" parameterType="String" resultType="Integer">
 		select starPoint from evaluation_tb where memberId = #{id}
 	</select>
+	
+	<select id="selectAllMember" resultType="Member">
+		select id As memberId, password, alias, imagePath from member_tb
+	</select>
 
 </mapper>

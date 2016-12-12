@@ -14,4 +14,5 @@ public interface MemberMapper {
 	Member selectMemberByMemberId(String memberId);
 	void insertStarPoint (@Param("memberId") String memberId, @Param("starPoint") int starPoint);
 	List<Integer> getStarPoint(String id);
+	List<Member> selectAllMember();
 }

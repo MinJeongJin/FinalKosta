@@ -1,5 +1,7 @@
 package teamphony.service.logic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +38,9 @@ public class MemberServiceLogic implements MemberService {
 	@Override
 	public void saveStarPoint(String memberId, int starPoint) {
 		store.insertStarPoint(memberId, starPoint);
+	}
+	
+	public List<Member> findAllMember(){
+		return store.selectAllMember();
 	}
 }

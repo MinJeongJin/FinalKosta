@@ -38,7 +38,7 @@
 		<div class="w3-container">
 			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
 				<li class="w3-navitem w3-tangerine">Teamphony</li>
-				<li><a href="#myModal" data-toggle="modal">회원 정보</a></li>
+				<li><a>회원 정보</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">회원 수정</a></li>
 				<li><a href="#">회원 탈퇴</a></li>
@@ -63,15 +63,15 @@
 				
 				<tr>
 					<th>프로필</th>
-					<td><input id="imagePath" type="file" name="imagePath" class="form-control" value=""></td>
+					<td><input id="imagePath" type="file" name="imagePath" class="form-control" value="${memebr.imagePath }"></td>
 				</tr>
 				<tr>
 					<th>별명</th>
-					<td><input id="alias" type="text" name="alias" class="form-control" value=""></td>
+					<td><input id="alias" type="text" name="alias" class="form-control" value="${member.alias }"></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input id="password" type="password" name="password" class="form-control" value=""></td>
+					<td><input id="password" type="password" name="password" class="form-control" value=""${member.password }></td>
 				</tr>
 				<tr>
 					<th>비밀 번호 확인</th>

@@ -1,5 +1,7 @@
 package teamphony.store.facade;
 
+import java.util.List;
+
 import teamphony.domain.Member;
 
 public interface MemberStore {
@@ -9,5 +11,5 @@ public interface MemberStore {
 	void deleteMember(String memberId);
 	Member selectMemberByMemberId(String memberId);
 	void insertStarPoint(String memberId, int starPoint);
-	
+	List<Member> selectAllMember();
 }
