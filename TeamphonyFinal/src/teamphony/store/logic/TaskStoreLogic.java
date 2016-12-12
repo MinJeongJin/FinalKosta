@@ -86,7 +86,7 @@ public class TaskStoreLogic implements TaskStore {
 			mapper.updateTask(task);
 			
 //ture == 1 , flase == 0 
-				if(task.isEvaluated()){
+				if(task.getEvaluated() == 1){
 					mapper.updateTaskPoint(task);
 //flag 1==submission   flag 0==assignment
 				}else if(task.getFlag() == 0){

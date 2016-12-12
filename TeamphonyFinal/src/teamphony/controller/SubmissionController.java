@@ -209,7 +209,7 @@ public class SubmissionController {
 		
 		task.setPoint(Integer.parseInt(point));
 		task.setEvaluationCnt(Integer.parseInt(evaluationCnt));
-		task.setEvaluated(Boolean.valueOf(evaluated));
+		task.setEvaluated(Integer.parseInt(evaluated));
 		
 		service.modifyTask(task);
 		
