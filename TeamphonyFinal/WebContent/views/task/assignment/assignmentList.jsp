@@ -108,13 +108,15 @@ h1 {
 									<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
 								</td>
 								<td>
-									<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
+									<c:forEach items="${task.memberIdList }" var="memberId">
 										${memberId }
 									</c:forEach>
 								</td>
 								<td>${task.deadline }</td>
 								<td>
-									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?AssignmentTitle=${task.title}"><input class="btn btn-success" type="submit" value="과제 제출하기"></a>
+									<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&taskId=${task.taskId }">
+										<input class="btn btn-success" type="submit" value="과제 제출하기">
+									</a>
 								
 								</td>
 							</tr>

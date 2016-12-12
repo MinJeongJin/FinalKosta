@@ -192,7 +192,6 @@ h1 {
 							<th>부여과제</th>
 							<th>제목</th>
 							<th>제출자</th>
-							<th>제출기한</th>
 							<th>첨부파일</th>
 							<th>평점</th>
 						</tr>
@@ -215,9 +214,6 @@ h1 {
 									</c:forEach>
 								</td>
 								<td>
-									<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
-								</td>
-								<td>
 									<c:forEach items="${task.taskFileList}" var="taskFile">
 									${taskFile.filePath}<br>
 									</c:forEach>
@@ -225,7 +221,12 @@ h1 {
 								<td >
 									<p><span class="starRating">
 										<span style="width:${task.getPointStar() }%"></span>
-									</span></p>
+										</span>
+									</p>
+								</td>
+								<td>
+										${task.getAverage() } 점 
+									
 								</td>
 							</tr>
 						</c:forEach>
