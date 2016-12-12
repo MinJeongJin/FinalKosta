@@ -133,7 +133,7 @@ public class PostController {
 		List<Post> listPost = postService.findAllPost(teamCode);
 
 		model.addAttribute("listPost", listPost);
-		return "post/postList";
+		return "post/postList2";
 	}
 	
 	@RequestMapping("detail.do")
@@ -143,7 +143,7 @@ public class PostController {
 		
 		model.addAttribute("post", post);
 		
-		return "post/postDetail";
+		return "post/postDetail2";
 	}
 	
 	@RequestMapping("revise.do")
@@ -254,7 +254,7 @@ public class PostController {
 	public String searchPostByContents(String search, Model model){
 		List<Post> list = postService.findPostByContents(search);
 		model.addAttribute("listPost", list);
-		return "/post/postList"; 
+		return "/post/postList2"; 
 	}
 
 }

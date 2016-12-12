@@ -21,7 +21,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
 <script
-	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.slim.js"></script>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/sideBarControl.js"></script>
@@ -58,29 +58,40 @@
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 
+
+
+
 		<div class="w3-container">
+
 			<form
 				action="${pageContext.request.contextPath}/post/searchBycontents.do">
+				<ul class="w3-navbar w3-large w3-padding-12">
 
-				<select class="w3-select w3-border w3-large" name="option"
-					style="display: inline-block; width: calc(10% + 50px)">
-					<option value="" disabled selected>Option</option>
-					<option value="1">Option 1</option>
-					<option value="2">Option 2</option>
-					<option value="3">Option 3</option>
-				</select> <input type="text" class="w3-input w3-white w3-large w3-border"
-					name="teamCode" onkeydown="return setOnlyNumber();"
-					onkeyup="removeChar();" maxlength="4" id="teamCode"
-					placeholder="게시물 검색"
-					style="display: inline-block; width: calc(50% + 200px)">
+					<li style="margin-right: 10px"><select
+						class="w3-select w3-large w3-border" name="option">
+							<option value="" disabled selected>Option</option>
+							<option value="1">Option 1</option>
+							<option value="2">Option 2</option>
+							<option value="3">Option 3</option>
+					</select></li>
+					<li style="margin-right: 10px; width: 75%;"><input type="text"
+						class="w3-input w3-white w3-large w3-border" name="teamCode"
+						onkeydown="return setOnlyNumber();" onkeyup="removeChar();"
+						maxlength="4" id="teamCode" placeholder="게시물 검색"></li>
+					<li><button type="submit"
+							class="w3-btn w3-dark-grey w3-large"
+							style="margin-bottom: 5px">검색</button></li>
 
-				<button type="submit" class="w3-btn w3-brown w3-large w3-margin-0"
-					style="margin-bottom: 5px">검색</button>
 
+
+				</ul>
 
 			</form>
-
 		</div>
+
+
+
+
 
 		<div class="w3-container w3-padding-32">
 
@@ -92,15 +103,15 @@
 				<c:otherwise>
 					<c:forEach items="${listPost}" var="post" varStatus="status">
 
-						<figure style="display:inline-block">
+						<figure style="display: inline-block">
 							<div class="w3-card-4 w3-white"
-								style="width: 300px; display: inline-block;">
+								style="width: 300px; display: inline-block;word-break:break-all;">
 								<header class="w3-container w3-padding-8">
 									<img src="${post.member.imagePath }" alt="Avatar"
 										class="w3-left w3-circle w3-margin-right" style="width: 30px">
 									<h3>${post.member.memberId }</h3>
 								</header>
-								<div class="w3-container" style="height: 210px;">
+								<div class="w3-container">
 									<c:if test="${post.imagePath ne pass}">
 										<b class="glyphicon glyphicon-paperclip"></b>
 									</c:if>
@@ -126,13 +137,14 @@
 				</c:otherwise>
 			</c:choose>
 
+			<div class="w3-row">
+				<a class="w3-btn-floating-large w3-right w3-dark-grey"
+					href="${pageContext.request.contextPath}/views/post/createPost2.jsp">+</a>
+			</div>
 
 		</div>
 
-		<div class="w3-row">
-			<a class="w3-btn-floating-large w3-right "
-				href="${pageContext.request.contextPath}/views/post/createPost2.jsp">+</a>
-		</div>
+
 
 
 		<div class="w3-black w3-center w3-padding-24 w3-card-12">

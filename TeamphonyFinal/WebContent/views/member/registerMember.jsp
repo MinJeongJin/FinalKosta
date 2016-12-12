@@ -4,11 +4,10 @@
 
 
 <!doctype html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <title>Teamphony 가입</title>
 
@@ -24,15 +23,20 @@
 <link href='https://fonts.googleapis.com/css?family=Lato:400,700'
 	rel='stylesheet' type='text/css'>
 
-<script type="text/javascript">
-	function myFunction() {
-
-		var path = document.getElementById("imagePath").value;
-		document.getElementById("profileImage").src = path;
-	}
-</script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.slim.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/classie.js"></script>
 
 <script type="text/javascript">
+	
+function myFunction() {
+
+	var path = document.getElementById("imagePath").value;
+	document.getElementById("profileImage").src = path;
+}
+	
+	
+	
 	$(document)
 			.ready(
 					function() {
@@ -138,16 +142,9 @@
 	<!-- end #main-wrapper -->
 
 	<!-- Scripts -->
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/classie.js"></script>
 
 	<script>
 		(function() {
-			// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
 			if (!String.prototype.trim) {
 				(function() {
 					// Make sure we trim BOM and NBSP

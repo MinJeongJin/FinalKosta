@@ -10,7 +10,7 @@
 <title>제출 과제 상세</title>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.slim.js"></script>
 
 </head>
 <style type="text/css">

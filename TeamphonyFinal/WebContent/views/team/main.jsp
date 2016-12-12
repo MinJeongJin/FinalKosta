@@ -30,22 +30,22 @@
 	
 </script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.slim.js"></script>
 
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <!-- /Script -->
 
 </head>
 
-<body class="w3-light-gray">
+<body class="w3-light-grey">
 
 	<header id="mainHeader">
 		<div class="w3-container">
 
-			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
+			<ul class="w3-navbar w3-black w3-large w3-card-4 w3-padding-12">
 				<li class="w3-navitem w3-tangerine">Teamphony</li>
-				<li><a href="#myModal" data-toggle="modal">팀 생성</a></li>
+				<li><a href="#" onclick="document.getElementById('id01').style.display='block'">팀 생성</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">마이페이지</a></li>
 				<li><a href="#">로그아웃</a></li>
@@ -57,7 +57,7 @@
 						placeholder="팀 코드 입력"></li>
 
 					<li>
-						<button class="w3-btn w3-brown"
+						<button class="w3-btn w3-dark-grey"
 							onclick="loadData('${pageContext.request.contextPath}/team/join.do');">검색</button>
 					</li>
 				</div>
@@ -69,7 +69,7 @@
 	</header>
 
 	<div class="w3-container">
-		<div class="w3-panel w3-sand w3-leftbar w3-card-12"
+		<div class="w3-panel w3-sand w3-leftbar w3-card-4"
 			style="padding: 20px">
 			<p>
 				<i class="w3-serif w3-xlarge">조직을 승리로 이끄는 힘의 25%는 실력이고 나머지 75%는
@@ -94,20 +94,21 @@
 			<form name="teamLink" method="post" style="display: inline-block;"
 				action="${pageContext.request.contextPath}/team/search.do">
 
-				<figure class="w3-card-12 w3-red w3-hover-Khaki">
+				<figure class="w3-card-4 w3-red">
 
-					<input type="text" value="${team.code}" name="teamCode" hidden="true">
+					<input type="text" value="${team.code}" name="teamCode"
+						hidden="true">
 
 					<div class="imgContainer">
 						<img
 							src="${pageContext.request.contextPath}/resources/images/team.png">
 					</div>
 
-					<a href="javascript:submitWithScript(${cntOfTeam.count});" 
-						style="text-decoration: none" >
-						<span class="teamNameContainer" >
-							<strong name="teamName" value="${team.name}">${team.name}</strong>
-						</span>
+					<a href="javascript:submitWithScript(${cntOfTeam.count});"
+						style="text-decoration: none"> <span
+						class="teamNameContainer"> <strong name="teamName"
+							value="${team.name}">${team.name}</strong>
+					</span>
 					</a>
 
 				</figure>
@@ -116,48 +117,11 @@
 		</c:forEach>
 	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
-
-		<form action="${pageContext.request.contextPath}/team/create.do"
-			method="post">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h2 class="modal-title">팀 생성</h2>
-					</div>
-					<div class="modal-body">
-						<p>
-							<input type="text" class="form-control" name="name"
-								placeholder="팀 이름" maxlength="20" required>
-						</p>
-						<p>
-							<input type="number" class="form-control" name="cycle" min="0"
-								max="3" placeholder="평가주기" required>
-						</p>
-						<p>
-							<input type="date" class="form-control" name="endDate"
-								id="endDate" placeholder="평가 만료기간" required>
-						</p>
-					</div>
-					<div class="modal-footer">
-
-						<button type="submit" class="w3-btn w3-brown w3-xlarge w3-round">생성</button>
-						<button type="button" class="w3-btn w3-brown w3-xlarge w3-round" data-dismiss="modal">취소</button>
-					</div>
-				</div>
-
-			</div>
-
-		</form>
-
-	</div>
+<!--<%@ include file="/views/team/teamCreate.jspf"%>  -->
+	
 
 
-	<div id="snackbar">Some text some message..</div>
+	<div id="snackbar" class="w3-opacity"></div>
 </body>
 
 

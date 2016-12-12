@@ -179,9 +179,9 @@ public class TeamController {
 		session.setAttribute("teamCode", teamCode);
 
 		if (id.equals(leaderId))
-			return "team/teamManageForLeader";
+			return "team/teamDetail_L";
 
-		return "team/teamManage";
+		return "team/teamDetail";
 	}
 
 	@RequestMapping(value = "search.do", method = RequestMethod.GET)
@@ -202,9 +202,9 @@ public class TeamController {
 		leaderId = team.getLeaderId();
 
 		if (id.equals(leaderId))
-			return "team/teamManageForLeader";
+			return "team/teamDetail_L";
 
-		return "team/teamManage";
+		return "team/teamDetail";
 	}
 
 	public String searchMembersByCode(HttpSession session) {

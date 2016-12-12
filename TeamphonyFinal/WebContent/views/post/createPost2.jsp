@@ -20,7 +20,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
 <script
-	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.slim.js"></script>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/sideBarControl.js"></script>
