@@ -1,5 +1,14 @@
 package teamphony.domain;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.springframework.stereotype.Component;
+
+@XmlRootElement(name="taskFile")
+@XmlAccessorType(XmlAccessType.FIELD)
+@Component
 public class TaskFile {
 	private int submissionId;
 	private String filePath;

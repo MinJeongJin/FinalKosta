@@ -3,6 +3,15 @@ package teamphony.domain;
 import java.sql.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@XmlRootElement(name="team")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Team {
 
 	private String name;

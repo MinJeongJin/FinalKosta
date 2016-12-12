@@ -1,8 +1,16 @@
 package teamphony.domain;
 
-import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.springframework.stereotype.Component;
+
+@XmlRootElement(name="task")
+@XmlAccessorType(XmlAccessType.FIELD)
+@Component
 public class Task {
 
 	private int taskId;
