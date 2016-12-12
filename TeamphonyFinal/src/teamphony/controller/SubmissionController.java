@@ -179,6 +179,9 @@ public class SubmissionController {
 		
 		List<Task> taskList = service.findAllTaskByFlag(flag);
 		
+		for(Task task: taskList){
+			System.out.println("getEvaluated= "+task.getEvaluated());
+		}
 		model.addAttribute("taskList", taskList);
 		
 		return "/task/submission/submissionList";
@@ -196,16 +199,8 @@ public class SubmissionController {
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
 	public String evaluateAssignment(String taskId, String point, String evaluated,String evaluationCnt ) {
-		int id= Integer.parseInt(taskId);
-		int poin = Integer.parseInt(point);
-		int count = Integer.parseInt(evaluationCnt);
-		boolean evalute = Boolean.valueOf(evaluated);
-		
 		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-		
-		System.out.println("============fint task=================");
-		System.out.println("getPointStar"+ task.getPointStar());
 		
 		task.setPoint(Integer.parseInt(point));
 		task.setEvaluationCnt(Integer.parseInt(evaluationCnt));

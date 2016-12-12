@@ -184,6 +184,8 @@ h1 {
 						<col width="400" align="center">
 						<col width="400" align="center">
 						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
 						<col width="1000" align="center">
 					</colgroup>
 					<thead>
@@ -194,6 +196,8 @@ h1 {
 							<th>제출자</th>
 							<th>첨부파일</th>
 							<th>평점</th>
+							<th>평가여부</th>
+							<th>평가횟수</th>
 						</tr>
 					</thead>
 					<tbody >
@@ -219,18 +223,34 @@ h1 {
 									</c:forEach>
 								</td>
 								<td >
-									<p><span class="starRating">
-										<span style="width:${task.getPointStar() }%"></span>
-										</span>
+									<p>
+									<span class="starRating">
+										<span style="width:${task.getPointStar() }%">
+									</span>
+									</span>
+										<fmt:formatNumber value="${task.getAverage() }" pattern=".00"/>
+										 점
 									</p>
 								</td>
+								<td>		
+									<c:choose>
+										<c:when test="${task.evaluated == 1 }">
+											Y
+										</c:when>
+										<c:when test="${task.evaluated == 0 }">
+											N
+										</c:when>
+									</c:choose>
+								</td>
 								<td>
-									${task.getAverage() } 점
+									${task.evaluationCnt } 회
 								</td>
 							</tr>
 						</c:forEach>
 						<tr>
 							<th></th>
+							<td></td>
+							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>

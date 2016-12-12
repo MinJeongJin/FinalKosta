@@ -73,7 +73,7 @@
 					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 				</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<th></th>
 				<td>
 					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
@@ -90,7 +90,7 @@
 				<td>
 					<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 				</td>
-			</tr>
+			</tr> -->
 	
 			
 		</table>
