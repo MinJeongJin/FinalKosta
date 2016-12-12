@@ -12,25 +12,29 @@
 			INSERT
 			INTO TASK_TB
 			(
-				ID,
-				TITLE,
-				CONTENTS,
-				DEADLINE,
-				FLAG,
-				EVALUATIONPERIODSTART,
-				EVALUATIONPERIODEND,
-				POINT
+				ID
+				,TITLE
+				,CONTENTS
+				,DEADLINE
+				,FLAG
+				,EVALUATIONPERIODSTART
+				,EVALUATIONPERIODEND
+				,POINT
+				,EVALUATED 
+				,EVALUATIONCNT
 			)
 			VALUES
 			(
-				#{taskId},
-				#{title},
-				#{contents, jdbcType=VARCHAR},
-				#{deadline, jdbcType=VARCHAR},
-				#{flag, jdbcType=INTEGER},
-				#{evaluationPeriodStart, jdbcType=VARCHAR},
-				#{evaluationPeriodEnd, jdbcType=VARCHAR},
-				#{point, jdbcType=INTEGER}
+				#{taskId}
+				,#{title}
+				,#{contents, jdbcType=VARCHAR}
+				,#{deadline, jdbcType=VARCHAR}
+				,#{flag, jdbcType=INTEGER}
+				,#{evaluationPeriodStart, jdbcType=VARCHAR}
+				,#{evaluationPeriodEnd, jdbcType=VARCHAR}
+				,#{point, jdbcType=INTEGER}
+				,#{evaluated, jdbcType=INTEGER}
+				,#{evaluationCnt}
 			)
 	</insert>  
 	<insert id="insertTaskMember">
@@ -54,19 +58,23 @@
 			INSERT
 			INTO TASK_TB
 			(
-				ID,
-				TITLE,
-				CONTENTS,
-				FLAG,
-				POINT
+				ID
+				,TITLE
+				,CONTENTS
+				,FLAG
+				,POINT
+				,EVALUATED 
+				,EVALUATIONCNT
 			)
 			VALUES
 			(
-				#{taskId},
-				#{title},
-				#{contents, jdbcType=VARCHAR},
-				#{flag, jdbcType=INTEGER},
-				#{point, jdbcType=INTEGER}
+				#{taskId}
+				,#{title}
+				,#{contents, jdbcType=VARCHAR}
+				,#{flag, jdbcType=INTEGER}
+				,#{point, jdbcType=INTEGER}
+				,#{evaluated, jdbcType=INTEGER}
+				,#{evaluationCnt }
 			)
 	</insert>  
 	
@@ -95,19 +103,20 @@
 				,EVALUATIONPERIODEND    
 				,FLAG                   
 				,POINT
-				,EVALUATIONCNT      
-				              
+				,EVALUATED
+				,EVALUATIONCNT
 			FROM TASK_TB            
 				WHERE FLAG = #{flag}
 				ORDER BY ID ASC
+				
 	</select>
 	
 	<select id="selectMemberIdByTaskId" parameterType="int"  resultType="String">
 			SELECT 
 				MEMBERID 
 				FROM TASKMEMBER 
-				WHERE ASSIGNMENTID = #{taskId}
-				ORDER BY ASSIGNMENTID ASC
+			WHERE ASSIGNMENTID = #{taskId}
+			ORDER BY ASSIGNMENTID ASC
 	</select>
 	
 	<select id="selectAllFileList" resultType="TaskFile">
@@ -133,11 +142,13 @@
 				,DEADLINE               
 				,EVALUATIONPERIODSTART 
 				,EVALUATIONPERIODEND 
-				,EVALUATIONCNT   
+				,EVALUATED
+				,EVALUATIONCNT
 				,FLAG                   
 				,POINT                  
-       			FROM TASK_TB 
+   			FROM TASK_TB 
 			WHERE ID= #{taskId}  
+		
 	</select>
 	
 	<select id="selectTaskIdByMemberId" parameterType="String" resultType="int">
@@ -164,10 +175,7 @@
 			UPDATE TASK_TB
 				SET POINT				= #{point, jdbcType=INTEGER}
 					,EVALUATIONCNT		= #{evaluationCnt, jdbcType=INTEGER}
-					
-			<if test="#{evaluated}">
-					,EVALUATED = 1
-			</if>
+				<!-- ,EVALUATED = 1 -->
 			WHERE ID					= #{taskId}
 	</update>
 	

@@ -22,8 +22,8 @@ public class Task {
 	private int point;
 	private int flag;
 	private List<TaskFile> taskFileList;
-//평가 여부를 위한 변수 선언// ture == 1 , flase == 0 
-	private boolean evaluated;
+//평가 여부를 위한 변수 선언// flase == 0, ture == 1   
+	private int evaluated;
 //평가 횟수를 위한 변수 선언
 	private int evaluationCnt;
 	private String deadline;
@@ -45,7 +45,7 @@ public class Task {
 
 	public Task() {
 		point= 0;
-		evaluated= false;
+		evaluated= 0;
 		evaluationCnt=0;
 	}
 	
@@ -117,11 +117,11 @@ public class Task {
 	}
 
 //평가 여부를 위한 메소드
-	public boolean isEvaluated() {
+	public int getEvaluated() {
 		return evaluated;
 	}
 //평가 여부를 위한 메소드
-	public void setEvaluated(boolean evaluated) {
+	public void setEvaluated(int evaluated) {
 		this.evaluated = evaluated;
 	}
 //평가 횟수를 위한 메소드
