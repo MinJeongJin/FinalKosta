@@ -80,14 +80,24 @@ public class Task {
 	}
 	
 	public float getAverage(){
-		float average = (float) point/ evaluationCnt;
-		return average;
+		int startPoint = 0;
+		
+			if(evaluationCnt != 0){
+				float average = (float) point/ evaluationCnt;
+				return average;
+			}
+			return startPoint;
 	}
 
 //10점 만점의 percentage 계산 
 	public double getPointStar() {
-		double percent = ( point *1.0 / evaluationCnt ) * 10 ;
-		return percent;
+		int startPointStar = 0;
+		
+			if(evaluationCnt !=0 ){
+				double percent = ( point *1.0 / evaluationCnt ) * 10 ;
+				return percent;
+			}
+			return startPointStar;
 	}
 
 	public int getPoint() {
@@ -170,7 +180,8 @@ public class Task {
 				+ "evaluated= " + evaluated + "\n"
 				+ "point= " + point + "\n"
 				+ "evaluationCnt= " + evaluationCnt + "\n" 
-				+ "pointStar= " + getPointStar() + "%" + "\n" ;
+				+ "pointStar= " + getPointStar() + "%" + "\n";
+//				+ "memberList= " + memberList.size() + "\n" ;
 	
 	}
 	

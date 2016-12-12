@@ -30,6 +30,21 @@ public class SubmissionController {
 
 	private static final String filePathOnly = "c:/upload";
 
+	
+	@RequestMapping("/create.do")
+	public String createSubmission(String assignmentTitle, String taskId, Model model) {
+		
+		System.out.println("===================controller (get)==========");
+		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
+		System.out.println("getMemberIdList().length= "+task.getMemberIdList().length);
+		
+		
+		//		System.out.println(task.toString());
+		model.addAttribute("task",task);
+		
+		return "/task/submission/submissionRegister";
+	}
+	
 	@RequestMapping(value = "/create.do", method = RequestMethod.POST)
 	public String createSubmission(HttpServletRequest request
 									,HttpSession httpSession,

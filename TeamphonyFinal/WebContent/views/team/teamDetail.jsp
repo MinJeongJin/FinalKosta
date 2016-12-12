@@ -26,14 +26,15 @@ a[name=aInBtn] {
 	text-decoration: none;
 }
 
-a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]:visited {
+a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]:visited
+	{
 	text-decoration: none;
 	color: white;
 }
 </style>
 
 <script
-	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.slim.js"></script>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/sideBarControl.js"></script>
@@ -75,35 +76,9 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 
 <body class="w3-light-grey w3-content" style="max-width: 1600px;">
 
-	<!-- modal -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
 
-			<form action="${pageContext.request.contextPath}/team/invite.do"
-				method="post">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">팀원 초대</h4>
-					</div>
-					<div class="modal-body">
-						<p>
-							<input type="email" class="form-control" name="e_mail_1"
-								placeholder="팀원 e-mail  ex) prattler@gmail.com">
-						</p>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-info btn-lg">초대</button>
-						<button type="button" class="btn btn-info btn-lg"
-							data-dismiss="modal">취소</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+	<!-- <%@ include file="/views/team/memberInvite.jspf"%> -->
 
-	<!-- /modal -->
 
 	<!-- side bar -->
 	<%@ include file="/views/common/sideBar.jspf"%>
@@ -171,8 +146,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<div id="selectBtnGr" class="w3-right">
 
 						<button class="w3-btn w3-large">
-							<a href="${pageContext.request.contextPath}/team/erase.do" name="aInBtn">
-								삭제 </a>
+							<a href="${pageContext.request.contextPath}/team/erase.do"
+								name="aInBtn"> 삭제 </a>
 						</button>
 						<button type="button" class="w3-btn w3-large"
 							onclick="reviseInfo();">수정</button>
@@ -182,9 +157,9 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 
 
 						<button type="submit" class="w3-btn w3-large">확인</button>
-						<button class="w3-btn w3-large" >
-							<a href="${pageContext.request.contextPath}/team/search.do" name="aInBtn">
-								취소 </a>
+						<button class="w3-btn w3-large">
+							<a href="${pageContext.request.contextPath}/team/search.do"
+								name="aInBtn"> 취소 </a>
 						</button>
 						<!-- required 속성 지워주는 작업 필요 -->
 					</div>
