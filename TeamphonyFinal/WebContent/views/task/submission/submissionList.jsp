@@ -225,7 +225,6 @@ h1 {
 									</p>
 								</td>
 								<td>
-										${task.getAverage() } 점 
 									
 								</td>
 							</tr>
