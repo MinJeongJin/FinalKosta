@@ -45,7 +45,6 @@ public class Task {
 
 	public Task() {
 		point= 0;
-		evaluated= 0;
 		evaluationCnt=0;
 	}
 	
@@ -122,10 +121,12 @@ public class Task {
 	}
 //평가 여부를 위한 메소드
 	public void setEvaluated(int evaluated) {
+		
 		if(evaluated == 1){
 			this.evaluated = 1;
+		}else if (evaluated == 0) {
+			this.evaluated = 0;
 		}
-		this.evaluated = evaluated;
 	}
 //평가 횟수를 위한 메소드
 	public int getEvaluationCnt() {

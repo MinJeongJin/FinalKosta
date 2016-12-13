@@ -34,12 +34,8 @@ public class SubmissionController {
 	@RequestMapping("/create.do")
 	public String createSubmission(String assignmentTitle, String taskId, Model model) {
 		
-		System.out.println("===================controller (get)==========");
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-		System.out.println("getMemberIdList().length= "+task.getMemberIdList().length);
 		
-		
-		//		System.out.println(task.toString());
 		model.addAttribute("task",task);
 		
 		return "/task/submission/submissionRegister";
@@ -154,7 +150,6 @@ public class SubmissionController {
 	public String searchSubmissionByTaskId(String taskId, Model model) {
 		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-		System.out.println("getPointStar= " + task.getPointStar() + "%");
 		model.addAttribute("task", task);
 		
 		return "/task/submission/submissionDetail";
@@ -179,9 +174,6 @@ public class SubmissionController {
 		
 		List<Task> taskList = service.findAllTaskByFlag(flag);
 		
-		for(Task task: taskList){
-			System.out.println("getEvaluated= "+task.getEvaluated());
-		}
 		model.addAttribute("taskList", taskList);
 		
 		return "/task/submission/submissionList";
@@ -211,6 +203,7 @@ public class SubmissionController {
 		
 		System.out.println("===========evaluate===========");
 		System.out.println("getEvaluated"+task.getEvaluated());
+		System.out.println("=============================");
 		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";

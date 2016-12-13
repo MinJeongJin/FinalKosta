@@ -112,5 +112,9 @@ add (imagePath VARCHAR2(500));
 
 alter Table (evaluation_tb) modify(starPoint, float);
 
+//12.13 task_tb
+ALTER TABLE TASK_TB MODIFY EVALUATED NUMBER(38);
+ALTER TABLE TASK_TB MODIFY EVALUATIONCNT NUMBER(38);
+
 
 commit;

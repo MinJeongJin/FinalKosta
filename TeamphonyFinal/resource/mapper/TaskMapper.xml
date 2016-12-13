@@ -175,7 +175,7 @@
 			UPDATE TASK_TB
 				SET POINT				= #{point, jdbcType=INTEGER}
 					,EVALUATIONCNT		= #{evaluationCnt, jdbcType=INTEGER}
-				<!-- ,EVALUATED = 1 -->
+					,EVALUATED			= #{evaluated, jdbcType=INTEGER }
 			WHERE ID					= #{taskId}
 	</update>
 	
