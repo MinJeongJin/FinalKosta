@@ -105,83 +105,127 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</header>
 
 <!--  Start Page  -->
-<table>
-	<colgroup>
-			<col width="400" align="center">
-			<col width="400" align="left">
-			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
-	</colgroup>
-	<form class="w3-container" action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
-	<tr>
-		<td align="center">
-			<input name="memberId" id="memberId" type="text" class="w3-input" value="" placeholder="팀원 아이디를 입력 하세요"/>
-		</td>
-		<td align="left">
-			<input type="submit" class="w3-btn w3-light-grey w3-border w3-round-large" name="searchByMemberId" value="검색"/>
-		</td>
-	</tr>
-	</form>
-	
-</table>
-	
+	<div align="right">
+					<form action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
+						<input name="memberId" id="memberId" type="text" class="btn btn-xs btn-default" value="" placeholder="팀원 아이디를 입력 하세요"/>
+						<input type="submit" class="btn btn-success" name="searchByMemberId" value="검색"/>
+					</form>
+				</div>
+				<table class="table table-hover table-condensed" text-align:center;>
+					<colgroup>
+						<col width="100" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+						<col width="400" align="center">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>순번</th>
+							<th>제목</th>
+							<th>제출기한</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list }" var="task" varStatus="sts">
+							<c:if test="${task.flag eq 0 }"  >
+								<tr>
+								<td>${sts.count }</td>
+								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
+								<td>${task.deadline }</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?AssignmentTitle=${task.title }">
+									<input class="btn btn-success" type="button" value="과제 제출 하기">
+									</a>
+								</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+							<tr>
+							<th></th>
+								<td></td>
+								<td>																	
+									<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+										<input class="btn" type="button" value="부여 과제 리스트">
+									</a> 
+									<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+										<input class="btn" type="button" value="제출 과제 리스트">
+									</a> 
+								</td>
+							</tr>
+					</tbody>
+				</table>
+				
+<h1>${memberId } 님의 Submission List</h1>
 	<table class="table table-hover table-condensed" text-align:center;>
 		<colgroup>
 			<col width="100" align="center">
 			<col width="400" align="center">
 			<col width="400" align="center">
 			<col width="400" align="center">
-			<col width="400" align="right">
 		</colgroup>
 		<thead>
 			<tr>
-				<th>번호</th>
+				<th>순번</th>
 				<th>제목</th>
-				<th>제출자</th>
-				<th>제출기한</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${list }" var="task" varStatus="sts">
-				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+				<c:if test="${task.flag eq 1 }"  >
+					<tr>
 					<td>${sts.count }</td>
+					<td><a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
+					<td>${task.deadline }</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
-					</td>
-					<td>
-						<c:forEach items="${task.memberIdList }" var="memberId">
-							${memberId }
-						</c:forEach>
-					</td>
-					<td colspan="2">${task.deadline }</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&taskId=${task.taskId }">
-							<button class="w3-btn w3-white w3-border w3-border-pale-red w3-text-red w3-round-large">제출</button>
+						<a href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId }&memberId=${memberId }">
+							<input class="btn btn-success" type="button" value="수정">
+						</a>
+						<a href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }">
+							<input class="btn btn-success" type="button" value="삭제">
 						</a>
 					</td>
-				</tr>
+					</tr>
+				</c:if>
 			</c:forEach>
 				<tr>
 				<th></th>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td align="right">
-					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-						<input class="w3-btn w3-light-grey w3-border" type="submit" value="제출과제 리스트">
-					</a> 
-				</td>	
-				<td>			
-					<a href="${pageContext.request.contextPath}/assignment/create.do">
-						<input  class="w3-btn w3-light-grey w3-border" type="submit" value="부여과제 등록">
-					</a>
-				</td>
-			</tr>
+					<td></td>
+					<td>																	
+						<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+							<input class="btn" type="button" value="부여 과제 리스트">
+						</a> 
+						<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+							<input class="btn" type="button" value="제출 과제 리스트">
+						</a> 
+					</td>
+				</tr>
 		</tbody>
 	</table>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- End page content -->
 
 </body>
