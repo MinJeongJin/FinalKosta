@@ -100,7 +100,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<h1>
 				<b>과제 제출</b>
 			</h1>
-			<h4>과제제출 정보를 확인하고 관리해 보세요.</h4>
+			<h4>제출과제 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 
@@ -111,16 +111,15 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">검색</button>
 		</form>
 	</div>
-		<table class="table" >
+		<table >
 			<colgroup>
-				<col width="100" align="center">
+				<col width="200" align="center">
 				<col width="400" align="center">
 				<col width="400" align="center">
 				<col width="400" align="center">
 				<col width="400" align="center">
 				<col width="400" align="center">
 				<col width="400" align="center">
-				<col width="1000" align="center">
 			</colgroup>
 			<thead>
 				<tr>
