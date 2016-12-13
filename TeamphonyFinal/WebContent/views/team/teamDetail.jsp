@@ -143,26 +143,16 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 
 				<div class="w3-row">
 
-					<div id="selectBtnGr" class="w3-right">
+					<div class="w3-right">
 
 						<button class="w3-btn w3-large">
-							<a href="${pageContext.request.contextPath}/team/erase.do"
-								name="aInBtn"> 삭제 </a>
+							<a href="${pageContext.request.contextPath}/team/remove.do"
+								name="aInBtn"> 팀 탈퇴 </a>
 						</button>
-						<button type="button" class="w3-btn w3-large"
-							onclick="reviseInfo();">수정</button>
+						
 					</div>
 
-					<div id="reviseBtnGr" class="w3-right" hidden="true">
-
-
-						<button type="submit" class="w3-btn w3-large">확인</button>
-						<button class="w3-btn w3-large">
-							<a href="${pageContext.request.contextPath}/team/search.do"
-								name="aInBtn"> 취소 </a>
-						</button>
-						<!-- required 속성 지워주는 작업 필요 -->
-					</div>
+					
 
 				</div>
 			</form>
@@ -189,9 +179,12 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			</div>
 
 			<div class="w3-row">
-				<button class="w3-btn-floating-large w3-right " data-toggle="modal"
-					data-target="#myModal">+</button>
+				<a class="w3-btn-floating w3-right w3-dark-grey" href="#"
+					onclick="document.getElementById('id01').style.display='block'">+</a>
 			</div>
+
+			<!-- /modal -->
+			<%@ include file="/views/team/memberInvite.jspf"%>
 		</div>
 
 		<div class="w3-black w3-center w3-padding-24 w3-card-12">
