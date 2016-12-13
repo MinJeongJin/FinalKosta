@@ -17,4 +17,5 @@ public interface TeamService {
 	void belongToTeam(int teamCode, String memberId);
 	void leaveTeam(int teamCode, String memberId);
 	Set<Integer> findAllTeamCodes();
+	List<Team> findAllTeam();
 }

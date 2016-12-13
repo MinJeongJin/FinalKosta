@@ -2,6 +2,7 @@ package teamphony.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,11 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import teamphony.domain.Member;
+import teamphony.domain.Members;
 import teamphony.domain.Post;
+import teamphony.domain.Posts;
 import teamphony.service.facade.MemberService;
 import teamphony.service.facade.PostService;
 
@@ -255,6 +259,19 @@ public class PostController {
 		List<Post> list = postService.findPostByContents(search);
 		model.addAttribute("listPost", list);
 		return "/post/postList2"; 
+	}
+	
+	@RequestMapping(value="xml.do", produces="application/xml")
+	public @ResponseBody Posts getPostsToXml(int teamId){
+		
+		List<Post> list  = new ArrayList<>();
+		Posts posts = new Posts();
+		
+		list = postService.findAllPost(teamId);
+		
+		posts.setPosts(list);
+		
+		return posts;
 	}
 
 }

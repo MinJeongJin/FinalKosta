@@ -17,5 +17,5 @@ public interface TeamStore {
 	void insertBelong(int teamCode, String memberId);
 	void deleteBelong(int teamCode, String memberId);
 	Set<Integer> selectAllTeamCodes();
-
+	List<Team> selectAllTeam();
 }

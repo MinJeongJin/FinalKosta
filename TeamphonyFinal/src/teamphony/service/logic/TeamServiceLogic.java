@@ -71,5 +71,9 @@ public class TeamServiceLogic implements TeamService {
 		
 		return store.selectAllTeamCodes();
 	}
+	
+	public List<Team> findAllTeam(){
+		return store.selectAllTeam();
+	}
 
 }

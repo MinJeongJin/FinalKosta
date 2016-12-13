@@ -192,5 +192,22 @@ public class TeamStoreLogic implements TeamStore {
 
 		return codeSet;
 	}
+	
+	public List<Team> selectAllTeam(){
+		
+		SqlSession session = getSessionFactory().openSession();
+		List<Team> list = null;
+		try {
+			TeamMapper mapper = session.getMapper(TeamMapper.class);
+			list = mapper.selectAllTeam();
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return list;
+	}
 
 }
