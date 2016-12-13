@@ -98,75 +98,106 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>팀 관리</b>
+				<b>부여과제 수정</b>
 			</h1>
-			<h4>팀 정보를 확인하고 관리해 보세요.</h4>
+			<h4>부여과제 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 <!--  Start Page  -->
 
 
 
-
-
-		<form action="${pageContext.request.contextPath}/assignment/create.do"
-			method="post">
-			<table class="table">
-				<colgroup>
-					<col width="150">
-					<col width="*">
-
-				</colgroup>
-				<tr>
-					<th>제목</th>
-					<td><input id="title" name="title" class="form-control"
-						type="text" value="" placeholder="제목을 입력하세요."></td>
-				</tr>
-				<tr style="horizontal-align: left;">
-					<th>제출자</th>
-					<c:forEach items="${memberList }" var="member">
-						<td style="float: left; width: 70px;"><input type="checkbox"
-							name="memberIdList" class="form-control"
-							style="width: 20px; margin: 0px;" value="${member.memberId }">
-							${member.memberId }</td>
-					</c:forEach>
-				</tr>
-				<tr>
-					<th>제출 기한</th>
-					<td><input type="date" id="deadlineDay" name="deadlineDay">
-						<input type="time" id="deadlineHour" name="deadlineHour">
-
+<div style="padding: 50px"> 
+	<div style="padding-left: 90px"> 
+		<div style="padding-right: 180px"> 
+			<div style="padding-bottom: 50px" align="right">
+				<div class="w3-container">
+		<form action="${pageContext.request.contextPath}/assignment/revise.do" method="post">
+		<table class="table">
+			<colgroup>
+				<col width="150">
+				<col width="*">
+			</colgroup>
+			<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+				<th>
+					<label class="w3-label w3-validate" style="color: #050505">제목</label>
+				</th>
+				<td>
+					<input id="title" name="title" class="w3-input" type="text" value="" placeholder="${task.title } ">
+					<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
+				</td>
+			</tr>
+			<tr class="w3-hover w3-padding w3-card-2 " style="horizontal-align: left;">
+				<th>
+					<label class="w3-label w3-validate" style="color: #050505">제출자</label>
+				</th>
+					<td>
+						<h6 style="color: black">	
+							<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
+								${memberId }
+							</c:forEach>
+						</h6>
 					</td>
-				</tr>
-				<tr>
-					<th>평가 기한</th>
-					<td><input type="date" id="evalDayStart" name="evalDayStart">
-						<input type="time" id="evalHourStart" name="evalHourStart">-
-						<input type="date" id="evalDayEnd" name="evalDayEnd"> <input
-						type="time" id="evalHourEnd" name="evalHourEnd"></td>
-				</tr>
+			</tr>
+			<tr class="w3-hover-light-grey w3-padding w3-card-2 ">		
+			<th></th>
+				<c:forEach items="${task.memberList }" var="member">
+					<td style="float: left; width: 70px;">
+						<input type="checkbox" name="memberIdList" class="w3-check:checked+.w3-validate" style="width: 20px; margin: 0px;" value="${member.memberId }" >
+						${member.memberId }
+					</td>
+				</c:forEach>
+			</tr>
+			<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+				<th>
+					<label class="w3-label w3-validate" style="color: #050505">제출 기한</label>
+				</th>
+				<td>
+					<label class="w3-label w3-validate" style="color: black">
+						${task.deadline }
+					</label><br> 
+						<input type="date" min="" id="deadlineDay" name="deadlineDay" value= "">
+						<input type="time" id="deadlineHour" name="deadlineHour" value= "">  
+				</td>
+			</tr>
+			<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+				<th>
+					<label class="w3-label w3-validate" style="color: #050505">평가 기간</label>
+				</th>
+				<td>
+					<label class="w3-label w3-validate" style="color: black">
+						${task.evaluationPeriodStart }-
+						${task.evaluationPeriodEnd }
+					</label><br> 
+					
+						<input type="date" min="" id="evalDayStart" name="evalDayStart">
+						<input type="time" id="evalHourStart" name="evalHourStart" >-  
+						<input type="date" min="" id="evalDayEnd" name="evalDayEnd">
+						<input type="time" id="evalHourEnd" name="evalHourEnd">
+				</td>
+			</tr>
+			<tr class="w3-hover-light-gray w3-padding w3-card-2 ">
+				<th>
+					<label class="w3-label w3-validate" style="color: #050505">내용</label>
+				</th>
+					<td>
+						<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="${task.contents } "></textarea>
+					</td>
+			</tr>
+		</table>
+		<br>
+		<div align="center">
+				<a href="assignmentList.do"><input class="btn" type="reset" value="취소"></a> 
+				<input class="btn btn-success" type="submit" value="완료">
+		</div>
+	</form>
 
-				<tr>
-					<th>내용</th>
-					<td><textarea id="contents" name="contents"
-							class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요.">
-						</textarea> <input type="hidden" name="flag" value="0" /></td>
-				</tr>
-			</table>
-			<br>
-			<div align="center">
-				<a href="assignmentList.do"><input class="btn" type="reset"
-					value="취소"></a> <input class="btn btn-success" type="submit"
-					value="저장">
+
+
 			</div>
-		</form>
-
-
-		<div class="w3-black w3-center w3-padding-24 w3-card-12">
-			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">Suho</a>
 		</div>
 	</div>
+</div>
 	<!-- End page content -->
 
 </body>

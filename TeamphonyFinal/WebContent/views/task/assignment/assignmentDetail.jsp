@@ -1,6 +1,5 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -106,18 +105,36 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 <!--  Start Page  -->
 
 <input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
+<div style="padding: 50px"> 
+	<div style="padding-left: 160px"> 
+		<div style="padding-right: 300px"> 
+			<div style="padding-bottom: 50px" align="right">
+		<tr>
+			<td>
+				<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 리스트</button>
+				</a>
+			</td>
+			<td>
+				<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
+				</a> 
+			</td>
+		</tr>
+		</div>
 	<table class="w3-table">
 		<colgroup>
 			<col width="150">
 			<col width="*">
 		</colgroup>
-		<tr class="w3-padding w3-card-2 ">
+			
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>제목</th>
 				<td class="">
 					${task.title } 
 				</td>
 		</tr>
-		<tr class="w3-padding w3-card-2 ">
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>제출자</th>
 				<td>
 					<c:forEach items="${task.memberIdList }" var="memberId">
@@ -125,13 +142,13 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</c:forEach>
 				</td>
 		</tr>
-		<tr class="w3-padding w3-card-2 ">
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>제출 기한</th>
 			<td>
 				${task.deadline }
 			</td>
 		</tr>
-		<tr class="w3-padding w3-card-2 ">
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>평가 기간</th>
 			<td>
 				시작<br> 
@@ -140,7 +157,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				${task.evaluationPeriodEnd }
 			</td>
 		</tr>
-		<tr class="w3-padding w3-card-2">
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>내용</th>
 				<td class="w3-animate-input">
 					${task.contents }
@@ -149,11 +166,17 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	</table>
 </form>
 	<br>
-	<div align="right">
-	
-	<a  class="w3-btn w3-white w3-border" href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId }&flag=${task.flag }" >수정</a>
-	<a class="w3-btn w3-white w3-border"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }">삭제</a>
+			<div align="right">
+	<a class="w3-border" href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId }&flag=${task.flag }" >
+		<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">수정</button>
+	</a>
+	<a class="w3-border"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }">
+		<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
+	</a>
+			</div>
+		</div>
 	</div>
+</div> 
 	<!-- End page content -->
 	
 	

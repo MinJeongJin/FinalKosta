@@ -105,12 +105,12 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</header>
 
 <!--  Start Page  -->
-	<div align="right">
+<div align="right" style="padding:50px ">
 					<form action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
 						<input name="memberId" id="memberId" type="text" class="btn btn-xs btn-default" value="" placeholder="팀원 아이디를 입력 하세요"/>
-						<input type="submit" class="btn btn-success" name="searchByMemberId" value="검색"/>
+						<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">검색</button>
 					</form>
-				</div>
+				
 				<table class="table table-hover table-condensed" text-align:center;>
 	<h1>${memberId } 님의 부여과제 리스트</h1><br><br>
 					<colgroup>
@@ -129,28 +129,29 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<tbody>
 						<c:forEach items="${list }" var="task" varStatus="sts">
 							<c:if test="${task.flag eq 0 }"  >
-								<tr>
+						<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 								<td>${sts.count }</td>
 								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
 								<td>${task.deadline }</td>
 								<td>
 									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?assignmentTitle=${task.title }&memberId=${task.memberIdList }">
-									<input class="btn btn-success" type="button" value="과제 제출 하기">
+									<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
 									</a>
 								</td>
-								</tr>
+						</tr>
 							</c:if>
 						</c:forEach>
+</div>
 							<tr>
 							<th></th>
 								<td></td>
 								<td></td>
 								<td>																	
 									<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
-										<input class="btn" type="button" value="부여 과제 리스트">
+										<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 리스트</button>
 									</a> 
 									<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-										<input class="btn" type="button" value="제출 과제 리스트">
+										<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
 									</a> 
 								</td>
 							</tr>
@@ -167,9 +168,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<col width="400" align="center">
 				<col width="400" align="center">
 				<col width="400" align="center">
-				<col width="400" align="center">
-				<col width="400" align="center">
-				<col width="1000" align="center">
+				<col width="200" align="center">
+				<col width="200" align="center">
 		</colgroup>
 		<thead>
 			<tr>
@@ -185,7 +185,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		<tbody>
 			<c:forEach items="${list }" var="task" varStatus="sts">
 				<c:if test="${task.flag eq 1 }"  >
-					<tr>
+					<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 					<td>${sts.count }</td>
 					<td><a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
 					<td>subtitle</td>
@@ -217,12 +217,13 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<td>
 						${task.evaluationCnt } 회
 					</td>
+				
 					<td>
 						<a href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId }&memberId=${memberId }">
-							<input class="btn btn-success" type="button" value="수정">
+							<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">수정</button>
 						</a>
 						<a href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }">
-							<input class="btn btn-success" type="button" value="삭제">
+							<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
 						</a>
 					</td>
 				</c:if>
@@ -231,12 +232,18 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<th></th>
 				<td></td>
 				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				
 				<td>																	
 					<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
-						<input class="btn" type="button" value="부여 과제 리스트">
+						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 리스트</button>
 					</a> 
+				</td>
+				<td>
 					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-						<input class="btn" type="button" value="제출 과제 리스트">
+						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
 					</a> 
 				</td>
 				</tr>

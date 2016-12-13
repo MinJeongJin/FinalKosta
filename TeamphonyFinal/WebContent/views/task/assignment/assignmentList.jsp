@@ -105,6 +105,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</header>
 
 <!--  Start Page  -->
+<div style="padding: 50px">   
 <table>
 	<colgroup>
 			<col width="400" align="center">
@@ -115,11 +116,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	</colgroup>
 	<form class="w3-container" action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
 	<tr>
-		<td align="center">
-			<input name="memberId" id="memberId" type="text" class="w3-input" value="" placeholder="팀원 아이디를 입력 하세요"/>
-		</td>
 		<td align="left">
-			<input type="submit" class="w3-btn w3-light-grey w3-border w3-round-large" name="searchByMemberId" value="검색"/>
+			<input name="memberId" id="memberId" type="text" class="btn btn-xs btn-default" value="" placeholder="팀원 아이디를 입력 하세요"/>
+		
+			<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">검색</button>
 		</td>
 	</tr>
 	</form>
@@ -158,30 +158,30 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<td colspan="2">${task.deadline }</td>
 					<td>
 						<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&taskId=${task.taskId }">
-							<button class="w3-btn w3-white w3-border w3-border-pale-red w3-text-red w3-round-large">제출</button>
+							<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
 						</a>
 					</td>
 				</tr>
 			</c:forEach>
-				<tr>
+</div>
+				<tr style="margin-top: 20px">
 				<th></th>
 				<td></td>
 				<td></td>
 				<td></td>
 				<td align="right">
 					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-						<input class="w3-btn w3-light-grey w3-border" type="submit" value="제출과제 리스트">
+						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
 					</a> 
 				</td>	
 				<td>			
 					<a href="${pageContext.request.contextPath}/assignment/create.do">
-						<input  class="w3-btn w3-light-grey w3-border" type="submit" value="부여과제 등록">
+						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 등록</button>
 					</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-</div>
 <!-- End page content -->
 
 </body>
