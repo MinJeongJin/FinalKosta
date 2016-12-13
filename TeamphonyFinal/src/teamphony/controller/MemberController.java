@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,28 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private TeamService teamService;
+
+	@RequestMapping(value = "redunCheck.do", method = RequestMethod.POST)
+	public void checkIdRedundancy(String checkingId, HttpServletResponse res) {
+
+		Object objRes = memberService.findMemberByMemberId(checkingId);
+		String state = "true";
+
+		if (objRes != null) {
+
+			state = "false";
+		}
+
+		try {
+			res.getWriter().write(state);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
@@ -55,7 +75,6 @@ public class MemberController {
 	public String createMember(String memberId, String password, String alias, HttpServletRequest request) {
 		Member member = new Member(memberId, password, alias);
 
-		
 		// http://addio3305.tistory.com/83 참조
 
 		// Request에서 첨부파일을 받기위해 캐스팅을 함
@@ -65,12 +84,11 @@ public class MemberController {
 		// 필요한 변수 선언
 		MultipartFile multipartFile = null;
 		String originalFileName = null;
-		
+
 		String root = request.getSession().getServletContext().getRealPath("/");
-		
 
 		// 파일을 저장할 폴더 설정
-		File file = new File(root+filePath + memberId + "\\");
+		File file = new File(root + filePath + memberId + "\\");
 		// 폴더가 없으면 폴더 생성
 		if (file.exists() == false) {
 			file.mkdirs();
@@ -86,7 +104,7 @@ public class MemberController {
 				originalFileName = multipartFile.getOriginalFilename();
 
 				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
-				file = new File(root+filePath + memberId + "\\" + originalFileName);
+				file = new File(root + filePath + memberId + "\\" + originalFileName);
 				member.setImagePath(originalFileName);
 				try {
 					// 파일 전송
@@ -102,7 +120,7 @@ public class MemberController {
 		}
 		memberService.registerMember(member);
 
-		return "/common/login";
+		return "redirect:/views/common/login.jsp";
 	}
 
 	@RequestMapping(value = "revise.do", method = RequestMethod.POST)
@@ -120,7 +138,7 @@ public class MemberController {
 		String root = request.getSession().getServletContext().getRealPath("/");
 
 		// 파일을 저장할 폴더 설정
-		File file = new File(root+filePath + login.getMemberId() + "\\");
+		File file = new File(root + filePath + login.getMemberId() + "\\");
 		// 폴더가 없으면 폴더 생성
 		if (file.exists() == false) {
 			file.mkdirs();
@@ -136,7 +154,7 @@ public class MemberController {
 				originalFileName = multipartFile.getOriginalFilename();
 
 				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
-				file = new File(root+filePath + login.getMemberId() + "\\" + originalFileName);
+				file = new File(root + filePath + login.getMemberId() + "\\" + originalFileName);
 				System.out.println(filePath + login.getMemberId() + "\\" + originalFileName);
 				member.setImagePath(originalFileName);
 				try {
@@ -150,7 +168,7 @@ public class MemberController {
 					e.printStackTrace();
 				}
 			}
-		} 
+		}
 
 		if (!session.isNew()) {
 			member.setMemberId(login.getMemberId());
@@ -196,65 +214,72 @@ public class MemberController {
 
 		return "/common/login";
 	}
-	
-	@RequestMapping("logout.do")
-	public String logout(HttpSession session){
+
+	@RequestMapping(value="logout.do", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		System.out.println("get logout");
 		session.invalidate();
 		return "redirect:/views/common/login.jsp";
 	}
 	
-	@RequestMapping(value="evaluationList", method=RequestMethod.GET)
-	public String evaluationMemberList(HttpSession session, Model model){
-		int teamCode = (int)session.getAttribute("teamCode");
-		
-		List<Member> list=teamService.findMembersByTeamCode(teamCode);
-		
-		model.addAttribute("memberList",list);
-		
+	
+	@RequestMapping(value="logout.do", method = RequestMethod.POST)
+	public String logout() {
+		System.out.println("post logout");
+		return "redirect:/views/common/login.jsp";
+	}
+
+	@RequestMapping(value = "evaluationList", method = RequestMethod.GET)
+	public String evaluationMemberList(HttpSession session, Model model) {
+		int teamCode = (int) session.getAttribute("teamCode");
+
+		List<Member> list = teamService.findMembersByTeamCode(teamCode);
+
+		model.addAttribute("memberList", list);
+
 		return "/member/evaluationList";
 	}
-	
-	@RequestMapping(value="evaluation", method=RequestMethod.GET)
-	public String evaluationMember(String memberId, Model model){
-		
+
+	@RequestMapping(value = "evaluation", method = RequestMethod.GET)
+	public String evaluationMember(String memberId, Model model) {
+
 		Member member = memberService.findMemberByMemberId(memberId);
-		
-		model.addAttribute("evaluate",member);
-		
+
+		model.addAttribute("evaluate", member);
+
 		return "/member/evaluationMember";
 	}
-	
-	@RequestMapping(value="evaluation", method=RequestMethod.POST)
-	public String evaluationMember(String memberId, int sincerity, int attitude, int contribution){
-		
-		double starPoint = (double)(attitude+contribution+sincerity)/3.0;
-		
-		
+
+	@RequestMapping(value = "evaluation", method = RequestMethod.POST)
+	public String evaluationMember(String memberId, int sincerity, int attitude, int contribution) {
+
+		double starPoint = (double) (attitude + contribution + sincerity) / 3.0;
+
 		memberService.saveStarPoint(memberId, starPoint);
-		
+
 		return "redirect:/team/main.do";
 	}
-	
-	@RequestMapping(value="check.do", method=RequestMethod.POST)
-	public String CheckMember(HttpSession session, String password ){
-		
-		Member member = (Member)session.getAttribute("member");	
-		if(member.getPassword().equals(password)){
+
+	@RequestMapping(value = "check.do", method = RequestMethod.POST)
+	public String CheckMember(HttpSession session, String password) {
+
+		Member member = (Member) session.getAttribute("member");
+		if (member.getPassword().equals(password)) {
 			return "redirect:/views/member/myPage.jsp";
 		}
 		return "redirect:/team/main.do";
 	}
-	
-	@RequestMapping(value="xml.do", produces="application/xml")
-	public @ResponseBody Members getMembersToXml(){
-		
-		List<Member> list  = new ArrayList<>();
+
+	@RequestMapping(value = "xml.do", produces = "application/xml")
+	public @ResponseBody Members getMembersToXml() {
+
+		List<Member> list = new ArrayList<>();
 		Members members = new Members();
-		
+
 		list = memberService.findAllMember();
-		
+
 		members.setMembers(list);
-		
+
 		return members;
 	}
 

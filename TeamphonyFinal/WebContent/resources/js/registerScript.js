@@ -1,3 +1,53 @@
+var globalTestingVar = false;
+
+var showSnackBar = function(msg) {
+	var x = document.getElementById("snackbar");
+	x.innerHTML = msg;
+	x.className = "show";
+	setTimeout(function() {
+		x.className = x.className.replace("show", "");
+	}, 2000);
+}
+
+var checkRedun = function() {
+
+	var confirm = document.getElementById('idValidity');
+	var msg = document.getElementById('validityInId');
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var data = xhttp.responseText;
+
+			switch (data) {
+
+			case "true":
+
+				msg.innerHTML = "사용가능한 ID 입니다.";
+				confirm.value = "true";
+
+				break;
+
+			case "false":
+
+				msg.innerHTML = "이미 사용중인 ID 입니다.";
+				confirm.value = "false";
+
+				break;
+
+			default:
+				console.log(data);
+
+				break;
+
+			}
+		}
+	};
+
+	xhttp.open("POST", "/TeamphonyFinal/member/redunCheck.do", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("checkingId=" + document.getElementById('id').value);
+}
 
 var checkValidityInId = function() {
 
@@ -15,8 +65,7 @@ var checkValidityInId = function() {
 
 		if (idReg.test(idVal)) {
 
-			msg.innerHTML = "사용가능한 ID 입니다.";
-			confirm.value = "true";
+			checkRedun();
 
 		} else {
 
@@ -90,9 +139,6 @@ var checkAll = function() {
 		registerForm.submit();
 
 	} else {
-		//snack bar
-		window.alert('완전히 기입되어 있지 않은 사항이 있습니다.');
+		showSnackBar("완벽하게 기입되지 않은 항목이 존재합니다.");
 	}
 }
-
-

@@ -6,8 +6,94 @@
 <head>
 <meta charset="UTF-8">
 <title>JSP</title>
+
+<style>
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+#snackbar {
+	visibility: hidden;
+	min-width: 250px;
+	margin-left: -125px;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	bottom: 30px;
+	font-size: 17px;
+}
+
+#snackbar.show {
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@
+-webkit-keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
+}
+
+to {
+	bottom: 30px;
+	opacity: 1;
+}
+
+}
+@
+keyframes fadein {
+	from {bottom: 0;
+	opacity: 0;
+}
+
+to {
+	bottom: 30px;
+	opacity: 1;
+}
+
+}
+@
+-webkit-keyframes fadeout {
+	from {bottom: 30px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
+
+}
+@
+keyframes fadeout {
+	from {bottom: 30px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
+}
+</style>
+
+
+
 </head>
-<body>
+<body onload="modalReset();">
 
 	<div id="registerModal" class="w3-modal">
 		<div class="w3-modal-content w3-card-8 w3-animate-zoom w3-red"
@@ -37,8 +123,8 @@
 
 					<label style="color: white;"><b>ID</b></label> <input
 						class="w3-input w3-border" type="text"
-						placeholder="영문 숫자 조합 4 ~ 15자" id="id" name="memberId" maxlength="15"
-						oninput="checkValidityInId();">
+						placeholder="영문 숫자 조합 4 ~ 15자" id="id" name="memberId"
+						maxlength="15" oninput="checkValidityInId();">
 
 					<p id="validityInId" class="msg"></p>
 					<input id="idValidity" style="display: none" value=""
@@ -58,6 +144,9 @@
 					<input id="aliasValidity" style="display: none" value=""
 						class="confirm">
 
+
+					
+
 					<button class="w3-btn-block w3-black w3-section w3-padding"
 						type="button" onclick="checkAll();">
 						<b>회원가입</b>
@@ -66,7 +155,55 @@
 				</div>
 			</form>
 		</div>
+		
+		<div id="snackbar" class="w3-opacity"></div>
 	</div>
+	
+	
+	<script>
+		
+
+		var upload = document.getElementsByTagName('input')[0], holder = document
+				.getElementById('holder'), state = document
+				.getElementById('status');
+
+		upload.onchange = function(e) {
+
+			e.preventDefault();
+
+			var file = upload.files[0], reader = new FileReader();
+
+			reader.onload = function(event) {
+
+				holder.src = event.target.result;
+
+			};
+			reader.readAsDataURL(file);
+
+			return false;
+		};
+
+		var modalReset = function() {
+
+			var idField = document.getElementById('id');
+			var pwField = document.getElementById('pw');
+			var aliasField = document.getElementById('alias');
+			var img = document.getElementById('holder');
+			var msgs = document.getElementsByClassName('msg');
+			var len = msgs.length;
+
+			idField.value = '';
+			pwField.value = '';
+			aliasField.value = '';
+			img.src = "${pageContext.request.contextPath}/resources/images/default.png";
+
+			for (var i = 0; i < len; i++) {
+
+				msgs[i].innerHTML = ' ';
+
+			}
+		}
+	</script>
 
 
 </body>

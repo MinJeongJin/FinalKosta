@@ -22,18 +22,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/w3.css">
 
-<style>
-.filebox input[type="file"] {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
-</style>
+
 
 <!-- /CSS -->
 
@@ -107,50 +96,15 @@
 				</p>
 			</form>
 		</div>
+
+		
+
 	</div>
 
-	<script>
-		var upload = document.getElementsByTagName('input')[0], holder = document
-				.getElementById('holder'), state = document
-				.getElementById('status');
+	
 
-		upload.onchange = function(e) {
 
-			e.preventDefault();
 
-			var file = upload.files[0], reader = new FileReader();
-
-			reader.onload = function(event) {
-
-				holder.src = event.target.result;
-
-			};
-			reader.readAsDataURL(file);
-
-			return false;
-		};
-
-		var modalReset = function() {
-
-			var idField = document.getElementById('id');
-			var pwField = document.getElementById('pw');
-			var aliasField = document.getElementById('alias');
-			var img = document.getElementById('holder');
-			var msgs = document.getElementsByClassName('msg');
-			var len = msgs.length;
-
-			idField.value = '';
-			pwField.value = '';
-			aliasField.value = '';
-			img.src = "${pageContext.request.contextPath}/resources/images/default.png";
-
-			for (var i = 0; i < len; i++) {
-
-				msgs[i].innerHTML = ' ';
-
-			}
-		}
-	</script>
 
 </body>
 </html>

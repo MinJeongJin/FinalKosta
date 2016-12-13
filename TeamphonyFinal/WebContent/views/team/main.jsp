@@ -15,8 +15,6 @@
 
 <!-- CSS -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/w3.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Tangerine">
@@ -50,7 +48,7 @@
 						생성</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">마이페이지</a></li>
-				<li><a href="#">로그아웃</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li>
 
 				<div class="w3-right" style="margin-right: 10px;">
 					<li><input type="text" class="w3-input w3-white"
