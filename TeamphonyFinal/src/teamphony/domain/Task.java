@@ -122,6 +122,9 @@ public class Task {
 	}
 //평가 여부를 위한 메소드
 	public void setEvaluated(int evaluated) {
+		if(evaluated == 1){
+			this.evaluated = 1;
+		}
 		this.evaluated = evaluated;
 	}
 //평가 횟수를 위한 메소드

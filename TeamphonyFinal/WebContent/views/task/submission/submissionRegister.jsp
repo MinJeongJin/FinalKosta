@@ -27,7 +27,7 @@
 			<tr>
 				<th>부여 과제 제목</th>
 				<td>
-					${task.title }
+					${param.assignmentTitle }
 				</td>
 			</tr>
 			<tr>

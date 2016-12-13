@@ -1,7 +1,7 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -98,9 +98,9 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>과제 부여</b>
+				<b>${memberId } 님의 과제 리스트</b>
 			</h1>
-			<h4>과제부여 정보를 확인하고 관리해 보세요.</h4>
+			<h4>${memberId }님의 과제 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 
@@ -112,6 +112,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</form>
 				</div>
 				<table class="table table-hover table-condensed" text-align:center;>
+	<h1>${memberId } 님의 부여과제 리스트</h1><br><br>
 					<colgroup>
 						<col width="100" align="center">
 						<col width="400" align="center">
@@ -133,7 +134,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
 								<td>${task.deadline }</td>
 								<td>
-									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?AssignmentTitle=${task.title }">
+									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?assignmentTitle=${task.title }&memberId=${task.memberIdList }">
 									<input class="btn btn-success" type="button" value="과제 제출 하기">
 									</a>
 								</td>
@@ -142,6 +143,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 						</c:forEach>
 							<tr>
 							<th></th>
+								<td></td>
 								<td></td>
 								<td>																	
 									<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
@@ -155,18 +157,29 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</tbody>
 				</table>
 				
-<h1>${memberId } 님의 Submission List</h1>
+<h1>${memberId } 님의 제출과제 리스트</h1><br><br>
 	<table class="table table-hover table-condensed" text-align:center;>
 		<colgroup>
-			<col width="100" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
+				<col width="200" align="center">
+				<col width="400" align="center">
+				<col width="400" align="center">
+				<col width="400" align="center">
+				<col width="400" align="center">
+				<col width="400" align="center">
+				<col width="400" align="center">
+				<col width="400" align="center">
+				<col width="400" align="center">
+				<col width="1000" align="center">
 		</colgroup>
 		<thead>
 			<tr>
 				<th>순번</th>
+				<th>부여과제</th>
 				<th>제목</th>
+				<th>첨부파일</th>
+				<th>평점</th>
+				<th>평가여부</th>
+				<th>평가횟수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -175,7 +188,35 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<tr>
 					<td>${sts.count }</td>
 					<td><a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
-					<td>${task.deadline }</td>
+					<td>subtitle</td>
+					<td>
+						<c:forEach items="${task.taskFileList}" var="taskFile">
+										${taskFile.filePath}<br>
+						</c:forEach>
+					</td>
+					<td>
+						<p>
+							<span class="starRating">
+								<span style="width:${task.getPointStar() }%">
+							</span>
+							</span>
+								<fmt:formatNumber value="${task.getAverage() }" pattern=".00"/>
+								 점
+						</p>
+					</td>
+					<td>
+						<c:choose>
+							<c:when test="${task.evaluated == 1 }">
+								Y
+							</c:when>
+							<c:when test="${task.evaluated == 0 }">
+								N
+							</c:when>
+						</c:choose>
+					</td>
+					<td>
+						${task.evaluationCnt } 회
+					</td>
 					<td>
 						<a href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId }&memberId=${memberId }">
 							<input class="btn btn-success" type="button" value="수정">
@@ -184,46 +225,23 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 							<input class="btn btn-success" type="button" value="삭제">
 						</a>
 					</td>
-					</tr>
 				</c:if>
 			</c:forEach>
 				<tr>
 				<th></th>
-					<td></td>
-					<td>																	
-						<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
-							<input class="btn" type="button" value="부여 과제 리스트">
-						</a> 
-						<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-							<input class="btn" type="button" value="제출 과제 리스트">
-						</a> 
-					</td>
+				<td></td>
+				<td></td>
+				<td>																	
+					<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+						<input class="btn" type="button" value="부여 과제 리스트">
+					</a> 
+					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+						<input class="btn" type="button" value="제출 과제 리스트">
+					</a> 
+				</td>
 				</tr>
 		</tbody>
 	</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- End page content -->

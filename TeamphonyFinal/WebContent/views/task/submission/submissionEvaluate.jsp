@@ -181,7 +181,7 @@
 					<span class="point">
 						<span class="input">
 							<input type="hidden" name="taskId" id="id" value=${task.taskId } >
-							<input type="hidden" name="evaluated" id="evaluate" value="1" >
+							<input type="hidden" name="evaluated" id="evaluated" value="1" >
 							<input type="hidden" name="evaluationCnt" id="count" value="1" >
 							<input type="radio" name="point" id="p1" value="1"><label for="p1">1</label>
 							<input type="radio" name="point" id="p2" value="2"><label for="p2">2</label>

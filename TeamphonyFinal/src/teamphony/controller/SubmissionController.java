@@ -204,8 +204,13 @@ public class SubmissionController {
 		
 		task.setPoint(Integer.parseInt(point));
 		task.setEvaluationCnt(Integer.parseInt(evaluationCnt));
+		
+		System.out.println("parse = "+Integer.parseInt(evaluated));
 		task.setEvaluated(Integer.parseInt(evaluated));
 		
+		
+		System.out.println("===========evaluate===========");
+		System.out.println("getEvaluated"+task.getEvaluated());
 		service.modifyTask(task);
 		
 		return "redirect:searchAll.do";
