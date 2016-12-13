@@ -20,8 +20,7 @@
 				switch (flag) {
 
 				case '0':
-
-					
+	
 					showSnackBar('존재하지 않는 팀 입니다.');
 				
 
@@ -81,9 +80,7 @@
 				teamList[i].innerHTML = teamName.substring(0, 8) + " ...";
 
 			}
-
 		}
-
 	}
 
 	var setOnlyNumber = function(event) {

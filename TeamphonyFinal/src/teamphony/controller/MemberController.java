@@ -55,6 +55,7 @@ public class MemberController {
 	public String createMember(String memberId, String password, String alias, HttpServletRequest request) {
 		Member member = new Member(memberId, password, alias);
 
+		
 		// http://addio3305.tistory.com/83 참조
 
 		// Request에서 첨부파일을 받기위해 캐스팅을 함
@@ -151,7 +152,6 @@ public class MemberController {
 			}
 		} 
 
-		System.out.println(password + " " + alias);
 		if (!session.isNew()) {
 			member.setMemberId(login.getMemberId());
 		}
