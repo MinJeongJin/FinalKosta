@@ -115,6 +115,9 @@ public class AssignmentController {
 		team.setCode(9642);
 		session.setAttribute("code", team.getCode());
 		
+		
+		
+		
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
 		List<Task> list = service.findAllTaskByFlag(0);
 		
