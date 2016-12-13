@@ -26,14 +26,14 @@
 	</update>
 	
 	<delete id="deleteMember" parameterType="String">
-		delete from Member_tb where id = #{memberId} cv
+		delete from Member_tb where id = #{memberId}
 	</delete>
 	
 	<insert id="insertStarPoint" parameterType="map">
 		insert into evaluation_tb(memberId, starPoint) values(#{memberId},#{starPoint})
 	</insert>
 	
-	<select id="getStarPoint" parameterType="String" resultType="Integer">
+	<select id="getStarPoint" parameterType="String" resultType="float">
 		select starPoint from evaluation_tb where memberId = #{id}
 	</select>
 	

@@ -114,43 +114,123 @@
 			.starPoint>.input>label:hover~label{
 			    background-image: none;
 			}
-			.starPoint>.input>label[for="p1"]{ 
+			.starPoint>.input>label[for="p1-1"]{ 
 			    width: 10px;
 			    z-index: 10;
 			}
-			.starPoint>.input>label[for="p2"]{ 
+			.starPoint>.input>label[for="p2-1"]{ 
 			    width: 20px;
 			    z-index: 9;
 			}
-			.starPoint>.input>label[for="p3"]{ 
+			.starPoint>.input>label[for="p3-1"]{ 
 			    width: 30px;
 			    z-index: 8;
 			}
-			.starPoint>.input>label[for="p4"]{ 
+			.starPoint>.input>label[for="p4-1"]{ 
 			    width: 40px;
 			    z-index: 7;
 			}
-			.starPoint>.input>label[for="p5"]{ 
+			.starPoint>.input>label[for="p5-1"]{ 
 			    width: 50px;
 			    z-index: 6;
 			}
-			.starPoint>.input>label[for="p6"]{ 
+			.starPoint>.input>label[for="p6-1"]{ 
 			    width: 60px;
 			    z-index: 5;
 			}
-			.starPoint>.input>label[for="p7"]{ 
+			.starPoint>.input>label[for="p7-1"]{ 
 			    width: 70px;
 			    z-index: 4;
 			}
-			.starPoint>.input>label[for="p8"]{ 
+			.starPoint>.input>label[for="p8-1"]{ 
 			    width: 80px;
 			    z-index: 3;
 			}
-			.starPoint>.input>label[for="p9"]{ 
+			.starPoint>.input>label[for="p9-1"]{ 
 			    width: 90px;
 			    z-index: 2;
 			}
-			.starPoint>.input>label[for="p10"]{ 
+			.starPoint>.input>label[for="p10-1"]{ 
+			    width: 100px;
+			    z-index: 1;
+			}
+			.starPoint>.input>label[for="p1-2"]{ 
+			    width: 10px;
+			    z-index: 10;
+			}
+			.starPoint>.input>label[for="p2-2"]{ 
+			    width: 20px;
+			    z-index: 9;
+			}
+			.starPoint>.input>label[for="p3-2"]{ 
+			    width: 30px;
+			    z-index: 8;
+			}
+			.starPoint>.input>label[for="p4-2"]{ 
+			    width: 40px;
+			    z-index: 7;
+			}
+			.starPoint>.input>label[for="p5-2"]{ 
+			    width: 50px;
+			    z-index: 6;
+			}
+			.starPoint>.input>label[for="p6-2"]{ 
+			    width: 60px;
+			    z-index: 5;
+			}
+			.starPoint>.input>label[for="p7-2"]{ 
+			    width: 70px;
+			    z-index: 4;
+			}
+			.starPoint>.input>label[for="p8-2"]{ 
+			    width: 80px;
+			    z-index: 3;
+			}
+			.starPoint>.input>label[for="p9-2"]{ 
+			    width: 90px;
+			    z-index: 2;
+			}
+			.starPoint>.input>label[for="p10-2"]{ 
+			    width: 100px;
+			    z-index: 1;
+			}
+			.starPoint>.input>label[for="p1-3"]{ 
+			    width: 10px;
+			    z-index: 10;
+			}
+			.starPoint>.input>label[for="p2-3"]{ 
+			    width: 20px;
+			    z-index: 9;
+			}
+			.starPoint>.input>label[for="p3-3"]{ 
+			    width: 30px;
+			    z-index: 8;
+			}
+			.starPoint>.input>label[for="p4-3"]{ 
+			    width: 40px;
+			    z-index: 7;
+			}
+			.starPoint>.input>label[for="p5-3"]{ 
+			    width: 50px;
+			    z-index: 6;
+			}
+			.starPoint>.input>label[for="p6-3"]{ 
+			    width: 60px;
+			    z-index: 5;
+			}
+			.starPoint>.input>label[for="p7-3"]{ 
+			    width: 70px;
+			    z-index: 4;
+			}
+			.starPoint>.input>label[for="p8-3"]{ 
+			    width: 80px;
+			    z-index: 3;
+			}
+			.starPoint>.input>label[for="p9-3"]{ 
+			    width: 90px;
+			    z-index: 2;
+			}
+			.starPoint>.input>label[for="p10-3"]{ 
 			    width: 100px;
 			    z-index: 1;
 			}
@@ -237,35 +317,84 @@
 						<form action="${pageContext.request.contextPath}/member/evaluation.do" Method="post">
 							<h2 id="menuTitle">회원 평가</h2>
 							<input type="hidden" value="${evaluationMember.memberId }" id="memberId" name="memberId">
-							<div class="row">
-								<div class="form-group col-xs-7">
-									<h3>${evaluationMember.alias}</h3>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-xs-7">
-									<label for="contents">${evaluationMember.alias}의 지금까지 평점 :</label><p><span class="stars" ><span style="width:${evaluationMember.starPoint*10}%"></span></span></p> 
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-xs-7">
-									<label for="contents">평가 : </label> 
-									<span class="starPoint">
-										<span class="input">
-											<input type="radio" name="starPoint" id="p1" value="1"><label for="p1">1</label>
-											<input type="radio" name="starPoint" id="p2" value="2"><label for="p2">2</label>
-											<input type="radio" name="starPoint" id="p3" value="3"><label for="p3">3</label>
-											<input type="radio" name="starPoint" id="p4" value="4"><label for="p4">4</label>
-											<input type="radio" name="starPoint" id="p5" value="5"><label for="p5">5</label>
-											<input type="radio" name="starPoint" id="p6" value="6"><label for="p6">6</label>
-											<input type="radio" name="starPoint" id="p7" value="7"><label for="p7">7</label>
-											<input type="radio" name="starPoint" id="p8" value="8"><label for="p8">8</label>
-											<input type="radio" name="starPoint" id="p9" value="9"><label for="p9">9</label>
-											<input type="radio" name="starPoint" id="p10" value="10"><label for="p10">10</label>
-										</span>
-									</span>
-								</div>
-							</div>
+							<table>
+								<colgroup>
+									<col width="150">
+									<col width="*">
+								</colgroup>
+								<tr>
+									<td><img alt="사진 없음" height="150" width="150" src="${pageContext.request.contextPath}/resources/images/${evaluate.memberId}/${evaluate.imagePath}"></td>
+									<td>
+										별명 : ${evaluate.alias}<br>
+										<p><span class="stars" >지금 까지의 평점 : <span style="width:${evaluate.starPoint*10}%"></span></span></p>
+									</td>
+								</tr>
+							</table>
+							<table>
+								<colgroup>
+									<col width="150">
+									<col width="*">
+								</colgroup>
+								<tbody>
+									<tr>
+										<td>성실성</td>
+										<td>
+											<span class="starPoint">
+												<span class="input">
+													<input type="radio" name="sincerity" id="p1-1" value="1"><label for="p1-1">1</label>
+													<input type="radio" name="sincerity" id="p2-1" value="2"><label for="p2-1">2</label>
+													<input type="radio" name="sincerity" id="p3-1" value="3"><label for="p3-1">3</label>
+													<input type="radio" name="sincerity" id="p4-1" value="4"><label for="p4-1">4</label>
+													<input type="radio" name="sincerity" id="p5-1" value="5"><label for="p5-1">5</label>
+													<input type="radio" name="sincerity" id="p6-1" value="6"><label for="p6-1">6</label>
+													<input type="radio" name="sincerity" id="p7-1" value="7"><label for="p7-1">7</label>
+													<input type="radio" name="sincerity" id="p8-1" value="8"><label for="p8-1">8</label>
+													<input type="radio" name="sincerity" id="p9-1" value="9"><label for="p9-1">9</label>
+													<input type="radio" name="sincerity" id="p10-1" value="10"><label for="p10-1">10</label>
+												</span>
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>기여도</td>
+										<td>
+											<span class="starPoint">
+												<span class="input">
+													<input type="radio" name="contribution" id="p1-2" value="1"><label for="p1-2">1</label>
+													<input type="radio" name="contribution" id="p2-2" value="2"><label for="p2-2">2</label>
+													<input type="radio" name="contribution" id="p3-2" value="3"><label for="p3-2">3</label>
+													<input type="radio" name="contribution" id="p4-2" value="4"><label for="p4-2">4</label>
+													<input type="radio" name="contribution" id="p5-2" value="5"><label for="p5-2">5</label>
+													<input type="radio" name="contribution" id="p6-2" value="6"><label for="p6-2">6</label>
+													<input type="radio" name="contribution" id="p7-2" value="7"><label for="p7-2">7</label>
+													<input type="radio" name="contribution" id="p8-2" value="8"><label for="p8-2">8</label>
+													<input type="radio" name="contribution" id="p9-2" value="9"><label for="p9-2">9</label>
+													<input type="radio" name="contribution" id="p10-2" value="10"><label for="p10-2">10</label>
+												</span>
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>태도</td>
+										<td>
+											<span class="starPoint">
+												<span class="input">
+													<input type="radio" name="attitude" id="p1-3" value="1"><label for="p1-3">1</label>
+													<input type="radio" name="attitude" id="p2-3" value="2"><label for="p2-3">2</label>
+													<input type="radio" name="attitude" id="p3-3" value="3"><label for="p3-3">3</label>
+													<input type="radio" name="attitude" id="p4-3" value="4"><label for="p4-3">4</label>
+													<input type="radio" name="attitude" id="p5-3" value="5"><label for="p5-3">5</label>
+													<input type="radio" name="attitude" id="p6-3" value="6"><label for="p6-3">6</label>
+													<input type="radio" name="attitude" id="p7-3" value="7"><label for="p7-3">7</label>
+													<input type="radio" name="attitude" id="p8-3" value="8"><label for="p8-3">8</label>
+													<input type="radio" name="attitude" id="p9-3" value="9"><label for="p9-3">9</label>
+													<input type="radio" name="attitude" id="p10-3" value="10"><label for="p10-3">10</label>
+												</span>
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 							<div class="row">
 								<div class="form-group col-xs-7">
 									<button class="btn btn-success btn-lg" type="submit">평가</button>
@@ -277,34 +406,5 @@
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
-		
-			var starRating = function(){
-				var $star = $(".starPoint"), $result = $star.find("output>b");
-				$(document).on("focusin", ".starPoint>.input", function(){
-						$(this).addClass("focus");
-				}).on("focusout", ".starPoint>.input", function(){
-					var $this = $(this);
-					setTimeout(function(){
-						if($this.find(":focus").length === 0){
-							$this.removeClass("focus");
-						}
-					}, 100);
-				}).on("change", ".starPoint :radio", function(){
-					$result.text($(this).next().text());
-				}).on("mouseover", ".starPoint label", function(){
-					$	result.text($(this).text());
-				}).on("mouseleave", ".starPoint>.input", function(){
-					var $checked = $star.find(":checked");
-					if($checked.length === 0){
-						$result.text("0");
-					} else {
-						$result.text($checked.next().text());
-					}
-				});
-			};
-			starRating();
-			
-		</script>
 	</body>
 </html>

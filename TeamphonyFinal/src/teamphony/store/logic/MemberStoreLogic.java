@@ -90,9 +90,9 @@ public class MemberStoreLogic implements MemberStore {
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			member = mapper.selectMemberByMemberId(memberId);
-			List<Integer> list = mapper.getStarPoint(memberId);
+			List<Double> list = mapper.getStarPoint(memberId);
 			int sum=0;
-			for (Integer starPoint : list) {
+			for (Double starPoint : list) {
 				sum+=starPoint;
 			}
 			member.setStarPoint((double)sum/list.size());
@@ -104,7 +104,7 @@ public class MemberStoreLogic implements MemberStore {
 	}
 
 	@Override
-	public void insertStarPoint(String memberId, int starPoint) {
+	public void insertStarPoint(String memberId, double starPoint) {
 		SqlSession session = getSessionFactory().openSession();
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);

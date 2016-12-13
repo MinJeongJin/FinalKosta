@@ -36,7 +36,7 @@ public class MemberServiceLogic implements MemberService {
 	}
 
 	@Override
-	public void saveStarPoint(String memberId, int starPoint) {
+	public void saveStarPoint(String memberId, double starPoint) {
 		store.insertStarPoint(memberId, starPoint);
 	}
 	

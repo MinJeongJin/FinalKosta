@@ -51,7 +51,7 @@
 		</div>
 		<img alt="사진 없음" style="border-radius: 100%; display: block; overflow: hidden;" width="90" height="110" src="${pageContext.request.contextPath}/resources/images/avatar_g2.jpg">
 		<br>
-		<form action="${pageContext.request.contextPath}/member/revice.do" method="post"  enctype="multipart/form-data">
+		<form action="${pageContext.request.contextPath}/member/revise.do" method="post"  enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<colgroup>
 					<col width="60" />
@@ -79,7 +79,7 @@
 				</tr>
 			</table>
 			<div>
-				<div style="display: inline-block;"><button class="btn btn-info btn-lg">확인</button></div>
+				<div style="display: inline-block;"><button type="submit" class="btn btn-info btn-lg">확인</button></div>
 				<div style="display: inline-block;"><button class="btn btn-danger btn-lg">취소</button></div>
 			</div>
 		</form>

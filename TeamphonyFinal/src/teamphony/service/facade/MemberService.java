@@ -10,6 +10,6 @@ public interface MemberService {
 	void modifyMember(Member member);
 	void removeMember(String memberId);
 	Member findMemberByMemberId(String memberId);
-	void saveStarPoint(String memberId, int starPoint);
+	void saveStarPoint(String memberId, double starPoint);
 	List<Member> findAllMember();
 }

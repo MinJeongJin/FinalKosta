@@ -104,7 +104,7 @@ public class MemberController {
 		return "/common/login";
 	}
 
-	@RequestMapping(value = "revise", method = RequestMethod.POST)
+	@RequestMapping(value = "revise.do", method = RequestMethod.POST)
 	public String reviseMember(HttpSession session, String password, String alias, HttpServletRequest request) {
 
 		Member member = new Member();
@@ -116,9 +116,10 @@ public class MemberController {
 		// 필요한 변수 선언
 		MultipartFile multipartFile = null;
 		String originalFileName = null;
+		String root = request.getSession().getServletContext().getRealPath("/");
 
 		// 파일을 저장할 폴더 설정
-		File file = new File(filePath + login.getMemberId() + "\\");
+		File file = new File(root+filePath + login.getMemberId() + "\\");
 		// 폴더가 없으면 폴더 생성
 		if (file.exists() == false) {
 			file.mkdirs();
@@ -134,8 +135,9 @@ public class MemberController {
 				originalFileName = multipartFile.getOriginalFilename();
 
 				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
-				file = new File(filePath + login.getMemberId() + "\\" + originalFileName);
-				member.setImagePath(filePath + login.getMemberId() + "\\" + originalFileName);
+				file = new File(root+filePath + login.getMemberId() + "\\" + originalFileName);
+				System.out.println(filePath + login.getMemberId() + "\\" + originalFileName);
+				member.setImagePath(originalFileName);
 				try {
 					// 파일 전송
 					multipartFile.transferTo(file);
@@ -166,6 +168,7 @@ public class MemberController {
 
 		memberService.modifyMember(member);
 		session.setAttribute("member", member);
+		System.out.println("controller");
 
 		return "/member/myPage";
 	}
@@ -216,13 +219,17 @@ public class MemberController {
 		
 		Member member = memberService.findMemberByMemberId(memberId);
 		
-		model.addAttribute("evaluationMember",member);
+		model.addAttribute("evaluate",member);
 		
 		return "/member/evaluationMember";
 	}
 	
 	@RequestMapping(value="evaluation", method=RequestMethod.POST)
-	public String evaluationMember(String memberId, int starPoint){
+	public String evaluationMember(String memberId, int sincerity, int attitude, int contribution){
+		
+		double starPoint = (double)(attitude+contribution+sincerity)/3.0;
+		
+		
 		memberService.saveStarPoint(memberId, starPoint);
 		
 		return "redirect:/team/main.do";
@@ -250,6 +257,5 @@ public class MemberController {
 		
 		return members;
 	}
-
 
 }

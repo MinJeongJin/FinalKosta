@@ -110,5 +110,7 @@ MODIFY (FILEPATH VARCHAR2(500));
 ALTER TABLE TASKFILE_TB 
 add (imagePath VARCHAR2(500));
 
+alter Table (evaluation_tb) modify(starPoint, float);
+
 
 commit;

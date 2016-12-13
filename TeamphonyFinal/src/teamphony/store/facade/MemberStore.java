@@ -10,6 +10,6 @@ public interface MemberStore {
 	void updateMember(Member member);
 	void deleteMember(String memberId);
 	Member selectMemberByMemberId(String memberId);
-	void insertStarPoint(String memberId, int starPoint);
+	void insertStarPoint(String memberId, double starPoint);
 	List<Member> selectAllMember();
 }
