@@ -38,17 +38,22 @@
 				,#{evaluationCnt, jdbcType=INTEGER}
 				,#{teamCode, jdbcType=INTEGER}
 			)
-	</insert>  
+	</insert> 
+	 
 	<insert id="insertTaskMember">
 			INSERT
 			INTO TASKMEMBER
 			(
-				ASSIGNMENTID,
-				MEMBERID
+				ASSIGNMENTID
+				,MEMBERID
+				,SUBMISSIONID
+				,ASSIGNMENT_TITLE
 			)
 			VALUES
-			(	#{taskId},
-				#{memberId }
+			(	#{taskId}
+				,#{memberId }
+				,TASK_TB_ID_SEQ.NEXTVAL
+				,#{assignmentTitle }
 			)
 	</insert>
 	
