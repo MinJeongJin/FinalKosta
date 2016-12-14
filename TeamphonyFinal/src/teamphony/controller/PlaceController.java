@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import teamphony.domain.Member;
+import teamphony.domain.Members;
 import teamphony.domain.Place;
+import teamphony.domain.Places;
 import teamphony.service.facade.PlaceService;
 
 @Controller
@@ -72,6 +76,19 @@ public class PlaceController {
 		}
 		model.addAttribute("places", places);
 		return "place/placeList";
+	}
+	
+	@RequestMapping(value = "xml.do", produces = "application/xml")
+	public @ResponseBody Places getMembersToXml() {
+
+		List<Place> list = new ArrayList<>();
+		Places places = new Places();
+
+		list = placeService.findAllPlace();
+
+		places.setPlaces(list);
+
+		return places;
 	}
 	
 }

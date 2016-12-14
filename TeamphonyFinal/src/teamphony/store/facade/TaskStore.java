@@ -14,10 +14,12 @@ public interface TaskStore {
 
 	void deleteTask(int taskId, int flag);
 
-	List<Task> selectAllTaskByFlag(int flag);
+	List<Task> selectAllTaskByFlag(int flag, int teamCode);
 
 	Task selectTaskByTaskId(int taskId);
 
 	List<Task> selectTaskByMemberId(String memberId);
+	
+	List<Task> selectAllAssginment();
 	
 }

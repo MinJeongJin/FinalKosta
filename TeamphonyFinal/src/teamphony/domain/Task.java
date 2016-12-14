@@ -29,6 +29,7 @@ public class Task {
 	private String deadline;
 	private String evaluationPeriodStart;
 	private String evaluationPeriodEnd;
+	private int teamCode;
 	
 	
 	public int getTaskId() {
@@ -81,22 +82,22 @@ public class Task {
 	public float getAverage(){
 		int startPoint = 0;
 		
-			if(evaluationCnt != 0){
-				float average = (float) point/ evaluationCnt;
-				return average;
-			}
-			return startPoint;
+		if(evaluationCnt != 0){
+			float average = (float) point/ evaluationCnt;
+			return average;
+		}
+		return startPoint;
 	}
 
 //10점 만점의 percentage 계산 
 	public double getPointStar() {
 		int startPointStar = 0;
 		
-			if(evaluationCnt !=0 ){
-				double percent = ( point *1.0 / evaluationCnt ) * 10 ;
-				return percent;
-			}
-			return startPointStar;
+		if(evaluationCnt !=0 ){
+			double percent = ( point *1.0 / evaluationCnt ) * 10 ;
+			return percent;
+		}
+		return startPointStar;
 	}
 
 	public int getPoint() {
@@ -169,6 +170,14 @@ public class Task {
 
 	public void setEvaluationPeriodEnd(String evaluationPeriodEnd) {
 		this.evaluationPeriodEnd = evaluationPeriodEnd;
+	}
+	
+	public int getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(int teamCode) {
+		this.teamCode = teamCode;
 	}
 
 	@Override

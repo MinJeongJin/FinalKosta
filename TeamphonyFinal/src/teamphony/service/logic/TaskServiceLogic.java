@@ -40,8 +40,8 @@ public class TaskServiceLogic implements TaskService {
 	
 
 	@Override
-	public List<Task> findAllTaskByFlag(int flag) {
-		return store.selectAllTaskByFlag(flag);
+	public List<Task> findAllTaskByFlag(int flag, int teamCode) {
+		return store.selectAllTaskByFlag(flag, teamCode);
 	}
 	
 	
@@ -58,7 +58,9 @@ public class TaskServiceLogic implements TaskService {
 		return store.selectTaskByTaskId(taskId);
 	}
 	
-	
+	public List<Task> findAllAssginment(){
+		return store.selectAllAssginment();
+	}
 	
 
 }

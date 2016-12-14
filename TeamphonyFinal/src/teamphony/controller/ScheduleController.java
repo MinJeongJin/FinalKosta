@@ -2,6 +2,7 @@ package teamphony.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import teamphony.domain.Member;
+import teamphony.domain.Members;
 import teamphony.domain.Schedule;
+import teamphony.domain.Schedules;
 import teamphony.service.facade.ScheduleService;
 /**
  * 팀코드를 2로 전체적으로 set해준 상황.
@@ -113,6 +118,19 @@ public class ScheduleController {
 		
 		model.addAttribute("teamSchedules", teamSchedules);
 		return "schedule/calendar2";
+	}
+	
+	@RequestMapping(value = "xml.do", produces = "application/xml")
+	public @ResponseBody Schedules getSchedulesToXml(int teamCode) {
+
+		List<Schedule> list = new ArrayList<>();
+		Schedules schedules = new Schedules();
+
+		list = scheduleService.findSchedulesByTeamCode(teamCode);
+
+		schedules.setSchedules(list);
+
+		return schedules;
 	}
 	
 }

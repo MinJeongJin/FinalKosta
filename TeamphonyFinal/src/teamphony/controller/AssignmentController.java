@@ -34,7 +34,7 @@ public class AssignmentController {
 	@RequestMapping("/create.do")
 	public String createAssignment(HttpSession session, Model model){
 		Team team = new Team();
-		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
+		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("teamCode"));
 		
 		model.addAttribute("memberList", memberList);
 		
@@ -52,6 +52,7 @@ public class AssignmentController {
 		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
 		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
 		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
+		task.setTeamCode((int)httpSession.getAttribute("teamCode"));
 		
 		System.out.println("==============================");
 		System.out.println(task.toString());
@@ -66,7 +67,7 @@ public class AssignmentController {
 		Team team = new Team();
 
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
-		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
+		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("teamCode"));
 		
 		task.setMemberList(memberList);
 		model.addAttribute("task", task);
@@ -111,17 +112,12 @@ public class AssignmentController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(HttpSession session, Model model) {
-//test 중 이라서 임의로 팀 코드를 부여 하였다
 		
-		Team team = new Team();
-		team.setCode(9642);
-		session.setAttribute("code", team.getCode());
+		int teamCode = (int)session.getAttribute("teamCode");
 		
 		
-		
-		
-		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("code"));
-		List<Task> list = service.findAllTaskByFlag(0);
+		List<Member> memberList = teamService.findMembersByTeamCode(teamCode);
+		List<Task> list = service.findAllTaskByFlag(0,teamCode);
 		
 		for(Task task : list){
 			task.setMemberList(memberList);
@@ -143,11 +139,16 @@ public class AssignmentController {
 	
 	@RequestMapping(value="xml.do", produces="application/xml")
 	public @ResponseBody Tasks getTasksToXml(){
+		System.out.println("xml Test");
 		
 		List<Task> list  = new ArrayList<>();
 		Tasks tasks = new Tasks();
 		
-		list = service.findAllTaskByFlag(1);
+		list = service.findAllAssginment();
+		
+		for (Task task : list) {
+			System.out.println(task.getTitle());
+		}
 		
 		tasks.setTasks(list);
 		
