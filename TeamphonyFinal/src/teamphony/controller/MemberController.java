@@ -116,6 +116,11 @@ public class MemberController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+			}else{
+				
+				member.setImagePath("pass");
+				
 			}
 		}
 		memberService.registerMember(member);
@@ -155,7 +160,6 @@ public class MemberController {
 
 				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
 				file = new File(root + filePath + login.getMemberId() + "\\" + originalFileName);
-				System.out.println(filePath + login.getMemberId() + "\\" + originalFileName);
 				member.setImagePath(originalFileName);
 				try {
 					// 파일 전송
@@ -167,6 +171,10 @@ public class MemberController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}else{
+				
+				member.setImagePath(login.getImagePath());
+				
 			}
 		}
 
@@ -186,22 +194,17 @@ public class MemberController {
 
 		memberService.modifyMember(member);
 		session.setAttribute("member", member);
-		System.out.println("controller");
 
-		return "/member/myPage";
+		return "redirect:/member/revise.do";
 	}
 
 	@RequestMapping(value = "revise.do", method = RequestMethod.GET)
 	public String revise(HttpSession session, Model model) {
 
 		Member member = (Member) session.getAttribute("member");
-
-		System.out.println(member.getMemberId());
-
 		Member reviseMember = memberService.findMemberByMemberId(member.getMemberId());
 
 		model.addAttribute("member", reviseMember);
-		System.out.println("ok");
 		return "/member/reviseMember";
 	}
 
@@ -215,17 +218,9 @@ public class MemberController {
 		return "/common/login";
 	}
 
-	@RequestMapping(value="logout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
-		System.out.println("get logout");
 		session.invalidate();
-		return "redirect:/views/common/login.jsp";
-	}
-	
-	
-	@RequestMapping(value="logout.do", method = RequestMethod.POST)
-	public String logout() {
-		System.out.println("post logout");
 		return "redirect:/views/common/login.jsp";
 	}
 
@@ -261,13 +256,21 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "check.do", method = RequestMethod.POST)
-	public String CheckMember(HttpSession session, String password) {
+	public void CheckMember(HttpSession session, String password, HttpServletResponse res) {
 
+		String stamp = "false";
 		Member member = (Member) session.getAttribute("member");
 		if (member.getPassword().equals(password)) {
-			return "redirect:/views/member/myPage.jsp";
+
+			stamp = "true";
 		}
-		return "redirect:/team/main.do";
+
+		try {
+			res.getWriter().write(stamp);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "xml.do", produces = "application/xml")

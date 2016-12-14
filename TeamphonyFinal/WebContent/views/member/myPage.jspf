@@ -1,0 +1,189 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<body onload="modalReset();">
+
+
+	<div id="pwConModal" class="w3-modal">
+		<div class="w3-modal-content w3-card-8 w3-animate-zoom"
+			style="min-width: 200px; max-width: 400px">
+
+			<div class="w3-center">
+				<br> <span
+					onclick="document.getElementById('pwConModal').style.display='none';modalReset();"
+					class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright"
+					title="Close Modal">&times;</span>
+
+				<h2>회원 확인</h2>
+
+			</div>
+
+			<form id="registerForm" class="w3-container" action="#" method="post">
+				<div class="w3-section">
+
+					<label><b>PW</b></label> <input
+						class="w3-input w3-border w3-margin-bottom" type="password"
+						placeholder="영문, 특수, 숫자 조합 9 ~ 15자" id="pw" name="pw"
+						maxlength="15" oninput="checkValidityInPw();">
+
+					<p id="validityInPw" class="msg" style="color: red"></p>
+					<input id="pwValidity" style="display: none" value=""
+						class="confirm"> <label><b>PW 확인</b></label> <input
+						class="w3-input w3-border w3-margin-bottom" type="password"
+						placeholder="PW 필드와 같은 비밀번호를 입력" id="pwCon" name="pwCon"
+						maxlength="15" oninput="checkValidityInPwCon();">
+
+					<p id="validityInPwCon" class="msg" style="color: red"></p>
+					<input id="pwConValidity" style="display: none" value=""
+						class="confirm">
+
+					<button class="w3-btn-block w3-black w3-section w3-padding"
+						type="button" onclick="checkAll();">
+						<b>확인</b>
+					</button>
+
+					<P id="checkResultMsg" class="msg"></P>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<script>
+		var checkPw = function() {
+
+			var checkResult = document.getElementById('checkResultMsg');
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var data = xhttp.responseText;
+
+					switch (data) {
+
+					case "true":
+
+						window.location.href = "/TeamphonyFinal/member/revise.do";
+
+						break;
+
+					case "false":
+
+						checkResult.innerHTML = "입력한 PW와 일치하는 회원이 없습니다. <br>입력 정보를 확인하고 다시 시도하세요."
+
+						break;
+
+					default:
+						console.log(data);
+
+						break;
+
+					}
+				}
+			};
+
+			xhttp.open("POST", "/TeamphonyFinal/member/check.do", true);
+			xhttp.setRequestHeader("Content-type",
+					"application/x-www-form-urlencoded");
+			xhttp.send("password=" + document.getElementById('pw').value);
+		}
+
+		var checkValidityInPw = function() {
+
+			var pwVal = document.getElementById('pw').value;
+			var confirm = document.getElementById('pwValidity');
+			var msg = document.getElementById('validityInPw');
+			var pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{9,15}$/;
+
+			if (pwVal.length < 9) {
+
+				msg.innerHTML = "9자 이상 15자 이하"
+				confirm.value = "false";
+			} else {
+
+				if (pwReg.test(pwVal)) {
+
+					msg.innerHTML = "올바른 비밀번호 형식입니다.";
+					confirm.value = "true";
+
+				} else {
+
+					msg.innerHTML = "비밀번호는 영문, 특수, 숫자 조합입니다.";
+					confirm.value = "false";
+				}
+			}
+		}
+
+		var checkValidityInPwCon = function() {
+
+			var pwConVal = document.getElementById('pwCon').value;
+			var pwVal = document.getElementById('pw').value;
+			var confirm = document.getElementById('pwConValidity');
+			var msg = document.getElementById('validityInPwCon');
+
+			if (pwVal != pwConVal) {
+
+				msg.innerHTML = "PW필드의 값과 일치하지 않습니다.";
+				confirm.value = "false";
+
+			} else {
+
+				msg.innerHTML = "일치합니다.";
+				confirm.value = "true";
+
+			}
+		}
+
+		var checkAll = function() {
+
+			var confirms = document.getElementsByClassName('confirm');
+			var len = confirms.length;
+			var trueCnt = 0;
+			var registerForm = document.getElementById('registerForm');
+
+			for (var i = 0; i < len; i++) {
+
+				if (confirms[i].value == "true") {
+
+					trueCnt++;
+				}
+			}
+
+			if (trueCnt == len) {
+
+				checkPw();
+
+			} else {
+				//snack bar
+				window.alert('완전히 기입되어 있지 않은 사항이 있습니다.');
+			}
+		}
+
+		var modalReset = function() {
+
+			var msgs = document.getElementsByClassName('msg');
+			var pwConField = document.getElementById('pwCon');
+			var pwField = document.getElementById('pw');
+			var len = msgs.length;
+			pwField.value = '';
+			pwConField.value = '';
+
+			for (var i = 0; i < len; i++) {
+
+				msgs[i].innerHTML = '';
+			}
+		}
+	</script>
+
+</body>
+
+</html>

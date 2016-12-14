@@ -11,13 +11,26 @@
 
 <!-- CSS -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/w3.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Tangerine">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainCustomStyle.css">
+
+
+<style>
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+</style>
+
 <!-- /CSS -->
 
 <!-- Script -->
@@ -25,11 +38,7 @@
 	src="${pageContext.request.contextPath}/resources/js/mainCustomScript.js">
 	
 </script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- /Script -->
 
 </head>
@@ -38,88 +47,219 @@
 		<div class="w3-container">
 			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
 				<li class="w3-navitem w3-tangerine">Teamphony</li>
-				<li><a>회원 정보</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">회원 수정</a></li>
+					href="#">마이 페이지</a></li>
 				<li><a href="#">회원 탈퇴</a></li>
 			</ul>
 		</div>
 	</header>
 	<div class="w3-container w3-padding-xxlarge">
 		<div class="w3-bottombar" style="margin-bottom: 30px;">
-			<h2>회원 수정</h2>
+			<h2>마이 페이지</h2>
+			<h3>자신의 정보를 확인하고 수정 할 수 있습니다.</h3>
 		</div>
-		<img alt="사진 없음" style="border-radius: 100%; display: block; overflow: hidden;" width="90" height="110" src="${pageContext.request.contextPath}/resources/images/avatar_g2.jpg">
-		<br>
-		<form action="${pageContext.request.contextPath}/member/revise.do" method="post"  enctype="multipart/form-data">
-			<table class="table table-bordered">
-				<colgroup>
-					<col width="60" />
-					<col width="100" />
-					<col width="*" />
-					<col width="150" />
-					<col width="120" />
-				</colgroup>
-				
-				<tr>
-					<th>프로필</th>
-					<td><input id="imagePath" type="file" name="imagePath" class="form-control" value="${memebr.imagePath }"></td>
-				</tr>
-				<tr>
-					<th>별명</th>
-					<td><input id="alias" type="text" name="alias" class="form-control" value="${member.alias }"></td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input id="password" type="password" name="password" class="form-control" value=""${member.password }></td>
-				</tr>
-				<tr>
-					<th>비밀 번호 확인</th>
-					<td><input id="passwordCheck" type="password" name="passwordCheck" class="form-control" value=""></td>
-				</tr>
-			</table>
-			<div>
-				<div style="display: inline-block;"><button type="submit" class="btn btn-info btn-lg">확인</button></div>
-				<div style="display: inline-block;"><button class="btn btn-danger btn-lg">취소</button></div>
+
+	</div>
+
+	<div class="w3-modal-content w3-teal"
+		style="min-width: 300px; max-width: 600px; margin-bottom: 30px;">
+
+
+		<form id="reviseForm" class="w3-container"
+			action="${pageContext.request.contextPath}/member/revise.do"
+			method="post" enctype="multipart/form-data">
+			<div class="w3-center">
+				<br>
+				<c:choose>
+
+					<c:when test="${member.imagePath eq 'pass'}">
+
+						<img id="holder"
+							src="${pageContext.request.contextPath}/resources/images/default.png"
+							alt="Avatar" style="width: 150px; height: 150px;"
+							class="w3-circle w3-margin-top">
+
+
+					</c:when>
+
+					<c:otherwise>
+						<img id="holder"
+							src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
+							alt="Avatar" style="width: 150px; height: 150px;"
+							class="w3-circle w3-margin-top">
+
+					</c:otherwise>
+
+				</c:choose>
+
+
+				<div class="filebox">
+					<label for="ex_file" class="w3-btn w3-large w3-dark-grey"
+						style="margin-top: 20px; display: inline-block;">프로필 사진 변경</label>
+					<input type="file" id="ex_file" name="imagePath">
+					
+				</div>
+			</div>
+			<div class="w3-section">
+
+				<label><b>ID</b></label> <input class="w3-input w3-border"
+					value="${member.memberId}" type="text" readonly> <br><label><b>PW</b></label>
+				<input class="w3-input w3-border w3-margin-bottom" type="password"
+					placeholder="영문, 특수, 숫자 조합 9 ~ 15자" id="pw" name="password"
+					maxlength="15" oninput="checkValidityInPw();"
+					value="${member.password}">
+
+				<p id="validityInPw" class="msg"></p>
+				<input id="pwValidity" style="display: none" value="true"
+					class="confirm"> <label><b>PW 확인</b></label> <input
+					class="w3-input w3-border w3-margin-bottom" type="password"
+					placeholder="PW 필드와 같은 비밀번호를 입력" id="pwCon" name="pwCon"
+					maxlength="15" oninput="checkValidityInPwCon();"
+					value="${member.password}">
+
+				<p id="validityInPwCon" class="msg" style="color: red"></p>
+				<input id="pwConValidity" style="display: none" value="true"
+					class="confirm"> <label><b>별명</b></label> <input
+					class="w3-input w3-border w3-margin-bottom" type="text"
+					placeholder="공백 제외 2 ~ 10자" id="alias" name="alias" maxlength="10"
+					oninput="checkValidityInAlias();" value="${member.alias}">
+
+				<p id="validityInAlias" class="msg"></p>
+				<input id="aliasValidity" style="display: none" value="true"
+					class="confirm">
+
+				<div class="w3-right w3-padding">
+					<button class="w3-btn w3-padding w3-dark-grey w3-large"
+						type="button" onclick="checkAll();">
+						<b>수정</b>
+					</button>
+
+					<button class="w3-btn w3-padding w3-dark-grey w3-large"
+						type="button" onclick="location.reload();">
+						<b>취소</b>
+					</button>
+
+				</div>
 			</div>
 		</form>
 	</div>
+	
+	<%@ include file="/views/member/alertInMyPage.jspf"%>
+
 	<script>
-		(function() {
-			// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
-			if (!String.prototype.trim) {
-				(function() {
-					// Make sure we trim BOM and NBSP
-					var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-					String.prototype.trim = function() {
-						return this.replace(rtrim, '');
-					};
-				})();
+		var upload = document.getElementsByTagName('input')[0], holder = document
+				.getElementById('holder'), state = document
+				.getElementById('status');
+
+		upload.onchange = function(e) {
+
+			e.preventDefault();
+
+			var file = upload.files[0], reader = new FileReader();
+
+			reader.onload = function(event) {
+
+				holder.src = event.target.result;
+
+			};
+			reader.readAsDataURL(file);
+
+			return false;
+		};
+	</script>
+
+
+	<script>
+		var checkValidityInAlias = function() {
+
+			var aliasVal = document.getElementById('alias').value;
+			var confirm = document.getElementById('aliasValidity');
+			var msg = document.getElementById('validityInAlias');
+
+			if (aliasVal.length < 2) {
+
+				msg.innerHTML = "2자 이상 10자 이하"
+				confirm.value = "false";
+
+			} else {
+
+				msg.innerHTML = "사용가능한 별명 입니다.";
+				confirm.value = "true";
 			}
+		}
 
-			[].slice.call(document.querySelectorAll('input.input__field'))
-					.forEach(function(inputEl) {
-						// in case the input is already filled..
-						if (inputEl.value.trim() !== '') {
-							classie.add(inputEl.parentNode, 'input--filled');
-						}
+		var checkValidityInPw = function() {
 
-						// events:
-						inputEl.addEventListener('focus', onInputFocus);
-						inputEl.addEventListener('blur', onInputBlur);
-					});
+			var pwVal = document.getElementById('pw').value;
+			var confirm = document.getElementById('pwValidity');
+			var msg = document.getElementById('validityInPw');
+			var pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{9,15}$/;
 
-			function onInputFocus(ev) {
-				classie.add(ev.target.parentNode, 'input--filled');
-			}
+			if (pwVal.length < 9) {
 
-			function onInputBlur(ev) {
-				if (ev.target.value.trim() === '') {
-					classie.remove(ev.target.parentNode, 'input--filled');
+				msg.innerHTML = "9자 이상 15자 이하"
+				confirm.value = "false";
+			} else {
+
+				if (pwReg.test(pwVal)) {
+
+					msg.innerHTML = "올바른 비밀번호 형식입니다.";
+					confirm.value = "true";
+
+				} else {
+
+					msg.innerHTML = "비밀번호는 영문, 특수, 숫자 조합입니다.";
+					confirm.value = "false";
 				}
 			}
-		})();
+		}
+
+		var checkValidityInPwCon = function() {
+
+			var pwConVal = document.getElementById('pwCon').value;
+			var pwVal = document.getElementById('pw').value;
+			var confirm = document.getElementById('pwConValidity');
+			var msg = document.getElementById('validityInPwCon');
+
+			if (pwVal != pwConVal) {
+
+				msg.innerHTML = "PW필드의 값과 일치하지 않습니다.";
+				confirm.value = "false";
+
+			} else {
+
+				msg.innerHTML = "일치합니다.";
+				confirm.value = "true";
+
+			}
+		}
+
+		var checkAll = function() {
+
+			var confirms = document.getElementsByClassName('confirm');
+			var len = confirms.length;
+			var trueCnt = 0;
+
+			for (var i = 0; i < len; i++) {
+
+				if (confirms[i].value == "true") {
+
+					trueCnt++;
+				}
+			}
+			
+			if (trueCnt == len) {
+
+				document.getElementById('alert').style.display='block';
+
+			} else {
+				//snack bar
+				window.alert('완전히 기입되어 있지 않은 사항이 있습니다.');
+			}
+		}
+
 	</script>
+	
 	
 </body>
 </html>

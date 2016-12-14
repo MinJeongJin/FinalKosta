@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+    <div id="alert" class="w3-modal">
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="min-width: 200px; max-width: 400px">
+
+            <div class="w3-center">
+                <br> <span onclick="document.getElementById('alert').style.display='none';" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</span>
+
+                <h2 style="color:red"><b>경고</b></h2>
+                <br>
+                <h4><b>진심</b> <small>입력하신 정보로 수정하시겠습니까?</small></h4>
+
+                <button class="w3-btn w3-dark-grey w3-section w3-padding " type="button" 
+                onclick="document.getElementById('reviseForm').submit();">
+                    <b>확인</b>
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

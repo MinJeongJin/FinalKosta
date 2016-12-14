@@ -46,9 +46,9 @@
 				<li><a href="#"
 					onclick="document.getElementById('id01').style.display='block'">팀
 						생성</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/views/member/checkMember.jsp">마이페이지</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li>
+				<li><a href="#" onclick="document.getElementById('pwConModal').style.display='block'"
+					>마이페이지</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/logout.do" >로그아웃</a></li>
 
 				<div class="w3-right" style="margin-right: 10px;">
 					<li><input type="text" class="w3-input w3-white"
@@ -117,7 +117,7 @@
 	</div>
 
 	<%@ include file="/views/team/teamCreate.jspf"%>
-
+	<%@ include file="/views/member/myPage.jspf" %>
 
 
 	<div id="snackbar" class="w3-opacity"></div>

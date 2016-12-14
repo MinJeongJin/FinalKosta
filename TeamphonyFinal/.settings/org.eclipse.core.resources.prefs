@@ -2,6 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=branch 'master' of https\://github.com/MinJeongJin/FinalKosta.git
 eclipse.preferences.version=1
+encoding//WebContent/views/member/myPage.jspf=UTF-8
 encoding//WebContent/views/team/main.jsp=UTF-8
 encoding//WebContent/views/team/memberInvite.jspf=UTF-8
 encoding//WebContent/views/team/teamCreate.jspf=UTF-8
