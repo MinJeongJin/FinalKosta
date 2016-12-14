@@ -23,7 +23,10 @@
     <link href="${pageContext.request.contextPath}/resources/schedule/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/place/custom.css" rel="stylesheet">
+    
+    <link href="${pageContext.request.contextPath}/resources/place/js-image-slider.css" rel="stylesheet" type="text/css" />
+    <script src="${pageContext.request.contextPath}/resources/place/js-image-slider.js" type="text/javascript"></script>
 
 	 <style>
 	    .screen_out {display:block;overflow:hidden;position:absolute;left:-9999px;width:1px;height:1px;font-size:0;line-height:0;text-indent:-9999px}
@@ -69,54 +72,46 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
+                  
+                  <!-- 관리자모드 -->
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a style="visibility: hidden;" class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a style="visibility: hidden;" class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
                           <li><a href="${pageContext.request.contextPath}/place/revise.do?placeId=${place.placeId}">수정</a>
                           </li>
-                          <li><a href="${pageContext.request.contextPath}/place/erase.do?placeId=${place.placeId}">삭제</a>
+                          <li><a onclick="deleteFile(); deletePlace();">삭제</a>
                           </li>
                         </ul>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
+                      
                     </ul>
+                    
+                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
 
-                    <div class="col-md-7 col-sm-7 col-xs-12">
-                      <div class="product-image">
-                        <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/${place.imagePath}" alt="이미지" />
-                        <%-- <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/img_3.jpg" alt="이미지" />
-                        <img class="mySlides" src="${pageContext.request.contextPath}/resources/place/img/img_5.jpg" alt="이미지" /> --%>
-                      </div>
-                      <div class="product_gallery">
-                      	<a>
-                          <img class="demo" src="${pageContext.request.contextPath}/resources/place/img/${place.imagePath}" alt="이미지" onclick="currentDiv(1)"/>
-                        </a>
-                        <%-- <a>
-                          <img class="demo" src="${pageContext.request.contextPath}/resources/place/img/img_3.jpg" alt="이미지" onclick="currentDiv(2)"/>
-                        </a>
-                        <a>
-                          <img class="demo" src="${pageContext.request.contextPath}/resources/place/img/img_5.jpg" alt="이미지" onclick="currentDiv(3)"/>
-                        </a> --%>
-                      </div>
-                    </div>
+                     <div class="col-md-7 col-sm-7 col-xs-12">
+                      <div id="sliderFrame">
+				        <div id="slider">
+				           <!-- handlbars -->
+				        </div>
+				        <!--thumbnails-->
+				        <div id="thumbs">
+				          <!-- handlbars -->
+				        </div>
+				    </div>
+                    </div> 
 
                     <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
 
                       <h3 class="prod_title">${place.address }</h3>
                       <br>
-<!-- 
-                      <p>장소 주소</p>
-                      <br />
-					  <p>장소 전화번호</p>
-                      <br />
- -->
                       <div class="">
                         <div class="product_price">
                           <h1 class="price">${place.name }</h1>
@@ -134,15 +129,12 @@
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                           <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">소개</a>
                           </li>
-                          <!-- <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">시설 안내</a>
-                          </li> -->
                           <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">위치</a>
                           </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                             <div class="text_box">
-								<!-- <h2 class="h_copy">댄스&#44; 연기&#44; 회의 등등 을 할수 있는 공간</h2> -->
 								<h3 class="h_intro">공간 소개</h3>
 								<p class="p_intro">${place.contents }</p>
 
@@ -152,34 +144,12 @@
 								</ul>
 							</div>
                           </div>
-                          <!-- <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                            <div class="text_box">
-								<h3 class="h_intro">시설 안내</h3>
-								<ol class="info_list">
-
-									<li><strong class="tit">1</strong><span class="data">거울</span></li>
-
-									<li><strong class="tit">2</strong><span class="data">오디오</span></li>
-
-									<li><strong class="tit">3</strong><span class="data">발레바</span></li>
-
-									<li><strong class="tit">4</strong><span class="data">난방기</span></li>
-
-									<li><strong class="tit">5</strong><span class="data">에어컨</span></li>
-
-									<li><strong class="tit">6</strong>
-									<span class="data">주차장 (1시간만 무료 입니다 . 이후부터 30분당1000원)</span></li>
-								</ol>
-							</div>
-                          </div> -->
                           <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
                            <div class="detail_box map_box">
 								<h3 class="h_intro blind">공간 위치 정보</h3>
 								<div class="host_profile">
 									<div class="inner">
 										<div class="sp_location">
-											<input type="hidden" name="spcLat" id="spcLat" value="37.560177" /> 
-											<input type="hidden" name="spcLng" id="spcLng" value="126.92085" />
 											<p class="sp_name">${place.name }</p>
 											<p class="sp_address">${place.address }</p>
 										</div>
@@ -201,12 +171,6 @@
 												</a>
 											</div>
 											<div class="col col6">
-												<!-- <a href="javascript:void(0);" _lat="37.560177"_lng="126.92085"
-													class="btn btn_rounded btn_navi nclk" id="_contact_navi" _nclk="end.navi"> 
-													<span class="btn_inner"> 
-													<i class="ico_navi sp_icon"></i>내비게이션
-												</span>
-												</a> -->
 											</div>
 										</div>
 
@@ -247,8 +211,6 @@
       </div>
     </div>
 
-	
-
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/schedule/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -263,6 +225,63 @@
     
 	<!-- Daum map API -->
     <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=ab42606eabf146a2840ea3e9b21a2ac0&libraries=services"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    <script id="templateImage" type="text/x-handlebars-template">
+	<a data-src="{{fullName}}" class="lazyImage" href="{{getLink}}"></a>
+	</script>
+	
+	<script id="templateGallary" type="text/x-handlebars-template">
+	<div class="thumb"><img src="{{getLink}}" /></div>
+	</script>
+	
+	<script>
+	function checkImageType(fileName){
+		var pattern = /jpg|gif|png|jpeg/i;
+		return fileName.match(pattern);
+	}
+	
+	function getFileInfo(fullName){
+		var fileName, imgsrc, getLink;
+		var fileLink;
+		
+		if(checkImageType(fullName)){
+			imgsrc = "${pageContext.request.contextPath}/place/displayFile.do?fileName="+fullName;
+			fileLink = fullName.substr(14);
+			
+			var front = fullName.substr(0,12); // /2016/00/00/
+			var end = fullName.substr(14);
+			
+			getLink = "${pageContext.request.contextPath}/place/displayFile.do?fileName="+front + end;
+		} else{
+			alert("이미지 파일만 등록해주세요");
+		}
+		
+		fileName = fileLink.substr(fileLink.indexOf("_") + 1);
+		
+		return {
+			fileName: fileName,
+			imgsrc: imgsrc,
+			getLink: getLink,
+			fullName: fullName
+		};
+	}
+	
+	var placeId = ${place.placeId};
+	var templateImage = Handlebars.compile($("#templateImage").html());
+	var templateGallary = Handlebars.compile($("#templateGallary").html());
+	
+	$.getJSON("${pageContext.request.contextPath}/place/getFile.do?placeId="+placeId, function(list){
+    	
+    	$(list).each(function(){
+    		var fileInfo = getFileInfo(this);
+    		var html = templateImage(fileInfo);
+    		var galleryHtml = templateGallary(fileInfo);
+    		$("#slider").append(html);
+    		$("#thumbs").append(galleryHtml);
+    	});
+    });
+	</script>
 	
 	<!-- 지도 script -->
  	<script>
@@ -385,31 +404,28 @@
 	} 
 	</script>
    
-	<!-- image 슬라이드 -->
+ 
 	<script>
-	var slideIndex = 1;
-	showDivs(slideIndex);
-
-	function plusDivs(n) {
-	  showDivs(slideIndex += n);
+	// 삭제버튼 클릭시 file 삭제
+	function deleteFile(){
+		var arr=[];
+		$("#slider a").each(function(index){
+			arr.push($(this).attr("data-src"));
+		});
+		if(arr.length > 0){
+			$.post("${pageContext.request.contextPath}/place/deleteAllFiles.do", {files:arr}, function(){
+			
+			});
+		}
 	}
-
-	function currentDiv(n) {
-	  showDivs(slideIndex = n);
+	// 삭제버튼 클릭시 place 삭제()
+	function deletePlace(){
+		var id = ${place.placeId};
+		location.href = "${pageContext.request.contextPath}/place/erase.do?placeId=" + ${place.placeId};
 	}
-
-	function showDivs(n) {
-	  var i;
-	  var x = document.getElementsByClassName("mySlides");
-	  var dots = document.getElementsByClassName("demo");
-	  if (n > x.length) {slideIndex = 1}
-	  if (n < 1) {slideIndex = x.length}
-	  for (i = 0; i < x.length; i++) {
-	     x[i].style.display = "none";
-	  }
-	   x[slideIndex-1].style.display = "block";
-	}
+	
 	</script>
+	
 	
   </body>
 </html>

@@ -4,6 +4,30 @@
 
 <mapper namespace="teamphony.store.mapper.PlaceMapper">
 
+	<insert id="insertPlace" parameterType="Place">
+		INSERT INTO PLACE_TB (ID, NAME,ADDRESS,PHONENUMBER,CONTENTS,HOLIDAY,BUSINESSHOUR)
+		VALUES (place_seq.nextval
+				,#{name}
+				,#{address}
+				,#{phoneNum}
+				,#{contents}
+				,#{holiday}
+				,#{businessHour}
+				)
+	</insert>
+	
+	<update id="updatePlace" parameterType="Place">
+		UPDATE PLACE_TB
+		SET 
+		NAME = #{name}
+		,ADDRESS  = #{address}
+		,PHONENUMBER = #{phoneNum}
+		,CONTENTS = #{contents}
+		,HOLIDAY  = #{holiday}
+		,BUSINESSHOUR = #{businessHour}
+		WHERE ID = #{placeId}
+	</update>
+
 	<delete id="deletePlace" parameterType="int">
 		DELETE place_tb
 		WHERE id = #{id}
@@ -14,7 +38,6 @@
 			   name, 
 			   address,
 			   phoneNumber AS phoneNum,
-			   imagePath,
 			   contents,
 			   holiday,
 			   businessHour
@@ -26,7 +49,6 @@
 			   name, 
 			   address,
 			   phoneNumber AS phoneNum,
-			   imagePath,
 			   contents,
 			   holiday,
 			   businessHour
@@ -39,24 +61,44 @@
 			   name, 
 			   address,
 			   phoneNumber AS phoneNum,
-			   imagePath,
 			   contents,
 			   holiday,
 			   businessHour
-		FROM place_tb
+		FROM PLACE_TB
 		WHERE name LIKE '%' || #{name} || '%'
 	</select>
 	
 	<select id="selectPlaceByPlaceAddress" resultType="Place" parameterType="String">
-		SELECT id AS placeId,
+		SELECT ID AS placeId,
 			   name, 
 			   address,
 			   phoneNumber AS phoneNum,
-			   imagePath,
 			   contents,
 			   holiday,
 			   businessHour
-		FROM place_tb
+		FROM PLACE_TB
 		WHERE address LIKE '%' || #{address} || '%'
 	</select>
+
+	<insert id="addFile" parameterType="String">
+		INSERT INTO PLACEFILE_TB (FULLNAME, ID)
+		VALUES (#{fullName}, (SELECT ID FROM PLACE_TB WHERE ID=(SELECT MAX(ID) FROM PLACE_TB)))
+	</insert>	
+	
+	<select id="getFile" resultType="String" parameterType="int">
+		SELECT FULLNAME 
+		FROM PLACEFILE_TB
+		WHERE ID = #{placeId}
+	</select>
+	
+	<delete id="deleteFile" parameterType="int">
+		DELETE 
+		FROM PLACEFILE_TB
+		WHERE ID = #{placeId}
+	</delete>
+	
+	<insert id="replaceFile" parameterType="Map">
+		INSERT INTO PLACEFILE_TB (FULLNAME, ID)
+		VALUES (#{fullName}, #{placeId})
+	</insert>
 </mapper>

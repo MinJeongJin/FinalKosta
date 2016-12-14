@@ -19,6 +19,8 @@ public class Place {
 	private String contents;
 	private String holiday;
 	private String businessHour;
+	
+	private String[] files;
 
 	public int getPlaceId() {
 		return placeId;
@@ -64,6 +66,7 @@ public class Place {
 		return contents;
 	}
 
+
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
@@ -84,4 +87,11 @@ public class Place {
 		this.businessHour = businessHour;
 	}
 
+	public String[] getFiles() {
+		return files;
+	}
+	
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 }

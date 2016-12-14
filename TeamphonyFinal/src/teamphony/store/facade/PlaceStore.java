@@ -13,4 +13,10 @@ public interface PlaceStore {
 	Place selectPlaceByPlaceId(int placeId);
 	List<Place> selectPlaceByPlaceName(String placeName);
 	List<Place> selectPlaceByPlaceAddress(String placeAddress);
+	
+	void addFile(String fullName) throws Exception;
+	List<String> getFile(int placeId) throws Exception;
+	
+	void deleteFile(int placeId) throws Exception;
+	void replaceFile(String fullName, int placeId) throws Exception;
 }

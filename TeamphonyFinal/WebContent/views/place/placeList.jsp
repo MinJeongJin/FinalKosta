@@ -21,6 +21,21 @@
     
     <!-- Custom styling plus plugins -->
     <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    
+    <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.js"></script>
+    
+    <script id="template" type="text/x-handlebars-template">
+	<img style="width: 100%; display: block;" src="{{getLink}}" alt="image"/>
+	</script>
   </head>
 
   <body class="nav-md">
@@ -57,22 +72,16 @@
                 <div class="x_panel">
                   <div class="x_title">
                      <h2> <small> 스터디 공간을 알려드릴게요</small></h2> 
+                     
+                     <!-- 관리자에게만 보인다. -->
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a style="visibility: hidden;" class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
+                      <li><a style="visibility: hidden;" class="close-link"><i class="fa fa-close"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                      
+                      <li><a href="${pageContext.request.contextPath}/views/place/placeRegister.jsp" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
                     </ul>
+                    
                     <div class="clearfix"></div>
                     
                   </div>
@@ -80,12 +89,24 @@
 
                     <div class="row">
                     
-                   	<c:forEach items="${places }" var="place">
+                   	<c:forEach items="${places }" var="place" varStatus="status">
 	                      <div class="col-md-4">
 	                        <div class="thumbnail" style="height: 500%;">
 	                          <div class="image view view-first" style="height: 160px;">
-	                          <a href="${pageContext.request.contextPath}/place/detail.do?placeId=${place.placeId}">
-	                            <img style="width: 100%; display: block;" src="${pageContext.request.contextPath}/resources/place/img/${place.imagePath }" alt="image"/>
+	                          <a class="imageA${status.index}" href="${pageContext.request.contextPath}/place/detail.do?placeId=${place.placeId}">
+		                          <script>
+				                      var placeId = ${place.placeId};
+				                      var template = Handlebars.compile($("#template").html());
+			                    
+			                          $.getJSON("${pageContext.request.contextPath}/place/getThumnailFile.do?placeId="+placeId, function(list){
+			                        	$(list).each(function(){
+			                    			var front = this.substr(0,12); // /2016/00/00/
+			                    			var end = this.substr(14);
+			                        		var html = template({getLink : "${pageContext.request.contextPath}/place/displayFile.do?fileName="+front + end});
+			                        		$(".imageA${status.index}").append(html);
+			                        	});
+			                        });
+		                          </script>
 	                       	  </a>
 	                       	  
 	                       	  <c:if test="${isAdmin }">
@@ -118,15 +139,6 @@
         <!-- /page content -->
       </div>
     </div>
-
-    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/resources/schedule/build/js/custom.min.js"></script>
