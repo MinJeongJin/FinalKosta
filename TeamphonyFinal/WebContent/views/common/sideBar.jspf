@@ -10,10 +10,9 @@
 </head>
 <body>
 
-
 	<!-- Sidenav/menu -->
 	<nav class="w3-sidenav w3-collapse w3-white w3-animate-left "
-		style="z-index: 3; width: 300px;" id="mySidenav">
+		style="z-index: 3; width: 250px;" id="mySidenav">
 		<br>
 		<div class="w3-container w3-card-4 w3-padding-16"
 			style="margin-bottom: 20px;">
@@ -64,8 +63,10 @@
 			<a href="${pageContext.request.contextPath}/member/evaluationList.do"
 			id="menu5" name="menuItem" onclick="clickCheck('menu5');closeAcc();"
 			class="w3-padding w3-card-4"><i
-			class="fa fa-check-square-o fa-fw w3-margin-right"></i>팀원평가</a> <a
-			href="#" id="menu6" name="menuItem"
+			class="fa fa-check-square-o fa-fw w3-margin-right"></i>팀원평가</a>
+			
+			<a href="${pageContext.request.contextPath}/place/searchAll.do" 
+			id="menu6" name="menuItem"
 			onclick="clickCheck('menu6');closeAcc();"
 			class="w3-padding w3-card-4"><i
 			class="fa fa-info fa-fw w3-margin-right"></i>장소정보</a>

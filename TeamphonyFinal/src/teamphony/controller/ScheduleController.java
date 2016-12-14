@@ -117,7 +117,7 @@ public class ScheduleController {
 		List<Schedule> teamSchedules = scheduleService.findSchedulesByTeamCode(teamCode);
 		
 		model.addAttribute("teamSchedules", teamSchedules);
-		return "schedule/calendar2";
+		return "schedule/calendar";
 	}
 	
 	@RequestMapping(value = "xml.do", produces = "application/xml")
