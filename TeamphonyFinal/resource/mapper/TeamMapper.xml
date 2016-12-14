@@ -87,6 +87,11 @@
 		SET NAME = #{name}, CYCLE = #{cycle}, ENDDATE = #{endDate} 
 		WHERE CODE = #{code}
 	</update>
+	
+	<select id="selectAllTeam"  resultType="Team">
+		SELECT CODE, CYCLE, ENDDATE, LEADERID, NAME
+		FROM Team_tb
+	</select>
 
 
 

@@ -1,6 +1,7 @@
 package teamphony.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -15,9 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import teamphony.domain.Member;
+import teamphony.domain.Members;
 import teamphony.domain.Team;
+import teamphony.domain.Teams;
 import teamphony.service.facade.TeamService;
 
 // teamCode 중복 없이 randomGenerate
@@ -258,5 +262,23 @@ public class TeamController {
 
 		return "team/main";
 
+	}
+	
+	@RequestMapping(value="xml.do", produces="application/xml")
+	public @ResponseBody Teams getTeamsToXml(){
+		
+		List<Team> list  = new ArrayList<>();
+		Teams teams = new Teams();
+		
+		list = service.findAllTeam();
+		
+		for (Team team : list) {
+			List<Member> memberList = service.findMembersByTeamCode(team.getCode());
+			team.setMemberList(memberList);
+		}
+		
+		teams.setTeams(list);
+		
+		return teams;
 	}
 }

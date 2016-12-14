@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import teamphony.domain.Member;
 import teamphony.domain.Task;
+import teamphony.domain.Tasks;
 import teamphony.domain.Team;
 import teamphony.service.facade.TaskService;
 import teamphony.service.facade.TeamService;
@@ -139,7 +141,17 @@ public class AssignmentController {
 		return "/task/assignment/memberAssignmentList";
 	}
 	
+	@RequestMapping(value="xml.do", produces="application/xml")
+	public @ResponseBody Tasks getTasksToXml(){
+		
+		List<Task> list  = new ArrayList<>();
+		Tasks tasks = new Tasks();
+		
+		list = service.findAllTaskByFlag(1);
+		
+		tasks.setTasks(list);
+		
+		return tasks;
+	}
 	
-	
-
 }

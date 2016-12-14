@@ -48,7 +48,7 @@
 
 
 			<div id="subMenu" class="w3-accordion-content w3-white w3-card-4">
-				<a href="#" id="sub1" name="subMenuItem"
+				<a href="${pageContext.request.contextPath}/submission/searchAll.do" id="sub1" name="subMenuItem"
 					onclick="clickCheck_sub('sub1')">과제제출</a> <a href="#" id="sub2"
 					name="subMenuItem" onclick="clickCheck_sub('sub2')">과제평가</a>
 			</div>

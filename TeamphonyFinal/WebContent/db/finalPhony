@@ -116,5 +116,8 @@ alter Table (evaluation_tb) modify(starPoint, float);
 ALTER TABLE TASK_TB MODIFY EVALUATED NUMBER(38);
 ALTER TABLE TASK_TB MODIFY EVALUATIONCNT NUMBER(38);
 
+//누락된 teamCode 추가
+alter table task_tb Add teamCode number;
+
 
 commit;
