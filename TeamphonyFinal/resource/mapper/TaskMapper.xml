@@ -22,6 +22,7 @@
 				,POINT
 				,EVALUATED 
 				,EVALUATIONCNT
+				,TEAMCODE
 			)
 			VALUES
 			(
@@ -35,6 +36,7 @@
 				,#{point, jdbcType=INTEGER}
 				,#{evaluated, jdbcType=INTEGER}
 				,#{evaluationCnt}
+				,#{teamCode}
 			)
 	</insert>  
 	<insert id="insertTaskMember">
@@ -65,6 +67,7 @@
 				,POINT
 				,EVALUATED 
 				,EVALUATIONCNT
+				,TEAMCODE
 			)
 			VALUES
 			(
@@ -75,6 +78,7 @@
 				,#{point, jdbcType=INTEGER}
 				,#{evaluated, jdbcType=INTEGER}
 				,#{evaluationCnt }
+				,#{teamCode}
 			)
 	</insert>  
 	
@@ -93,7 +97,7 @@
 				)
 	</insert>
 	
-	<select id="selectAllTaskByFlag" parameterType="int" resultType="Task">
+	<select id="selectAllTaskByFlag" parameterType="map" resultType="Task">
 			SELECT 
 				ID							AS taskId
 				,TITLE                  
@@ -105,8 +109,9 @@
 				,POINT
 				,EVALUATED
 				,EVALUATIONCNT
+				,TEAMCODE
 			FROM TASK_TB            
-				WHERE FLAG = #{flag}
+				WHERE FLAG = #{flag} AND TEAMCODE = #{teamCode}
 				ORDER BY ID ASC
 				
 	</select>
@@ -145,7 +150,8 @@
 				,EVALUATED
 				,EVALUATIONCNT
 				,FLAG                   
-				,POINT                  
+				,POINT
+				,TEAMCODE                  
    			FROM TASK_TB 
 			WHERE ID= #{taskId}  
 		
@@ -204,5 +210,10 @@
 		FROM TASKMEMBER
 		WHERE ASSIGNMENTID = 		#{taskId}
 	</delete>	
+	
+	<select id="selectAllAssginment" resultType="Task">
+		select ID AS taskId, TITLE, CONTENTS, DEADLINE, EVALUATIONPERIODSTART, EVALUATIONPERIODEND, EVALUATED, EVALUATIONCNT, FLAG, POINT, TEAMCODE
+		from Task_tb where flag=0
+	</select>
 
 </mapper>

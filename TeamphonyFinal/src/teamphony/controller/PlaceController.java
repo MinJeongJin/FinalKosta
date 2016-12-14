@@ -17,12 +17,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import teamphony.domain.Place;
+import teamphony.domain.Places;
 import teamphony.service.facade.PlaceService;
 import teamphony.util.MediaUtils;
 import teamphony.util.UploadFileUtils;
@@ -232,6 +234,19 @@ public class PlaceController {
 			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
 		}
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "xml.do", produces = "application/xml")
+	public @ResponseBody Places getMembersToXml() {
+
+		List<Place> list = new ArrayList<>();
+		Places places = new Places();
+
+		list = placeService.findAllPlace();
+
+		places.setPlaces(list);
+
+		return places;
 	}
 	
 }

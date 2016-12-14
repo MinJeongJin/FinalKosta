@@ -32,7 +32,7 @@ public interface TaskMapper {
 //	추가 했음
 	void deleteMemberIdByTaskId(int taskId);
 //	변경했음
-	List<Task> selectAllTaskByFlag(int flag);
+	List<Task> selectAllTaskByFlag(@Param("flag") int flag,@Param("teamCode") int teamCode);
 //	추가했음
 	List<TaskFile> selectAllFileList();
 //	추가 했음
@@ -46,6 +46,8 @@ public interface TaskMapper {
 	Task selectTaskByTaskId(int taskId);
 //추가 했음
 	List<Integer> selectTaskIdByMemberId(String memberId);
+	
+	List<Task> selectAllAssginment();
 	
 	
 }

@@ -54,26 +54,26 @@ public class TaskStoreLogic implements TaskStore {
 				
 			}else if (task.getFlag() == 1) {
 				
-					String loginedMemberId =(String) httpSession.getAttribute("loginedMember");
-					mapper.insertSubmission(task);
-					mapper.insertTaskMember(task.getTaskId(), loginedMemberId);
-					session.commit();
+				String loginedMemberId =(String) httpSession.getAttribute("loginedMember");
+				mapper.insertSubmission(task);
+				mapper.insertTaskMember(task.getTaskId(), loginedMemberId);
+				session.commit();
+				
+				int taskId = task.getTaskId();
+				List<TaskFile> taskFileList = task.getTaskFileList();
+
+				for (TaskFile taskFile : taskFileList) {
+					taskFile.setSubmissionId(taskId);
 					
-					int taskId = task.getTaskId();
-					List<TaskFile> taskFileList = task.getTaskFileList();
-	
-					for (TaskFile taskFile : taskFileList) {
-						taskFile.setSubmissionId(taskId);
-						
-						mapper.insertTaskFile(taskFile);
-					}
+					mapper.insertTaskFile(taskFile);
+				}
 			}
 			session.commit();
 		}catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
 		}finally{
-				session.close();
+			session.close();
 		}
 	}
 
@@ -86,28 +86,27 @@ public class TaskStoreLogic implements TaskStore {
 			mapper.updateTask(task);
 			
 //ture == 1 , flase == 0 
-				if(task.getEvaluated() == 1){
-					mapper.updateTaskPoint(task);
+			if(task.getEvaluated() == 1){
+				mapper.updateTaskPoint(task);
 //flag 1==submission   flag 0==assignment
-				}else if(task.getFlag() == 0){
+			}else if(task.getFlag() == 0){
 
-					mapper.deleteMemberIdByTaskId(task.getTaskId());
-					
-						for(String memberId : task.getMemberIdList()){
-							mapper.insertTaskMember(task.getTaskId(), memberId);
-						}
-				}else if(task.getFlag() == 1){
-					mapper.deleteTaskFile(task.getTaskId());
-					
-					List<TaskFile> taskFileList = task.getTaskFileList();
-					
-					for (TaskFile taskFile : taskFileList) {
-						taskFile.setSubmissionId(task.getTaskId());
-						mapper.insertTaskFile(taskFile);
+				mapper.deleteMemberIdByTaskId(task.getTaskId());
+				
+					for(String memberId : task.getMemberIdList()){
+						mapper.insertTaskMember(task.getTaskId(), memberId);
 					}
+			}else if(task.getFlag() == 1){
+				mapper.deleteTaskFile(task.getTaskId());
+				
+				List<TaskFile> taskFileList = task.getTaskFileList();
+				
+				for (TaskFile taskFile : taskFileList) {
+					taskFile.setSubmissionId(task.getTaskId());
+					mapper.insertTaskFile(taskFile);
 				}
-					session.commit();
-
+			}
+			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
@@ -123,17 +122,17 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 //flag 1==submission   flag 0==assignment	
-				if(flag == 1){
-					
-					mapper.deleteTaskFile(taskId);
-					mapper.deleteMemberIdByTaskId(taskId);
-					mapper.deleteTask(taskId);
-					
-				}else if(flag == 0){
-					mapper.deleteTaskMember(taskId);
-					mapper.deleteTask(taskId);
-				}
-				session.commit();
+			if(flag == 1){
+				
+				mapper.deleteTaskFile(taskId);
+				mapper.deleteMemberIdByTaskId(taskId);
+				mapper.deleteTask(taskId);
+				
+			}else if(flag == 0){
+				mapper.deleteTaskMember(taskId);
+				mapper.deleteTask(taskId);
+			}
+			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.rollback();
@@ -143,7 +142,7 @@ public class TaskStoreLogic implements TaskStore {
 	}
 
 	@Override
-	public List<Task> selectAllTaskByFlag(int flag) {
+	public List<Task> selectAllTaskByFlag(int flag, int teamCode) {
 
 		SqlSession session = getSessionFactory().openSession();
 		
@@ -153,13 +152,13 @@ public class TaskStoreLogic implements TaskStore {
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			
-			taskList = mapper.selectAllTaskByFlag(flag);
+			taskList = mapper.selectAllTaskByFlag(flag, teamCode);
 			
-				for(Task task : taskList){
-					fileList = mapper.selectFileListByTaskId(task.getTaskId());
-					task.setTaskFileList(fileList);
-					task.setMemberIdList(mapper.selectMemberIdByTaskId(task.getTaskId()));
-				}
+			for(Task task : taskList){
+				fileList = mapper.selectFileListByTaskId(task.getTaskId());
+				task.setTaskFileList(fileList);
+				task.setMemberIdList(mapper.selectMemberIdByTaskId(task.getTaskId()));
+			}
 			return taskList;
 		} finally {
 			session.close();
@@ -171,20 +170,20 @@ public class TaskStoreLogic implements TaskStore {
 	public Task selectTaskByTaskId(int taskId) {
 		SqlSession session = getSessionFactory().openSession();
 		Task task = new Task();
-		
-			try{
-				TaskMapper mapper = session.getMapper(TaskMapper.class);
-				
-				task = mapper.selectTaskByTaskId(taskId);
-				task.setMemberIdList(mapper.selectMemberIdByTaskId(taskId));
+	
+		try{
+			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			
+			task = mapper.selectTaskByTaskId(taskId);
+			task.setMemberIdList(mapper.selectMemberIdByTaskId(taskId));
 //flag 1==submission   flag 0==assignment		
+			
+			if(task.getFlag() == 1){
 				
-				if(task.getFlag() == 1){
-					
-					List<TaskFile> fileList = new ArrayList<>();
-					fileList = mapper.selectFileListByTaskId(task.getTaskId());
-					task.setTaskFileList(fileList);
-				}
+				List<TaskFile> fileList = new ArrayList<>();
+				fileList = mapper.selectFileListByTaskId(task.getTaskId());
+				task.setTaskFileList(fileList);
+			}
 			}finally {
 				session.close();
 			}
@@ -197,17 +196,31 @@ public class TaskStoreLogic implements TaskStore {
 		List<Integer> taskIdList= new ArrayList<>();
 		List<Task> taskList = new ArrayList<>();
 		
-			try{
-				TaskMapper mapper= session.getMapper(TaskMapper.class);
-				taskIdList = mapper.selectTaskIdByMemberId(memberId);
-				
-					for(int taskId : taskIdList){
-						taskList.add(mapper.selectTaskByTaskId(taskId));
-					}
-			}finally{
-				session.close();
+		try{
+			TaskMapper mapper= session.getMapper(TaskMapper.class);
+			taskIdList = mapper.selectTaskIdByMemberId(memberId);
+			
+			for(int taskId : taskIdList){
+				taskList.add(mapper.selectTaskByTaskId(taskId));
 			}
+		}finally{
+			session.close();
+		}
 		return taskList;
 	}	
+	
+	public List<Task> selectAllAssginment() {
+
+		SqlSession session = getSessionFactory().openSession();
+		
+		List<Task> taskList= new ArrayList<>();
+		try {
+			TaskMapper mapper = session.getMapper(TaskMapper.class);
+			taskList = mapper.selectAllAssginment();
+			return taskList;
+		} finally {
+			session.close();
+		}
+	}
 
 }

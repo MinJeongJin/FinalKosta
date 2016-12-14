@@ -171,8 +171,9 @@ public class SubmissionController {
 		session.setAttribute("flag", 1);
 //		session.setAttribute("loginedMember", loginedMember);
 		int flag = (int)session.getAttribute("flag");
+		int teamCode = (int)session.getAttribute("teamCode");
 		
-		List<Task> taskList = service.findAllTaskByFlag(flag);
+		List<Task> taskList = service.findAllTaskByFlag(flag, teamCode);
 		
 		model.addAttribute("taskList", taskList);
 		
