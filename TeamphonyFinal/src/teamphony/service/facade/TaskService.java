@@ -7,10 +7,11 @@ import javax.servlet.http.HttpSession;
 import teamphony.domain.Task;
 
 public interface TaskService {
+	
+	
+	 void registerTask(Task task, HttpSession httpSession, String assignmentTitle, String assignmentId);
 
-	 void registerTask(Task task, HttpSession httpSession);
-
-	 void modifyTask(Task task);
+	 void modifyTask(Task task, String assignmentTitle);
 
 	 void removeTask(int taskId, int flag);
 

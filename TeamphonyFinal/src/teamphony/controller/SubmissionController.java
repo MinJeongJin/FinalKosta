@@ -32,9 +32,9 @@ public class SubmissionController {
 
 	
 	@RequestMapping("/create.do")
-	public String createSubmission(String assignmentTitle, String taskId, Model model) {
+	public String createSubmission(String assignmentTitle, String assignmentId, Model model) {
 		
-		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
+		Task task = service.findTaskByTaskId(Integer.parseInt(assignmentId));
 		
 		model.addAttribute("task",task);
 		
@@ -47,15 +47,21 @@ public class SubmissionController {
 									@RequestParam("attchFile") MultipartFile[] attchFileList
 									,String title
 									,String contents
-									,String flag) { // attchFile
+									,String flag
+									,String assignmentTitle
+									,String assignmentId) { 
 		
 		httpSession.setAttribute("loginedMember", "aaaa");
-		
+		httpSession.setAttribute("teamCode", 9642);
 		Task task = new Task();
 		
 		task.setTitle(title);
 		task.setContents(contents);
 		task.setFlag(Integer.parseInt(flag));
+		task.setTeamCode((int)httpSession.getAttribute("teamCode"));
+		
+		System.out.println("=========submissionController// create.do==============");
+		System.out.println("task.getTeamCode= "+ task.getTeamCode());
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
@@ -82,7 +88,9 @@ public class SubmissionController {
 		task.setTaskFileList(taskFileList);
 		
 		System.out.println(task.toString());
-		service.registerTask(task, httpSession); // task_tb 저장
+		
+		
+		service.registerTask(task, httpSession, assignmentTitle, assignmentId); // task_tb 저장
 		
 		return "redirect:searchAll.do";
 	}
@@ -90,6 +98,8 @@ public class SubmissionController {
 	@RequestMapping("/revise.do")
 	public String reviseSubmission(int taskId, Model model) {
 
+		
+		
 		Task task = service.findTaskByTaskId(taskId);
 		model.addAttribute("task", task);
 
@@ -97,9 +107,14 @@ public class SubmissionController {
 	}
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
-	public String reviseSubmission(HttpServletRequest request, HttpSession session,
-			@RequestParam("attchFile") MultipartFile[] attchFileList, String taskId, String title, String contents,
-			String flag) {
+	public String reviseSubmission(HttpServletRequest request
+									,HttpSession session,
+									@RequestParam("attchFile") MultipartFile[] attchFileList
+									,String taskId
+									,String title
+									,String contents
+									,String flag
+									,String assignmentTitle) {
 		
 		Task task = new Task();
 		
@@ -132,7 +147,7 @@ public class SubmissionController {
 
 		task.setTaskFileList(taskFileList);
 		
-		service.modifyTask(task);
+		service.modifyTask(task,assignmentTitle);
 		; // task_tb 저장
 		return "redirect:searchAll.do";
 	}
@@ -174,6 +189,12 @@ public class SubmissionController {
 		int teamCode = (int)session.getAttribute("teamCode");
 		
 		List<Task> taskList = service.findAllTaskByFlag(flag, teamCode);
+		System.out.println("==============submissionCotroller===============");
+		System.out.println("taskList.size= " + taskList.size());
+		for(Task task : taskList){
+			System.out.println(task.toString());
+			System.out.println("====================================");
+		}
 		
 		model.addAttribute("taskList", taskList);
 		
@@ -191,7 +212,11 @@ public class SubmissionController {
 	
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
-	public String evaluateAssignment(String taskId, String point, String evaluated,String evaluationCnt ) {
+	public String evaluateAssignment(String taskId
+									,String point
+									,String evaluated
+									,String evaluationCnt
+									,String assignmentTitle) {
 		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
 		
@@ -205,7 +230,7 @@ public class SubmissionController {
 		System.out.println("===========evaluate===========");
 		System.out.println("getEvaluated"+task.getEvaluated());
 		System.out.println("=============================");
-		service.modifyTask(task);
+		service.modifyTask(task, assignmentTitle);
 		
 		return "redirect:searchAll.do";
 	}

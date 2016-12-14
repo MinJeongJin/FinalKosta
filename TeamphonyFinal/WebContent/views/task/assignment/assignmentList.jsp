@@ -98,14 +98,16 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>과제 부여</b>
+				<b>부여과제 리스트</b>
 			</h1>
-			<h4>과제부여 정보를 확인하고 관리해 보세요.</h4>
+			<h4>부여과제 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 
 <!--  Start Page  -->
 <div style="padding: 50px">   
+	<div style="padding-right: 100px">
+		<div style="padding-right: 60px">
 <table>
 	<colgroup>
 			<col width="400" align="center">
@@ -157,12 +159,14 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</td>
 					<td colspan="2">${task.deadline }</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&taskId=${task.taskId }">
+						<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&assignmentId=${task.taskId }">
 							<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
 						</a>
 					</td>
 				</tr>
 			</c:forEach>
+		</div>
+	</div>
 </div>
 				<tr style="margin-top: 20px">
 				<th></th>
@@ -175,7 +179,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</a> 
 				</td>	
 				<td>			
-					<a href="${pageContext.request.contextPath}/assignment/create.do">
+					<a href="${pageContext.request.contextPath}/assignment/create.do?">
 						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 등록</button>
 					</a>
 				</td>

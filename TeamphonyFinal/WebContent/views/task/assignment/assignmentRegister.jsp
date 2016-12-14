@@ -98,76 +98,77 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>팀 관리</b>
+				<b>부여과제 등록</b>
 			</h1>
-			<h4>팀 정보를 확인하고 관리해 보세요.</h4>
+			<h4>부여과제 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 <!--  Start Page  -->
+<div style="padding: 50px">
+	<div style="padding-left: 80px">
+		<div style="padding-right: 250px">
+<form action="${pageContext.request.contextPath}/assignment/create.do"
+	method="post">
+	<table class="table">
+		<colgroup>
+			<col width="150">
+			<col width="*">
 
+		</colgroup>
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>제목</th>
+			<td><input id="title" name="title" class="form-control"
+				type="text" value="" placeholder="제목을 입력하세요."></td>
+		</tr>
+		<tr style="horizontal-align: left;">
+			<th>제출자</th>
+			<c:forEach items="${memberList }" var="member">
+				<td style="float: left; width: 70px;"><input type="checkbox"
+					name="memberIdList" class="form-control"
+					style="width: 20px; margin: 0px;" value="${member.memberId }">
+					${member.memberId }</td>
+			</c:forEach>
+		</tr>
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>제출 기한</th>
+			<td><input type="date" id="deadlineDay" name="deadlineDay">
+				<input type="time" id="deadlineHour" name="deadlineHour">
 
+			</td>
+		</tr>
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>평가 기한</th>
+			<td><input type="date" id="evalDayStart" name="evalDayStart">
+				<input type="time" id="evalHourStart" name="evalHourStart">-
+				<input type="date" id="evalDayEnd" name="evalDayEnd"> <input
+				type="time" id="evalHourEnd" name="evalHourEnd"></td>
+		</tr>
 
-
-
-
-		<form action="${pageContext.request.contextPath}/assignment/create.do"
-			method="post">
-			<table class="table">
-				<colgroup>
-					<col width="150">
-					<col width="*">
-
-				</colgroup>
-				<tr>
-					<th>제목</th>
-					<td><input id="title" name="title" class="form-control"
-						type="text" value="" placeholder="제목을 입력하세요."></td>
-				</tr>
-				<tr style="horizontal-align: left;">
-					<th>제출자</th>
-					<c:forEach items="${memberList }" var="member">
-						<td style="float: left; width: 70px;"><input type="checkbox"
-							name="memberIdList" class="form-control"
-							style="width: 20px; margin: 0px;" value="${member.memberId }">
-							${member.memberId }</td>
-					</c:forEach>
-				</tr>
-				<tr>
-					<th>제출 기한</th>
-					<td><input type="date" id="deadlineDay" name="deadlineDay">
-						<input type="time" id="deadlineHour" name="deadlineHour">
-
-					</td>
-				</tr>
-				<tr>
-					<th>평가 기한</th>
-					<td><input type="date" id="evalDayStart" name="evalDayStart">
-						<input type="time" id="evalHourStart" name="evalHourStart">-
-						<input type="date" id="evalDayEnd" name="evalDayEnd"> <input
-						type="time" id="evalHourEnd" name="evalHourEnd"></td>
-				</tr>
-
-				<tr>
-					<th>내용</th>
-					<td><textarea id="contents" name="contents"
-							class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요.">
-						</textarea> <input type="hidden" name="flag" value="0" /></td>
-				</tr>
-			</table>
-			<br>
-			<div align="center">
-				<a href="assignmentList.do"><input class="btn" type="reset"
-					value="취소"></a> <input class="btn btn-success" type="submit"
-					value="저장">
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>내용</th>
+			<td>
+				<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="부여할 과제의 내용을 입력하세요."></textarea> 
+				<input type="hidden" name="flag" value="0" />
+			</td>
+		</tr>
+		<tr>
+		<th></th>
+		<td align="right">
+			<div align="right">
+				<a href="assignmentList.do">
+					<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">취소</button>
+				</a> 
+				
+				<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">저장</button>
 			</div>
-		</form>
-
-
-		<div class="w3-black w3-center w3-padding-24 w3-card-12">
-			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">Suho</a>
+		</td>
+		</tr>
+	</table>
+</form>
 		</div>
 	</div>
+</div>
+
 	<!-- End page content -->
 
 </body>

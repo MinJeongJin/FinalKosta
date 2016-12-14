@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import teamphony.domain.Member;
 import teamphony.domain.Task;
 import teamphony.domain.Tasks;
@@ -47,7 +49,9 @@ public class AssignmentController {
 									,String evalDayStart, String evalHourStart
 									,String evalDayEnd, String evalHourEnd
 									,String[] memberIdList
-									,HttpSession httpSession) {
+									,HttpSession httpSession
+		                            ,String assignmentId
+		                            ,String assignmentTitle) {
 		
 		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
 		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
@@ -57,7 +61,7 @@ public class AssignmentController {
 		System.out.println("==============================");
 		System.out.println(task.toString());
 		System.out.println("==============================");
-		service.registerTask(task, httpSession);
+		service.registerTask(task, httpSession , assignmentTitle, assignmentId );
 		
 		return "redirect:searchAll.do";
 	}
@@ -80,14 +84,15 @@ public class AssignmentController {
 									,String deadlineDay, String deadlineHour
 									,String evalDayStart, String evalHourStart
 									,String evalDayEnd, String evalHourEnd
-									,String[] memberIdList) {
+									,String[] memberIdList
+		                            ,String assignmentTitle) {
 
 		
 		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
 		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
 		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
 		
-		service.modifyTask(task);
+		service.modifyTask(task, assignmentTitle);
 		return "redirect:searchAll.do";
 	}
 	
@@ -112,6 +117,11 @@ public class AssignmentController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(HttpSession session, Model model) {
+		
+		session.setAttribute("teamCode", 9642 );
+		
+		System.out.println("============assignmentController=============");
+		System.out.println("getSession= " + session.getAttribute("teamCode"));
 		
 		int teamCode = (int)session.getAttribute("teamCode");
 		

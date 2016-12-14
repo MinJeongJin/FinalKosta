@@ -35,8 +35,8 @@
 				,#{evaluationPeriodEnd, jdbcType=VARCHAR}
 				,#{point, jdbcType=INTEGER}
 				,#{evaluated, jdbcType=INTEGER}
-				,#{evaluationCnt}
-				,#{teamCode}
+				,#{evaluationCnt, jdbcType=INTEGER}
+				,#{teamCode, jdbcType=INTEGER}
 			)
 	</insert>  
 	<insert id="insertTaskMember">
@@ -77,8 +77,8 @@
 				,#{flag, jdbcType=INTEGER}
 				,#{point, jdbcType=INTEGER}
 				,#{evaluated, jdbcType=INTEGER}
-				,#{evaluationCnt }
-				,#{teamCode}
+				,#{evaluationCnt, jdbcType=INTEGER }
+				,#{teamCode, jdbcType=INTEGER}
 			)
 	</insert>  
 	

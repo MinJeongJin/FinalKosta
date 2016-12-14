@@ -8,9 +8,9 @@ import teamphony.domain.Task;
 
 public interface TaskStore {
 
-	void insertTask(Task task, HttpSession httpSession);
+	void insertTask(Task task, HttpSession httpSession, String assignmentTitle, String assignmentId);
 
-	void updateTask(Task task);
+	void updateTask(Task task, String assignmentTitle);
 
 	void deleteTask(int taskId, int flag);
 

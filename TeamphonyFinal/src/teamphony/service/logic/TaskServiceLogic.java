@@ -20,15 +20,15 @@ public class TaskServiceLogic implements TaskService {
 	
 
 	@Override
-	public void registerTask(Task task, HttpSession httpSession) {
+	public void registerTask(Task task, HttpSession httpSession, String assignmentTitle, String assignmentId) {
 		
-		store.insertTask(task, httpSession);
+		store.insertTask(task, httpSession, assignmentTitle, assignmentId);
 	}
 	
 
 	@Override
-	public void modifyTask(Task task) {
-		store.updateTask(task);
+	public void modifyTask(Task task, String assignmentTitle) {
+		store.updateTask(task, assignmentTitle);
 
 	}
 	
