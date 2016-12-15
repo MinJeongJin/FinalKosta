@@ -1,9 +1,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+<head>
 <title>Teamphony</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,17 +20,23 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">	
 
-<style>
+
+<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+</head>
+
+<style type="text/css">
 a[name=aInBtn] {
 	text-decoration: none;
 }
-
 a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]:visited
 	{
 	text-decoration: none;
 	color: white;
 }
+
+
 </style>
 
 <script
