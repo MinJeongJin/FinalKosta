@@ -17,8 +17,10 @@ public class Task {
 	private String title;
 	private String contents;
 	private List<Member> memberList;
-////부여 과제 명단을 위한 변수 선언
+////부여 과제 팀원명단을 위한 변수 선언
 	private String[] memberIdList;
+//제출과제 리스트에 뿌리기 위한 부여과제 제목 변수 선언
+	private List<String> assignmentTitle;
 	private int point;
 	private int flag;
 	private List<TaskFile> taskFileList;
@@ -178,6 +180,14 @@ public class Task {
 
 	public void setTeamCode(int teamCode) {
 		this.teamCode = teamCode;
+	}
+	
+	public List<String> getAssignmentTitle() {
+		return assignmentTitle;
+	}
+
+	public void setAssignmentTitle(List<String> assignmentTitle) {
+		this.assignmentTitle = assignmentTitle;
 	}
 
 	@Override

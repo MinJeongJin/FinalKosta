@@ -43,13 +43,17 @@ public interface TaskMapper {
 //	추가 했음
 	TaskFile selectFileList(int taskId);
 //	추가 했음
-	String[] selectMemberIdByTaskId(int taskId);
+	String[] selectMemberIdByAssignmentId(int assignmentId);
+//	추가 했음
+	String[] selectMemberIdBySubmissionId(int submissionId);
 	
 	Task selectTaskByTaskId(int taskId);
 //추가 했음
 	List<Integer> selectTaskIdByMemberId(String memberId);
 	
 	List<Task> selectAllAssginment();
+	
+	List<String> selectAssignmentTitleBySubmissionId(int submissionId);
 	
 	
 }

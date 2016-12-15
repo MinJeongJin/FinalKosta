@@ -248,7 +248,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 <table class="table table-hover table-condensed" text-align:center;>
 	<colgroup>
 		<col width="50" align="center">
-		<col width="200" align="center">
+		<col width="150" align="center">
 		<col width="200" align="center">
 		<col width="50" align="center">
 		<col width="200" align="center">
@@ -269,26 +269,27 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${taskList }" var="task" varStatus="sts">
+		<c:forEach items="${taskList }" var="task" varStatus="sts">
+			<c:forEach items="${task.assignmentTitle }" var="assignmentTitle"> 
 				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 					<td >
 						${sts.count }
 					</td>
 					<td>
-						${param.AssignmentTitle}
+						${assignmentTitle}
 					</td>
 					<td>
 						<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}">${task.title }</a>
 					</td>
 					<td>
-						<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
+			<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
 							${memberId }
-						</c:forEach>
+			</c:forEach>
 					</td>
 					<td>
-						<c:forEach items="${task.taskFileList}" var="taskFile">
+			<c:forEach items="${task.taskFileList}" var="taskFile">
 						${taskFile.filePath}<br>
-						</c:forEach>
+			</c:forEach>
 					</td>
 					<td >
 						<p>
@@ -300,7 +301,6 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 							 점
 						</p>
 					</td>
-				<div >
 					<td align="center">		
 						<c:choose>
 							<c:when test="${task.evaluated == 1 }">
@@ -311,17 +311,28 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 							</c:when>
 						</c:choose>
 					</td>
-				</div>
 					<td align="center">	
 						${task.evaluationCnt } 회
 					</td>
 				</tr>
 			</c:forEach>
-		</div>
-	</div>
-</div>
+		</c:forEach>
+</table>
+<table>
+	<colgroup>
+		<col width="1000" align="center">
+		<col width="1000" align="center">
+		<col width="1000" align="center">
+		<col width="1000" align="center">
+		<col width="1000" align="center">
+		<col width="1000" align="center">
+		<col width="100" align="center">
+		<col width="100" align="center">
+	</colgroup>
 			<tr style="margin-top: 20px">
 			<th></th>
+			<td></td>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>

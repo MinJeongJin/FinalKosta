@@ -190,9 +190,9 @@ public class SubmissionController {
 		session.setAttribute("flag", 1);
 //		session.setAttribute("loginedMember", loginedMember);
 		int flag = (int)session.getAttribute("flag");
-		int teamCode = (int)session.getAttribute("teamCode");
+//		int teamCode = (int)session.getAttribute("teamCode");
 		
-		List<Task> taskList = service.findAllTaskByFlag(flag, teamCode);
+		List<Task> taskList = service.findAllTaskByFlag(flag, 9642);
 		System.out.println("==============submissionCotroller===============");
 		System.out.println("taskList.size= " + taskList.size());
 		for(Task task : taskList){

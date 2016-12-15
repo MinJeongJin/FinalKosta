@@ -131,7 +131,6 @@ public class AssignmentController {
 		
 		for(Task task : list){
 			task.setMemberList(memberList);
-			System.out.println(task.getMemberList().size());
 		}
 		model.addAttribute("list", list);
 		

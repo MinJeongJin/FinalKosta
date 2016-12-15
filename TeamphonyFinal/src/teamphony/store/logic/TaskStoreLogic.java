@@ -167,20 +167,23 @@ public class TaskStoreLogic implements TaskStore {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			taskList = mapper.selectAllTaskByFlag(flag, teamCode);
 			
-			if(flag == 1){
+			if(flag == 0){
 				
 				for(Task task : taskList){
+					task.setMemberIdList(mapper.selectMemberIdByAssignmentId(task.getTaskId()));
+				}
+			
+				}else if(flag == 1){
+				
+				for(Task task : taskList){
+					
 					fileList = mapper.selectFileListByTaskId(task.getTaskId());
 					task.setTaskFileList(fileList);
-					task.setMemberIdList(mapper.selectMemberIdByTaskId(task.getTaskId()));
+					task.setMemberIdList(mapper.selectMemberIdBySubmissionId(task.getTaskId()));
+					task.setAssignmentTitle(mapper.selectAssignmentTitleBySubmissionId(task.getTaskId()));
 				}
 				
-				
 			}
-			
-				
-			
-				
 			return taskList;
 		} finally {
 			session.close();
@@ -197,7 +200,7 @@ public class TaskStoreLogic implements TaskStore {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
 			
 			task = mapper.selectTaskByTaskId(taskId);
-			task.setMemberIdList(mapper.selectMemberIdByTaskId(taskId));
+			task.setMemberIdList(mapper.selectMemberIdByAssignmentId(taskId));
 //flag 1==submission   flag 0==assignment		
 			
 			if(task.getFlag() == 1){
