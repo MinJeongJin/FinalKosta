@@ -12,7 +12,6 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/w3.css">
 <link rel="stylesheet"
@@ -131,9 +130,6 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
     font:bold 18px Helvetica, Arial, sans-serif;
     vertical-align: middle;
 }
-
-
-
 
 </style>
 

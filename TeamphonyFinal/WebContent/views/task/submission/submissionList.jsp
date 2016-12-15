@@ -259,7 +259,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		<thead>
 			<tr>
 				<th>순번</th>
-				<th>부여과제 제목</th>
+				<th>부여과제</th>
 				<th>제목</th>
 				<th>제출자</th>
 				<th>첨부파일</th>
@@ -270,7 +270,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</thead>
 		<tbody>
 		<c:forEach items="${taskList }" var="task" varStatus="sts">
-			<c:forEach items="${task.assignmentTitle }" var="assignmentTitle"> 
+			<c:forEach items="${task.assignmentTitleList }" var="assignmentTitle"> 
 				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 					<td >
 						${sts.count }
@@ -337,15 +337,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<td></td>
 			<td></td>
 			<td align="right">
-				<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
+				<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 리스트</button>
 				</a> 
 			</td>	
-			<td>			
-				<a href="${pageContext.request.contextPath}/assignment/create.do">
-					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 등록</button>
-				</a>
-			</td>
 		</tr>
 	</tbody>
 </table>

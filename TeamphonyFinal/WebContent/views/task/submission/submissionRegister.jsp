@@ -190,7 +190,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
 						<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">취소</button>
 					</a> 
-						<input type="submit" class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large" value="dsfsdfsdfdsf"></input>
+						<button type="submit" class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large" >등록</button>
 				</div>
 			</td>
 	</table>
@@ -199,14 +199,6 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	</div>
 </div>
 	
-
-
-
-
-
-
-
-
 
 <!-- End page content -->
 

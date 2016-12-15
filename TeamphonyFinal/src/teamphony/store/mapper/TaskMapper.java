@@ -49,7 +49,9 @@ public interface TaskMapper {
 	
 	Task selectTaskByTaskId(int taskId);
 //추가 했음
-	List<Integer> selectTaskIdByMemberId(String memberId);
+	List<Integer> selectAssignmentIdByMemberId(String memberId);
+//추가 했음
+	List<Integer> selectSubmissionIdByMemberId(String memberId);
 	
 	List<Task> selectAllAssginment();
 	

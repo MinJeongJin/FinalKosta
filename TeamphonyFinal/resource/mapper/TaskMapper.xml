@@ -180,9 +180,16 @@
 		
 	</select>
 	
-	<select id="selectTaskIdByMemberId" parameterType="String" resultType="int">
+	<select id="selectAssignmentIdByMemberId" parameterType="String" resultType="int">
 			SELECT 
 				ASSIGNMENTID
+				FROM TASKMEMBER
+				WHERE MEMBERID = #{memberId}
+	</select>
+	
+	<select id="selectSubmissionIdByMemberId" parameterType="String" resultType="int">
+			SELECT 
+				SUBMISSIONID
 				FROM TASKMEMBER
 				WHERE MEMBERID = #{memberId}
 	</select>

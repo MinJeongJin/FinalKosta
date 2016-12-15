@@ -143,6 +143,12 @@ public class AssignmentController {
 		model.addAttribute("memberId",memberId);
 		model.addAttribute("list",list);
 		
+		for(Task task : list){
+			System.out.println("==========searchByMemberId==========");
+			System.out.println(task.toString());
+			System.out.println("=================================");
+		}
+		
 		return "/task/assignment/memberAssignmentList";
 	}
 	
