@@ -115,7 +115,7 @@ to {
 					<div class="filebox">
 						<label for="ex_file" class="w3-btn w3-large"
 							style="margin-top: 20px; display: inline-block; color: white">프로필
-							사진 업로드</label> <input type="file" id="ex_file" name="imagePath">
+							사진 업로드</label> <input type="file" id="ex_file" name="imagePath" accept="image/*">
 					</div>
 				</div>
 

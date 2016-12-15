@@ -46,7 +46,7 @@
 		<!-- Header -->
 		<header class="w3-container">
 			<a href="#"><img
-				src="${pageContext.request.contextPath}/resources/images/avatar_g2.jpg"
+				src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
 				style="width: 65px;"
 				class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"

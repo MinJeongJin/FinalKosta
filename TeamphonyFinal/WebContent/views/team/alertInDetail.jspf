@@ -1,0 +1,108 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+	<div id="reviseAlert" class="w3-modal">
+		<div class="w3-modal-content w3-card-8 w3-animate-zoom"
+			style="min-width: 200px; max-width: 400px">
+
+			<div class="w3-center">
+				<br> <span
+					onclick="document.getElementById('reviseAlert').style.display='none';"
+					class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright"
+					title="Close Modal">&times;</span>
+
+				<h2 style="color: red">
+					<b>경고</b>
+				</h2>
+				<br>
+				<h4>
+					<b>진심</b> <small>입력하신 정보로 수정하시겠습니까?</small>
+				</h4>
+
+				<button class="w3-btn w3-dark-grey w3-section w3-padding "
+					type="button"
+					onclick="document.getElementById('detailForm').submit();">
+					<b>확인</b>
+				</button>
+
+
+			</div>
+		</div>
+	</div>
+
+
+	<div id="removeAlert" class="w3-modal">
+		<div class="w3-modal-content w3-card-8 w3-animate-zoom"
+			style="min-width: 200px; max-width: 400px">
+
+			<div class="w3-center">
+				<br> <span
+					onclick="document.getElementById('removeAlert').style.display='none';"
+					class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright"
+					title="Close Modal">&times;</span>
+
+				<h2 style="color: red">
+					<b>경고</b>
+				</h2>
+				<br>
+				<h4>
+					<small>팀 내부의 게시물과 인원정보가 모두 삭제됩니다.</small>
+				</h4>
+				<h4>
+					<b>진심</b> <small>이 팀을 삭제하시겠습니까?</small>
+				</h4>
+
+				<button class="w3-btn w3-dark-grey w3-section w3-padding "
+					type="button"
+					onclick="location.href='${pageContext.request.contextPath}/team/erase.do'">
+					<b>확인</b>
+				</button>
+
+
+			</div>
+		</div>
+	</div>
+
+	<div id="withdrawAlert" class="w3-modal">
+		<div class="w3-modal-content w3-card-8 w3-animate-zoom"
+			style="min-width: 200px; max-width: 400px">
+
+			<div class="w3-center">
+				<br> <span
+					onclick="document.getElementById('withdrawAlert').style.display='none';"
+					class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright"
+					title="Close Modal">&times;</span>
+
+				<h2 style="color: red">
+					<b>경고</b>
+				</h2>
+				<br>
+				<h4>
+					<small>본인이 작성한 모든 정보는 삭제됩니다.</small>
+				</h4>
+				<h4>
+					<b>진심</b> <small>이 팀을 떠나시겠습니까?</small>
+				</h4>
+
+				<button class="w3-btn w3-dark-grey w3-section w3-padding "
+					type="button"
+					onclick="location.href='${pageContext.request.contextPath}/team/withdraw.do'">
+					<b>확인</b>
+				</button>
+
+
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
