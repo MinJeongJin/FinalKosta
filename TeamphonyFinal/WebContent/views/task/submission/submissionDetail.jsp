@@ -1,19 +1,25 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <title>Teamphony</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	rel="stylesheet">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
-<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
+
 <style>
 a[name=aInBtn] {
 	text-decoration: none;
@@ -96,125 +102,95 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<h4>제출과제 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
-
 <!--  Start Page  -->
 
+<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
 <div style="padding: 50px"> 
 	<div style="padding-left: 160px"> 
 		<div style="padding-right: 300px"> 
-			<div style="padding-bottom: 50px" >
-<form action="${pageContext.request.contextPath}/submission/evaluate.do" method="post">
-	<input id="taskId" name="taskId" type="hidden" value="">
-		<a class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium" href="${pageContext.request.contextPath}/submission/searchAll.do">
-		  제출 과제 리스트
-  	</a>
-	<br>
-
-
-		<table class="w3-table">
-			 <colgroup>
-				<col width="150" align="center">
-				<col width="0" align="center">
-			</colgroup> 
-			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<th>제목</th>
-				<td>${task.title }</td>
-				
-			</tr>
-			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<th>제출자</th>
-					<td>
+			<div style="padding-bottom: 50px" align="right">
+		<tr>
+			<td>
+				<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 리스트</button>
+				</a>
+			</td>
+			<td>
+				<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
+				</a> 
+			</td>
+		</tr>
+		</div>
+	<table class="w3-table">
+		<colgroup>
+			<col width="150">
+			<col width="*">
+		</colgroup>
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>부여과제 제목</th>
+			<td>
+				<c:forEach items="${task.assignmentTitle }" var="assignmentTitle">
+		 			${assignmentTitle }
+				</c:forEach>
+			</td>
+		</tr>	
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>제목</th>
+				<td>
+					${task.title } 
+				</td>
+		</tr>
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>제출자</th>
+				<td>
 					<c:forEach items="${task.memberIdList }" var="memberId">
 						${memberId }
 					</c:forEach>
 				</td>
-				
-			</tr>
-			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<th>제출 기한</th>
-					<td>
-					</td>
-			</tr>
-			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<th>내용</th>
-				<td>
+		</tr>
+		
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>내용</th>
+				<td class="w3-animate-input">
 					${task.contents }
 				</td>
-			</tr>
-			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<th>첨부파일</th>
-					<td>
-						<c:forEach items="${task.taskFileList }" var="taskFile">
-						${taskFile.filePath }<br>
-						</c:forEach>
-					</td>
-			</tr>
-			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<th>평점</th>
-					<td>
-						<span class="starRating">
-							<span style="width:${task.getPointStar() }%"></span>
-						</span><br>
-						<fmt:formatNumber value="${task.getAverage() }" type="pattern" pattern="0.0	0" /> 점
-					</td>
-			</tr>
-			<tr>
-			<th></th>
-				<td align="right">
-					<a href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId}" >
-						<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">
-							수정
-						</button>
-					</a>
-				</td>
+		</tr>
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th>첨부파일</th>
 				<td>
-					<a  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId}&flag=${task.flag}" >
-						<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">
-							삭제
-						</button>	
-					</a>
+					<c:forEach items="${task.taskFileList }" var="taskFile">
+						${taskFile.filePath }<br>
+					</c:forEach>
 				</td>
-				
-			</tr>
-			
-			<td>
-					<a id="evalutate" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >
-						<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">
-							평가
-						</button>
-					</a>
-			</td>
-		</table>
+		</tr>
+	</table>
+</form>
+	<br>
+			<div align="right">
+	<a class="w3-border" href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId }&flag=${task.flag }" >
+		<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">수정</button>
+	</a>
+	<a class="w3-border"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }">
+		<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
+	</a>
+			</div>
 		</div>
 	</div>
-</div>
-
-		
-		
-		
-		
-	</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- End page content -->
-
+</div> 
+	<!-- End page content -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
-
 </html>

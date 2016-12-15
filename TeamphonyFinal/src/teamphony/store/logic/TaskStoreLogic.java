@@ -161,7 +161,6 @@ public class TaskStoreLogic implements TaskStore {
 		SqlSession session = getSessionFactory().openSession();
 		
 		List<Task> taskList= new ArrayList<>();
-		List<TaskFile> fileList = new ArrayList<>();
 //flag 1==submission   flag 0==assignment
 		try {
 			TaskMapper mapper = session.getMapper(TaskMapper.class);
@@ -177,8 +176,7 @@ public class TaskStoreLogic implements TaskStore {
 				
 				for(Task task : taskList){
 					
-					fileList = mapper.selectFileListByTaskId(task.getTaskId());
-					task.setTaskFileList(fileList);
+					task.setTaskFileList(mapper.selectFileListByTaskId(task.getTaskId()));
 					task.setMemberIdList(mapper.selectMemberIdBySubmissionId(task.getTaskId()));
 					task.setAssignmentTitle(mapper.selectAssignmentTitleBySubmissionId(task.getTaskId()));
 				}
@@ -205,9 +203,9 @@ public class TaskStoreLogic implements TaskStore {
 			
 			if(task.getFlag() == 1){
 				
-				List<TaskFile> fileList = new ArrayList<>();
-				fileList = mapper.selectFileListByTaskId(task.getTaskId());
-				task.setTaskFileList(fileList);
+				task.setTaskFileList(mapper.selectFileListByTaskId(task.getTaskId()));
+				task.setMemberIdList(mapper.selectMemberIdBySubmissionId(task.getTaskId()));
+				task.setAssignmentTitle(mapper.selectAssignmentTitleBySubmissionId(task.getTaskId()));
 			}
 			}finally {
 				session.close();

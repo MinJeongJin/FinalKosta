@@ -259,7 +259,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		<thead>
 			<tr>
 				<th>순번</th>
-				<th>부여과제</th>
+				<th>부여과제 제목</th>
 				<th>제목</th>
 				<th>제출자</th>
 				<th>첨부파일</th>
