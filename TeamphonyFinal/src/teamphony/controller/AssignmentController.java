@@ -61,7 +61,7 @@ public class AssignmentController {
 		System.out.println("==============================");
 		System.out.println(task.toString());
 		System.out.println("==============================");
-		service.registerTask(task, httpSession , assignmentTitle, assignmentId );
+		service.registerTask(task, httpSession , assignmentTitle, task.getTaskId());
 		
 		return "redirect:searchAll.do";
 	}

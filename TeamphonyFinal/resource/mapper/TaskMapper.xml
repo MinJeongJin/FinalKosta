@@ -39,23 +39,33 @@
 				,#{teamCode, jdbcType=INTEGER}
 			)
 	</insert> 
-	 
-	<insert id="insertTaskMember">
+	
+	<insert id="insertTaskMemberForAssignment" >
 			INSERT
 			INTO TASKMEMBER
 			(
 				ASSIGNMENTID
 				,MEMBERID
-				,SUBMISSIONID
 				,ASSIGNMENT_TITLE
 			)
 			VALUES
 			(	#{taskId}
 				,#{memberId }
-				,TASK_TB_ID_SEQ.NEXTVAL
 				,#{assignmentTitle }
 			)
+	
+	
 	</insert>
+	 
+	
+	
+	<update id="updateTaskMemberForSubmission">
+			UPDATE TASKMEMBER
+				SET SUBMISSIONID			=(SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
+				WHERE ASSIGNMENTID			= #{assignmentId}
+				AND MEMBERID				= #{loginedMemberId }
+	
+	</update>
 	
 	<insert id="insertSubmission" parameterType="task">
 		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">

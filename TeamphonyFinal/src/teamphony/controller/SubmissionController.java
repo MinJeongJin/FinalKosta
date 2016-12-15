@@ -60,8 +60,12 @@ public class SubmissionController {
 		task.setFlag(Integer.parseInt(flag));
 		task.setTeamCode((int)httpSession.getAttribute("teamCode"));
 		
+		
+		
+		
 		System.out.println("=========submissionController// create.do==============");
 		System.out.println("task.getTeamCode= "+ task.getTeamCode());
+		System.out.println("sessionGetId= "+ (String)httpSession.getAttribute("loginedMember"));
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
@@ -90,7 +94,7 @@ public class SubmissionController {
 		System.out.println(task.toString());
 		
 		
-		service.registerTask(task, httpSession, assignmentTitle, assignmentId); // task_tb 저장
+		service.registerTask(task, httpSession, assignmentTitle, Integer.parseInt(assignmentId)); // task_tb 저장
 		
 		return "redirect:searchAll.do";
 	}

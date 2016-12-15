@@ -38,7 +38,10 @@ public class TaskStoreLogic implements TaskStore {
 	
 
 	@Override
-	public void insertTask(Task task, HttpSession httpSession, String assignmentTitle, String assignmentId) {
+	public void insertTask(Task task
+						,HttpSession httpSession
+						,String assignmentTitle
+						,int assignmentId) {
 		SqlSession session = getSessionFactory().openSession();
 
 		try {
@@ -49,15 +52,26 @@ public class TaskStoreLogic implements TaskStore {
 				mapper.insertAssignment(task);
 				
 				for(String memberId: task.getMemberIdList()){
-					mapper.insertTaskMember(task.getTaskId(), memberId, assignmentTitle);
+					
+					mapper.insertTaskMemberForAssignment(task.getTaskId(), memberId, task.getTitle());
 				}
 				
 			}else if (task.getFlag() == 1) {
 				
 				String loginedMemberId =(String) httpSession.getAttribute("loginedMember");
+				System.out.println("==============insert Mapper================");
+				System.out.println("loginedMemberId"+(String)httpSession.getAttribute("loginedMember") );
 				mapper.insertSubmission(task);
-				mapper.insertTaskMember(task.getTaskId(), loginedMemberId, assignmentTitle);
 				session.commit();
+				
+					
+				mapper.updateTaskMemberForSubmission(assignmentId, loginedMemberId, task.getTaskId());
+				
+				
+				
+				
+				session.commit();
+				
 				
 				int taskId = task.getTaskId();
 				List<TaskFile> taskFileList = task.getTaskFileList();
@@ -94,7 +108,7 @@ public class TaskStoreLogic implements TaskStore {
 				mapper.deleteMemberIdByTaskId(task.getTaskId());
 				
 					for(String memberId : task.getMemberIdList()){
-						mapper.insertTaskMember(task.getTaskId(), memberId, assignmentTitle);
+						mapper.insertTaskMemberForAssignment(task.getTaskId(), memberId, assignmentTitle);
 					}
 			}else if(task.getFlag() == 1){
 				mapper.deleteTaskFile(task.getTaskId());

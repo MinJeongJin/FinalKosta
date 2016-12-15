@@ -20,7 +20,7 @@ public class TaskServiceLogic implements TaskService {
 	
 
 	@Override
-	public void registerTask(Task task, HttpSession httpSession, String assignmentTitle, String assignmentId) {
+	public void registerTask(Task task, HttpSession httpSession, String assignmentTitle, int assignmentId) {
 		
 		store.insertTask(task, httpSession, assignmentTitle, assignmentId);
 	}

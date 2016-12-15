@@ -9,7 +9,7 @@ import teamphony.domain.Task;
 public interface TaskService {
 	
 	
-	 void registerTask(Task task, HttpSession httpSession, String assignmentTitle, String assignmentId);
+	 void registerTask(Task task, HttpSession httpSession, String assignmentTitle, int assignmentId);
 
 	 void modifyTask(Task task, String assignmentTitle);
 

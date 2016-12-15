@@ -21,6 +21,15 @@
 	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
 
 <style type="text/css">
+
+table {
+    table-layout:fixed;
+}
+
+table td {
+    overflow:hidden;
+}
+
 a[name=aInBtn] {
 	text-decoration: none;
 }
@@ -224,9 +233,6 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</header>
 
 <!--  Start Page  -->
-<div style="padding: 50px">   
-	<div style="padding-right: 20px">
-		<div style="padding-right: 10px">
 <form class="w3-container" action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
 	<tr>
 		<td align="left">
@@ -237,16 +243,18 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 </form>
 	
 	
+<div style="padding-top:30px">  
+	<div style="padding-right: 30px">
 <table class="table table-hover table-condensed" text-align:center;>
 	<colgroup>
-		<col width="400" align="center">
-		<col width="800" align="center">
-		<col width="400" align="center">
-		<col width="400" align="center">
-		<col width="400" align="center">
-		<col width="400" align="center">
-		<col width="600" align="center">
-		<col width="600" align="center">
+		<col width="50" align="center">
+		<col width="200" align="center">
+		<col width="200" align="center">
+		<col width="50" align="center">
+		<col width="200" align="center">
+		<col width="70" align="center">
+		<col width="70" align="center">
+		<col width="70" align="center">
 	</colgroup>
 		<thead>
 			<tr>
@@ -255,7 +263,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<th>제목</th>
 				<th>제출자</th>
 				<th>첨부파일</th>
-				<th align="center">평점</th>
+				<th>평점</th>
 				<th>평가여부</th>
 				<th>평가횟수</th>
 			</tr>
@@ -309,12 +317,6 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</td>
 				</tr>
 			</c:forEach>
-		
-		
-		
-		
-		
-			
 		</div>
 	</div>
 </div>
