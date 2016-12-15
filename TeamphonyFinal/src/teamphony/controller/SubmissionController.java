@@ -69,30 +69,31 @@ public class SubmissionController {
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
+		
 		for (MultipartFile attchFile : attchFileList) {
 			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
 			TaskFile taskFile = new TaskFile(filePath);
-
-			System.out.println("저장 경로 =" + filePath);
 			
-			
-			File f = new File(filePath);
-			try {
+			if(filePath != SubmissionController.filePathOnly ){
 				
-				attchFile.transferTo(f);
-				taskFileList.add(taskFile);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("저장 경로 =" + filePath);
+				
+				File f = new File(filePath);
+				try {
+					attchFile.transferTo(f);
+					taskFileList.add(taskFile);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-		}
+			}
 		
 		task.setTaskFileList(taskFileList);
 		
 		System.out.println(task.toString());
-		
 		
 		service.registerTask(task, httpSession, assignmentTitle, Integer.parseInt(assignmentId)); // task_tb 저장
 		
@@ -133,22 +134,24 @@ public class SubmissionController {
 
 			
 			String filePath = SubmissionController.filePathOnly + File.separator + attchFile.getOriginalFilename();
-			TaskFile taskFile = new TaskFile(filePath);
-
-			File f = new File(filePath);
 			
-			try {
+			if(filePath != SubmissionController.filePathOnly ){
 				
-				attchFile.transferTo(f);
-				taskFileList.add(taskFile);
+				TaskFile taskFile = new TaskFile(filePath);
+				File f = new File(filePath);
 				
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				try {
+					
+					attchFile.transferTo(f);
+					taskFileList.add(taskFile);
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-		}
-
+			}
 		task.setTaskFileList(taskFileList);
 		
 		service.modifyTask(task,assignmentTitle);
