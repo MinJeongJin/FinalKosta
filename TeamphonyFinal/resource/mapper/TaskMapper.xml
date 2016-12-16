@@ -130,6 +130,17 @@
 				
 	</select>
 	
+	<select id="selectTaskMemberByAssignmentId" parameterType="int" resultType="TaskMember">
+			SELECT 				
+				ASSIGNMENTID
+				,MEMBERID
+				,SUBMISSIONID
+				,ASSIGNMENT_TITLE
+				,COMMITTED
+			FROM TASKMEMBER 
+				WHERE ASSIGNMENTID = #{taskId }
+	</select>
+	
 	<select id="selectMemberIdByAssignmentId" parameterType="int"  resultType="String">
 			SELECT 
 				MEMBERID 

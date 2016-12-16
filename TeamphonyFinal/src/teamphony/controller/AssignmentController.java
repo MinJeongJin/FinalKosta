@@ -20,6 +20,7 @@ import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
 import teamphony.domain.Member;
 import teamphony.domain.Task;
+import teamphony.domain.TaskMember;
 import teamphony.domain.Tasks;
 import teamphony.domain.Team;
 import teamphony.service.facade.TaskService;
@@ -146,7 +147,7 @@ public class AssignmentController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllAssignment(HttpSession session, Model model) {
-		
+		TaskMember taskMember = new TaskMember();
 		session.setAttribute("teamCode", 9642 );
 		
 		System.out.println("============assignmentController=============");
@@ -160,9 +161,10 @@ public class AssignmentController {
 		
 		
 		
-		
 		for(Task task : list){
 			task.setMemberList(memberList);
+			System.out.println("===============assignmentController===========");
+			System.out.println("getTaskMember().size()= "+task.getTaskMember().size());
 		}
 		
 		

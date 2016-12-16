@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
+import teamphony.domain.TaskMember;
 
 public interface TaskMapper {
 
@@ -39,6 +40,8 @@ public interface TaskMapper {
 	List<TaskFile> selectAllFileList();
 //	추가 했음
 	List<TaskFile> selectFileListByTaskId(int taskId);
+// 추가 했음
+	List<TaskMember> selectTaskMemberByAssignmentId(int taskId);
 	
 //	추가 했음
 	TaskFile selectFileList(int taskId);

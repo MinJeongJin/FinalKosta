@@ -171,6 +171,8 @@ public class TaskStoreLogic implements TaskStore {
 				
 				for(Task task : taskList){
 					task.setMemberIdList(mapper.selectMemberIdByAssignmentId(task.getTaskId()));
+					task.setTaskMember(mapper.selectTaskMemberByAssignmentId(task.getTaskId()));
+				
 				}
 			
 				}else if(flag == 1){
