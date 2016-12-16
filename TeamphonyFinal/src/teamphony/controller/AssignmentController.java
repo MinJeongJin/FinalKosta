@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
 import teamphony.domain.Member;
 import teamphony.domain.Task;
@@ -33,15 +34,20 @@ public class AssignmentController {
 	@Autowired
 	private TeamService teamService;
 	
-	@RequestMapping("/create.do")
+	@RequestMapping(value="/create.do" , method =RequestMethod.GET)
 	public String createAssignment(String loginedId, HttpSession session, Model model){
 		Team team = new Team();
 		team = teamService.findTeamByTeamCode((int)session.getAttribute("teamCode"));
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("teamCode"));
+
+		System.out.println("==========assignment/create.do/get===========");
+		System.out.println("getLeaderId= "+team.getLeaderId());
+		System.out.println("loginedId= "+loginedId);
 		
-		if(loginedId != team.getLeaderId()){
+		if( !loginedId.equals(team.getLeaderId()) ){
 			return "common/leaderError";
 		}
+		
 		model.addAttribute("memberList", memberList);
 		
 		return "task/assignment/assignmentRegister";
