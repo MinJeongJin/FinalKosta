@@ -158,9 +158,14 @@ public class AssignmentController {
 		List<Member> memberList = teamService.findMembersByTeamCode(teamCode);
 		List<Task> list = service.findAllTaskByFlag(0,teamCode);
 		
+		
+		
+		
 		for(Task task : list){
 			task.setMemberList(memberList);
 		}
+		
+		
 		model.addAttribute("list", list);
 		
 		return "/task/assignment/assignmentList";

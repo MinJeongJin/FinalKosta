@@ -154,7 +154,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</td>
 					<td>
 						<c:forEach items="${task.memberIdList }" var="memberId">
-							${memberId }
+							${memberId }<br>
 						</c:forEach>
 					</td>
 					<td colspan="2">${task.deadline }</td>
