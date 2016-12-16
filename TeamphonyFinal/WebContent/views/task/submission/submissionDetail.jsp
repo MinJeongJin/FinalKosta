@@ -137,7 +137,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>부여과제 제목</th>
 			<td>
-				<c:forEach items="${task.assignmentTitle }" var="assignmentTitle">
+				<c:forEach items="${task.assignmentTitleList }" var="assignmentTitle">
 		 			${assignmentTitle }
 				</c:forEach>
 			</td>

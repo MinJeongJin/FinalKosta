@@ -207,8 +207,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 <!--  Start Page  -->
 
 <div style="padding: 50px">
-	<div style="padding-left: 100px">
-		<div style="padding-right: 200px">
+	<div style="padding-left: 150px">
+		<div style="padding-right: 280px">
 			<div style="padding-top: 10px">
 <div align="right">
 	<div style="padding-bottom: 20px">
@@ -230,22 +230,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			</tr>
 			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 				<th>제출자</th>
-				<td>
-					<ul>
-						<li style="float: left; width: 70px;">이은채</li>
-						<li style="float: left; width: 70px;">진민정</li>
-						<li style="float: left; width: 70px;">현대경</li>
-						<li style="float: left; width: 70px;">김수호</li>
-						<li style="float: left; width: 70px;">윤영민</li>
-						<li style="float: left; width: 70px;">미구현</li>
-						
-					</ul>
-				</td>
-			</tr>
-			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<th>제출 기한</th>
 					<td>
-						<fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${task.deadline }"/>
+						<c:forEach items="${task.memberIdList }" var="memberId">
+							${memberId }
+						</c:forEach>
 					</td>
 			</tr>
 			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
@@ -267,10 +255,16 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<td>
 						<p>
 							<span class="starRating">
-								<fmt:formatNumber value="${task.getAverage() }" pattern="0.0" /> 점
+								<fmt:formatNumber value="${task.getAverage() }" pattern="0.00" /> 점
 							</span>
 						</p>
 					</td>
+			</tr>
+			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+				<th>평가횟수</th>
+				<td>
+					${task.evaluationCnt } 회
+				</td>
 			</tr>
 			<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 				<th> </th>
