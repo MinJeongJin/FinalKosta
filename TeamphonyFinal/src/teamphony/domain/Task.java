@@ -203,8 +203,8 @@ public class Task {
 				+ "evaluated= " + evaluated + "\n"
 				+ "point= " + point + "\n"
 				+ "evaluationCnt= " + evaluationCnt + "\n" 
-				+ "pointStar= " + getPointStar() + "%" + "\n";
-//				+ "memberList= " + memberList.size() + "\n" ;
+				+ "pointStar= " + getPointStar() + "%" + "\n"
+				+ "memberIdList= " + getMemberIdList().length + "\n" ;
 	
 	}
 	

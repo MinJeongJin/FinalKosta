@@ -110,7 +110,7 @@ public class SubmissionController {
 				
 				task.setTaskFileList(taskFileList);
 				
-				System.out.println(task.toString());
+//				System.out.println(task.toString());
 				model.addAttribute("saveName",saveName);
 				
 			} catch (IOException e) {
@@ -338,17 +338,9 @@ public class SubmissionController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(HttpSession session, Model model) {
-//		Member loginedMember = new Member();
-//		loginedMember.setMemberId("hiyogils");
-		
-// submissionRegister.jsp 에서 flag 값을 준다. 
-//현재는 test 중이라서 임의로 flag 값을 부여 하였다
-		session.setAttribute("flag", 1);
-//		session.setAttribute("loginedMember", loginedMember);
 		int flag = (int)session.getAttribute("flag");
-//		int teamCode = (int)session.getAttribute("teamCode");
 		
-		List<Task> taskList = service.findAllTaskByFlag(flag, 9642);
+		List<Task> taskList = service.findAllTaskByFlag(flag, (int)session.getAttribute("teamCode"));
 		
 		model.addAttribute("taskList", taskList);
 		
