@@ -34,10 +34,14 @@ public class AssignmentController {
 	private TeamService teamService;
 	
 	@RequestMapping("/create.do")
-	public String createAssignment(HttpSession session, Model model){
+	public String createAssignment(String loginedId, HttpSession session, Model model){
 		Team team = new Team();
+		team = teamService.findTeamByTeamCode((int)session.getAttribute("teamCode"));
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("teamCode"));
 		
+		if(loginedId != team.getLeaderId()){
+			return "common/leaderError";
+		}
 		model.addAttribute("memberList", memberList);
 		
 		return "task/assignment/assignmentRegister";
