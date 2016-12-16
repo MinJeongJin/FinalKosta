@@ -64,7 +64,7 @@
     <div class="error-body">
 
         <h3>에러메시지</h3>
-        <p>부여과제 등록은 팀장만 가능 합니다.</p>
+        <p>이 페이지는 팀장만 이용 가능합니다.</p>
 
         <div class="row error-btn">
             <button onclick="history.back();" class="btn btn-large btn-default">이전으로 이동</button>

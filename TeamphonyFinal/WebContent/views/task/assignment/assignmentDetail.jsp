@@ -167,10 +167,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 </form>
 	<br>
 			<div align="right">
-	<a class="w3-border" href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId }&flag=${task.flag }" >
+		<a class="w3-border" href="${pageContext.request.contextPath}/assignment/revise.do?taskId=${task.taskId }&flag=${task.flag }&loginedId=${member.memberId }" >
 		<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">수정</button>
 	</a>
-	<a class="w3-border"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }">
+	<a class="w3-border"  href="${pageContext.request.contextPath}/assignment/erase.do?taskId=${task.taskId }&flag=${task.flag }&loginedId=${member.memberId }">
 		<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
 	</a>
 			</div>

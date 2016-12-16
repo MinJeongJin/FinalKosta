@@ -41,8 +41,8 @@ public class AssignmentController {
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("teamCode"));
 
 		System.out.println("==========assignment/create.do/get===========");
-		System.out.println("getLeaderId= "+team.getLeaderId());
-		System.out.println("loginedId= "+loginedId);
+		System.out.println("getLeaderId= "+ team.getLeaderId());
+		System.out.println("loginedId= "+ loginedId);
 		
 		if( !loginedId.equals(team.getLeaderId()) ){
 			return "common/leaderError";
@@ -77,9 +77,18 @@ public class AssignmentController {
 	}
 
 	@RequestMapping("/revise.do")
-	public String reviseAssignment(HttpSession session, String taskId, Model model) {
+	public String reviseAssignment(HttpSession session
+									,String loginedId
+									,String taskId
+									,Model model) {
 		Team team = new Team();
-
+		team = teamService.findTeamByTeamCode((int)session.getAttribute("teamCode"));
+		
+		if( !loginedId.equals(team.getLeaderId()) ){
+			return "common/leaderError";
+		}
+		
+		
 		Task task = service.findTaskByTaskId(Integer.parseInt(taskId));
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("teamCode"));
 		
@@ -97,7 +106,7 @@ public class AssignmentController {
 									,String[] memberIdList
 		                            ,String assignmentTitle) {
 
-		
+		task.setTitle(assignmentTitle);
 		task.setDeadline("날짜: "+ deadlineDay +"   시간: "+ deadlineHour );
 		task.setEvaluationPeriodStart("날짜: "+evalDayStart +"   시간: "+ evalHourStart);
 		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
@@ -107,9 +116,19 @@ public class AssignmentController {
 	}
 	
 
-	@RequestMapping("/erase.do")
-	public String eraseAssignment(String taskId,String flag) {
+	@RequestMapping(value="/erase.do", method=RequestMethod.GET)
+	public String eraseAssignment(HttpSession session
+								,String loginedId
+								,String taskId
+								,String flag) {
 		
+		Team team = new Team();
+		team = teamService.findTeamByTeamCode((int)session.getAttribute("teamCode"));
+		
+			if( !loginedId.equals(team.getLeaderId()) ){
+				return "common/leaderError";
+			}
+			
 		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
 		return "redirect:searchAll.do";
 	}

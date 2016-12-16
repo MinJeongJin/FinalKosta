@@ -123,7 +123,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<label class="w3-label w3-validate" style="color: #050505">제목</label>
 				</th>
 				<td>
-					<input id="title" name="title" class="w3-input" type="text" value="" placeholder="${task.title } ">
+					<input id="assignmentTitle" name="assignmentTitle" class="w3-input" type="text" value="" placeholder="${task.title } ">
 					<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
 				</td>
 			</tr>
