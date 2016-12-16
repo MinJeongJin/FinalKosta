@@ -64,6 +64,8 @@ public class MemberController {
 		} else if (!result.getPassword().equals(loginPw)) {
 			model.addAttribute("result", "true");
 			return "/common/login";
+		}else if(loginId.equals("isAdmin")){
+			return "/place/place.do";
 		} else {
 			session.setAttribute("member", result);
 			return "redirect:/team/main.do";
