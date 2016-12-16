@@ -47,9 +47,9 @@
 
 
 			<div id="subMenu" class="w3-accordion-content w3-white w3-card-4">
-				<a href="${pageContext.request.contextPath}/submission/searchAll.do" id="sub1" name="subMenuItem"
-					onclick="clickCheck_sub('sub1')">과제제출</a> <a href="#" id="sub2"
-					name="subMenuItem" onclick="clickCheck_sub('sub2')">과제평가</a>
+				<a href="${pageContext.request.contextPath}/assignment/searchAll.do" id="sub1" name="subMenuItem"
+					onclick="clickCheck_sub('sub1')">부여과제</a> <a href="${pageContext.request.contextPath}/submission/searchAll.do" id="sub2"
+					name="subMenuItem" onclick="clickCheck_sub('sub2')">제출과제</a>
 			</div>
 
 		</div>

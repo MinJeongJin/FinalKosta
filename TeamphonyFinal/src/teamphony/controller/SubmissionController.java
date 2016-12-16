@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,8 +75,6 @@ public class SubmissionController {
 		
 		System.out.println("filePathOnly1= " +  uploadPath);
 		
-		
-		
 		httpSession.setAttribute("loginedMember", "aaaa");
 		httpSession.setAttribute("teamCode", 9642);
 		
@@ -90,6 +89,7 @@ public class SubmissionController {
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
+		TaskFile taskFile = new TaskFile();
 		
 		for (MultipartFile file : attchFileList) {
 			
@@ -98,6 +98,19 @@ public class SubmissionController {
 				String saveName = uploadFile(file.getOriginalFilename(), file.getBytes(), request);
 				System.out.println("===========================================");
 				System.out.println("saveName= "+ saveName);
+				
+				
+				taskFile.setFilePath(saveName);
+				
+				System.out.println("getFilePath= "+ taskFile.getFilePath());
+				System.out.println("=========================================");
+			
+				taskFileList.add(taskFile);
+				
+				
+				task.setTaskFileList(taskFileList);
+				
+				System.out.println(task.toString());
 				model.addAttribute("saveName",saveName);
 				
 			} catch (IOException e) {
@@ -107,9 +120,7 @@ public class SubmissionController {
 			}
 			}
 		
-		task.setTaskFileList(taskFileList);
 		
-		System.out.println(task.toString());
 		
 		service.registerTask(task, httpSession, assignmentTitle, Integer.parseInt(assignmentId)); // task_tb 저장
 		
@@ -141,6 +152,8 @@ public class SubmissionController {
 			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
 			
 		}
+		
+		System.out.println("uploadedFileName= "+ uploadedFileName);
 		return uploadedFileName;
 	}
 	
@@ -336,12 +349,6 @@ public class SubmissionController {
 //		int teamCode = (int)session.getAttribute("teamCode");
 		
 		List<Task> taskList = service.findAllTaskByFlag(flag, 9642);
-		System.out.println("==============submissionCotroller===============");
-		System.out.println("taskList.size= " + taskList.size());
-		for(Task task : taskList){
-			System.out.println(task.toString());
-			System.out.println("====================================");
-		}
 		
 		model.addAttribute("taskList", taskList);
 		
@@ -354,9 +361,6 @@ public class SubmissionController {
 		model.addAttribute("task", service.findTaskByTaskId(Integer.parseInt(taskId)));
 		return "/task/submission/submissionEvaluate";
 	}
-	
-	
-	
 
 	@RequestMapping(value="/evaluate.do", method=RequestMethod.POST)
 	public String evaluateAssignment(String taskId
