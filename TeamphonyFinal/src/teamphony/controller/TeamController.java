@@ -267,14 +267,14 @@ public class TeamController {
 		Teams teams = new Teams();
 
 		list = service.findAllTeam();
-
+		
 		for (Team team : list) {
 			List<Member> memberList = service.findMembersByTeamCode(team.getCode());
 			team.setMemberList(memberList);
 		}
 
 		teams.setTeams(list);
-
+	
 		return teams;
 	}
 }

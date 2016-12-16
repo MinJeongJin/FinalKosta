@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div id="postModal" class="w3-modal">
+		<div class="w3-modal-content w3-card-8 w3-animate-zoom"
+			style="min-width: 300px; max-width: 600px">
+
+			<div class="w3-center">
+				<br> <span
+					onclick="document.getElementById('postModal').style.display='none';"
+					class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright"
+					title="Close Modal">&times;</span>
+
+				<h2>게시물 작성</h2>
+
+			</div>
+
+			<form id="postForm" class="w3-container"
+				action="${pageContext.request.contextPath}/post/create.do"
+				method="post" enctype="multipart/form-data">
+				<div class="w3-section">
+
+					<label><b>내용</b></label>
+					<textarea class="w3-input w3-border" type="tex"
+						placeholder="내용을 입력하세요." id="area" name="contents" maxlength="300"
+						oninput="checkLength()" rows="7"></textarea>
+
+					<p id="" style="color: gray; text-align: right">
+						<span id="textLen">0</span>/300
+					</p>
+
+					<label><b>영상 Link</b></label> <input
+						class="w3-input w3-border w3-margin-bottom" type="text"
+						placeholder="URL형식의 링크를 입력하세요." id="pwCon" name="videoLink"
+						maxlength="15"> <label><b>사진 첨부</b></label> <input
+						class="w3-input w3-border w3-margin-bottom" type="file"
+						name="imagePath"> <label><b>파일 첨부</b></label> <input
+						class="w3-input w3-border w3-margin-bottom" type="file"
+						name="filePath">
+
+					<button class="w3-btn-block w3-dark-gray w3-section w3-padding"
+						type="submit">
+						<b>등록</b>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+ <script>
+        var checkLength = function () {
+
+            var textLen = document.getElementById('textLen');
+            var areaLen = document.getElementById('area').value.length;
+
+            textLen.innerHTML = areaLen;
+
+        }
+
+
+        var checkAll = function () {
+
+
+        }
+
+        var modalReset = function () {
+
+
+        }
+    </script>
+
+
+</body>
+</html>
