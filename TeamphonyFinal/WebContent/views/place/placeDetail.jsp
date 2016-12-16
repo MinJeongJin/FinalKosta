@@ -39,6 +39,7 @@
 	    .btn_resetMap {background-position:-69px 0;}
 	    .btn_linkRoadview {background-position:0 0;}
 	    .btn_resetRoadview {background-position:-69px 0;}
+	    .pre_contents {font-family: NanumBarunGothic;font-size:13px;line-height:21px;color:#656565;word-break:break-all;word-wrap:break-word;background-color: white;border-color: white;}
 	</style>
   </head>
 
@@ -136,7 +137,7 @@
                           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                             <div class="text_box">
 								<h3 class="h_intro">공간 소개</h3>
-								<p class="p_intro">${place.contents }</p>
+								<pre class="pre_contents">${place.contents }</pre>
 
 								<ul class="info_list officehours">
 									<li><span class="tit">이용시간</span> <span class="data">${place.businessHour }</span></li>

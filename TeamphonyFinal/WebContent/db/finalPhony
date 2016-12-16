@@ -132,6 +132,7 @@ ALTER TABLE TASKMEMBER
 ADD (SUBMISSION_ID number
 );
 
-
+//12.16 placeFile_tb 크기 조정
+alter table placefile_tb modify(fullname varchar2(1000));
 
 commit;

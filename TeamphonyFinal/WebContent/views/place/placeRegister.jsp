@@ -237,6 +237,7 @@
 		$(".uploadedList .delbtn").each(function(index){
 			str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") + "'> ";
 		});
+		
 		that.append(str);
 		// get(0)은 순수한 DOM객체를 얻어내기 위해 사용한다.
 		that.get(0).submit();
