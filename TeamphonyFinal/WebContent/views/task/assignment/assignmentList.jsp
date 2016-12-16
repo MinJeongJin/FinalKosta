@@ -179,7 +179,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</a> 
 				</td>	
 				<td>			
-					<a href="${pageContext.request.contextPath}/assignment/create.do?">
+					<a href="${pageContext.request.contextPath}/assignment/create.do?loginedId=${member.memberId }">
 						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 등록</button>
 					</a>
 				</td>

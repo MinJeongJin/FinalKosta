@@ -94,8 +94,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		<!-- Header -->
 		<header class="w3-container">
 			<a href="#"><img
-				src="${pageContext.request.contextPath}/resources/images/avatar_g2.jpg"
-				style="width: 65px;"
+				src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
+				style="width: 65px;height:65px;"
 				class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
@@ -145,9 +145,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 
 					<div class="w3-right">
 
-						<button class="w3-btn w3-large">
-							<a href="${pageContext.request.contextPath}/team/remove.do"
-								name="aInBtn"> 팀 탈퇴 </a>
+						<button class="w3-btn w3-large" onclick="document.getElementById('withdrawAlert').style.display='block'">
+							 팀 탈퇴 
 						</button>
 						
 					</div>
@@ -168,10 +167,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<c:forEach items="${memberList}" var="member"
 						varStatus="cntOfMembers">
 
-						<li class="w3-padding-16"><img
-							src="${pageContext.request.contextPath}/resources/images/avatar_g2.jpg"
-							class="w3-left w3-circle w3-margin-right" style="width: 40px">
-							<span class="w3-xlarge">${member.alias}</span> <br></li>
+						 <li class="w3-padding-16 w3-pale-yellow"><img
+                            src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
+                            class="w3-left w3-circle w3-margin-right" style="width: 30px; height:30px;">
+                            <span class="w3-large">${member.alias}</span> <br></li>
 
 					</c:forEach>
 				</ul>
@@ -185,6 +184,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 
 			<!-- /modal -->
 			<%@ include file="/views/team/memberInvite.jspf"%>
+			<%@ include file="/views/team/alertInDetail.jspf"%>
 		</div>
 
 		<div class="w3-black w3-center w3-padding-24 w3-card-12">

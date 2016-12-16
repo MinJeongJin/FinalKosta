@@ -187,8 +187,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</table>
 		<br>
 		<div align="center">
-				<a href="assignmentList.do"><input class="btn" type="reset" value="취소"></a> 
-				<input class="btn btn-success" type="submit" value="완료">
+				<a href="assignmentList.do">
+					<input class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large" type="reset" value="취소">
+				</a> 
+				<input class="btn w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large" type="submit" value="완료">
 		</div>
 	</form>
 

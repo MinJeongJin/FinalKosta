@@ -115,7 +115,6 @@ public class TeamController {
 	@RequestMapping(value = "join.do", method = RequestMethod.POST)
 	public void joinTeam(int teamCode, HttpSession session, HttpServletResponse res) {
 
-		
 		Team team = service.findTeamByTeamCode(teamCode);
 		String resObj = null;
 		boolean stamp = true;
@@ -149,7 +148,6 @@ public class TeamController {
 			}
 
 		}
-		
 
 		try {
 			res.getWriter().write(resObj);
@@ -158,9 +156,6 @@ public class TeamController {
 		}
 
 	}
-	
-	
-	
 
 	@RequestMapping(value = "search.do", method = RequestMethod.POST)
 	public String searchTeamByCode(int teamCode, HttpSession session, Model model) {
@@ -171,6 +166,7 @@ public class TeamController {
 		String id = null, leaderId = null;
 
 		team.setMemberList(memberList);
+		model.addAttribute("member", member);
 		model.addAttribute("team", team);
 		model.addAttribute("memberList", memberList);
 
@@ -263,22 +259,22 @@ public class TeamController {
 		return "team/main";
 
 	}
-	
-	@RequestMapping(value="xml.do", produces="application/xml")
-	public @ResponseBody Teams getTeamsToXml(){
-		
-		List<Team> list  = new ArrayList<>();
+
+	@RequestMapping(value = "xml.do", produces = "application/xml")
+	public @ResponseBody Teams getTeamsToXml() {
+
+		List<Team> list = new ArrayList<>();
 		Teams teams = new Teams();
-		
+
 		list = service.findAllTeam();
 		
 		for (Team team : list) {
 			List<Member> memberList = service.findMembersByTeamCode(team.getCode());
 			team.setMemberList(memberList);
 		}
-		
+
 		teams.setTeams(list);
-		
+	
 		return teams;
 	}
 }

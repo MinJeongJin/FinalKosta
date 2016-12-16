@@ -8,7 +8,7 @@ import teamphony.domain.Task;
 
 public interface TaskStore {
 
-	void insertTask(Task task, HttpSession httpSession, String assignmentTitle, String assignmentId);
+	void insertTask(Task task, HttpSession httpSession, String assignmentTitle, int assignmentId);
 
 	void updateTask(Task task, String assignmentTitle);
 

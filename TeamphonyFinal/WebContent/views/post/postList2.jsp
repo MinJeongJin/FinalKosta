@@ -34,6 +34,7 @@
 
 	<!-- side bar -->
 	<%@ include file="/views/common/sideBar.jspf"%>
+	<%@ include file="/views/post/createPost.jspf"%>
 
 	<!-- Overlay effect when opening sidenav on small screens -->
 	<div class="w3-overlay w3-hide-large w3-animate-opacity"
@@ -46,7 +47,7 @@
 		<!-- Header -->
 		<header class="w3-container">
 			<a href="#"><img
-				src="${pageContext.request.contextPath}/resources/images/avatar_g2.jpg"
+				src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
 				style="width: 65px;"
 				class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
@@ -60,31 +61,22 @@
 
 
 
-
 		<div class="w3-container">
 
 			<form
 				action="${pageContext.request.contextPath}/post/searchBycontents.do">
-				<ul class="w3-navbar w3-large w3-padding-12">
-
-					<li style="margin-right: 10px"><select
-						class="w3-select w3-large w3-border" name="option">
-							<option value="" disabled selected>Option</option>
-							<option value="1">Option 1</option>
-							<option value="2">Option 2</option>
-							<option value="3">Option 3</option>
-					</select></li>
-					<li style="margin-right: 10px; width: 75%;"><input type="text"
-						class="w3-input w3-white w3-large w3-border" name="teamCode"
-						onkeydown="return setOnlyNumber();" onkeyup="removeChar();"
-						maxlength="4" id="teamCode" placeholder="게시물 검색"></li>
-					<li><button type="submit"
-							class="w3-btn w3-dark-grey w3-large"
-							style="margin-bottom: 5px">검색</button></li>
 
 
 
-				</ul>
+				<input class="w3-input w3-border w3-animate-input w3-white w3-large" type="text"
+					style="padding-left:70px;padding-top:12px; padding-bottom:12px;width: 30%;display:inline-block;background:url(${pageContext.request.contextPath}/resources/images/search_icon.png) no-repeat;" placeholder="search">
+				
+				<button type="submit" class="w3-btn w3-dark-grey w3-large"
+					style="display:none">검색</button>
+
+
+
+
 
 			</form>
 		</div>
@@ -105,10 +97,12 @@
 
 						<figure style="display: inline-block">
 							<div class="w3-card-4 w3-white"
-								style="width: 300px; display: inline-block;word-break:break-all;">
+								style="width: 300px; display: inline-block; word-break: break-all;">
 								<header class="w3-container w3-padding-8">
-									<img src="${post.member.imagePath }" alt="Avatar"
-										class="w3-left w3-circle w3-margin-right" style="width: 30px">
+									<img
+										src="${pageContext.request.contextPath}/resources/images/${post.member.memberId}/${post.member.imagePath}"
+										alt="Avatar" class="w3-left w3-circle w3-margin-right"
+										style="width: 30px">
 									<h3>${post.member.memberId }</h3>
 								</header>
 								<div class="w3-container">
@@ -139,7 +133,8 @@
 
 			<div class="w3-row">
 				<a class="w3-btn-floating-large w3-right w3-dark-grey"
-					href="${pageContext.request.contextPath}/views/post/createPost2.jsp">+</a>
+					onclick="document.getElementById('postModal').style.display='block';"
+					href="#">+</a>
 			</div>
 
 		</div>
@@ -153,6 +148,8 @@
 		</div>
 	</div>
 	<!-- End page content -->
+
+
 
 </body>
 

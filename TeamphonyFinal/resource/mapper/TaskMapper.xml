@@ -39,23 +39,32 @@
 				,#{teamCode, jdbcType=INTEGER}
 			)
 	</insert> 
-	 
-	<insert id="insertTaskMember">
+	
+	<insert id="insertTaskMemberForAssignment" >
 			INSERT
 			INTO TASKMEMBER
 			(
 				ASSIGNMENTID
 				,MEMBERID
-				,SUBMISSIONID
 				,ASSIGNMENT_TITLE
 			)
 			VALUES
 			(	#{taskId}
 				,#{memberId }
-				,TASK_TB_ID_SEQ.NEXTVAL
 				,#{assignmentTitle }
 			)
+	
+	
 	</insert>
+	 
+	
+	
+	<update id="updateTaskMemberForSubmission">
+			UPDATE TASKMEMBER
+				SET SUBMISSIONID			=(SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
+				WHERE ASSIGNMENTID			= #{assignmentId}
+				AND MEMBERID				= #{loginedMemberId }
+	</update>
 	
 	<insert id="insertSubmission" parameterType="task">
 		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
@@ -121,12 +130,21 @@
 				
 	</select>
 	
-	<select id="selectMemberIdByTaskId" parameterType="int"  resultType="String">
+	<select id="selectMemberIdByAssignmentId" parameterType="int"  resultType="String">
 			SELECT 
 				MEMBERID 
 				FROM TASKMEMBER 
 			WHERE ASSIGNMENTID = #{taskId}
 			ORDER BY ASSIGNMENTID ASC
+	</select>
+	
+	
+	<select id="selectMemberIdBySubmissionId" parameterType="int" resultType="String">
+			SELECT 
+				MEMBERID 
+				FROM TASKMEMBER 
+			WHERE SUBMISSIONID = #{taskId}
+			ORDER BY SUBMISSIONID ASC
 	</select>
 	
 	<select id="selectAllFileList" resultType="TaskFile">
@@ -162,11 +180,26 @@
 		
 	</select>
 	
-	<select id="selectTaskIdByMemberId" parameterType="String" resultType="int">
+	<select id="selectAssignmentIdByMemberId" parameterType="String" resultType="int">
 			SELECT 
 				ASSIGNMENTID
 				FROM TASKMEMBER
 				WHERE MEMBERID = #{memberId}
+	</select>
+	
+	<select id="selectSubmissionIdByMemberId" parameterType="String" resultType="int">
+			SELECT 
+				SUBMISSIONID
+				FROM TASKMEMBER
+				WHERE MEMBERID = #{memberId}
+	</select>
+	
+	<select id="selectAssignmentTitleBySubmissionId" parameterType="int" resultType="String">
+			SELECT 
+				ASSIGNMENT_TITLE
+				FROM TASKMEMBER 
+				WHERE SUBMISSIONID = #{task.taskId }
+				ORDER BY SUBMISSIONID ASC
 	</select>
 	
 	
@@ -195,7 +228,6 @@
 			FROM TASKMEMBER 
 			WHERE ASSIGNMENTID		= #{taskId}
 	
-	
 	</delete>
 	
 	<delete id="deleteTask" parameterType="int">
@@ -217,7 +249,17 @@
 	</delete>	
 	
 	<select id="selectAllAssginment" resultType="Task">
-		select ID AS taskId, TITLE, CONTENTS, DEADLINE, EVALUATIONPERIODSTART, EVALUATIONPERIODEND, EVALUATED, EVALUATIONCNT, FLAG, POINT, TEAMCODE
+		select 
+		ID AS taskId
+			,TITLE
+			,CONTENTS
+			,DEADLINE
+			,EVALUATIONPERIODSTART
+			,EVALUATIONPERIODEND
+			,EVALUATED, EVALUATIONCNT
+			,FLAG
+			,POINT
+			,TEAMCODE
 		from Task_tb where flag=0
 	</select>
 

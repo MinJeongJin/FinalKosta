@@ -16,7 +16,9 @@ public interface TaskMapper {
 	
 	void insertTaskFile(TaskFile task);
 	
-	void insertTaskMember(@Param("taskId") int taskId, @Param("memberId") String memberId, @Param("assignmentTitle") String assignmentTitle );
+	void insertTaskMemberForAssignment(@Param("taskId") int taskId, @Param("memberId") String memberId, @Param("assignmentTitle") String assignmentTitle);
+	
+	void updateTaskMemberForSubmission(@Param("assignmentId") int assignmentId, @Param("loginedMemberId") String loginedMemberId, @Param("submissionId") int submissionId);
 
 	void updateTask(Task task);
 //	추가했음
@@ -41,13 +43,19 @@ public interface TaskMapper {
 //	추가 했음
 	TaskFile selectFileList(int taskId);
 //	추가 했음
-	String[] selectMemberIdByTaskId(int taskId);
+	String[] selectMemberIdByAssignmentId(int assignmentId);
+//	추가 했음
+	String[] selectMemberIdBySubmissionId(int submissionId);
 	
 	Task selectTaskByTaskId(int taskId);
 //추가 했음
-	List<Integer> selectTaskIdByMemberId(String memberId);
+	List<Integer> selectAssignmentIdByMemberId(String memberId);
+//추가 했음
+	List<Integer> selectSubmissionIdByMemberId(String memberId);
 	
 	List<Task> selectAllAssginment();
+	
+	List<String> selectAssignmentTitleBySubmissionId(int submissionId);
 	
 	
 }

@@ -98,90 +98,99 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>과제 부여</b>
+				<b>제출과제 수정</b>
 			</h1>
-			<h4>과제부여 정보를 확인하고 관리해 보세요.</h4>
+			<h4>제출과제 정보를 확인하고 관리해 보세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 
 <!--  Start Page  -->
-<div style="padding: 50px">   
-<table>
+
+
+<div style="padding: 50px">
+	<div style="padding-left: 140px">
+		<div style="padding-right: 230px">
+<form action="${pageContext.request.contextPath}/submission/revise.do" method="post" enctype="multipart/form-data">
+<table class="table">
 	<colgroup>
-			<col width="400" align="center">
-			<col width="400" align="left">
-			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
+		<col width="150">
+		<col width="*">
+		<col width="*">
 	</colgroup>
-	<form class="w3-container" action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
-	<tr>
-		<td align="left">
-			<input name="memberId" id="memberId" type="text" class="btn btn-xs btn-default" value="" placeholder="팀원 아이디를 입력 하세요"/>
-		
-			<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">검색</button>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th>제목</th>
+		<td>
+			<input id="title" name="title" class="form-control" type="text" value="" placeholder="${task.title }">
+			<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
 		</td>
 	</tr>
-	</form>
-	
-</table>
-	
-	<table class="table table-hover table-condensed" text-align:center;>
-		<colgroup>
-			<col width="100" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="right">
-		</colgroup>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>제출자</th>
-				<th>제출기한</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${list }" var="task" varStatus="sts">
-				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-					<td>${sts.count }</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
-					</td>
-					<td>
-						<c:forEach items="${task.memberIdList }" var="memberId">
-							${memberId }
-						</c:forEach>
-					</td>
-					<td colspan="2">${task.deadline }</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&taskId=${task.taskId }">
-							<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
-						</a>
-					</td>
-				</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th>내용</th>	
+			<td>
+				<textarea id="contents" name="contents" class="form-control" rows="7" placeholder="${task.contents }"></textarea>
+			</td>
+	</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th>첨부파일</th>
+		<td>
+			<c:forEach items="${task.taskFileList }" var="taskFile">
+				${taskFile.filePath }<br>
 			</c:forEach>
+			<input type="hidden" id="flag" name="flag" value="${task.flag }"  />
+		</td>
+	</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th></th>
+		<td>
+			<h6 style="color: red">**첨부파일은 최대 5개 입니다.</h6>
+		</td>
+	</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th></th>
+		<td>
+			<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+		</td>
+	</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th></th>
+		<td>
+			<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+		</td>
+	</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th></th>
+		<td>
+			<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+		</td>
+	</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th></th>
+		<td>
+			<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+		</td>
+	</tr>
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th></th>
+		<td>
+			<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+		</td>
+	</tr> 
+	<tr>
+	<th></th>
+		<td align="right">
+			<input class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large" type="reset" type="reset" value="취소">
+			<input class="btn w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large" type="submit" value="완료">
+		</td>
+	</tr>
+</table>
+</form>
+		</div>
+	</div>
 </div>
-				<tr style="margin-top: 20px">
-				<th></th>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td align="right">
-					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
-					</a> 
-				</td>	
-				<td>			
-					<a href="${pageContext.request.contextPath}/assignment/create.do">
-						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 등록</button>
-					</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+
+
+
+
 <!-- End page content -->
 
 </body>

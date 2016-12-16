@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
 import teamphony.domain.Member;
 import teamphony.domain.Task;
@@ -33,10 +34,19 @@ public class AssignmentController {
 	@Autowired
 	private TeamService teamService;
 	
-	@RequestMapping("/create.do")
-	public String createAssignment(HttpSession session, Model model){
+	@RequestMapping(value="/create.do" , method =RequestMethod.GET)
+	public String createAssignment(String loginedId, HttpSession session, Model model){
 		Team team = new Team();
+		team = teamService.findTeamByTeamCode((int)session.getAttribute("teamCode"));
 		List<Member> memberList = teamService.findMembersByTeamCode((int)session.getAttribute("teamCode"));
+
+		System.out.println("==========assignment/create.do/get===========");
+		System.out.println("getLeaderId= "+team.getLeaderId());
+		System.out.println("loginedId= "+loginedId);
+		
+		if( !loginedId.equals(team.getLeaderId()) ){
+			return "common/leaderError";
+		}
 		
 		model.addAttribute("memberList", memberList);
 		
@@ -61,7 +71,7 @@ public class AssignmentController {
 		System.out.println("==============================");
 		System.out.println(task.toString());
 		System.out.println("==============================");
-		service.registerTask(task, httpSession , assignmentTitle, assignmentId );
+		service.registerTask(task, httpSession , assignmentTitle, task.getTaskId());
 		
 		return "redirect:searchAll.do";
 	}
@@ -131,7 +141,6 @@ public class AssignmentController {
 		
 		for(Task task : list){
 			task.setMemberList(memberList);
-			System.out.println(task.getMemberList().size());
 		}
 		model.addAttribute("list", list);
 		
@@ -143,6 +152,12 @@ public class AssignmentController {
 		List<Task> list = service.findTaskByMemberId(memberId);
 		model.addAttribute("memberId",memberId);
 		model.addAttribute("list",list);
+		
+		for(Task task : list){
+			System.out.println("==========searchByMemberId==========");
+			System.out.println(task.toString());
+			System.out.println("=================================");
+		}
 		
 		return "/task/assignment/memberAssignmentList";
 	}

@@ -165,12 +165,6 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 			</td>
 		</tr>
-		<!-- <tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-			<th></th>
-			<td>
-				<input style="width: 250px"  type="file" name="attchFile" class="form-control">
-			</td>
-		</tr>
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th></th>
 			<td>
@@ -182,7 +176,13 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<td>
 				<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 			</td>
-		</tr> -->
+		</tr>
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<th></th>
+			<td>
+				<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+			</td>
+		</tr>
 		<tr>
 			<th></th>
 			<td>
@@ -190,29 +190,15 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<a href="${pageContext.request.contextPath}/submission/searchAll.do">
 						<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">취소</button>
 					</a> 
-						<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">저장</button>
+						<button type="submit" class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large" >등록</button>
 				</div>
-			
-			
 			</td>
-		
-		
-		</tr>
-
-		
 	</table>
+</form>
 		</div>
 	</div>
 </div>
 	
-</form>
-
-
-
-
-
-
-
 
 <!-- End page content -->
 

@@ -11,12 +11,13 @@
 
 <!-- CSS -->
 <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/w3.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Tangerine">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainCustomStyle.css">
-
 
 <style>
 .filebox input[type="file"] {
@@ -47,16 +48,16 @@
 		<div class="w3-container">
 			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
 				<li class="w3-navitem w3-tangerine">Teamphony</li>
-				<li><a
-					href="#">마이 페이지</a></li>
+				<li><a href="#">마이 페이지</a></li>
 				<li><a href="#">회원 탈퇴</a></li>
+				<li class="w3-right"><a href="${pageContext.request.contextPath}/team/main.do"><i class="fa fa-sign-in"></i></a></li>
 			</ul>
 		</div>
 	</header>
 	<div class="w3-container w3-padding-xxlarge">
 		<div class="w3-bottombar" style="margin-bottom: 30px;">
-			<h2>마이 페이지</h2>
-			<h3>자신의 정보를 확인하고 수정 할 수 있습니다.</h3>
+			<h2><strong>마이 페이지</strong></h2>
+			<h4>자신의 정보를 확인하고 수정 할 수 있습니다.</h4>
 		</div>
 
 	</div>
@@ -96,15 +97,16 @@
 				<div class="filebox">
 					<label for="ex_file" class="w3-btn w3-large w3-dark-grey"
 						style="margin-top: 20px; display: inline-block;">프로필 사진 변경</label>
-					<input type="file" id="ex_file" name="imagePath">
-					
+					<input type="file" id="ex_file" name="imagePath" accept="image/*">
+
 				</div>
 			</div>
 			<div class="w3-section">
 
 				<label><b>ID</b></label> <input class="w3-input w3-border"
-					value="${member.memberId}" type="text" readonly> <br><label><b>PW</b></label>
-				<input class="w3-input w3-border w3-margin-bottom" type="password"
+					value="${member.memberId}" type="text" readonly> <br>
+				<label><b>PW</b></label> <input
+					class="w3-input w3-border w3-margin-bottom" type="password"
 					placeholder="영문, 특수, 숫자 조합 9 ~ 15자" id="pw" name="password"
 					maxlength="15" oninput="checkValidityInPw();"
 					value="${member.password}">
@@ -117,7 +119,7 @@
 					maxlength="15" oninput="checkValidityInPwCon();"
 					value="${member.password}">
 
-				<p id="validityInPwCon" class="msg" style="color: red"></p>
+				<p id="validityInPwCon" class="msg"></p>
 				<input id="pwConValidity" style="display: none" value="true"
 					class="confirm"> <label><b>별명</b></label> <input
 					class="w3-input w3-border w3-margin-bottom" type="text"
@@ -143,7 +145,7 @@
 			</div>
 		</form>
 	</div>
-	
+
 	<%@ include file="/views/member/alertInMyPage.jspf"%>
 
 	<script>
@@ -259,7 +261,7 @@
 		}
 
 	</script>
-	
-	
+
+
 </body>
 </html>
