@@ -22,6 +22,10 @@
 	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
 
 <style>
+
+
+
+
 a[name=aInBtn] {
 	text-decoration: none;
 }
@@ -105,16 +109,16 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</header>
 
 <!--  Start Page  -->
-<div style="padding: 50px">   
-	<div style="padding-right: 100px">
-		<div style="padding-right: 60px">
+<div style="padding: 30px">   
+	<div style="padding-right: 30px">
+		<div style="padding-right: 30px">
 <table>
 	<colgroup>
 			<col width="400" align="center">
-			<col width="400" align="left">
+			<col width="500" align="left">
+			<col width="300" align="center">
 			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
+			<col width="300" align="center">
 	</colgroup>
 	<form class="w3-container" action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
 	<tr>

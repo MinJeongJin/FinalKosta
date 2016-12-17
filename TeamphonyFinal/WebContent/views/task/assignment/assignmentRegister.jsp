@@ -22,6 +22,15 @@
 	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
 
 <style>
+
+
+table {
+    table-layout:fixed;
+}
+
+table td {
+    overflow:hidden;
+}
 a[name=aInBtn] {
 	text-decoration: none;
 }
@@ -112,7 +121,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	<table class="table">
 		<colgroup>
 			<col width="150">
-			<col width="*">
+			<col width="600">
 
 		</colgroup>
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
@@ -120,20 +129,11 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<td><input id="title" name="title" class="form-control"
 				type="text" value="" placeholder="제목을 입력하세요."></td>
 		</tr>
-		<tr style="horizontal-align: left;">
-			<th>제출자</th>
-			<c:forEach items="${memberList }" var="member">
-				<td style="float: left; width: 70px;"><input type="checkbox"
-					name="memberIdList" class="form-control"
-					style="width: 20px; margin: 0px;" value="${member.memberId }">
-					${member.memberId }</td>
-			</c:forEach>
-		</tr>
+		
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>제출 기한</th>
 			<td><input type="date" id="deadlineDay" name="deadlineDay">
 				<input type="time" id="deadlineHour" name="deadlineHour">
-
 			</td>
 		</tr>
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
@@ -151,6 +151,15 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<input type="hidden" name="flag" value="0" />
 				
 			</td>
+		</tr>
+		<tr style="horizontal-align: left;">
+			<th>제출자</th>
+				<td >
+			<c:forEach items="${memberList }" var="member">
+					<input type="checkbox" name="memberIdList" style="width: 20px; margin: 0px;" value="${member.memberId }">
+					${member.memberId }<br>
+			</c:forEach>
+				</td>
 		</tr>
 		<tr>
 		<th></th>

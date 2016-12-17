@@ -81,8 +81,8 @@ public class SubmissionController {
 		
 		System.out.println("filePathOnly1= " +  uploadPath);
 		
-		httpSession.setAttribute("loginedMember", "aaaa");
-		httpSession.setAttribute("teamCode", 9642);
+//		httpSession.setAttribute("loginedMember", "aaaa");
+//		httpSession.setAttribute("teamCode", 9642);
 		
 		TaskMember taskMember= new TaskMember();
 		taskMember.setCommitted(Integer.parseInt(committed));
