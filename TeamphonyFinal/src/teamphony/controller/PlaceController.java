@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class PlaceController {
 	}
 	
 	@RequestMapping("searchAll.do")
-	public String searchAllPlace(Model model){
+	public String searchAllPlace(Model model, HttpSession session){
 		List<Place> list = placeService.findAllPlace();
 		List<Place> places = new ArrayList<>();
 		
@@ -80,22 +81,29 @@ public class PlaceController {
 			places.add(place);
 		}
 		model.addAttribute("places", places);
-		return "place/placeList";
+		
+		String admin = (String) session.getAttribute("isAdmin");
+		if(admin.equals("Admin")){
+			session.setAttribute("isAdmin", admin);
+			return "place/placeListAdmin";
+		} else {
+			return "place/placeList";
+		}
 	}
 	
-	@RequestMapping("adminSearchAll.do")
-	public String searchAdminAllPlace(Model model){
-		List<Place> list = placeService.findAllPlace();
-		List<Place> places = new ArrayList<>();
-		
-		for(Place place : list){
-			String [] array = place.getAddress().split(" ");
-			place.setAddress(array[0] + " " + array[1]);
-			places.add(place);
-		}
-		model.addAttribute("places", places);
-		return "place/placeListAdmin";
-	}
+//	@RequestMapping("adminSearchAll.do")
+//	public String searchAdminAllPlace(Model model){
+//		List<Place> list = placeService.findAllPlace();
+//		List<Place> places = new ArrayList<>();
+//		
+//		for(Place place : list){
+//			String [] array = place.getAddress().split(" ");
+//			place.setAddress(array[0] + " " + array[1]);
+//			places.add(place);
+//		}
+//		model.addAttribute("places", places);
+//		return "place/placeListAdmin";
+//	}
 	
 	@RequestMapping("searchByName.do")
 	public String searchPlaceByPlaceName(String placeName, Model model){

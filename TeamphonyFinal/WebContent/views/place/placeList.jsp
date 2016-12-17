@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Teamphony !  </title>
-
+    
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -21,6 +21,9 @@
     
     <!-- Custom styling plus plugins -->
     <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/w3.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     
@@ -33,6 +36,8 @@
     <!-- NProgress -->
     <script src="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.js"></script>
     
+    <script src="${pageContext.request.contextPath}/resources/js/sideBarControl.js"></script>
+    
     <script id="template" type="text/x-handlebars-template">
 	<img style="width: 100%; display: block;" src="{{getLink}}" alt="image"/>
 	</script>
@@ -41,12 +46,16 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
+      
+		<%@ include file="/views/common/sideBar.jspf"%>
+   
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="padding-left:70px;">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3> 모임 장소 </h3>
+              <div class="title_left" style="color:black">
+                <h3><strong> 모임 장소  </strong></h3>
+                
               </div>
 
               <div class="title_right">
@@ -64,6 +73,7 @@
                 </div>
               </div>
             </div>
+            <div class="w3-section w3-bottombar "></div>
 
             <div class="clearfix"></div>
 
@@ -71,17 +81,8 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                     <h2> <small> 스터디 공간을 알려드릴게요</small></h2> 
+                     <h4>스터디 공간을 알려드릴게요</h4> 
                      
-                     <!-- 관리자에게만 보인다. -->
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a style="visibility: hidden;" class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a style="visibility: hidden;" class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                      <li><a href="${pageContext.request.contextPath}/views/place/placeRegister.jsp" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
-                    </ul>
-                    
                     <div class="clearfix"></div>
                     
                   </div>

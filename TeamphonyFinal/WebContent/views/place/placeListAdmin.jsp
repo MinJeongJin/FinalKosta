@@ -22,6 +22,9 @@
     <!-- Custom styling plus plugins -->
     <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
     
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/w3.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     
     <!-- jQuery -->
@@ -33,16 +36,39 @@
     <!-- NProgress -->
     <script src="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.js"></script>
     
+    <script src="${pageContext.request.contextPath}/resources/js/sideBarControl.js"></script>
+    
     <script id="template" type="text/x-handlebars-template">
 	<img style="width: 100%; display: block;" src="{{getLink}}" alt="image"/>
 	</script>
   </head>
 
   <body class="nav-md">
-    <div class="container body">
+    <div class="container body" >
       <div class="main_container">
+      
+      <!-- Sidenav/menu -->
+	<nav class="w3-sidenav w3-collapse w3-white w3-animate-left "
+		style="z-index: 3; width: 250px;" id="mySidenav">
+		<br>
+		<div class="w3-container w3-card-4 w3-padding-16"
+			style="margin-bottom: 20px;">
+			<a href="#" onclick="w3_close()"
+				class="w3-hide-large w3-right w3-jumbo w3-padding"
+				title="close menu"> <i class="fa fa-remove"></i>
+			</a> <img
+				src="${pageContext.request.contextPath}/resources/images/admin.jpg"
+				style="width: 45%;" class="w3-round"> <br><br>
+			<h4 class="w3-padding-0">
+				<span>어서오세요</span><br>
+			</h4>
+			<p class="w3-text-grey">관리자 님</p>
+		</div>
+
+	</nav>
+      
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="padding-left:70px;">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -73,7 +99,6 @@
                   <div class="x_title">
                      <h2> <small> 스터디 공간을 알려드릴게요</small></h2> 
                      
-                     <!-- 관리자에게만 보인다. -->
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a style="visibility: hidden;" class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -109,16 +134,14 @@
 		                          </script>
 	                       	  </a>
 	                       	  
-	                       	  <c:if test="${isAdmin }">
-		                       	  <div class="mask" style="height: 160px;">
+		                       	<div class="mask" style="height: 160px;">
 	                              <p>관리자 모드</p>
 	                              <div class="tools tools-bottom">
 	                                <a href="${pageContext.request.contextPath}/place/detail.do?placeId=${place.placeId}"><i class="fa fa-link"></i></a>
 	                                <a href="${pageContext.request.contextPath}/place/revise.do?placeId=${place.placeId}"><i class="fa fa-pencil"></i></a>
-	                                <a href="${pageContext.request.contextPath}/place/erase.do?placeId=${place.placeId}"><i class="fa fa-times"></i></a>
+	                                <a onclick="deleteFile(); deletePlace();"><i class="fa fa-times"></i></a>
 	                              </div>
 	                           	  </div>
-                              </c:if>
                               
 	                          </div>
 	                          <div class="caption">
@@ -154,6 +177,25 @@
     	}
     	
     }
+
+	// 삭제버튼 클릭시 file 삭제
+	function deleteFile(){
+		var arr=[];
+		$("#slider a").each(function(index){
+			arr.push($(this).attr("data-src"));
+		});
+		if(arr.length > 0){
+			$.post("${pageContext.request.contextPath}/place/deleteAllFiles.do", {files:arr}, function(){
+			
+			});
+		}
+	}
+	// 삭제버튼 클릭시 place 삭제()
+	function deletePlace(){
+		var id = ${place.placeId};
+		location.href = "${pageContext.request.contextPath}/place/erase.do?placeId=" + ${place.placeId};
+	}
+	
     </script>
   </body>
 </html>
