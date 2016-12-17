@@ -156,6 +156,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<td>
 				<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 				<input type="hidden" name="flag" value="1" />
+				<input type="hidden" name="committed" value="1" />
 			</td>
 		</tr>
 		

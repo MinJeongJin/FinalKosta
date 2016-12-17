@@ -60,9 +60,9 @@ public class TaskStoreLogic implements TaskStore {
 				
 				Member member = (Member)session.getAttribute("member");
 				String loginedMemberId = member.getMemberId();
-				System.out.println("==============insert Mapper================");
-				System.out.println("loginedMemberId"+ loginedMemberId);
 				mapper.insertSubmission(task);
+				
+				
 				sqlsession.commit();
 				
 					
@@ -172,6 +172,9 @@ public class TaskStoreLogic implements TaskStore {
 				for(Task task : taskList){
 					task.setMemberIdList(mapper.selectMemberIdByAssignmentId(task.getTaskId()));
 					task.setTaskMember(mapper.selectTaskMemberByAssignmentId(task.getTaskId()));
+					System.out.println("==========mapper/selectAlltask//assignment========");
+					System.out.println("getTaskMember().size= "+task.getTaskMember().size());
+					
 				
 				}
 			
@@ -224,6 +227,7 @@ public class TaskStoreLogic implements TaskStore {
 	public List<Task> selectTaskByMemberId(String memberId) {
 		
 		SqlSession sqlsession = getSessionFactory().openSession();
+		Task task = new Task();
 		List<Task> taskList = new ArrayList<>();
 		List<Integer> assignmentIdList = new ArrayList<>();
 		List<Integer> submissionIdList = new ArrayList<>();
@@ -231,15 +235,21 @@ public class TaskStoreLogic implements TaskStore {
 		try{
 			TaskMapper mapper= sqlsession.getMapper(TaskMapper.class);
 			
-			submissionIdList = mapper.selectSubmissionIdByMemberId(memberId);
 			assignmentIdList = mapper.selectAssignmentIdByMemberId(memberId);
+			submissionIdList = mapper.selectSubmissionIdByMemberId(memberId);
 			
-			for(int submissionId : submissionIdList){
-				taskList.add(selectTaskByTaskId(submissionId));
-				for(int assignmentId : assignmentIdList ){
-					taskList.add(selectTaskByTaskId(assignmentId));
+			for(int assignmentId : assignmentIdList ){
+				task = selectTaskByTaskId(assignmentId);
+				task.setTaskMember(mapper.selectTaskMemberByAssignmentId(assignmentId));
+				taskList.add(task);
+
+				for(int submissionId : submissionIdList){
+					taskList.add(selectTaskByTaskId(submissionId));
 				}
 			}
+			
+			
+			
 		}finally{
 			sqlsession.close();
 		}

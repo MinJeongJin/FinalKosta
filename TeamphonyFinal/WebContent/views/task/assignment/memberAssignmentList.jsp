@@ -235,135 +235,155 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</header>
 
 <!--  Start Page  -->
-<div align="right" style="padding:10px ">
-					<form action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
-						<input name="memberId" id="memberId" type="text" class="btn btn-xs btn-default" value="" placeholder="팀원 아이디를 입력 하세요"/>
-						<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">검색</button>
-					</form>
+<div align="right" style="padding:0px ">
+	<form action="${pageContext.request.contextPath}/assignment/searchByMemberId.do" method="post">
+		<input name="memberId" id="memberId" type="text" class="btn btn-xs btn-default" value="" placeholder="팀원 아이디를 입력 하세요"/>
+		<button name="searchByMemberId" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">검색</button>
+	</form>
+	<div style="padding-top: 10px">
+		<tr>
+			<th></th>
+			<td></td>
+			<td></td>
+			<td align="right">																	
+				<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
+					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 리스트</button>
+				</a> 
+				<a href="${pageContext.request.contextPath}/submission/searchAll.do">
+					<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
+				</a> 
+			</td>
+		</tr>
+	</div>
 				
-	<h1 align="left">${memberId } 님의 부여과제 리스트</h1><br><br>
-				<table class="table table-hover table-condensed" text-align:center;>
-					<colgroup>
-						<col width="70" align="center">
-						<col width="300" align="center">
-						<col width="300" align="center">
-						<col width="400" align="center">
-					</colgroup>
-					<thead>
-						<tr>
-							<th>순번</th>
-							<th>제목</th>
-							<th>제출기한</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list }" var="task" varStatus="sts">
-							<c:if test="${task.flag eq 0 }"  >
-						<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-								<td>${sts.count }</td>
-								<td><a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a></td>
-								<td>${task.deadline }</td>
-								<td align="right">
-									<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?assignmentTitle=${task.title }&memberId=${loginedMember }&assignmentId=${task.taskId }">
-										<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
-									</a>
-								</td>
-						</tr>
-							</c:if>
-						</c:forEach>
+<h1 align="left">${memberId } 님의 부여과제 리스트</h1><br><br>
+	<table class="table table-hover table-condensed" text-align:center;>
+		<colgroup>
+			<col width="70" align="center">
+			<col width="400" align="center">
+			<col width="100" align="center">
+			<col width="400" align="center">
+			<col width="100" align="center">
+		</colgroup>
+	<thead>
+		<tr>
+			<th>순번</th>
+			<th>제목</th>
+			<th>제출여부</th>
+			<th>제출기한</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${list }" var="task" varStatus="sts">
+			<c:if test="${task.flag eq 0 }"  >
+		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+			<td>${sts.count }</td>
+			<td>
+				<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+			</td>
+			<td>
+				<c:forEach items="${task.taskMember }" var="taskMember">
+				<c:if test="${taskMember.memberId eq memberId }">
+					<c:if test="${taskMember.committed eq 1 }">
+						Y <br>
+					</c:if>
+					<c:if test="${taskMember.committed eq 0 }">
+						N <br>
+					</c:if>
+				</c:if>
+					
+				</c:forEach>
+			</td>
+			<td>${task.deadline }</td>
+			<td align="right">
+				<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?assignmentTitle=${task.title }&memberId=${loginedMember }&assignmentId=${task.taskId }">
+					<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
+				</a>
+			</td>
+		</tr>
+			</c:if>
+		</c:forEach>
+	</tbody>
+</table>
 </div>
-							<tr>
-							<th></th>
-								<td></td>
-								<td></td>
-								<td align="right">																	
-									<a href="${pageContext.request.contextPath}/assignment/searchAll.do">
-										<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">부여과제 리스트</button>
-									</a> 
-									<a href="${pageContext.request.contextPath}/submission/searchAll.do">
-										<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-medium">제출과제 리스트</button>
-									</a> 
-								</td>
-							</tr>
-					</tbody>
-				</table>
+
 				
 <div style="padding-top: 50px">
 <h1 align="left">${memberId } 님의 제출과제 리스트</h1><br><br>
 	<table class="table table-hover table-condensed">
 		<colgroup>
-				<col width="60" align="center">
-				<col width="200" align="center">
-				<col width="150" align="center">
-				<col width="150" align="center">
-				<col width="80" align="center">
-				<col width="80" align="center">
-				<col width="80" align="center">
-				<col width="120" align="right">
+			<col width="60" align="center">
+			<col width="200" align="center">
+			<col width="150" align="center">
+			<col width="150" align="center">
+			<col width="80" align="center">
+			<col width="80" align="center">
+			<col width="80" align="center">
+			<col width="120" align="right">
 		</colgroup>
-		<thead>
-			<tr>
-				<th>순번</th>
-				<th>부여과제</th>
-				<th>제목</th>
-				<th>첨부파일</th>
-				<th>평점</th>
-				<th>평가여부</th>
-				<th>평가횟수</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${list }" var="task" varStatus="sts">
-				<c:forEach items="${task.assignmentTitleList }" var="assignmentTitle"> 
-					<c:if test="${task.flag eq 1 }"  >
-						<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-						<td>${sts.count }</td>
-						<td>${assignmentTitle }</td>
-						
-						<td>
-							<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
-						</td>
-						<td>
-							<c:forEach items="${task.taskFileList}" var="taskFile">
-											${taskFile.filePath}<br>
-							</c:forEach>
-						</td>
-						<td>
-							<p>
-								<span class="starRating">
-									<span style="width:${task.getPointStar() }%"><br>
-								</span>
-								</span>
-									<fmt:formatNumber value="${task.getAverage() }" pattern=".00"/>
-									 점
-							</p>
-						</td>
-						<td>
-							<c:choose>
-								<c:when test="${task.evaluated == 1 }">
-									Y
-								</c:when>
-								<c:when test="${task.evaluated == 0 }">
-									N
-								</c:when>
-							</c:choose>
-						</td>
-						<td>
-							${task.evaluationCnt } 회
-						</td>
-						<td align="right">
-							<a href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId }&memberId=${memberId }">
-								<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">수정</button>
-							</a>
-							<a href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }">
-								<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
-							</a>
-						</td>
-					</c:if>
-				</c:forEach>
-			</c:forEach>
-		</tbody>
-	</table>
+	<thead>
+		<tr>
+			<th>순번</th>
+			<th>부여과제</th>
+			<th>제목</th>
+			<th>첨부파일</th>
+			<th>평점</th>
+			<th>평가여부</th>
+			<th>평가횟수</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:forEach items="${list }" var="task" varStatus="sts">
+		<c:forEach items="${task.assignmentTitleList }" var="assignmentTitle"> 
+			<c:if test="${task.flag eq 1 }"  >
+				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+				<td>${sts.count }</td>
+				<td>${assignmentTitle }</td>
+				
+				<td>
+					<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+				</td>
+				<td>
+					<c:forEach items="${task.taskFileList}" var="taskFile">
+									${taskFile.filePath}<br>
+					</c:forEach>
+				</td>
+				<td>
+					<p>
+						<span class="starRating">
+							<span style="width:${task.getPointStar() }%"><br>
+						</span>
+						</span>
+							<fmt:formatNumber value="${task.getAverage() }" pattern=".00"/>
+							 점
+					</p>
+				</td>
+				<td>
+					<c:choose>
+						<c:when test="${task.evaluated == 1 }">
+							Y
+						</c:when>
+						<c:when test="${task.evaluated == 0 }">
+							N
+						</c:when>
+					</c:choose>
+				</td>
+				<td>
+					${task.evaluationCnt } 회
+				</td>
+				<td align="right">
+					<a href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId }&memberId=${memberId }">
+						<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">수정</button>
+					</a>
+					<a href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }">
+						<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
+					</a>
+				</td>
+			</c:if>
+		</c:forEach>
+	</c:forEach>
+	</tbody>
+</table>
 </div>
 
 <!-- End page content -->

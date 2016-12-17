@@ -131,16 +131,18 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	<table class="table table-hover table-condensed" text-align:center;>
 		<colgroup>
 			<col width="100" align="center">
+			<col width="800" align="center">
 			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="center">
-			<col width="400" align="right">
+			<col width="300" align="center">
+			<col width="500" align="center">
+			<col width="200" align="right">
 		</colgroup>
 		<thead>
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
 				<th>제출자</th>
+				<th>제출여부</th>
 				<th>제출기한</th>
 				<th></th>
 			</tr>
@@ -154,22 +156,36 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</td>
 					<td>
 						<c:forEach items="${task.memberIdList }" var="memberId">
-							${memberId }<br>
+							${memberId } <br>
+						</c:forEach>
+					</td>
+							
+					<td align="center">
+						<c:forEach items="${task.taskMember }" var="taskMember">
+							<c:if test="${taskMember.committed eq 1 }">
+								Y <br>
+							</c:if>
+							<c:if test="${taskMember.committed eq 0 }">
+								N <br>
+							</c:if>
 						</c:forEach>
 					</td>
 					<td colspan="2">${task.deadline }</td>
-					<td>
+					<td align="right">
 						<a href="${pageContext.request.contextPath}/submission/create.do?assignmentTitle=${task.title }&assignmentId=${task.taskId }">
 							<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
 						</a>
 					</td>
 				</tr>
+				
 			</c:forEach>
+			
 		</div>
 	</div>
 </div>
 				<tr style="margin-top: 20px">
 				<th></th>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
