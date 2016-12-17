@@ -17,6 +17,7 @@ import org.w3c.dom.ls.LSInput;
 import teamphony.domain.Member;
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
+import teamphony.domain.TaskMember;
 import teamphony.store.facade.TaskStore;
 import teamphony.store.mapper.TaskMapper;
 
@@ -172,9 +173,9 @@ public class TaskStoreLogic implements TaskStore {
 				for(Task task : taskList){
 					task.setMemberIdList(mapper.selectMemberIdByAssignmentId(task.getTaskId()));
 					task.setTaskMember(mapper.selectTaskMemberByAssignmentId(task.getTaskId()));
-					System.out.println("==========mapper/selectAlltask//assignment========");
-					System.out.println("getTaskMember().size= "+task.getTaskMember().size());
-					
+//					System.out.println("==========mapper/selectAlltask//assignment========");
+//					System.out.println("getTaskMember().size= "+task.getTaskMember().size());
+//					
 				
 				}
 			
@@ -189,6 +190,7 @@ public class TaskStoreLogic implements TaskStore {
 					System.out.println("=======mapper===============");
 					System.out.println(task.toString());
 					System.out.println("=====================================");
+					
 				}
 				
 			}
@@ -227,26 +229,35 @@ public class TaskStoreLogic implements TaskStore {
 	public List<Task> selectTaskByMemberId(String memberId) {
 		
 		SqlSession sqlsession = getSessionFactory().openSession();
-		Task task = new Task();
 		List<Task> taskList = new ArrayList<>();
-		List<Integer> assignmentIdList = new ArrayList<>();
-		List<Integer> submissionIdList = new ArrayList<>();
+		List<TaskMember> taskMemberList = new ArrayList<>();
+//		List<Integer> assignmentIdList = new ArrayList<>();
+//		List<Integer> submissionIdList = new ArrayList<>();
 		
 		try{
 			TaskMapper mapper= sqlsession.getMapper(TaskMapper.class);
+			taskList = mapper.selectMembersTaskByMemberId(memberId);
 			
-			assignmentIdList = mapper.selectAssignmentIdByMemberId(memberId);
-			submissionIdList = mapper.selectSubmissionIdByMemberId(memberId);
-			
-			for(int assignmentId : assignmentIdList ){
-				task = selectTaskByTaskId(assignmentId);
-				task.setTaskMember(mapper.selectTaskMemberByAssignmentId(assignmentId));
-				taskList.add(task);
-
-				for(int submissionId : submissionIdList){
-					taskList.add(selectTaskByTaskId(submissionId));
-				}
+			for(Task task : taskList){
+				taskMemberList = mapper.selectTaskMemberBySubmissionId(task.getTaskId());
+				
+				task.setTaskMember(taskMemberList);
 			}
+			
+			
+//			assignmentIdList = mapper.selectAssignmentIdByMemberId(memberId);
+//			submissionIdList = mapper.selectSubmissionIdByMemberId(memberId);
+//			
+//			
+//			for(int assignmentId : assignmentIdList ){
+//				task = selectTaskByTaskId(assignmentId);
+//				task.setTaskMember(mapper.selectTaskMemberByAssignmentId(assignmentId));
+//				taskList.add(task);
+//
+//				for(int submissionId : submissionIdList){
+//					taskList.add(selectTaskByTaskId(submissionId));
+//				}
+//			}
 			
 			
 			

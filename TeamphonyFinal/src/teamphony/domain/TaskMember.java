@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskMember {
 	
-	private int assignmentid;
-	private int submissionid;
+	private int assignmentId;
+	private int submissionId;
 // 0 == Not	, 1 == committed	
 	private int committed;
 	private String memberId; 
@@ -23,20 +23,23 @@ public class TaskMember {
 		
 	}
 
-	public int getAssignmentid() {
-		return assignmentid;
+	
+	public int getAssignmentId() {
+		return assignmentId;
 	}
 
-	public void setAssignmentid(int assignmentid) {
-		this.assignmentid = assignmentid;
+	public void setAssignmentId(int assignmentId) {
+		this.assignmentId = assignmentId;
 	}
 
-	public int getSubmissionid() {
-		return submissionid;
+
+	public int getSubmissionId() {
+		return submissionId;
 	}
 
-	public void setSubmissionid(int submissionid) {
-		this.submissionid = submissionid;
+
+	public void setSubmissionId(int submissionId) {
+		this.submissionId = submissionId;
 	}
 
 	public int getCommitted() {
@@ -47,14 +50,7 @@ public class TaskMember {
 		this.committed = committed;
 	}
 
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberid(String memberId) {
-		this.memberId = memberId;
-	}
-
+	
 	public String getAssignmentTitle() {
 		return assignmentTitle;
 	}
@@ -64,9 +60,26 @@ public class TaskMember {
 	}
 
 	
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	
+	public String getMemberId() {
+		return memberId;
+	}
+
+
+	@Override
+	public String toString() {
+		return "assignmentid = " + assignmentId + "\n"
+				+"submissionid = " + submissionId + "\n"
+				+"committed = " + committed + "\n"
+				+"memberId = " + memberId + "\n"
+				+"assignmentTitle = " + assignmentTitle + "\n";
+				
 	
+	}
 	
-	
+
 
 }

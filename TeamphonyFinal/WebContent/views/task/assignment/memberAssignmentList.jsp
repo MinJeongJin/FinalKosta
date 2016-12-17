@@ -274,34 +274,32 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${list }" var="task" varStatus="sts">
-			<c:if test="${task.flag eq 0 }"  >
-		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-			<td>${sts.count }</td>
-			<td>
-				<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
-			</td>
-			<td>
-				<c:forEach items="${task.taskMember }" var="taskMember">
-				<c:if test="${taskMember.memberId eq memberId }">
-					<c:if test="${taskMember.committed eq 1 }">
-						Y <br>
-					</c:if>
-					<c:if test="${taskMember.committed eq 0 }">
-						N <br>
-					</c:if>
-				</c:if>
-					
-				</c:forEach>
-			</td>
-			<td>${task.deadline }</td>
-			<td align="right">
-				<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?assignmentTitle=${task.title }&memberId=${loginedMember }&assignmentId=${task.taskId }">
-					<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
-				</a>
-			</td>
-		</tr>
-			</c:if>
+		<c:forEach items="${assignmentList }" var="task" varStatus="sts">
+				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
+					<td>${sts.count }</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/assignment/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
+					</td>
+					<td>
+						<c:forEach items="${task.taskMember }" var="taskMember">
+						<c:if test="${taskMember.memberId eq memberId }">
+							<c:if test="${taskMember.committed eq 1 }">
+								Y <br>
+							</c:if>
+							<c:if test="${taskMember.committed eq 0 }">
+								N <br>
+							</c:if>
+						</c:if>
+							
+						</c:forEach>
+					</td>
+					<td>${task.deadline }</td>
+					<td align="right">
+						<a href="${pageContext.request.contextPath}/views/task/submission/submissionRegister.jsp?assignmentTitle=${task.title }&memberId=${loginedMember }&assignmentId=${task.taskId }">
+							<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">제출</button>
+						</a>
+					</td>
+				</tr>
 		</c:forEach>
 	</tbody>
 </table>
@@ -330,23 +328,28 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<th>평점</th>
 			<th>평가여부</th>
 			<th>평가횟수</th>
+			<th></th>
 		</tr>
 	</thead>
+	
+	
+	
 	<tbody>
-	<c:forEach items="${list }" var="task" varStatus="sts">
-		<c:forEach items="${task.assignmentTitleList }" var="assignmentTitle"> 
-			<c:if test="${task.flag eq 1 }"  >
+	<c:forEach items="${submissionList }" var="task" varStatus="sts">
+		<c:forEach items="${task.taskMember }" var="taskMember">
+			<c:if test="${taskMember.memberId eq memberId }"> 
 				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
-				<td>${sts.count }</td>
-				<td>${assignmentTitle }</td>
-				
-				<td>
-					<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">${task.title }</a>
-				</td>
-				<td>
-					<c:forEach items="${task.taskFileList}" var="taskFile">
-									${taskFile.filePath}<br>
-					</c:forEach>
+					<td>${sts.count }</td>
+					<td>${taskMember.assignmentTitle }</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId }">
+							${task.title }
+						</a>
+					</td>
+					<td>
+			<c:forEach items="${task.taskFileList}" var="taskFile">
+				${taskFile.filePath}<br>
+			</c:forEach>
 				</td>
 				<td>
 					<p>
@@ -379,9 +382,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 						<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
 					</a>
 				</td>
-			</c:if>
-		</c:forEach>
-	</c:forEach>
+				</tr>
+				</c:if>
+			</c:forEach>
+		</c:forEach> 
 	</tbody>
 </table>
 </div>

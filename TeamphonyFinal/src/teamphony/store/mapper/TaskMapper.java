@@ -42,6 +42,8 @@ public interface TaskMapper {
 	List<TaskFile> selectFileListByTaskId(int taskId);
 // 추가 했음
 	List<TaskMember> selectTaskMemberByAssignmentId(int taskId);
+// 추가 했음	
+	List<TaskMember> selectTaskMemberBySubmissionId(int taskId);
 	
 //	추가 했음
 	TaskFile selectFileList(int taskId);
@@ -59,6 +61,8 @@ public interface TaskMapper {
 	List<Task> selectAllAssginment();
 	
 	List<String> selectAssignmentTitleBySubmissionId(int submissionId);
+//추가 했음	
+	List<Task> selectMembersTaskByMemberId(String memberId);
 	
 	
 }

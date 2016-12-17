@@ -23,6 +23,7 @@ public class Task {
 //제출과제 리스트에 뿌리기 위한 부여과제 제목 변수 선언
 	private List<String> assignmentTitleList;
 	private int point;
+//flag 1==submission   flag 0==assignment
 	private int flag;
 	private List<TaskFile> taskFileList;
 //평가 여부를 위한 변수 선언// flase == 0, ture == 1   
@@ -212,8 +213,8 @@ public class Task {
 				+ "evaluated= " + evaluated + "\n"
 				+ "point= " + point + "\n"
 				+ "evaluationCnt= " + evaluationCnt + "\n" 
-				+ "pointStar= " + getPointStar() + "%" + "\n"
-				+ "memberIdList= " + getMemberIdList().length + "\n" ;
+				+ "pointStar= " + getPointStar() + "%" + "\n";
+//				+ "memberIdList= " + getMemberIdList().length + "\n" ;
 	
 	}
 	

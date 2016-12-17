@@ -146,6 +146,18 @@
 				ORDER BY ASSIGNMENTID ASC
 	</select>
 	
+	<select id="selectTaskMemberBySubmissionId" parameterType="int" resultType="TaskMember">
+			SELECT 				
+				ASSIGNMENTID
+				,MEMBERID
+				,SUBMISSIONID
+				,ASSIGNMENT_TITLE			AS assignmentTitle
+				,COMMITTED
+			FROM TASKMEMBER 
+				WHERE SUBMISSIONID = #{taskId }
+				ORDER BY SUBMISSIONID ASC
+	</select>
+	
 	<select id="selectMemberIdByAssignmentId" parameterType="int"  resultType="String">
 			SELECT 
 				MEMBERID 
@@ -194,6 +206,62 @@
    			FROM TASK_TB 
 			WHERE ID= #{taskId}  
 		
+	</select>
+	
+	<select id="selectMembersTaskByMemberId" parameterType="String" resultType="task">
+			
+			SELECT 
+				TT.ID						AS taskId
+				,TT.TITLE                         
+				,TT.CONTENTS                        
+				,TT.FLAG                            
+				,TT.POINT                          
+				,TT.EVALUATED                       
+				,TT.EVALUATIONCNT                   
+				,TT.DEADLINE                       
+				,TT.EVALUATIONPERIODSTART          
+				,TT.EVALUATIONPERIODEND              
+				,TT.TEAMCODE
+				
+			FROM TASKMEMBER TM , TASK_TB TT
+			WHERE TM.MEMBERID = #{memberId}
+			AND TM.ASSIGNMENTID = TT.ID
+				UNION 
+			SELECT
+				TT.ID 
+				,TT.TITLE                         
+				,TT.CONTENTS                        
+				,TT.FLAG                            
+				,TT.POINT                          
+				,TT.EVALUATED                       
+				,TT.EVALUATIONCNT                   
+				,TT.DEADLINE                       
+				,TT.EVALUATIONPERIODSTART          
+				,TT.EVALUATIONPERIODEND              
+				,TT.TEAMCODE
+			FROM TASKMEMBER TM , TASK_TB TT
+			WHERE TM.MEMBERID = #{memberId}
+			AND TM.SUBMISSIONID = TT.ID 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	
 	</select>
 	
 	<select id="selectAssignmentIdByMemberId" parameterType="String" resultType="int">

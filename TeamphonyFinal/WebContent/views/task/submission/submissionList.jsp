@@ -250,7 +250,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		<col width="50" align="center">
 		<col width="150" align="center">
 		<col width="200" align="center">
-		<col width="50" align="center">
+		<col width="100" align="center">
 		<col width="200" align="center">
 		<col width="70" align="center">
 		<col width="70" align="center">
@@ -271,6 +271,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		<tbody>
 		<c:forEach items="${taskList }" var="task" varStatus="sts">
 			<c:forEach items="${task.assignmentTitleList }" var="assignmentTitle"> 
+				<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
+					
 				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 					<td >
 						${sts.count }
@@ -279,17 +281,17 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 						${assignmentTitle}
 					</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}">${task.title }</a>
+						<a href="${pageContext.request.contextPath}/submission/searchByTaskId.do?taskId=${task.taskId}">
+							${task.title }
+						</a>
 					</td>
 					<td>
-			<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
-							${memberId }
-			</c:forEach>
+						${memberId }
 					</td>
 					<td>
-			<c:forEach items="${task.taskFileList}" var="taskFile">
+				<c:forEach items="${task.taskFileList}" var="taskFile">
 						${taskFile.filePath}<br>
-			</c:forEach>
+				</c:forEach>
 					</td>
 					<td >
 						<p>
@@ -316,7 +318,9 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</td>
 				</tr>
 			</c:forEach>
-		</c:forEach>
+			</c:forEach>
+			</c:forEach>
+	
 </table>
 <table>
 	<colgroup>
@@ -344,6 +348,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</tr>
 	</tbody>
 </table>
+
 <!-- End page content -->
 
 </body>

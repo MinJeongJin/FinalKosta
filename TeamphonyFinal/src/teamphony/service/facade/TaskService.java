@@ -11,7 +11,7 @@ public interface TaskService {
 	
 	 void registerTask(Task task, HttpSession httpSession, String assignmentTitle, int assignmentId);
 
-	 void modifyTask(Task task, String assignmentTitle);
+	 void modifyTask(Task task , String assignmentTitle);
 
 	 void removeTask(int taskId, int flag);
 

@@ -10,7 +10,7 @@ public interface TaskStore {
 
 	void insertTask(Task task, HttpSession session, String assignmentTitle, int assignmentId);
 
-	void updateTask(Task task, String assignmentTitle);
+	void updateTask(Task task , String assignmentTitle);
 
 	void deleteTask(int taskId, int flag);
 

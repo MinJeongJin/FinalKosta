@@ -69,9 +69,9 @@ public class AssignmentController {
 		task.setEvaluationPeriodEnd("날짜: "+evalDayEnd +"   시간: " +evalHourEnd);
 		task.setTeamCode((int)httpSession.getAttribute("teamCode"));
 		
-		System.out.println("==============================");
-		System.out.println(task.toString());
-		System.out.println("==============================");
+//		System.out.println("==============================");
+//		System.out.println(task.toString());
+//		System.out.println("==============================");
 		service.registerTask(task, httpSession , assignmentTitle, task.getTaskId());
 		
 		return "redirect:searchAll.do";
@@ -160,10 +160,32 @@ public class AssignmentController {
 	@RequestMapping(value="/searchByMemberId.do", method= RequestMethod.POST)
 	public String searchAssignmentByMemberId(String memberId, Model model){
 		
-		List<Task> list = service.findTaskByMemberId(memberId);
+		List<Task> taskList = new ArrayList<>();
+		List<Task> assignmentList =new ArrayList<>();
+		List<Task> submissionList =new ArrayList<>();
 		
+		taskList = service.findTaskByMemberId(memberId);
+		
+		for(Task task : taskList){
+//flag 1==submission   flag 0==assignment			
+			if(task.getFlag() == 0){
+				
+				assignmentList.add(task);
+			}else if (task.getFlag() == 1){
+				
+				submissionList.add(task);
+			}
+		}
+		model.addAttribute("assignmentList", assignmentList);
+		model.addAttribute("submissionList", submissionList);
+		
+		for(Task task : submissionList){
+			System.out.println(task.toString());
+			System.out.println("==================================");
+			System.out.println("task.getTaskMember().toString()= "+task.getTaskMember().toString());
+			System.out.println("==================================");
+		}
 		model.addAttribute("memberId",memberId);
-		model.addAttribute("list",list);
 		
 		return "/task/assignment/memberAssignmentList";
 	}

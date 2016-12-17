@@ -36,7 +36,9 @@ import teamphony.domain.Member;
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
 import teamphony.domain.TaskMember;
+import teamphony.domain.Team;
 import teamphony.service.facade.TaskService;
+import teamphony.service.facade.TeamService;
 import teamphony.util.MediaUtils;
 import teamphony.util.UploadFileUtils;
 
@@ -46,6 +48,8 @@ public class SubmissionController {
 	
 	@Autowired
 	private TaskService service;
+	@Autowired
+	private TeamService teamService;
 	private static final Logger logger = LoggerFactory.getLogger(SubmissionController.class);
 
 //	private static final String filePathOnly = "c:/upload";
@@ -275,7 +279,7 @@ public class SubmissionController {
 
 	@RequestMapping(value = "/revise.do", method = RequestMethod.POST)
 	public String reviseSubmission(HttpServletRequest request
-									,HttpSession session,
+									,HttpSession httpSession,
 									@RequestParam("attchFile") MultipartFile[] attchFileList
 									,String taskId
 									,String title
@@ -348,17 +352,34 @@ public class SubmissionController {
 	}
 
 	@RequestMapping("/searchAll.do")
-	public String searchAllSubmission(HttpSession session, Model model) {
+	public String searchAllSubmission(HttpSession httpSession, Model model) {
 		
-		List<Task> taskList = service.findAllTaskByFlag(1, (int)session.getAttribute("teamCode"));
+		List<Task> taskList = service.findAllTaskByFlag(1, (int)httpSession.getAttribute("teamCode"));
 		
 		model.addAttribute("taskList", taskList);
+		
+		for(Task task : taskList){
+//			System.out.println("===========controller//submission//searchAll============");
+//			System.out.println(task.toString());
+//			System.out.println("==========================================================");
+//			System.out.println(task.getTaskMember().toString());
+//			System.out.println("==========================================================");
+		}
 		
 		return "/task/submission/submissionList";
 	}
 	
 	@RequestMapping("/evaluate.do")
-	public String evaluateAssignment(String taskId, Model model){
+	public String evaluateAssignment(HttpSession httpSession
+									, String loginedId
+									, String taskId
+									, Model model){
+		Team team = new Team();
+		team = teamService.findTeamByTeamCode((int)httpSession.getAttribute("teamCode"));
+		
+		if( !loginedId.equals(team.getLeaderId()) ){
+			return "common/leaderError";
+		}
 		
 		model.addAttribute("task", service.findTaskByTaskId(Integer.parseInt(taskId)));
 		return "/task/submission/submissionEvaluate";

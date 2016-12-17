@@ -27,6 +27,15 @@
 </head>
 
 <style type="text/css">
+
+table {
+    table-layout:fixed;
+}
+
+table td {
+    overflow:hidden;
+}
+
 a[name=aInBtn] {
 	text-decoration: none;
 }
@@ -112,9 +121,9 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 <!--  Start Page  -->
 
 <input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
-<div style="padding: 50px"> 
-	<div style="padding-left: 160px"> 
-		<div style="padding-right: 300px"> 
+<div style="padding: 30px"> 
+	<div style="padding-left: 90px"> 
+		<div style="padding-right: 180px"> 
 			<div style="padding-bottom: 50px" align="right">
 		<tr>
 			<td>
@@ -130,10 +139,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</tr>
 		</div>
 	<table class="w3-table">
-		<colgroup>
-			<col width="150">
-			<col width="*">
-		</colgroup>
+		 <colgroup>
+			<col width="120">
+			<col width="500">
+		</colgroup> 
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 			<th>부여과제 제목</th>
 			<td>
@@ -181,7 +190,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	<a class="w3-border"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }">
 		<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
 	</a>
-	<a id="evalutate" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}" >
+	<a id="evalutate" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}&loginedId=${member.memberId }" >
 		<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">
 			평가
 		</button>
