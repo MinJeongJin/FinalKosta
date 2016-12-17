@@ -119,8 +119,14 @@
 						varStatus="status">
 						<c:if test="${evaluationMember.memberId ne member.memberId }">
 							<tr>
-								<td><img class="evaluationProfile" alt="사진 없음"
-									src="${evaluationMember.imagePath}"></td>
+								<td>
+									<c:if test="${evaluationMember.imagePath eq 'pass'}">
+										<img alt="사진 없음" src="${pageContext.request.contextPath}/resources/images/defult.png">
+									</c:if>
+									<c:if test="${evaluationMember.imagePath ne 'pass'}">
+										<img class="evaluationProfile" alt="사진 없음" src="${pageContext.request.contextPath}/resources/images/${evaluationMember.memberId}/${evaluationMember.imagePath}">
+									</c:if>
+								</td>
 								<td>${evaluationMember.memberId}</td>
 								<td>${evaluationMember.alias}</td>
 								<td><a

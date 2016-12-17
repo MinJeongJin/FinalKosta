@@ -262,18 +262,32 @@
 	vertical-align: middle;
 }
 
-span.stars, span.stars span {
-	display: block;
-	background:
-		url(${pageContext.request.contextPath}/resources/images/stars.png) 0
-		-16px repeat-x;
-	width: 80px;
-	height: 16px;
+.star-ratings-sprite {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+  font-size: 0;
+  height: 21px;
+  line-height: 0;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 110px;
+  margin: 0 auto;
+  
+  &-rating {
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    background-position: 0 100%;
+    float: left;
+    height: 21px;
+    display:block;
+  }
+  
 }
 
-span.stars span {
-	background-position: 0 0;
-}
+// Stuff for Pen styling
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+body { margin: 50px; text-align: center; font-family: 'Open Sans', sans-serif; background: #f2fbff; }
+em { font-style: italic; }
+h1 { font-size: 24px; margin-bottom: 25px; font-weight: bold; text-transform: uppercase; }
+h2 { font-size: 16px; margin-bottom: 15px;}
 </style>
 
 
@@ -287,8 +301,7 @@ span.stars span {
 <script
 	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
-<body class="w3-light-grey w3-content" style="max-width: 1600px;"
-	onload="showInput();">
+<body class="w3-light-grey w3-content" style="max-width: 1600px;">
 
 	<!-- side bar -->
 	<%@ include file="/views/common/sideBar.jspf"%>
@@ -322,7 +335,7 @@ span.stars span {
 			<form
 				action="${pageContext.request.contextPath}/member/evaluation.do"
 				Method="post">
-				<input type="hidden" value="${evaluationMember.memberId }"
+				<input type="hidden" value="${evaluate.memberId }"
 					id="memberId" name="memberId">
 				<table>
 					<colgroup>
@@ -333,10 +346,8 @@ span.stars span {
 						<td><img alt="사진 없음" height="150" width="150"
 							src="${pageContext.request.contextPath}/resources/images/${evaluate.memberId}/${evaluate.imagePath}"></td>
 						<td>별명 : ${evaluate.alias}<br>
-							<p>
-								<span class="stars">지금 까지의 평점 : <span
-									style="width:${evaluate.starPoint*10}%"></span></span>
-							</p>
+							지금까지의 평점 : 
+							<div class="star-ratings-sprite"><span style="width:${evaluate.star}%" class="star-ratings-sprite-rating"></span></div>
 						</td>
 					</tr>
 				</table>

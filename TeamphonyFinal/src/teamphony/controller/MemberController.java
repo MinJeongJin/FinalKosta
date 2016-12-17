@@ -233,7 +233,7 @@ public class MemberController {
 		return "redirect:/views/common/login.jsp";
 	}
 
-	@RequestMapping(value = "evaluationList", method = RequestMethod.GET)
+	@RequestMapping(value = "evaluationList.do", method = RequestMethod.GET)
 	public String evaluationMemberList(HttpSession session, Model model) {
 		int teamCode = (int) session.getAttribute("teamCode");
 
@@ -244,7 +244,7 @@ public class MemberController {
 		return "/member/evaluationList";
 	}
 
-	@RequestMapping(value = "evaluation", method = RequestMethod.GET)
+	@RequestMapping(value = "evaluation.do", method = RequestMethod.GET)
 	public String evaluationMember(String memberId, Model model) {
 
 		Member member = memberService.findMemberByMemberId(memberId);
@@ -254,14 +254,14 @@ public class MemberController {
 		return "/member/evaluationMember";
 	}
 
-	@RequestMapping(value = "evaluation", method = RequestMethod.POST)
+	@RequestMapping(value = "evaluation.do", method = RequestMethod.POST)
 	public String evaluationMember(String memberId, int sincerity, int attitude, int contribution) {
 
 		double starPoint = (double) (attitude + contribution + sincerity) / 3.0;
 
 		memberService.saveStarPoint(memberId, starPoint);
 
-		return "redirect:/team/main.do";
+		return "redirect:/member/evaluationList.do";
 	}
 
 	@RequestMapping(value = "check.do", method = RequestMethod.POST)

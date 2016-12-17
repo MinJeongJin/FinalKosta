@@ -71,7 +71,7 @@ public class Member {
 	}
 	
 	public double getStar(){
-		return Math.round(starPoint/2.0);
+		return starPoint*10;
 	}
 
 }

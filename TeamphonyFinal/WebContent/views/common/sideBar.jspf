@@ -19,8 +19,7 @@
 			<a href="#" onclick="w3_close()"
 				class="w3-hide-large w3-right w3-jumbo w3-padding"
 				title="close menu"> <i class="fa fa-remove"></i>
-			</a> <img
-				src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
+			</a> <img src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
 				style="width: 45%;" class="w3-round"> <br> <br>
 			<h4 class="w3-padding-0">
 				<b>${member.memberId}</b>
