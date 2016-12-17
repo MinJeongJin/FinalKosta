@@ -179,12 +179,17 @@ public class AssignmentController {
 		model.addAttribute("assignmentList", assignmentList);
 		model.addAttribute("submissionList", submissionList);
 		
-		for(Task task : submissionList){
-			System.out.println(task.toString());
-			System.out.println("==================================");
-			System.out.println("task.getTaskMember().toString()= "+task.getTaskMember().toString());
-			System.out.println("==================================");
+		for(Task task : assignmentList){
+			System.out.println("=========assignmentList============");
+			System.out.println(task.getTaskMember().size());
 		}
+		
+//		for(Task task : submissionList){
+//			System.out.println(task.toString());
+//			System.out.println("==================================");
+//			System.out.println("task.getTaskMember().toString()= "+task.getTaskMember().toString());
+//			System.out.println("==================================");
+//		}
 		model.addAttribute("memberId",memberId);
 		
 		return "/task/assignment/memberAssignmentList";
