@@ -64,13 +64,20 @@ public class MemberController {
 		} else if (!result.getPassword().equals(loginPw)) {
 			model.addAttribute("result", "true");
 			return "/common/login";
-		}else if(loginId.equals("isAdmin")){
-			return "/place/place.do";
+		} else if(isAdminUser(loginId)){
+			session.setAttribute("isAdmin", isAdminUser(loginId));
+			return "redirect:/place/adminSearchAll.do";
 		} else {
 			session.setAttribute("member", result);
 			return "redirect:/team/main.do";
 		}
-
+		
+	}
+	
+	private boolean isAdminUser(String loginId) {
+		List<String> adminUser = new ArrayList<>();
+		adminUser.add("Admin");
+		return adminUser.contains(loginId);
 	}
 
 	@RequestMapping(value = "create.do", method = RequestMethod.POST)

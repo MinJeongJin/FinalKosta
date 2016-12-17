@@ -83,6 +83,20 @@ public class PlaceController {
 		return "place/placeList";
 	}
 	
+	@RequestMapping("adminSearchAll.do")
+	public String searchAdminAllPlace(Model model){
+		List<Place> list = placeService.findAllPlace();
+		List<Place> places = new ArrayList<>();
+		
+		for(Place place : list){
+			String [] array = place.getAddress().split(" ");
+			place.setAddress(array[0] + " " + array[1]);
+			places.add(place);
+		}
+		model.addAttribute("places", places);
+		return "place/placeListAdmin";
+	}
+	
 	@RequestMapping("searchByName.do")
 	public String searchPlaceByPlaceName(String placeName, Model model){
 		List<Place> list = placeService.findPlaceByPlaceName(placeName);

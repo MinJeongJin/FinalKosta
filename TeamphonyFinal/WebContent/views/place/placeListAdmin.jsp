@@ -108,6 +108,17 @@
 			                        });
 		                          </script>
 	                       	  </a>
+	                       	  
+	                       	  <c:if test="${isAdmin }">
+		                       	  <div class="mask" style="height: 160px;">
+	                              <p>관리자 모드</p>
+	                              <div class="tools tools-bottom">
+	                                <a href="${pageContext.request.contextPath}/place/detail.do?placeId=${place.placeId}"><i class="fa fa-link"></i></a>
+	                                <a href="${pageContext.request.contextPath}/place/revise.do?placeId=${place.placeId}"><i class="fa fa-pencil"></i></a>
+	                                <a href="${pageContext.request.contextPath}/place/erase.do?placeId=${place.placeId}"><i class="fa fa-times"></i></a>
+	                              </div>
+	                           	  </div>
+                              </c:if>
                               
 	                          </div>
 	                          <div class="caption">
