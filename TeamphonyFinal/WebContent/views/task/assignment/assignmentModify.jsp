@@ -118,7 +118,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<col width="150">
 				<col width="*">
 			</colgroup>
-			<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+			<tr class="w3-hover-light-grey w3-padding w3-card-2  ">
 				<th>
 					<label class="w3-label w3-validate" style="color: #050505">제목</label>
 				</th>
@@ -127,7 +127,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<input id="taskId" name="taskId" type="hidden" value="${task.taskId }">
 				</td>
 			</tr>
-			<tr class="w3-hover w3-padding w3-card-2 " style="horizontal-align: left;">
+			<tr class="w3-hover-light-grey w3-padding w3-card-2  " style="horizontal-align: left;">
 				<th>
 					<label class="w3-label w3-validate" style="color: #050505">제출자</label>
 				</th>
@@ -141,12 +141,12 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			</tr>
 			<tr class="w3-hover-light-grey w3-padding w3-card-2 ">		
 			<th></th>
-				<c:forEach items="${task.memberList }" var="member">
 					<td style="float: left; width: 70px;">
-						<input type="checkbox" name="memberIdList" class="w3-check:checked+.w3-validate" style="width: 20px; margin: 0px;" value="${member.memberId }" >
-						${member.memberId }
-					</td>
+				<c:forEach items="${task.memberList }" var="member">
+						<input type="checkbox" name="memberIdList"  style="width: 20px; margin: 0px;" value="${member.memberId }" >
+						${member.memberId }<br>
 				</c:forEach>
+					</td>
 			</tr>
 			<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
 				<th>

@@ -207,8 +207,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 <!--  Start Page  -->
 
 <div style="padding: 50px">
-	<div style="padding-left: 150px">
-		<div style="padding-right: 280px">
+	<div style="padding-left: 80px">
+		<div style="padding-right: 150px">
 			<div style="padding-top: 10px">
 <div align="right">
 	<div style="padding-bottom: 20px">
