@@ -15,7 +15,7 @@ public class TaskMember {
 	private int submissionid;
 // 0 == Not	, 1 == committed	
 	private int committed;
-	private String memberid; 
+	private String memberId; 
 	private String assignmentTitle; 
 	
 	public TaskMember() {
@@ -47,12 +47,12 @@ public class TaskMember {
 		this.committed = committed;
 	}
 
-	public String getMemberid() {
-		return memberid;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setMemberid(String memberid) {
-		this.memberid = memberid;
+	public void setMemberid(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getAssignmentTitle() {

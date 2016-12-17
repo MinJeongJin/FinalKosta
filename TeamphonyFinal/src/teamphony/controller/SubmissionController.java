@@ -35,6 +35,7 @@ import sun.security.action.GetBooleanAction;
 import teamphony.domain.Member;
 import teamphony.domain.Task;
 import teamphony.domain.TaskFile;
+import teamphony.domain.TaskMember;
 import teamphony.service.facade.TaskService;
 import teamphony.util.MediaUtils;
 import teamphony.util.UploadFileUtils;
@@ -69,7 +70,8 @@ public class SubmissionController {
 									,String flag
 									,String assignmentTitle
 									,String assignmentId
-									,Model model) { 
+									,Model model
+									,String committed) { 
 		
 		String uploadPath = request.getSession().getServletContext().getRealPath("/");
 		
@@ -78,6 +80,12 @@ public class SubmissionController {
 		httpSession.setAttribute("loginedMember", "aaaa");
 		httpSession.setAttribute("teamCode", 9642);
 		
+		TaskMember taskMember= new TaskMember();
+		taskMember.setCommitted(Integer.parseInt(committed));
+
+		
+		List<TaskMember> taskMemberList = new ArrayList<>();
+		 taskMemberList.add(taskMember);
 		
 		Task task = new Task();
 		
@@ -85,6 +93,9 @@ public class SubmissionController {
 		task.setContents(contents);
 		task.setFlag(Integer.parseInt(flag));
 		task.setTeamCode((int)httpSession.getAttribute("teamCode"));
+		
+		
+		
 		System.out.println("=========submissionController// create.do==============");
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
@@ -338,9 +349,8 @@ public class SubmissionController {
 
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(HttpSession session, Model model) {
-		int flag = (int)session.getAttribute("flag");
 		
-		List<Task> taskList = service.findAllTaskByFlag(flag, (int)session.getAttribute("teamCode"));
+		List<Task> taskList = service.findAllTaskByFlag(1, (int)session.getAttribute("teamCode"));
 		
 		model.addAttribute("taskList", taskList);
 		

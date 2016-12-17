@@ -47,11 +47,13 @@
 				ASSIGNMENTID
 				,MEMBERID
 				,ASSIGNMENT_TITLE
+				,COMMITTED
 			)
 			VALUES
 			(	#{taskId}
 				,#{memberId }
 				,#{assignmentTitle }
+				,0
 			)
 	
 	
@@ -61,9 +63,11 @@
 	
 	<update id="updateTaskMemberForSubmission">
 			UPDATE TASKMEMBER
-				SET SUBMISSIONID			=(SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
-				WHERE ASSIGNMENTID			= #{assignmentId}
-				AND MEMBERID				= #{loginedMemberId }
+				SET 
+				SUBMISSIONID			=(SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
+				,COMMITTED 				=1
+				WHERE ASSIGNMENTID		= #{assignmentId}
+				AND MEMBERID			= #{loginedMemberId }
 	</update>
 	
 	<insert id="insertSubmission" parameterType="task">
@@ -139,6 +143,7 @@
 				,COMMITTED
 			FROM TASKMEMBER 
 				WHERE ASSIGNMENTID = #{taskId }
+				ORDER BY ASSIGNMENTID ASC
 	</select>
 	
 	<select id="selectMemberIdByAssignmentId" parameterType="int"  resultType="String">
