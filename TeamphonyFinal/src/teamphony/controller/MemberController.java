@@ -58,7 +58,6 @@ public class MemberController {
 	@RequestMapping(value = "login.do")
 	public String login(HttpSession session, String loginId, String loginPw, Model model) {
 		Member result = memberService.findMemberByMemberId(loginId);
-		System.out.println(result.getPassword());
 		if (ObjectUtils.isEmpty(result)) {
 			model.addAttribute("result", "notId");
 			return "/common/login";
