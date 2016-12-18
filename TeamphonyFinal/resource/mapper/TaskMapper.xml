@@ -111,7 +111,7 @@
 				VALUES
 				(
 					#{submissionId }
-					,#{filePath}
+					,#{filePath }
 				)
 	</insert>
 	

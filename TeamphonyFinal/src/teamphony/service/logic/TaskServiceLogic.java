@@ -22,6 +22,11 @@ public class TaskServiceLogic implements TaskService {
 	@Override
 	public void registerTask(Task task, HttpSession httpSession, String assignmentTitle, int assignmentId) {
 		
+		
+		if(task.getFlag() == 1){
+			
+			System.out.println("taskService : "+task.getTaskFileList().get(0));
+		}
 		store.insertTask(task, httpSession, assignmentTitle, assignmentId);
 	}
 	

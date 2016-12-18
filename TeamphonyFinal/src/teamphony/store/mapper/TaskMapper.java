@@ -15,7 +15,7 @@ public interface TaskMapper {
 //추가했음
 	void insertSubmission(Task task);
 	
-	void insertTaskFile(TaskFile task);
+	void insertTaskFile(TaskFile taskFile);
 	
 	void insertTaskMemberForAssignment(@Param("taskId") int taskId, @Param("memberId") String memberId, @Param("assignmentTitle") String assignmentTitle);
 	

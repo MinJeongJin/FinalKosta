@@ -81,6 +81,10 @@ public class TaskStoreLogic implements TaskStore {
 				for (TaskFile taskFile : taskFileList) {
 					taskFile.setSubmissionId(taskId);
 					
+					
+					System.out.println("============taskFileMapper==================");
+					System.out.println("taskFile.getFilePath= "+taskFile.getFilePath());
+					System.out.println("===============================================");
 					mapper.insertTaskFile(taskFile);
 				}
 			}

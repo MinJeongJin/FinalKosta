@@ -183,7 +183,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<td>
 				<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 			</td>
-		</tr>
+		</tr> 
 		<tr>
 			<th></th>
 			<td>

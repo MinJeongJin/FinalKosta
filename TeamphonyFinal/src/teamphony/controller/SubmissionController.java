@@ -95,33 +95,29 @@ public class SubmissionController {
 		task.setContents(contents);
 		task.setFlag(Integer.parseInt(flag));
 		task.setTeamCode((int)httpSession.getAttribute("teamCode"));
+		task.setTaskFileList(new ArrayList<>());
 		
+		TaskFile taskFile = new TaskFile();
 		
 		
 		System.out.println("=========submissionController// create.do==============");
 
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
-		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
-		TaskFile taskFile = new TaskFile();
 		
 		for (MultipartFile file : attchFileList) {
 			
 			try {
 				
 				String saveName = uploadFile(file.getOriginalFilename(), file.getBytes(), request);
-				
+				int lastIdx = saveName.lastIndexOf('_')+1;
+				saveName = saveName.substring(lastIdx, saveName.length());
 				
 				taskFile.setFilePath(saveName);
+				task.getTaskFileList().add(taskFile);
 				
 				System.out.println("=================setFilePath!!!!====================");
 				System.out.println("getFilePath= "+ taskFile.getFilePath());
-				System.out.println("saveName= "+ saveName);
 				System.out.println("=========================================");
-			
-				taskFileList.add(taskFile);
-				
-				
-				task.setTaskFileList(taskFileList);
 				
 				model.addAttribute("saveName",saveName);
 				
@@ -131,6 +127,7 @@ public class SubmissionController {
 				e.printStackTrace();
 			}
 			}
+		
 		service.registerTask(task, httpSession, assignmentTitle, Integer.parseInt(assignmentId)); // task_tb 저장
 		
 		return "redirect:searchAll.do";
@@ -360,11 +357,17 @@ public class SubmissionController {
 		model.addAttribute("taskList", taskList);
 		
 		for(Task task : taskList){
-//			System.out.println("===========controller//submission//searchAll============");
-//			System.out.println(task.toString());
-//			System.out.println("==========================================================");
-//			System.out.println(task.getTaskMember().toString());
-//			System.out.println("==========================================================");
+			System.out.println("===========controller//submission//searchAll============");
+			System.out.println("task.getTaskFileList().size= "+task.getTaskFileList().size());
+			
+			for(TaskFile taskFile : task.getTaskFileList()){
+				
+				
+				System.out.println("filePath= " + taskFile.getFilePath());
+				
+				taskFile.setFilePath(taskFile.getFilePath());
+			}
+			
 		}
 		
 		return "/task/submission/submissionList";
