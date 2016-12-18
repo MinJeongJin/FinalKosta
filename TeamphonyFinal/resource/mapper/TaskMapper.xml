@@ -290,8 +290,8 @@
 				,TITLE =					#{title, jdbcType= VARCHAR}
 				,CONTENTS =					#{contents, jdbcType= VARCHAR}
 				,DEADLINE =					#{deadline , jdbcType= VARCHAR}
-				,EVALUATION_PERIOD_START =	#{EVALUATION_PERIOD_START ,jdbcType= VARCHAR}
-				,EVALUATION_PERIOD_END =	#{EVALUATION_PERIOD_END ,jdbcType= VARCHAR}
+				,EVALUATION_PERIOD_START =	#{evaluationPeriodStart ,jdbcType= VARCHAR}
+				,EVALUATION_PERIOD_END =	#{evaluationPeriodEnd ,jdbcType= VARCHAR}
 			WHERE ID =						#{taskId}
 	</update>
 	
