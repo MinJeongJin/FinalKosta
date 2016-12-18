@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Teamphony !  </title>
-    
+
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -44,18 +44,46 @@
   </head>
 
   <body class="nav-md">
-    <div class="container body">
+    <div class="container body" >
       <div class="main_container">
       
-		<%@ include file="/views/common/sideBar.jspf"%>
-   
+      <c:choose>
+      	<c:when test="${isAdmin }">
+      	<!-- Sidenav/menu -->
+	<nav class="w3-sidenav w3-collapse w3-white w3-animate-left "
+		style="z-index: 3; width: 250px;" id="mySidenav">
+		<br>
+		<div class="w3-container w3-card-4 w3-padding-16"
+			style="margin-bottom: 20px;">
+			<a href="#" onclick="w3_close()"
+				class="w3-hide-large w3-right w3-jumbo w3-padding"
+				title="close menu"> <i class="fa fa-remove"></i>
+			</a> <img
+				src="${pageContext.request.contextPath}/resources/images/admin.jpg"
+				style="width: 45%;" class="w3-round"> <br><br>
+			<h4 class="w3-padding-0">
+				<span>어서오세요</span><br>
+			</h4>
+			<p class="w3-text-grey">관리자 님</p>
+		</div>
+		
+		<a href="${pageContext.request.contextPath}/place/searchAll.do" id="menu1"
+			name="menuItem" onclick="clickCheck('menu1');closeAcc();" class="w3-padding w3-card-4">
+			<i class="fa fa-wrench fa-fw w3-margin-right"></i>장소 목록</a>
+
+	</nav>
+      	</c:when>
+      	<c:otherwise>
+      	<%@ include file="/views/common/sideBar.jspf"%>
+      	</c:otherwise>
+      </c:choose>
+      
         <!-- page content -->
         <div class="right_col" role="main" style="padding-left:70px;">
           <div class="">
             <div class="page-title">
-              <div class="title_left" style="color:black">
-                <h3><strong> 모임 장소  </strong></h3>
-                
+              <div class="title_left">
+                <h3> 모임 장소 </h3>
               </div>
 
               <div class="title_right">
@@ -67,13 +95,12 @@
                   <div class="input-group">
                     <input id="searchText" type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" onclick="search();">Go!</button>
+                        <button class="btn btn-default" type="button" onclick="javascript: search();">Go!</button>
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="w3-section w3-bottombar "></div>
 
             <div class="clearfix"></div>
 
@@ -81,8 +108,25 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                     <h4>스터디 공간을 알려드릴게요</h4> 
+                  <c:choose>
+                  	<c:when test="${isAdmin }">
+                     <h2> <small> 현재 사용자들에게 보여지는 장소입니다.</small></h2> 
+                  	</c:when>
+                  	<c:otherwise>
+                  		<h4>스터디 공간을 알려드릴게요</h4> 
+                  	</c:otherwise>
+                  </c:choose>
                      
+                     <c:if test="${isAdmin }">
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a style="visibility: hidden;" class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a style="visibility: hidden;" class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                      <li><a href="${pageContext.request.contextPath}/views/place/placeRegister.jsp" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
+                    </ul>
+                    </c:if>
+                    
                     <div class="clearfix"></div>
                     
                   </div>
@@ -109,6 +153,17 @@
 			                        });
 		                          </script>
 	                       	  </a>
+	                       	  
+	                       	  <c:if test="${isAdmin }">
+		                       	<div class="mask" style="height: 160px;">
+	                              <p>관리자 모드</p>
+	                              <div class="tools tools-bottom">
+	                                <a href="${pageContext.request.contextPath}/place/detail.do?placeId=${place.placeId}"><i class="fa fa-link"></i></a>
+	                                <a href="${pageContext.request.contextPath}/place/revise.do?placeId=${place.placeId}"><i class="fa fa-pencil"></i></a>
+	                                <a href="${pageContext.request.contextPath}/place/erase.do?placeId=${place.placeId}"><i class="fa fa-times"></i></a>
+	                              </div>
+	                           	  </div>
+	                           </c:if>
                               
 	                          </div>
 	                          <div class="caption">
@@ -133,6 +188,9 @@
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/resources/schedule/build/js/custom.min.js"></script>
     
+ 	<!-- 삭제버튼 클릭시 file 삭제 미구현 
+ 		현재 db에서만 삭제됨. -->
+
     <script>
     function search(){
     	var searchText = document.getElementById('searchText').value;

@@ -22,6 +22,9 @@
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath}/resources/schedule/build/css/custom.min.css" rel="stylesheet">
     
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/w3.css">
+    
     <style>
     .fileDrop {
     width: 80%;
@@ -55,9 +58,33 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
+      
+      <!-- Sidenav/menu -->
+	<nav class="w3-sidenav w3-collapse w3-white w3-animate-left "
+		style="z-index: 3; width: 250px;" id="mySidenav">
+		<br>
+		<div class="w3-container w3-card-4 w3-padding-16"
+			style="margin-bottom: 20px;">
+			<a href="#" onclick="w3_close()"
+				class="w3-hide-large w3-right w3-jumbo w3-padding"
+				title="close menu"> <i class="fa fa-remove"></i>
+			</a> <img
+				src="${pageContext.request.contextPath}/resources/images/admin.jpg"
+				style="width: 45%;" class="w3-round"> <br><br>
+			<h4 class="w3-padding-0">
+				<span>어서오세요</span><br>
+			</h4>
+			<p class="w3-text-grey">관리자 님</p>
+		</div>
+		
+		<a href="${pageContext.request.contextPath}/place/searchAll.do" id="menu1"
+			name="menuItem" onclick="clickCheck('menu1');closeAcc();" class="w3-padding w3-card-4">
+			<i class="fa fa-wrench fa-fw w3-margin-right"></i>장소 목록</a>
+
+	</nav>
 
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="padding-left:70px;">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -72,7 +99,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>정보 입력</h2>
+                    <h4>정보 입력</h4>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -173,8 +200,6 @@
     <script src="${pageContext.request.contextPath}/resources/schedule/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="${pageContext.request.contextPath}/resources/schedule/vendors/nprogress/nprogress.js"></script>
-    <!-- validator 
-    <script src="${pageContext.request.contextPath}/resources/place/vendors/validator/validator.js"></script>  -->
     <!-- Dropzone.js -->
     <script src="${pageContext.request.contextPath}/resources/place/vendors/dropzone/dist/dropzone.js"></script>
 
@@ -182,6 +207,8 @@
     <script src="${pageContext.request.contextPath}/resources/schedule/build/js/custom.min.js"></script>
     
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+   	
+   	<script src="${pageContext.request.contextPath}/resources/js/sideBarControl.js"></script>
     <script id="template" type="text/x-handlebars-template">
 	<li>
 		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
@@ -320,39 +347,6 @@
     	$(".popup").hide('slow');
     });
 	</script>
-    
-    
-    <!-- validator
-    <script>
-      // initialize the validator function
-      validator.message.date = 'not a real date';
-
-      // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-      $('form')
-        .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-        .on('change', 'select.required', validator.checkField)
-        .on('keypress', 'input[required][pattern]', validator.keypress);
-
-      $('.multi.required').on('keyup blur', 'input', function() {
-        validator.checkField.apply($(this).siblings().last()[0]);
-      });
-
-      $('form').submit(function(e) {
-        e.preventDefault();
-        var submit = true;
-
-        // evaluate the form using generic validaing
-        if (!validator.checkAll($(this))) {
-          submit = false;
-        }
-
-        if (submit)
-          this.submit();
-
-        return false;
-      });
-    </script>
-    <!-- /validator -->
     
   </body>
 </html>

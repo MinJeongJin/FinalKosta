@@ -66,17 +66,18 @@ public class MemberController {
 			return "/common/login";
 		} else if(isAdminUser(loginId)){
 			session.setAttribute("isAdmin", isAdminUser(loginId));
-			return "redirect:/place/adminSearchAll.do";
+			return "redirect:/place/searchAll.do";
 		} else {
 			session.setAttribute("member", result);
+			session.setAttribute("isAdmin", isAdminUser(loginId));
 			return "redirect:/team/main.do";
 		}
-		
 	}
 	
 	private boolean isAdminUser(String loginId) {
 		List<String> adminUser = new ArrayList<>();
 		adminUser.add("Admin");
+		adminUser.add("admin");
 		return adminUser.contains(loginId);
 	}
 
