@@ -28,6 +28,7 @@ display: none;
   <input id="scheduleId" name="scheduleId" type="hidden" value="${schedule.scheduleId}">
   <!-- side bar -->
 	<%@ include file="/views/common/sideBar.jspf"%>
+	
         <!-- page content -->
         <div class="w3-container w3-main" style="margin-left: 250px;">
         
@@ -63,7 +64,7 @@ display: none;
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">제목<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="title" required="required" class="form-control col-md-7 col-xs-12" value="${schedule.title }" readonly>
+                          <input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12" value="${schedule.title }" readonly>
                         </div>
                       </div>
                       <div class="form-group">

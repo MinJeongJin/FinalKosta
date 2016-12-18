@@ -14,26 +14,6 @@ public class Schedule {
 	private int scheduleId;
 	private String startDate;
 	private String endDate;
-	
-//	private String startTime;
-//	private String endTime;
-//	
-//	public String getStartTime() {
-//		return startTime;
-//	}
-//
-//	public void setStartTime(String startTime) {
-//		this.startTime = startTime;
-//	}
-//
-//	public String getEndTime() {
-//		return endTime;
-//	}
-//
-//	public void setEndTime(String endTime) {
-//		this.endTime = endTime;
-//	}
-
 	private String title;
 	private String place;
 	private String contents;

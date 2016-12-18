@@ -50,9 +50,9 @@
                     data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">제목</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">제목<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12" required="required">
                         </div>
                       </div>
                       <div class="form-group">

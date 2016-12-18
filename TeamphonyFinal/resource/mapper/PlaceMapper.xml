@@ -81,24 +81,24 @@
 	</select>
 
 	<insert id="addFile" parameterType="String">
-		INSERT INTO PLACEFILE_TB (FULLNAME, ID)
+		INSERT INTO PLACE_FILE_TB (FULL_NAME, ID)
 		VALUES (#{fullName}, (SELECT ID FROM PLACE_TB WHERE ID=(SELECT MAX(ID) FROM PLACE_TB)))
 	</insert>	
 	
 	<select id="getFile" resultType="String" parameterType="int">
-		SELECT FULLNAME 
-		FROM PLACEFILE_TB
+		SELECT FULL_NAME 
+		FROM PLACE_FILE_TB
 		WHERE ID = #{placeId}
 	</select>
 	
 	<delete id="deleteFile" parameterType="int">
 		DELETE 
-		FROM PLACEFILE_TB
+		FROM PLACE_FILE_TB
 		WHERE ID = #{placeId}
 	</delete>
 	
 	<insert id="replaceFile" parameterType="Map">
-		INSERT INTO PLACEFILE_TB (FULLNAME, ID)
+		INSERT INTO PLACE_FILE_TB (FULL_NAME, ID)
 		VALUES (#{fullName}, #{placeId})
 	</insert>
 </mapper>

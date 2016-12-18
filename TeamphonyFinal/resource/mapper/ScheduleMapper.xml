@@ -7,18 +7,22 @@
 	<insert id="insertSchedule" parameterType="Schedule">
 		INSERT INTO schedule_tb (id, start_Date, end_Date, title, place, contents, team_Code)
 		VALUES (Schedule_seq.nextval
-		,#{startDate, jdbcType=VARCHAR}
-		,#{endDate, jdbcType=VARCHAR}
-		,#{title, jdbcType=VARCHAR}
-		,#{place, jdbcType=VARCHAR}
-		,#{contents, jdbcType=VARCHAR}
-		,#{teamCode, jdbcType=INTEGER})
+				,#{startDate, jdbcType=VARCHAR}
+				,#{endDate, jdbcType=VARCHAR}
+				,#{title, jdbcType=VARCHAR}
+				,#{place, jdbcType=VARCHAR}
+				,#{contents, jdbcType=VARCHAR}
+				,#{teamCode, jdbcType=INTEGER})
 	</insert>
 
 	<update id="updateSchedule" parameterType="Schedule">
 		UPDATE schedule_tb
 		SET 
-		start_Date = #{startDate}, end_Date = #{endDate}, title = #{title}, place = #{place}, contents = #{contents}
+		start_Date = #{startDate}
+					, end_Date = #{endDate}
+					, title = #{title}
+					, place = #{place}
+					, contents = #{contents}
 		WHERE id = #{scheduleId}
 	</update>
 	

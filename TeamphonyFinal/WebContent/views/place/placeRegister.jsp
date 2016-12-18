@@ -159,7 +159,7 @@
                       <br><br>
                       
                       <div class="form-group">
-                   	 <label for="exampleInputEmail1">업로드할 파일을 끌어다 놓으세요.</label>
+                   	 <label for="exampleInputEmail1">업로드할 이미지를 끌어다 놓으세요.<span class="required">*</span></label>
                     <div class="fileDrop"></div>
                     </div>
                     
