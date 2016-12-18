@@ -5,7 +5,7 @@
 <mapper namespace="teamphony.store.mapper.ScheduleMapper">
 
 	<insert id="insertSchedule" parameterType="Schedule">
-		INSERT INTO schedule_tb (id, startDate, endDate, title, place, contents, teamCode)
+		INSERT INTO schedule_tb (id, start_Date, end_Date, title, place, contents, team_Code)
 		VALUES (Schedule_seq.nextval
 		,#{startDate, jdbcType=VARCHAR}
 		,#{endDate, jdbcType=VARCHAR}
@@ -18,7 +18,7 @@
 	<update id="updateSchedule" parameterType="Schedule">
 		UPDATE schedule_tb
 		SET 
-		startDate = #{startDate}, endDate = #{endDate}, title = #{title}, place = #{place}, contents = #{contents}
+		start_Date = #{startDate}, end_Date = #{endDate}, title = #{title}, place = #{place}, contents = #{contents}
 		WHERE id = #{scheduleId}
 	</update>
 	
@@ -28,13 +28,21 @@
 	</delete>
 	
 	<select id="selectSchedulesByTeamCode" resultType="Schedule" parameterType="int">
-		SELECT id AS scheduleId, startDate, endDate, title
+		SELECT id AS scheduleId
+				, start_Date AS startDate
+				, end_Date AS endDate
+				, title
 		FROM schedule_tb
-		WHERE teamCode = #{teamCode}
+		WHERE team_Code = #{teamCode}
 	</select>
 	
 	<select id="selectScheduleByScheduleId" resultType="Schedule" parameterType="int">
-		SELECT id AS scheduleId, startDate, endDate, title, place, contents
+		SELECT id AS scheduleId
+		, start_Date AS startDate
+		, end_Date AS endDate
+		, title
+		, place
+		, contents
 		FROM schedule_tb
 		WHERE id = #{id}
 	</select>

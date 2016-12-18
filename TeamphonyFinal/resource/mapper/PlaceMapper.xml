@@ -5,7 +5,7 @@
 <mapper namespace="teamphony.store.mapper.PlaceMapper">
 
 	<insert id="insertPlace" parameterType="Place">
-		INSERT INTO PLACE_TB (ID, NAME,ADDRESS,PHONENUMBER,CONTENTS,HOLIDAY,BUSINESSHOUR)
+		INSERT INTO PLACE_TB (ID, NAME,ADDRESS,PHONE_NUMBER,CONTENTS,HOLIDAY,BUSINESS_HOURS)
 		VALUES (place_seq.nextval
 				,#{name}
 				,#{address}
@@ -21,10 +21,10 @@
 		SET 
 		NAME = #{name}
 		,ADDRESS  = #{address}
-		,PHONENUMBER = #{phoneNum}
+		,PHONE_NUMBER = #{phoneNum}
 		,CONTENTS = #{contents}
 		,HOLIDAY  = #{holiday}
-		,BUSINESSHOUR = #{businessHour}
+		,BUSINESS_HOURS = #{businessHour}
 		WHERE ID = #{placeId}
 	</update>
 
@@ -37,10 +37,10 @@
 		SELECT id AS placeId,
 			   name, 
 			   address,
-			   phoneNumber AS phoneNum,
+			   phone_Number AS phoneNum,
 			   contents,
 			   holiday,
-			   businessHour
+			   business_Hours AS businessHour
 		FROM place_tb
 	</select>
 	
@@ -48,10 +48,10 @@
 		SELECT id AS placeId,
 			   name, 
 			   address,
-			   phoneNumber AS phoneNum,
+			   phone_Number AS phoneNum,
 			   contents,
 			   holiday,
-			   businessHour
+			   business_Hours AS businessHour
 		FROM place_tb
 		WHERE id = #{id}
 	</select>
@@ -60,10 +60,10 @@
 		SELECT id AS placeId,
 			   name, 
 			   address,
-			   phoneNumber AS phoneNum,
+			   phone_Number AS phoneNum,
 			   contents,
 			   holiday,
-			   businessHour
+			   business_Hour AS businessHour
 		FROM PLACE_TB
 		WHERE name LIKE '%' || #{name} || '%'
 	</select>
@@ -72,10 +72,10 @@
 		SELECT ID AS placeId,
 			   name, 
 			   address,
-			   phoneNumber AS phoneNum,
+			   phone_Number AS phoneNum,
 			   contents,
 			   holiday,
-			   businessHour
+			   business_Hour AS businessHour
 		FROM PLACE_TB
 		WHERE address LIKE '%' || #{address} || '%'
 	</select>

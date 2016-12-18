@@ -27,7 +27,12 @@
     <link href="${pageContext.request.contextPath}/resources/place/custom.css" rel="stylesheet">
     
     <link href="${pageContext.request.contextPath}/resources/place/js-image-slider.css" rel="stylesheet" type="text/css" />
-    <script src="${pageContext.request.contextPath}/resources/place/js-image-slider.js" type="text/javascript"></script>
+    
+    <%-- custom.css와 충돌 ㅠㅠ sidebar가 이쁘지 않음
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css"> --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/w3.css">
+    
+    
 
 	 <style>
 	    .screen_out {display:block;overflow:hidden;position:absolute;left:-9999px;width:1px;height:1px;font-size:0;line-height:0;text-indent:-9999px}
@@ -47,24 +52,45 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
+      
+      <c:choose>
+      	<c:when test="${isAdmin }">
+      	<!-- Sidenav/menu -->
+	<nav class="w3-sidenav w3-collapse w3-white w3-animate-left "
+		style="z-index: 3; width: 250px;" id="mySidenav">
+		<br>
+		<div class="w3-container w3-card-4 w3-padding-16"
+			style="margin-bottom: 20px;">
+			<a href="#" onclick="w3_close()"
+				class="w3-hide-large w3-right w3-jumbo w3-padding"
+				title="close menu"> <i class="fa fa-remove"></i>
+			</a> <img
+				src="${pageContext.request.contextPath}/resources/images/admin.jpg"
+				style="width: 45%;" class="w3-round"> <br><br>
+			<h4 class="w3-padding-0">
+				<span>어서오세요</span><br>
+			</h4>
+			<p class="w3-text-grey">관리자 님</p>
+		</div>
+		
+		<a href="${pageContext.request.contextPath}/place/searchAll.do" id="menu1"
+			name="menuItem" onclick="clickCheck('menu1');closeAcc();" class="w3-padding w3-card-4">
+			<i class="fa fa-wrench fa-fw w3-margin-right"></i>장소 목록</a>
+
+	</nav>
+      	</c:when>
+      	<c:otherwise>
+      	<%@ include file="/views/common/sideBar.jspf"%>
+      	</c:otherwise>
+      </c:choose>
+      
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="padding-left:70px;">
 
           <div class="">
             <div class="page-title">
               <div class="title_left">
                 <h3>모임 장소</h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
             
@@ -229,6 +255,9 @@
     <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=ab42606eabf146a2840ea3e9b21a2ac0&libraries=services"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/sideBarControl.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/place/js-image-slider.js" type="text/javascript"></script>
+	
     <script id="templateImage" type="text/x-handlebars-template">
 	<a data-src="{{fullName}}" class="lazyImage" href="{{getLink}}"></a>
 	</script>
