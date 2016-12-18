@@ -97,7 +97,7 @@
 	background-position: 0 bottom;
 }
 
-.starPoint>.input>label:hover ~label{
+.starPoint>.input>label:hover ~label {
 	background-image: none;
 }
 
@@ -263,31 +263,49 @@
 }
 
 .star-ratings-sprite {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-  font-size: 0;
-  height: 21px;
-  line-height: 0;
-  overflow: hidden;
-  text-indent: -999em;
-  width: 110px;
-  margin: 0 auto;
-  
-  &-rating {
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-    background-position: 0 100%;
-    float: left;
-    height: 21px;
-    display:block;
-  }
-  
+	background:
+		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
+		repeat-x;
+	font-size: 0;
+	height: 21px;
+	line-height: 0;
+	overflow: hidden;
+	text-indent: -999em;
+	width: 110px;
+	margin: 0 auto; & -rating { background :
+	url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
+	repeat-x;
+	background-position: 0 100%;
+	float: left;
+	height: 21px;
+	display: block;
+	}
+}
+@import
+	url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+
+body {
+	margin: 50px;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	background: #f2fbff;
 }
 
-// Stuff for Pen styling
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
-body { margin: 50px; text-align: center; font-family: 'Open Sans', sans-serif; background: #f2fbff; }
-em { font-style: italic; }
-h1 { font-size: 24px; margin-bottom: 25px; font-weight: bold; text-transform: uppercase; }
-h2 { font-size: 16px; margin-bottom: 15px;}
+em {
+	font-style: italic;
+}
+
+h1 {
+	font-size: 24px;
+	margin-bottom: 25px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+h2 {
+	font-size: 16px;
+	margin-bottom: 15px;
+}
 </style>
 
 
@@ -335,8 +353,8 @@ h2 { font-size: 16px; margin-bottom: 15px;}
 			<form
 				action="${pageContext.request.contextPath}/member/evaluation.do"
 				Method="post">
-				<input type="hidden" value="${evaluate.memberId }"
-					id="memberId" name="memberId">
+				<input type="hidden" value="${evaluate.memberId }" id="memberId"
+					name="memberId">
 				<table>
 					<colgroup>
 						<col width="150">
@@ -345,12 +363,15 @@ h2 { font-size: 16px; margin-bottom: 15px;}
 					<tr>
 						<td><img alt="사진 없음" height="150" width="150"
 							src="${pageContext.request.contextPath}/resources/images/${evaluate.memberId}/${evaluate.imagePath}"></td>
-						<td>별명 : ${evaluate.alias}<br>
-							지금까지의 평점 : 
-							<div class="star-ratings-sprite"><span style="width:${evaluate.star}%" class="star-ratings-sprite-rating"></span></div>
+						<td>별명 : ${evaluate.alias}<br> 지금까지의 평점 :
+							<div class="star-ratings-sprite">
+								<span style="width:${evaluate.starPoint*10}%"
+									class="star-ratings-sprite-rating"></span>
+							</div>
 						</td>
 					</tr>
 				</table>
+				${evaluate.starPoint}
 				<table>
 					<colgroup>
 						<col width="150">
@@ -425,16 +446,11 @@ h2 { font-size: 16px; margin-bottom: 15px;}
 				<div class="row">
 					<div class="form-group col-xs-7">
 						<button class="btn btn-success btn-lg" type="submit">평가</button>
-						<a
-							href="${pageContext.request.contextPath}/member/evaluationList.do"
+						<a href="${pageContext.request.contextPath}/member/evaluationList.do"
 							class="btn btn-danger btn-lg">뒤로</a>
 					</div>
 				</div>
 			</form>
-		</div>
-		<div class="w3-black w3-center w3-padding-24 w3-card-12">
-			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">Suho</a>
 		</div>
 	</div>
 	<!-- End page content -->

@@ -1,6 +1,5 @@
 package teamphony.store.logic;
 
-
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import teamphony.store.mapper.TaskMapper;
 
 @Repository
 public class MemberStoreLogic implements MemberStore {
-	
+
 	private static final String Resource = "config.xml";
 
 	private SqlSessionFactory getSessionFactory() {
@@ -33,7 +32,7 @@ public class MemberStoreLogic implements MemberStore {
 		}
 		return new SqlSessionFactoryBuilder().build(reader);
 	}
-	
+
 	@Override
 	public void insertMember(Member member) {
 
@@ -50,7 +49,7 @@ public class MemberStoreLogic implements MemberStore {
 		} finally {
 			session.close();
 		}
-		
+
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class MemberStoreLogic implements MemberStore {
 		} finally {
 			session.close();
 		}
-		
+
 	}
 
 	@Override
@@ -78,7 +77,7 @@ public class MemberStoreLogic implements MemberStore {
 			mapper.deleteMember(memberId);
 			session.commit();
 		} catch (Exception e) {
-		}finally{
+		} finally {
 			session.close();
 		}
 	}
@@ -86,20 +85,21 @@ public class MemberStoreLogic implements MemberStore {
 	@Override
 	public Member selectMemberByMemberId(String memberId) {
 		Member member = new Member();
+		double sum = 0;
+		List<Double> list = new ArrayList<>();
 		SqlSession session = getSessionFactory().openSession();
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			member = mapper.selectMemberByMemberId(memberId);
-			List<Double> list = mapper.getStarPoint(memberId);
-			int sum=0;
-			for (Double starPoint : list) {
-				sum+=starPoint;
-			}
-			member.setStarPoint((double)sum/list.size());
+			list = mapper.getStarPoint(memberId);
 		} catch (Exception e) {
-		}finally{
+		} finally {
 			session.close();
 		}
+		for (Double starPoint : list) {
+			sum += starPoint;
+		}
+		member.setStarPoint((double) sum / list.size());
 		return member;
 	}
 
@@ -109,14 +109,14 @@ public class MemberStoreLogic implements MemberStore {
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			mapper.insertStarPoint(memberId, starPoint);
-			System.out.println(memberId+" "+starPoint);
+			System.out.println(memberId + " " + starPoint);
 			session.commit();
 		} catch (Exception e) {
-		}finally{
+		} finally {
 			session.close();
 		}
 	}
-	
+
 	public List<Member> selectAllMember() {
 		List<Member> list = new ArrayList<>();
 		SqlSession session = getSessionFactory().openSession();
@@ -124,7 +124,7 @@ public class MemberStoreLogic implements MemberStore {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			list = mapper.selectAllMember();
 		} catch (Exception e) {
-		}finally{
+		} finally {
 			session.close();
 		}
 		return list;

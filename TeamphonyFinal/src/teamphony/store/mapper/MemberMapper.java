@@ -13,6 +13,6 @@ public interface MemberMapper {
 	void deleteMember(String memberId);
 	Member selectMemberByMemberId(String memberId);
 	void insertStarPoint (@Param("memberId") String memberId, @Param("starPoint") double starPoint);
-	List<Double> getStarPoint(String id);
+	List<Double> getStarPoint(String memberId);
 	List<Member> selectAllMember();
 }

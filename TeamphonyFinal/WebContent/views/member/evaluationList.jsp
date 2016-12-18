@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -84,22 +83,14 @@
 			<span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<h1>
-				<b>게시판</b>
+				<b>평가 회원 리스트</b>
 			</h1>
-			<h4>팀원들과 공유하고 싶은 자료를 올려보세요.</h4>
+			<h4>평가할 팀원을 선택해주세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 
 
 		<div class="w3-container w3-padding-32">
-
-
-			<a
-				href="${pageContext.request.contextPath}/post/erase.do?postId=${post.postId}"
-				class="glyphicon glyphicon-trash pull-right" style="padding: 10px">삭제</a>
-			<a onclick="revise();" href="#" id="revise"
-				class="glyphicon glyphicon-cog pull-right" style="padding: 10px">수정</a>
-
 			<table>
 				<colgroup>
 					<col width="100" align="center">
@@ -121,160 +112,25 @@
 							<tr>
 								<td>
 									<c:if test="${evaluationMember.imagePath eq 'pass'}">
-										<img alt="사진 없음" src="${pageContext.request.contextPath}/resources/images/defult.png">
+										<img alt="사진 없음" src="${pageContext.request.contextPath}/resources/images/default.png" style="width: 65px;">
 									</c:if>
 									<c:if test="${evaluationMember.imagePath ne 'pass'}">
-										<img class="evaluationProfile" alt="사진 없음" src="${pageContext.request.contextPath}/resources/images/${evaluationMember.memberId}/${evaluationMember.imagePath}">
+										<img class="evaluationProfile" alt="사진 없음" src="${pageContext.request.contextPath}/resources/images/${evaluationMember.memberId}/${evaluationMember.imagePath}" style="width: 65px;">
 									</c:if>
 								</td>
 								<td>${evaluationMember.memberId}</td>
 								<td>${evaluationMember.alias}</td>
 								<td><a
 									href="${pageContext.request.contextPath}/member/evaluation.do?memberId=${evaluationMember.memberId}"
-									class="btn btn-success btn-lg">평가하기</a></td>
+									class="btn btn-success">평가하기</a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
-
-
-
-
-		</div>
-
-
-
-
-		<div class="w3-black w3-center w3-padding-24 w3-card-12">
-			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">Suho</a>
 		</div>
 	</div>
 	<!-- End page content -->
-
-	<script>
-		// 2. This code loads the IFrame Player API code asynchronously.
-		var tag = document.createElement('script');
-
-		var change = function() {
-			document.getElementById("player")
-		};
-
-		tag.src = "https://www.youtube.com/iframe_api";
-		var firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-		// 3. This function creates an <iframe> (and YouTube player)
-		//    after the API code downloads.
-		var player;
-		function onYouTubeIframeAPIReady() {
-			player = new YT.Player('player', {
-				height : '360',
-				width : '640',
-				videoId : '${post.videoLink}',
-				events : {
-					'onReady' : onPlayerReady,
-					'onStateChange' : onPlayerStateChange
-				}
-			});
-		};
-
-		// 4. The API will call this function when the video player is ready.
-		function onPlayerReady(event) {
-			event.target.playVideo();
-		}
-
-		// 5. The API calls this function when the player's state changes.
-		//    The function indicates that when playing a video (state=1),
-		//    the player should play for six seconds and then stop.
-		var done = false;
-		function onPlayerStateChange(event) {
-			if (event.data == YT.PlayerState.PLAYING && !done) {
-			}
-		};
-		function stopVideo() {
-			player.stopVideo();
-		};
-
-		function revise() {
-			$('#contents, #videoLink, #imagePath, #filePath').attr('readonly',
-					false);
-			$('#okay, #reset, #videoView, #imageView, #fileView').show();
-			document.getElementById("back").style.display = "none";
-		};
-
-		$(document).ready(function() {
-			if ($("#videoLink").value !== "pass") {
-				$("#videoView").show();
-			}
-			if (document.getElementById("imagePath").value !== "pass") {
-				$("#imageView").show();
-			}
-			if (document.getElementById("filePath").value !== "pass") {
-				$("#fileView").show();
-			}
-		})
-
-		function showInput() {
-			if (document.getElementById("videoLink").value !== "pass") {
-				$("#videoView").show();
-			}
-			if (document.getElementById("imagePath").value !== "pass") {
-				$("#imageView").show();
-			}
-			if (document.getElementById("filePath").value !== "pass") {
-				$("#fileView").show();
-			}
-		};
-
-		function cancle() {
-
-			var contents = document.getElementById("contents");
-			var videoLink = document.getElementById("videoLink");
-			var imagePath = document.getElementById("imagePath");
-			var filePath = document.getElementById("filePath");
-
-			contents.readOnly = true;
-			videoLink.readOnly = true;
-			imagePath.readOnly = true;
-			filePath.readOnly = true;
-
-			contents.value = "${post.contents}";
-			videoLink.value = "${post.videoLink}";
-			imagePath.value = "${post.imagePath}";
-			filePath.value = "${post.filePath}";
-
-			if (videoLink.value == "pass") {
-				$("#videoView").hide();
-			}
-
-			if (imagePath.value == "pass") {
-				$("#imageView").hide();
-			}
-
-			if (filePath.value == "pass") {
-				$("#fileView").hide();
-			}
-
-		};
-	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 
 </html>

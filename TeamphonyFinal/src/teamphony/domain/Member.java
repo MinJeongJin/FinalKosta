@@ -16,6 +16,7 @@ public class Member {
 	private String alias;
 	private String imagePath;
 	private double starPoint;
+	private double star;
 
 	public Member() {}
 

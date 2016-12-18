@@ -6,29 +6,29 @@
 
 	<insert id="insertPost" parameterType="Post">
 		insert into Post_tb(id,
-		contents, videoLink, filePath, teamCode, MemberId, imagePath)
-		values(post_seq.nextval, #{contents}, #{videoLink}, #{filePath},
+		contents, video_Link, file_Path, team_Code, Member_Id, image_Path)
+		values(post_tb_id_seq.nextval, #{contents}, #{videoLink}, #{filePath},
 		#{teamCode}, #{member.memberId}, #{imagePath})
 	</insert>
 
 	<select id="selectAllPost" parameterType="int" resultMap="PostMap">
-		Select id ,contents,teamCode,memberId, videoLink from Post_tb where teamCode=#{teamCode} order By id
+		Select id ,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where team_Code=#{teamCode} order By id
 	</select>
 	
 	<select id="selectPostByPostId" parameterType="int" resultMap="PostMap">
-		Select id,contents,teamCode,memberId, videoLink, filePath, imagePath from Post_tb where id=#{postId}
+		Select id,contents,team_Code,member_Id, videoLink, file_Path, image_Path from Post_tb where id=#{postId}
 	</select>
 	
 	<select id="selectPostByMemberId" parameterType="String" resultMap="PostMap">
-		Select id,contents,teamCode,memberId, videoLink, filePath, imagePath from Post_tb where memberId=#{memberId}
+		Select id,contents,team_Code,member_Id, video_Link, filePath, image_Path from Post_tb where memberId=#{memberId}
 	</select>
 	
 	<select id="selectPostByContents" parameterType="String" resultMap="PostMap">
-		Select id,contents,teamCode,memberId, videoLink, filePath, imagePath from Post_tb where contents like '%'||#{contents}||'%' order By id
+		Select id,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where contents like '%'||#{contents}||'%' order By id
 	</select>
 	
 	<update id="updatePost" parameterType="post">
-		update post_tb set contents=#{contents}, videoLink=#{videoLink}, filePath=#{filePath}, imagePath=#{imagePath} where id = #{postId}
+		update post_tb set contents=#{contents}, video_Link=#{videoLink}, file_Path=#{filePath}, image_Path=#{imagePath} where id = #{postId}
 	</update>
 	
 	<delete id="deletePost" parameterType="int">
@@ -38,10 +38,10 @@
 	<resultMap type="Post" id="PostMap">
 		<id property="postId" column="id" />
 		<result property="contents" column="contents" />
-		<result property="teamCode" column="teamCode" />
-		<result property="imagePath" column="imagePath" />
-		<result property="videoLink" column="videoLink" />
-		<result property="filePath" column="filePath" />
+		<result property="teamCode" column="team_Code" />
+		<result property="imagePath" column="image_Path" />
+		<result property="videoLink" column="video_Link" />
+		<result property="filePath" column="file_Path" />
 		<association property="member" column="memberId" select="teamphony.store.mapper.MemberMapper.selectMemberByMemberId" javaType="Member" jdbcType="VARCHAR" />
 	</resultMap>
 
