@@ -16,7 +16,7 @@
 	</insert>
 	
 	<select id="selectMemberByMemberId" parameterType="String" resultType="member">
-		select id As memberId, password, alias, image_Path
+		select id As memberId, password, alias, image_Path As imagePath
 		from member_tb
 		where id = #{memberId}
 	</select>
@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="selectAllMember" resultType="Member">
-		select id As memberId, password, alias, image_Path from member_tb
+		select id As memberId, password, alias, image_Path As imagePath from member_tb
 	</select>
 
 </mapper>

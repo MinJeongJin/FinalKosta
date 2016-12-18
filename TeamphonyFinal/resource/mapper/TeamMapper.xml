@@ -30,7 +30,7 @@
 		resultType="Member">
 
 
-		SELECT ID AS memberId, PASSWORD, ALIAS, IMAGE_PATH
+		SELECT ID AS memberId, PASSWORD, ALIAS, IMAGE_PATH AS imagePath
 		FROM
 		MEMBER_TB
 		WHERE ID IN
