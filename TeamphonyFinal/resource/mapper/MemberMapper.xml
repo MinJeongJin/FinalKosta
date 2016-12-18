@@ -6,8 +6,8 @@
 
 	<resultMap type="Member" id="memberMap">
 		<result property="alias" column="alias" />
-		<result property="password" column="paaword" />
-		<result property="imagePath" column="imagePath" />
+		<result property="password" column="password" />
+		<result property="imagePath" column="image_Path" />
 		<association property="starPoint" column="id" select="teamphony.store.mapper.MemberMapper.getStarPoint" javaType="double" jdbcType="DOUBLE" />
 	</resultMap>
 	
