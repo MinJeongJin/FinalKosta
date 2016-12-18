@@ -106,17 +106,16 @@
 									<h3>${post.member.memberId }</h3>
 								</header>
 								<div class="w3-container">
-									<c:if test="${post.imagePath ne pass}">
+									<c:if test="${post.imagePath ne 'pass'}">
 										<b class="glyphicon glyphicon-paperclip"></b>
 									</c:if>
-									<c:if test="${post.videoLink ne pass}">
+									<c:if test="${post.videoLink ne 'pass'}">
 										<b class="glyphicon glyphicon-hd-video"></b>
 									</c:if>
-									<c:if test="${post.imagePath ne pass}">
+									<c:if test="${post.filePath ne 'pass'}">
 										<b class="glyphicon glyphicon-picture"></b>
 									</c:if>
 									<hr>
-
 									<p>${post.contents}</p>
 									<br>
 								</div>

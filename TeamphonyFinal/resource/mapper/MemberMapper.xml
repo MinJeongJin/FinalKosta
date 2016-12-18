@@ -12,17 +12,17 @@
 	</resultMap>
 	
 	<insert id="insertMember" parameterType="Member">
-		insert into Member_tb(id, password, alias, imagePath) values(#{memberId}, #{password}, #{alias}, #{imagePath})
+		insert into Member_tb(id, password, alias, image_Path) values(#{memberId}, #{password}, #{alias}, #{imagePath})
 	</insert>
 	
 	<select id="selectMemberByMemberId" parameterType="String" resultMap="memberMap">
-		select id As memberId, password, alias, imagePath
+		select id As memberId, password, alias, image_Path
 		from member_tb
 		where id = #{memberId}
 	</select>
 	
 	<update id="updateMember" parameterType="Member">
-		update Member_tb set password = #{password}, alias = #{alias}, imagePath=#{imagePath} where id = #{memberId}
+		update Member_tb set password = #{password}, alias = #{alias}, image_Path=#{imagePath} where id = #{memberId}
 	</update>
 	
 	<delete id="deleteMember" parameterType="String">
@@ -33,12 +33,12 @@
 		insert into evaluation_tb(memberId, starPoint) values(#{memberId},#{starPoint})
 	</insert>
 	
-	<select id="getStarPoint" parameterType="String" resultType="float">
-		select starPoint from evaluation_tb where memberId = #{id}
+	<select id="getStarPoint" parameterType="String" resultType="double">
+		select starPoint from evaluation_tb where memberId = #{memberId}
 	</select>
 	
 	<select id="selectAllMember" resultType="Member">
-		select id As memberId, password, alias, imagePath from member_tb
+		select id As memberId, password, alias, image_Path from member_tb
 	</select>
 
 </mapper>

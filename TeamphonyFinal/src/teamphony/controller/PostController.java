@@ -28,17 +28,20 @@ import teamphony.service.facade.PostService;
 @Controller
 @RequestMapping("post")
 public class PostController {
+	
+	private static final String filePath = "resources\\images\\";
 
 	@Autowired
 	private PostService postService;
 	@Autowired
 	private MemberService memberService;
 
-	private static final String filePath = "C:\\fileUploadTest\\";
 
 	@RequestMapping(value = "create.do", method = RequestMethod.POST)
 	public String createPost(HttpSession session, HttpServletRequest request, String contents, String videoLink) {
 
+		String root = request.getSession().getServletContext().getRealPath("/");
+		
 		Post post = new Post(contents,memberService.findMemberByMemberId(((Member) session.getAttribute("member")).getMemberId()),(int) session.getAttribute("teamCode"));
 
 		if (videoLink == null || videoLink.isEmpty()) {
@@ -48,6 +51,8 @@ public class PostController {
 			System.out.println(videoLink);
 			post.setVideoLink(videoLink);
 		}
+		
+		Member member = (Member)session.getAttribute("member");
 
 		// Request에서 첨부파일을 받기위해 캐스팅을 함
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
@@ -58,7 +63,7 @@ public class PostController {
 		String originalFileName = null;
 
 		// 파일을 저장할 폴더 설정
-		File file = new File(filePath + post.getMember().getMemberId() + "\\");
+		File file = new File(root + filePath + member.getMemberId() + "\\post\\");
 		// 폴더가 없으면 폴더 생성
 		if (file.exists() == false) {
 			file.mkdirs();

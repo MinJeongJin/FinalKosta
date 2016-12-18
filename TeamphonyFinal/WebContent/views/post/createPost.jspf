@@ -37,8 +37,8 @@
 
 					<label><b>영상 Link</b></label> <input
 						class="w3-input w3-border w3-margin-bottom" type="text"
-						placeholder="URL형식의 링크를 입력하세요." id="pwCon" name="videoLink"
-						maxlength="15"> <label><b>사진 첨부</b></label> <input
+						placeholder="URL형식의 링크를 입력하세요." id="pwCon" name="videoLink">
+					<label><b>사진 첨부</b></label> <input
 						class="w3-input w3-border w3-margin-bottom" type="file"
 						name="imagePath"> <label><b>파일 첨부</b></label> <input
 						class="w3-input w3-border w3-margin-bottom" type="file"
@@ -53,27 +53,24 @@
 		</div>
 	</div>
 
- <script>
-        var checkLength = function () {
+	<script>
+		var checkLength = function() {
 
-            var textLen = document.getElementById('textLen');
-            var areaLen = document.getElementById('area').value.length;
+			var textLen = document.getElementById('textLen');
+			var areaLen = document.getElementById('area').value.length;
 
-            textLen.innerHTML = areaLen;
+			textLen.innerHTML = areaLen;
 
-        }
+		}
 
+		var checkAll = function() {
 
-        var checkAll = function () {
+		}
 
+		var modalReset = function() {
 
-        }
-
-        var modalReset = function () {
-
-
-        }
-    </script>
+		}
+	</script>
 
 
 </body>
