@@ -79,17 +79,15 @@ public class SubmissionController {
 		
 		String uploadPath = request.getSession().getServletContext().getRealPath("/");
 		
-		System.out.println("filePathOnly1= " +  uploadPath);
+		System.out.println("uploadPath= " +  uploadPath);
 		
-//		httpSession.setAttribute("loginedMember", "aaaa");
-//		httpSession.setAttribute("teamCode", 9642);
 		
 		TaskMember taskMember= new TaskMember();
 		taskMember.setCommitted(Integer.parseInt(committed));
 
 		
 		List<TaskMember> taskMemberList = new ArrayList<>();
-		 taskMemberList.add(taskMember);
+		taskMemberList.add(taskMember);
 		
 		Task task = new Task();
 		
@@ -111,13 +109,13 @@ public class SubmissionController {
 			try {
 				
 				String saveName = uploadFile(file.getOriginalFilename(), file.getBytes(), request);
-				System.out.println("===========================================");
-				System.out.println("saveName= "+ saveName);
 				
 				
 				taskFile.setFilePath(saveName);
 				
+				System.out.println("=================setFilePath!!!!====================");
 				System.out.println("getFilePath= "+ taskFile.getFilePath());
+				System.out.println("saveName= "+ saveName);
 				System.out.println("=========================================");
 			
 				taskFileList.add(taskFile);
@@ -125,7 +123,6 @@ public class SubmissionController {
 				
 				task.setTaskFileList(taskFileList);
 				
-//				System.out.println(task.toString());
 				model.addAttribute("saveName",saveName);
 				
 			} catch (IOException e) {
@@ -134,18 +131,16 @@ public class SubmissionController {
 				e.printStackTrace();
 			}
 			}
-		
-		
-		
 		service.registerTask(task, httpSession, assignmentTitle, Integer.parseInt(assignmentId)); // task_tb 저장
 		
 		return "redirect:searchAll.do";
 	}
 	
+	
 	private static String uploadFile(String originalName
-							,byte[] fileData
-							,HttpServletRequest request) throws Exception{
-		
+			,byte[] fileData
+			,HttpServletRequest request) throws Exception{
+
 		String uploadPath = request.getSession().getServletContext().getRealPath("/");
 		
 		UUID uid = UUID.randomUUID();
@@ -153,85 +148,25 @@ public class SubmissionController {
 		String uploadedFileName = null;
 		
 		if ( originalName != null ){
-			
-			String savedName  = uid.toString() + "_" + originalName;
-			
-			String savedPath = calcPath(uploadPath);
-			
-			File target = new File(uploadPath+ savedPath, savedName);
-			
-			FileCopyUtils.copy(fileData, target);
-			
-			String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
-			
-			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
-			
-		}
 		
+		String savedName  = uid.toString() + "_" + originalName;
+		
+		String savedPath = calcPath(uploadPath);
+		
+		File target = new File(uploadPath+ savedPath, savedName);
+		
+		FileCopyUtils.copy(fileData, target);
+		
+		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
+		
+		uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
+		
+		}
+
 		System.out.println("uploadedFileName= "+ uploadedFileName);
 		return uploadedFileName;
-	}
+		}
 	
-	private static String makeIcon(String uploadPath, String path, String fileName) throws Exception{
-		
-		String iconName = uploadPath + path + File.separator + fileName;
-		
-		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');		
-	}
-	
-	
-	@RequestMapping(value = "uploadAjax.do", method = RequestMethod.GET)
-	public void uploadAjax(){
-	}
-	
-	@RequestMapping(value = "uploadAjax.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> uploadAjax(MultipartFile file, HttpServletRequest request) throws Exception {
-		
-		String uploadPath = request.getSession().getServletContext().getRealPath("/");
-		
-		return new ResponseEntity<>(
-				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
-	}
-	
-	@ResponseBody
-	@RequestMapping("displayFile.do")
-	public ResponseEntity<byte[]> displayFile(String fileName, HttpServletRequest request) throws Exception{
-		String uploadPath = request.getSession().getServletContext().getRealPath("/");
-		
-		InputStream in = null; 
-	    ResponseEntity<byte[]> entity = null;
-	    
-	    try{
-	      
-	      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-	      
-	      MediaType mType = MediaUtils.getMediaType(formatName);
-	      
-	      HttpHeaders headers = new HttpHeaders();
-	      
-	      in = new FileInputStream(uploadPath+fileName);
-	      
-	      if(mType != null){
-	        headers.setContentType(mType);
-	      }else{
-	        
-	        fileName = fileName.substring(fileName.indexOf("_")+1);       
-	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-	        headers.add("Content-Disposition", "attachment; filename=\""+ 
-	          new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-	      }
-
-	        entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), 
-	          headers, 
-	          HttpStatus.CREATED);
-	    }catch(Exception e){
-	      e.printStackTrace();
-	      entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-	    }finally{
-	      in.close();
-	    }
-	      return entity;    
-	}
 	
 	
 	private static String calcPath(String uploadPath){
@@ -264,6 +199,72 @@ public class SubmissionController {
 			}
 		}
 	}
+	
+	
+	
+	private static String makeIcon(String uploadPath, String path, String fileName) throws Exception{
+		
+		String iconName = uploadPath + path + File.separator + fileName;
+		
+		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');		
+	}
+	
+//	
+//	@RequestMapping(value = "uploadAjax.do", method = RequestMethod.GET)
+//	public void uploadAjax(){
+//	}
+//	
+//	@RequestMapping(value = "uploadAjax.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+//	public ResponseEntity<String> uploadAjax(MultipartFile file, HttpServletRequest request) throws Exception {
+//		
+//		String uploadPath = request.getSession().getServletContext().getRealPath("/");
+//		
+//		return new ResponseEntity<>(
+//				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping("displayFile.do")
+//	public ResponseEntity<byte[]> displayFile(String fileName, HttpServletRequest request) throws Exception{
+//		String uploadPath = request.getSession().getServletContext().getRealPath("/");
+//		
+//		InputStream in = null; 
+//	    ResponseEntity<byte[]> entity = null;
+//	    
+//	    try{
+//	      
+//	      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+//	      
+//	      MediaType mType = MediaUtils.getMediaType(formatName);
+//	      
+//	      HttpHeaders headers = new HttpHeaders();
+//	      
+//	      in = new FileInputStream(uploadPath+fileName);
+//	      
+//	      if(mType != null){
+//	        headers.setContentType(mType);
+//	      }else{
+//	        
+//	        fileName = fileName.substring(fileName.indexOf("_")+1);       
+//	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//	        headers.add("Content-Disposition", "attachment; filename=\""+ 
+//	          new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+//	      }
+//
+//	        entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), 
+//	          headers, 
+//	          HttpStatus.CREATED);
+//	    }catch(Exception e){
+//	      e.printStackTrace();
+//	      entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+//	    }finally{
+//	      in.close();
+//	    }
+//	      return entity;    
+//	}
+	
+	
+
 	
 
 	@RequestMapping("/revise.do")

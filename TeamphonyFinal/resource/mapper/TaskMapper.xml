@@ -134,7 +134,7 @@
 				
 	</select>
 	
-	<select id="selectTaskMemberByAssignmentId" parameterType="int" resultType="TASK_MEMBER_TB">
+	<select id="selectTaskMemberByAssignmentId" parameterType="int" resultType="taskMember">
 			SELECT 				
 				ASSIGNMENT_ID				AS assignmentId
 				,MEMBER_ID                  AS memberId
@@ -147,7 +147,7 @@
 				ORDER BY ASSIGNMENT_ID ASC
 	</select>
 	
-	<select id="selectTaskMemberBySubmissionId" parameterType="int" resultType="TASK_MEMBER_TB">
+	<select id="selectTaskMemberBySubmissionId" parameterType="int" resultType="taskMember">
 			SELECT 				
 				ASSIGNMENT_ID             AS assignmentId   
 				,MEMBER_ID                AS memberId       
