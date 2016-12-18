@@ -15,7 +15,7 @@
 		insert into Member_tb(id, password, alias, image_Path) values(#{memberId}, #{password}, #{alias}, #{imagePath})
 	</insert>
 	
-	<select id="selectMemberByMemberId" parameterType="String" resultMap="memberMap">
+	<select id="selectMemberByMemberId" parameterType="String" resultType="member">
 		select id As memberId, password, alias, image_Path
 		from member_tb
 		where id = #{memberId}
@@ -30,11 +30,11 @@
 	</delete>
 	
 	<insert id="insertStarPoint" parameterType="map">
-		insert into evaluation_tb(memberId, starPoint) values(#{memberId},#{starPoint})
+		insert into evaluation_tb(member_Id, star_Point) values(#{memberId},#{starPoint})
 	</insert>
 	
 	<select id="getStarPoint" parameterType="String" resultType="double">
-		select starPoint from evaluation_tb where memberId = #{memberId}
+		select star_Point from evaluation_tb where member_Id = #{memberId}
 	</select>
 	
 	<select id="selectAllMember" resultType="Member">
