@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.ObjectUtils;
 
 import teamphony.domain.Member;
 import teamphony.store.facade.MemberStore;
@@ -99,7 +100,9 @@ public class MemberStoreLogic implements MemberStore {
 		for (Double starPoint : list) {
 			sum += starPoint;
 		}
-		member.setStarPoint((double) sum / list.size());
+		if(!ObjectUtils.isEmpty(member)){
+			member.setStarPoint((double) sum / list.size());
+		}
 		return member;
 	}
 
