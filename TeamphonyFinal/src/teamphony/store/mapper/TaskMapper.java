@@ -25,8 +25,6 @@ public interface TaskMapper {
 //	추가했음
 	void updateTaskPoint(Task task);
 //	추가했음
-	void updateTaskFile(TaskFile taskFile);
-
 	void deleteTask(int taskId);
 //	추가 했음
 	void deleteTaskMember(int taskId);
@@ -44,9 +42,6 @@ public interface TaskMapper {
 	List<TaskMember> selectTaskMemberByAssignmentId(int taskId);
 // 추가 했음	
 	List<TaskMember> selectTaskMemberBySubmissionId(int taskId);
-	
-//	추가 했음
-	TaskFile selectFileList(int taskId);
 //	추가 했음
 	String[] selectMemberIdByAssignmentId(int assignmentId);
 //	추가 했음
