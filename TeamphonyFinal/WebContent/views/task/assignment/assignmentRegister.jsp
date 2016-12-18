@@ -121,7 +121,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	<table class="table">
 		<colgroup>
 			<col width="150">
-			<col width="600">
+			<col width="700">
 
 		</colgroup>
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
