@@ -17,7 +17,7 @@ public interface TaskService {
 
 	 List<Task> findAllTaskByFlag(int flag, int teamCode);
 
-	 List<Task> findTaskByMemberId(String memberId);
+	 List<Task> findTaskByMemberId(String memberId, int teamCode);
 
 	 Task findTaskByTaskId(int taskId);
 	 

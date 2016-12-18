@@ -33,7 +33,7 @@ public interface TaskMapper {
 //	추가 했음
 	void deleteMemberIdByTaskId(int taskId);
 //	변경했음
-	List<Task> selectAllTaskByFlag(@Param("flag") int flag,@Param("teamCode") int teamCode);
+	List<Task> selectAllTaskByFlag(@Param("flag") int flag, @Param("teamCode") int teamCode);
 //	추가했음
 	List<TaskFile> selectAllFileList();
 //	추가 했음
@@ -57,7 +57,7 @@ public interface TaskMapper {
 	
 	List<String> selectAssignmentTitleBySubmissionId(int submissionId);
 //추가 했음	
-	List<Task> selectMembersTaskByMemberId(String memberId);
+	List<Task> selectMembersTaskByMemberId(@Param("memberId") String memberId, @Param("teamCode") int teamCode);
 	
 	
 }

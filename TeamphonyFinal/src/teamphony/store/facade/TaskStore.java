@@ -18,7 +18,7 @@ public interface TaskStore {
 
 	Task selectTaskByTaskId(int taskId);
 
-	List<Task> selectTaskByMemberId(String memberId);
+	List<Task> selectTaskByMemberId(String memberId, int teamCode);
 	
 	List<Task> selectAllAssginment();
 	
