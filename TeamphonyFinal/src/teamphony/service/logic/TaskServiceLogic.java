@@ -47,8 +47,8 @@ public class TaskServiceLogic implements TaskService {
 	
 
 	@Override
-	public List<Task> findTaskByMemberId(String memberId) {
-		return store.selectTaskByMemberId(memberId);
+	public List<Task> findTaskByMemberId(String memberId, int teamCode) {
+		return store.selectTaskByMemberId(memberId, teamCode);
 	}
 	
 	

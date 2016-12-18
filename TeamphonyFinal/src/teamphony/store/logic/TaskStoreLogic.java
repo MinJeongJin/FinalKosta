@@ -226,7 +226,7 @@ public class TaskStoreLogic implements TaskStore {
 	}
 
 	@Override
-	public List<Task> selectTaskByMemberId(String memberId) {
+	public List<Task> selectTaskByMemberId(String memberId, int teamCode) {
 		
 		SqlSession sqlsession = getSessionFactory().openSession();
 		List<Task> taskList = new ArrayList<>();
@@ -235,7 +235,7 @@ public class TaskStoreLogic implements TaskStore {
 		
 		try{
 			TaskMapper mapper= sqlsession.getMapper(TaskMapper.class);
-			taskList = mapper.selectMembersTaskByMemberId(memberId);
+			taskList = mapper.selectMembersTaskByMemberId(memberId, teamCode);
 			
 			for(Task task : taskList){
 //flag 1==submission   flag 0==assignment				

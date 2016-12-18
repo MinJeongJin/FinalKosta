@@ -31,12 +31,12 @@
 				,#{contents, jdbcType=VARCHAR}
 				,#{deadline, jdbcType=VARCHAR}
 				,#{flag, jdbcType=INTEGER}
-				,#{EVALUATION_PERIOD_START, jdbcType=VARCHAR}
-				,#{EVALUATION_PERIOD_END, jdbcType=VARCHAR}
+				,#{evaluationPeriodStart, jdbcType=VARCHAR}
+				,#{evaluationPeriodEnd, jdbcType=VARCHAR}
 				,#{point, jdbcType=INTEGER}
 				,#{evaluated, jdbcType=INTEGER}
-				,#{EVALUATION_CNT, jdbcType=INTEGER}
-				,#{TEAM_CODE, jdbcType=INTEGER}
+				,#{evaluationCnt, jdbcType=INTEGER}
+				,#{teamCode, jdbcType=INTEGER}
 			)
 	</insert> 
 	
@@ -51,7 +51,7 @@
 			)
 			VALUES
 			(	#{taskId}
-				,#{MEMBER_ID }
+				,#{memberId }
 				,#{assignmentTitle }
 				,0
 			)
@@ -64,10 +64,10 @@
 	<update id="updateTaskMemberForSubmission">
 			UPDATE TASK_MEMBER_TB
 				SET 
-				SUBMISSION_ID			=(SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
-				,COMMITTED 				=1
-				WHERE ASSIGNMENT_ID		= #{ASSIGNMENT_ID}
-				AND MEMBER_ID			= #{loginedMEMBER_ID }
+				SUBMISSION_ID			= (SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
+				,COMMITTED 				= 1
+				WHERE ASSIGNMENT_ID		= #{assignmentId }
+				AND MEMBER_ID			= #{loginedMemberId }
 	</update>
 	
 	<insert id="insertSubmission" parameterType="task">
@@ -95,8 +95,8 @@
 				,#{flag, jdbcType=INTEGER}
 				,#{point, jdbcType=INTEGER}
 				,#{evaluated, jdbcType=INTEGER}
-				,#{EVALUATION_CNT, jdbcType=INTEGER }
-				,#{TEAM_CODE, jdbcType=INTEGER}
+				,#{evaluationCnt, jdbcType=INTEGER }
+				,#{teamCode, jdbcType=INTEGER}
 			)
 	</insert>  
 	
@@ -110,8 +110,8 @@
 				)
 				VALUES
 				(
-					#{SUBMISSION_ID}
-					,#{FILE_PATH}
+					#{submissionId }
+					,#{filePath}
 				)
 	</insert>
 	
@@ -129,7 +129,7 @@
 				,EVALUATION_CNT             AS evaluationCnt
 				,TEAM_CODE					AS teamCode
 			FROM TASK_TB            
-				WHERE FLAG = #{flag} AND TEAM_CODE = #{TEAM_CODE}
+				WHERE FLAG =				#{flag} 
 				ORDER BY ID ASC
 				
 	</select>
@@ -143,7 +143,7 @@
 				,COMMITTED                  AS committed
 				
 			FROM TASK_MEMBER_TB 
-				WHERE ASSIGNMENT_ID = #{taskId }
+				WHERE ASSIGNMENT_ID =		#{taskId }
 				ORDER BY ASSIGNMENT_ID ASC
 	</select>
 	
@@ -157,7 +157,7 @@
 				
 			FROM TASK_MEMBER_TB 
 			
-				WHERE SUBMISSION_ID = #{taskId }
+				WHERE SUBMISSION_ID =		#{taskId }
 				ORDER BY SUBMISSION_ID ASC
 	</select>
 	
@@ -166,6 +166,7 @@
 			SELECT 
 				MEMBER_ID 							AS memberId 
 				FROM TASK_MEMBER_TB 
+				
 			WHERE ASSIGNMENT_ID =					#{taskId}
 			ORDER BY ASSIGNMENT_ID ASC
 	</select>
@@ -194,7 +195,7 @@
 			,FILE_PATH								AS filePath
 			 
 			FROM TASK_FILE_TB 
-			WHERE SUBMISSION_ID =				#{taskId}
+			WHERE SUBMISSION_ID =				#{taskId }
 	</select>
 	
 	
@@ -216,17 +217,6 @@
 		
 	</select>
 	
-	
-	
-	
-                     
-                
-                 
-     
-      
-                   
-                 
-	
 	<select id="selectMembersTaskByMemberId" parameterType="String" resultType="task">
 			
 			SELECT 
@@ -240,10 +230,11 @@
 				,TT.DEADLINE                        AS deadline 
 				,TT.EVALUATION_PERIOD_START         AS evaluationPeriodStart 
 				,TT.EVALUATION_PERIOD_END           AS evaluationPeriodEnd    
-				,TT.TEAM_CODE						AS teamCode 
 				
 			FROM TASK_MEMBER_TB TM , TASK_TB TT
-			WHERE TM.MEMBER_ID = #{MEMBER_ID}
+			
+			WHERE TM.MEMBER_ID =						#{memberId }
+			AND TT.TEAM_CODE =							#{teamCode }
 			AND TM.ASSIGNMENT_ID = TT.ID
 			
 				UNION 
@@ -258,10 +249,11 @@
 				,TT.DEADLINE                       AS deadline             
 				,TT.EVALUATION_PERIOD_START        AS evaluationPeriodStart  
 				,TT.EVALUATION_PERIOD_END          AS evaluationPeriodEnd      
-				,TT.TEAM_CODE                      AS teamCode             
 				
 			FROM TASK_MEMBER_TB TM , TASK_TB TT
-			WHERE TM.MEMBER_ID = #{MEMBER_ID}
+			
+			WHERE TM.MEMBER_ID =						#{memberId }
+			AND TT.TEAM_CODE =							#{teamCode }
 			AND TM.SUBMISSION_ID = TT.ID 
 	</select>
 	
@@ -269,14 +261,16 @@
 			SELECT 
 				ASSIGNMENT_ID						AS assignmentId
 				FROM TASK_MEMBER_TB					
-				WHERE MEMBER_ID =					#{MEMBER_ID}
+				
+				WHERE MEMBER_ID =					#{memberId }
 	</select>
 	
 	<select id="selectSubmissionIdByMemberId" parameterType="String" resultType="int">
 			SELECT 
 				SUBMISSION_ID						AS submissionId
 				FROM TASK_MEMBER_TB
-				WHERE MEMBER_ID =					#{MEMBER_ID}
+				
+				WHERE MEMBER_ID =					#{memberId }
 	</select>
 	
 	<select id="selectAssignmentTitleBySubmissionId" parameterType="int" resultType="String">
@@ -297,41 +291,44 @@
 				,CONTENTS =					#{contents, jdbcType= VARCHAR}
 				,DEADLINE =					#{deadline , jdbcType= VARCHAR}
 				,EVALUATION_PERIOD_START =	#{EVALUATION_PERIOD_START ,jdbcType= VARCHAR}
-				,EVALUATION_PERIOD_END =		#{EVALUATION_PERIOD_END ,jdbcType= VARCHAR}
-			WHERE ID = #{taskId}
+				,EVALUATION_PERIOD_END =	#{EVALUATION_PERIOD_END ,jdbcType= VARCHAR}
+			WHERE ID =						#{taskId}
 	</update>
 	
 	<update id="updateTaskPoint" parameterType="task">
 			UPDATE TASK_TB
 				SET POINT				= #{point, jdbcType=INTEGER}
-					,EVALUATION_CNT		= #{EVALUATION_CNT, jdbcType=INTEGER}
+					,EVALUATION_CNT		= #{evaluationCnt, jdbcType=INTEGER}
 					,EVALUATED			= #{evaluated, jdbcType=INTEGER }
-			WHERE ID					= #{taskId}
+			WHERE ID					= #{taskId }
 	</update>
 	
 	<delete id="deleteTaskMember" parameterType="int">
 			DELETE
 			FROM TASK_MEMBER_TB 
-			WHERE ASSIGNMENT_ID		= #{taskId}
-	
+			
+			WHERE ASSIGNMENT_ID		=#{taskId }
 	</delete>
 	
 	<delete id="deleteTask" parameterType="int">
 			DELETE
 			FROM TASK_TB
-			WHERE ID	= #{taskId}
+			
+			WHERE ID				=#{taskId }
 	</delete>
 	
 	<delete id="deleteTaskFile" parameterType="int">
 		DELETE 
 		FROM TASK_FILE_TB
-		WHERE SUBMISSION_ID			= #{taskId}
+		
+		WHERE SUBMISSION_ID			= #{taskId }
 	</delete>
 
 	<delete id="deleteMemberIdByTaskId" >
 		DELETE 
 		FROM TASK_MEMBER_TB
-		WHERE ASSIGNMENT_ID = 		#{taskId}
+		
+		WHERE ASSIGNMENT_ID = 		#{taskId }
 	</delete>	
 	
 	
@@ -348,6 +345,7 @@
 			,POINT									AS point   
 			,TEAM_CODE								AS teamCode
 		from Task_tb 
+		
 		where flag=0					
 	</select>
 

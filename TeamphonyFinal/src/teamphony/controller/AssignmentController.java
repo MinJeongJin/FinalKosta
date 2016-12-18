@@ -158,13 +158,13 @@ public class AssignmentController {
 	}
 	
 	@RequestMapping(value="/searchByMemberId.do", method= RequestMethod.POST)
-	public String searchAssignmentByMemberId(String memberId, Model model){
+	public String searchAssignmentByMemberId(HttpSession httpSession, int TeamCode, String memberId, Model model){
 		
 		List<Task> taskList = new ArrayList<>();
 		List<Task> assignmentList =new ArrayList<>();
 		List<Task> submissionList =new ArrayList<>();
 		
-		taskList = service.findTaskByMemberId(memberId);
+		taskList = service.findTaskByMemberId(memberId, (int)httpSession.getAttribute("teamCode"));
 		
 		for(Task task : taskList){
 //flag 1==submission   flag 0==assignment			
