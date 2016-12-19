@@ -119,12 +119,12 @@ public class PostStoreLogic implements PostStore {
 	}
 
 	@Override
-	public List<Post> selectPostByContents(String contents) {
+	public List<Post> selectPostByContents(String contents, int teamCode) {
 		SqlSession session = getSessionFactory().openSession();
 		List<Post> list = new ArrayList<>();
 		try {
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			list=mapper.selectPostByContents(contents);
+			list=mapper.selectPostByContents(contents, teamCode);
 
 		} catch (Exception e) {
 			e.printStackTrace();
