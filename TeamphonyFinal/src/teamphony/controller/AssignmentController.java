@@ -158,7 +158,7 @@ public class AssignmentController {
 	}
 	
 	@RequestMapping(value="/searchByMemberId.do", method= RequestMethod.POST)
-	public String searchAssignmentByMemberId(HttpSession httpSession, int TeamCode, String memberId, Model model){
+	public String searchAssignmentByMemberId(HttpSession httpSession, String memberId, Model model){
 		
 		List<Task> taskList = new ArrayList<>();
 		List<Task> assignmentList =new ArrayList<>();
