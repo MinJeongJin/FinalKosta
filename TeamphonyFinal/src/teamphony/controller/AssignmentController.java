@@ -163,14 +163,17 @@ public class AssignmentController {
 		List<Task> taskList = new ArrayList<>();
 		List<Task> assignmentList =new ArrayList<>();
 		List<Task> submissionList =new ArrayList<>();
-		
+		System.out.println("======searchByMemberId===============");
+		System.out.println("memberId= " + memberId);
 		taskList = service.findTaskByMemberId(memberId, (int)httpSession.getAttribute("teamCode"));
 		
 		for(Task task : taskList){
-//flag 1==submission   flag 0==assignment			
+//flag 1==submission   flag 0==assignment	
+			System.out.println("task.getTitle= "+ task.getTitle());
 			if(task.getFlag() == 0){
 				
 				assignmentList.add(task);
+				
 			}else if (task.getFlag() == 1){
 				
 				submissionList.add(task);
@@ -183,13 +186,6 @@ public class AssignmentController {
 			System.out.println("=========assignmentList============");
 			System.out.println(task.getTaskMember().size());
 		}
-		
-//		for(Task task : submissionList){
-//			System.out.println(task.toString());
-//			System.out.println("==================================");
-//			System.out.println("task.getTaskMember().toString()= "+task.getTaskMember().toString());
-//			System.out.println("==================================");
-//		}
 		model.addAttribute("memberId",memberId);
 		
 		return "/task/assignment/memberAssignmentList";

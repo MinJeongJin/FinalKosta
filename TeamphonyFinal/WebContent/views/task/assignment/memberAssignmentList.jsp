@@ -275,7 +275,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	</thead>
 	<tbody>
 	<c:choose>
-		<c:when test="${list eq null || empty list }">
+		<c:when test="${assignmentList eq null || empty assignmentList }">
 			<tr >
 				<h3 align="center">부여과제가 존재하지 않습니다.</h3><br><br>
 			</tr>
@@ -347,7 +347,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	<tbody>
 	
 	<c:choose>
-	<c:when test="${list eq null || empty list }">
+	<c:when test="${submissionList eq null || empty submissionList }">
 		<tr >
 			<h3 align="center">제출과제가 존재하지 않습니다.</h3><br>
 		</tr>

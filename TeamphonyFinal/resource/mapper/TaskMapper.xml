@@ -248,6 +248,7 @@
 			WHERE TM.MEMBER_ID =						#{memberId }
 			AND TT.TEAM_CODE =							#{teamCode }
 			AND TM.SUBMISSION_ID = TT.ID 
+			
 	</select>
 	
 	<select id="selectAssignmentIdByMemberId" parameterType="String" resultType="int">
