@@ -219,8 +219,6 @@ public class SubmissionController {
 	@RequestMapping("/revise.do")
 	public String reviseSubmission(int taskId, Model model) {
 
-		
-		
 		Task task = service.findTaskByTaskId(taskId);
 		model.addAttribute("task", task);
 

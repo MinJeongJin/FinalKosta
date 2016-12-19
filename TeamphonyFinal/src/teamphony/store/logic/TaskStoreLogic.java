@@ -144,9 +144,7 @@ public class TaskStoreLogic implements TaskStore {
 			TaskMapper mapper = sqlsession.getMapper(TaskMapper.class);
 //flag 1==submission   flag 0==assignment	
 			if(flag == 1){
-				System.out.println("==========submssionDelete=================");
-				System.out.println("memberId= " + memberId);
-				System.out.println("taskId= "+taskId);
+				
 				mapper.deleteTaskFile(taskId);
 				mapper.updateTaskMemberForSubmissionDelete(memberId, taskId);
 				mapper.deleteTask(taskId);
