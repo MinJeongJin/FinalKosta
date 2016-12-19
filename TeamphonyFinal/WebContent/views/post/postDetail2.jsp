@@ -62,17 +62,6 @@
 	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	
 <script type="text/javascript">
-	function showInput() {
-		if ('${post.videoLink}' != "pass") {
-			$("#videoView").show();
-		}
-		if ('${post.imagePath}' != "pass") {
-			$("#imageView").show();
-		}
-		if ('${post.filePath}' != "pass") {
-			$("#fileView").show();
-		}
-	};
 	// 2. This code loads the IFrame Player API code asynchronously.
 	var tag = document.createElement('script');
 
@@ -116,55 +105,7 @@
 		player.stopVideo();
 	};
 
-	function revise() {
-		$('#contents, #videoLink, #imagePath, #filePath').attr('readonly', false);
-		$('#okay, #reset, #videoView, #imageView, #fileView').show();
-		document.getElementById("back").style.display="none";
-	};
 	
-	$(document).ready(function(){
-		if ($("#videoLink").value !== "pass") {
-			$("#videoView").show();
-		}
-		if (document.getElementById("imagePath").value !== "pass") {
-			$("#imageView").show();
-		}
-		if (document.getElementById("filePath").value !== "pass") {
-			$("#fileView").show();
-		}
-	})
-
-	
-	function cancle(){
-		
-		var contents = document.getElementById("contents");
-		var videoLink = document.getElementById("videoLink");
-		var imagePath = document.getElementById("imagePath");
-		var filePath = document.getElementById("filePath");
-		
-		contents.readOnly = true;
-		videoLink.readOnly = true;
-		imagePath.readOnly = true;
-		filePath.readOnly = true;
-		
-		contents.value = "${post.contents}";
-		videoLink.value = "${post.videoLink}";
-		imagePath.value = "${post.imagePath}";
-		filePath.value = "${post.filePath}";
-		
-		if (videoLink.value == "pass") {
-			$("#videoView").style.display=none;
-		}
-		
-		if (imagePath.value == "pass") {
-			$("#imageView").style.display=none;
-		}
-		
-		if (filePath.value == "pass") {
-			$("#fileView").style.display=none;
-		}
-		
-	};
 </script>
 
 <body class="w3-light-grey w3-content" style="max-width: 1600px;" onload="showInput();">
@@ -214,38 +155,35 @@
 					</colgroup>
 
 					<tbody>
-						<tr>
-							<th>내용</th>
-							<td><textarea id="contents" name="contents"
-									class="form-control" rows="5" readonly>${post.contents}</textarea></td>
-						</tr>
-						<tr id="videoView" style="display : none">
-							<th>영상</th>
-							<td>
-								<div id="player"></div> <input type="text"
-								name="videoLink" id="videoLink" value="${post.videoLink}" hidden="true" readOnly>
-							</td>
-						</tr>
-						<tr id="imageView" style="display : none">
-							<th>이미지</th>
-							<td><img src="${post.imagePath}"> <input type="file"
-								id="imagePath" name="imagePath" value="${post.imagePath}" accept=".gif, .jpg, .png" readOnly>
-							</td>
-						</tr>
-						<tr id="fileView" style="display : none">
-							<th>첨부파일</th>
-							<td><input type="file" id="filePath" name="filePath"
-								value="${post.filePath }" readOnly></td>
-						</tr>
+						<c:if test="${post.contents ne null && !(empty post.contents)}">
+							<tr>
+								<th>내용</th>
+								<td>
+								<textarea id="contents" name="contents"
+										class="form-control" rows="5" readonly>${post.contents}</textarea></td>
+							</tr>
+						</c:if>
+						<c:if test="${post.videoLink ne 'pass' }">
+							<tr id="videoView" style="display : none">
+								<th>영상</th>
+								<td>
+									<div id="player"></div>
+								</td>
+							</tr>
+						</c:if>
+						<c:if test="${post.imagePath ne 'pass' }">
+							<tr id="imageView" style="display : none">
+								<th>이미지</th>
+								<td><img src="${post.imagePath}"></td>
+							</tr>
+						</c:if>
 					</tbody>
 				</table>
 				<br>
 				<div align="center">
 					<a id="back" class="btn" type="reset"
 						href="${pageContext.request.contextPath}/post/list.do?teamCode=${teamCode}">목록으로</a>
-					<input type="button" id="reset" class="btn" type="reset" value="취소"
-						onclick="cancle()"> <a id="okay" class="btn btn-success"
-						type="submit" hidden="true">저장</a>
+					<a id="okay" class="btn btn-success" type="submit">저장</a>
 				</div>
 			</form>
 		</div>

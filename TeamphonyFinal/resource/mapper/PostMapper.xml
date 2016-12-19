@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="selectPostByPostId" parameterType="int" resultMap="PostMap">
-		Select id,contents,team_Code,member_Id, videoLink, file_Path, image_Path from Post_tb where id=#{postId}
+		Select id,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where id=#{postId}
 	</select>
 	
 	<select id="selectPostByMemberId" parameterType="String" resultMap="PostMap">

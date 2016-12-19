@@ -68,7 +68,6 @@ public class PostController {
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
-
 		// 첨부 파일 찾기
 		if (iterator.hasNext()) {
 			// 첨부파일 불러오기
@@ -79,38 +78,8 @@ public class PostController {
 				originalFileName = multipartFile.getOriginalFilename();
 
 				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
-				file = new File(filePath + post.getMember().getMemberId() + "\\" + originalFileName);
-				post.setFilePath(filePath + post.getMember().getMemberId() + "\\" + originalFileName);
-				System.out.println(post.getFilePath());
-				try {
-					// 파일 전송
-					multipartFile.transferTo(file);
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-
-			}
-		}else{
-			post.setFilePath("pass");
-		}
-		// 첨부 파일 찾기
-		if (iterator.hasNext()) {
-			// 첨부파일 불러오기
-			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-			// 첨부파일 존재 여부 확인
-			if (multipartFile.isEmpty() == false) {
-				// 파일이름 저장
-				originalFileName = multipartFile.getOriginalFilename();
-
-				// 폴더구조를 폴더안에 아이디로 구분 해야하기 때문에 폴더구조 생성
-				file = new File(filePath + post.getMember().getMemberId() + "\\" + originalFileName);
-				post.setImagePath(filePath + post.getMember().getMemberId() + "\\" + originalFileName);
-				System.out.println(post.getImagePath());
+				file = new File(root + filePath + member.getMemberId() + "\\post\\" + originalFileName);
+				post.setImagePath(originalFileName);
 				try {
 					// 파일 전송
 					multipartFile.transferTo(file);
