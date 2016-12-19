@@ -79,11 +79,12 @@ public class TaskStoreLogic implements TaskStore {
 				List<TaskFile> taskFileList = task.getTaskFileList();
 
 				for (TaskFile taskFile : taskFileList) {
+					
 					taskFile.setSubmissionId(taskId);
 					
-					
 					System.out.println("============taskFileMapper==================");
-					System.out.println("taskFile.getFilePath= "+taskFile.getFilePath());
+					System.out.println("submissionId= " + taskId);
+					System.out.println("taskFile.getFilePath= "+ taskFile.getFilePath());
 					System.out.println("===============================================");
 					mapper.insertTaskFile(taskFile);
 				}
@@ -143,9 +144,7 @@ public class TaskStoreLogic implements TaskStore {
 			TaskMapper mapper = sqlsession.getMapper(TaskMapper.class);
 //flag 1==submission   flag 0==assignment	
 			if(flag == 1){
-				System.out.println("==========submssionDelete=================");
-				System.out.println("memberId= " + memberId);
-				System.out.println("taskId= "+taskId);
+				
 				mapper.deleteTaskFile(taskId);
 				mapper.updateTaskMemberForSubmissionDelete(memberId, taskId);
 				mapper.deleteTask(taskId);

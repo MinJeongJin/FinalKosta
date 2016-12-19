@@ -97,7 +97,6 @@ public class SubmissionController {
 		task.setTeamCode((int)httpSession.getAttribute("teamCode"));
 		task.setTaskFileList(new ArrayList<>());
 		
-		TaskFile taskFile = new TaskFile();
 		
 		
 		System.out.println("=========submissionController// create.do==============");
@@ -105,29 +104,38 @@ public class SubmissionController {
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		
 		for (MultipartFile file : attchFileList) {
+			TaskFile taskFile = new TaskFile();
 			
 			try {
 				
 				String saveName = uploadFile(file.getOriginalFilename(), file.getBytes(), request);
+				
+				System.out.println("saveName= " + saveName);
+				
 				int lastIdx = saveName.lastIndexOf('_')+1;
 				saveName = saveName.substring(lastIdx, saveName.length());
 				
 				taskFile.setFilePath(saveName);
 				task.getTaskFileList().add(taskFile);
 				
-				System.out.println("=================setFilePath!!!!====================");
+				System.out.println("=================setFilePath!!=======================");
 				System.out.println("getFilePath= "+ taskFile.getFilePath());
-				System.out.println("=========================================");
+				System.out.println("==============forEach  End!===========================");
 				
-				model.addAttribute("saveName",saveName);
 				
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			}
+		}
 		
+		System.out.println("task.getTaskFileList().size= "+ task.getTaskFileList().size());
+		
+		for(TaskFile file : task.getTaskFileList()){
+			System.out.println("filePath= "+ file.getFilePath());
+			
+		}
 		service.registerTask(task, httpSession, assignmentTitle, Integer.parseInt(assignmentId)); // task_tb 저장
 		
 		return "redirect:searchAll.do";
@@ -160,7 +168,6 @@ public class SubmissionController {
 		
 		}
 
-		System.out.println("uploadedFileName= "+ uploadedFileName);
 		return uploadedFileName;
 		}
 	
@@ -206,69 +213,12 @@ public class SubmissionController {
 		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');		
 	}
 	
-//	
-//	@RequestMapping(value = "uploadAjax.do", method = RequestMethod.GET)
-//	public void uploadAjax(){
-//	}
-//	
-//	@RequestMapping(value = "uploadAjax.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-//	public ResponseEntity<String> uploadAjax(MultipartFile file, HttpServletRequest request) throws Exception {
-//		
-//		String uploadPath = request.getSession().getServletContext().getRealPath("/");
-//		
-//		return new ResponseEntity<>(
-//				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
-//	}
-//	
-//	@ResponseBody
-//	@RequestMapping("displayFile.do")
-//	public ResponseEntity<byte[]> displayFile(String fileName, HttpServletRequest request) throws Exception{
-//		String uploadPath = request.getSession().getServletContext().getRealPath("/");
-//		
-//		InputStream in = null; 
-//	    ResponseEntity<byte[]> entity = null;
-//	    
-//	    try{
-//	      
-//	      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-//	      
-//	      MediaType mType = MediaUtils.getMediaType(formatName);
-//	      
-//	      HttpHeaders headers = new HttpHeaders();
-//	      
-//	      in = new FileInputStream(uploadPath+fileName);
-//	      
-//	      if(mType != null){
-//	        headers.setContentType(mType);
-//	      }else{
-//	        
-//	        fileName = fileName.substring(fileName.indexOf("_")+1);       
-//	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-//	        headers.add("Content-Disposition", "attachment; filename=\""+ 
-//	          new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-//	      }
-//
-//	        entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), 
-//	          headers, 
-//	          HttpStatus.CREATED);
-//	    }catch(Exception e){
-//	      e.printStackTrace();
-//	      entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-//	    }finally{
-//	      in.close();
-//	    }
-//	      return entity;    
-//	}
-	
-	
 
 	
 
 	@RequestMapping("/revise.do")
 	public String reviseSubmission(int taskId, Model model) {
 
-		
-		
 		Task task = service.findTaskByTaskId(taskId);
 		model.addAttribute("task", task);
 
@@ -297,7 +247,6 @@ public class SubmissionController {
 		// 첨부 파일 List파일저장 , TASKFILE_TB 저장
 		List<TaskFile> taskFileList = new ArrayList<TaskFile>();
 		for (MultipartFile attchFile : attchFileList) {
-
 			
 			String filePath = filePathOnly1  + attchFile.getOriginalFilename();
 			

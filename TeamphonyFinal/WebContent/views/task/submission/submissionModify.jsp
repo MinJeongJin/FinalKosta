@@ -143,7 +143,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
 		<th></th>
 		<td>
-			<h6 style="color: red">**첨부파일은 최대 2개 입니다.</h6>
+			<h6 style="color: red">**첨부파일은 최대 3개 입니다.</h6>
 		</td>
 	</tr>
 	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
@@ -158,7 +158,12 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<input style="width: 250px"  type="file" name="attchFile" class="form-control">
 		</td>
 	</tr>
-	
+	<tr class="w3-hover-light-grey w3-padding w3-card-2 ">
+		<th></th>
+		<td>
+			<input style="width: 250px"  type="file" name="attchFile" class="form-control">
+		</td>
+	</tr>
 	<tr>
 	<th></th>
 		<td align="right">
