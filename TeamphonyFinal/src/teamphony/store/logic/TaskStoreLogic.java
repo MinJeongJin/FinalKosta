@@ -136,22 +136,25 @@ public class TaskStoreLogic implements TaskStore {
 	}
 
 	@Override
-	public void deleteTask(int taskId, int flag) {
+	public void deleteTask(String memberId, int taskId, int flag) {
 
 		SqlSession sqlsession = getSessionFactory().openSession();
 		try {
 			TaskMapper mapper = sqlsession.getMapper(TaskMapper.class);
 //flag 1==submission   flag 0==assignment	
 			if(flag == 1){
-				
+				System.out.println("==========submssionDelete=================");
+				System.out.println("memberId= " + memberId);
+				System.out.println("taskId= "+taskId);
 				mapper.deleteTaskFile(taskId);
-				mapper.deleteMemberIdByTaskId(taskId);
+				mapper.updateTaskMemberForSubmissionDelete(memberId, taskId);
 				mapper.deleteTask(taskId);
 				
 			}else if(flag == 0){
 				mapper.deleteTaskMember(taskId);
 				mapper.deleteTask(taskId);
 			}
+			
 			sqlsession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

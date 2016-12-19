@@ -39,8 +39,8 @@ public class TaskServiceLogic implements TaskService {
 	
 
 	@Override
-	public void removeTask(int taskId, int flag) {
-		store.deleteTask(taskId,flag);
+	public void removeTask(String memberId, int taskId, int flag) {
+		store.deleteTask(memberId, taskId,flag);
 	}
 	
 

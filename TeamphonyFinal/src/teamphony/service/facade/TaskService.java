@@ -13,7 +13,7 @@ public interface TaskService {
 
 	 void modifyTask(Task task , String assignmentTitle);
 
-	 void removeTask(int taskId, int flag);
+	 void removeTask(String memberId, int taskId, int flag);
 
 	 List<Task> findAllTaskByFlag(int flag, int teamCode);
 

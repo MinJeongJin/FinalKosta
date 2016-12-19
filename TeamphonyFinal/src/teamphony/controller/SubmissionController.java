@@ -326,10 +326,10 @@ public class SubmissionController {
 	}
 
 	@RequestMapping("/erase.do")
-	public String eraseSubmission(String taskId, String flag) {
+	public String eraseSubmission(String memberId, String taskId, String flag) {
 		
 		System.out.println("taskId= "+ Integer.parseInt(taskId)+ "\n" + "flag= "+ Integer.parseInt(flag));
-		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
+		service.removeTask(memberId, Integer.parseInt(taskId),Integer.parseInt(flag));
 
 		return "redirect:searchAll.do";
 	}

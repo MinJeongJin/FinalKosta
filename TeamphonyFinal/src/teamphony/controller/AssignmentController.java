@@ -130,7 +130,7 @@ public class AssignmentController {
 				return "common/leaderError";
 			}
 			
-		service.removeTask(Integer.parseInt(taskId),Integer.parseInt(flag));
+		service.removeTask(loginedId, Integer.parseInt(taskId),Integer.parseInt(flag));
 		return "redirect:searchAll.do";
 	}
 	

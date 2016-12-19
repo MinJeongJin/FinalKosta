@@ -162,7 +162,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<td>
 					<c:forEach items="${task.memberIdList }" var="memberId">
 						${memberId }
-					</c:forEach>
+					
 				</td>
 		</tr>
 		
@@ -187,9 +187,10 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	<a class="w3-border" href="${pageContext.request.contextPath}/submission/revise.do?taskId=${task.taskId }&flag=${task.flag }" >
 		<button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large">수정</button>
 	</a>
-	<a class="w3-border"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }">
+	<a class="w3-border"  href="${pageContext.request.contextPath}/submission/erase.do?taskId=${task.taskId }&flag=${task.flag }&memberId=${memberId }">
 		<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">삭제</button>
 	</a>
+</c:forEach>
 	<a id="evalutate" href="${pageContext.request.contextPath}/submission/evaluate.do?taskId=${task.taskId}&loginedId=${member.memberId }" >
 		<button class="w3-btn w3-white w3-border w3-border-orange w3-text-orange w3-round-large">
 			평가
