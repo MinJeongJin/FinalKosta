@@ -65,12 +65,8 @@
 
 			<form
 				action="${pageContext.request.contextPath}/post/searchBycontents.do">
-
-
-
 				<input class="w3-input w3-border w3-animate-input w3-white w3-large" type="text"
-					style="padding-left:70px;padding-top:12px; padding-bottom:12px;width: 30%;display:inline-block;background:url(${pageContext.request.contextPath}/resources/images/search_icon.png) no-repeat;" placeholder="search">
-				
+					style="padding-left:70px;padding-top:12px; padding-bottom:12px;width: 30%;display:inline-block;background:url(${pageContext.request.contextPath}/resources/images/search_icon.png) no-repeat;" name="search" placeholder="search">
 				<button type="submit" class="w3-btn w3-dark-grey w3-large"
 					style="display:none">검색</button>
 
@@ -107,13 +103,10 @@
 								</header>
 								<div class="w3-container">
 									<c:if test="${post.imagePath ne 'pass'}">
-										<b class="glyphicon glyphicon-paperclip"></b>
+										<b class="glyphicon glyphicon-picture"></b>
 									</c:if>
 									<c:if test="${post.videoLink ne 'pass'}">
 										<b class="glyphicon glyphicon-hd-video"></b>
-									</c:if>
-									<c:if test="${post.filePath ne 'pass'}">
-										<b class="glyphicon glyphicon-picture"></b>
 									</c:if>
 									<hr>
 									<p>${post.contents}</p>

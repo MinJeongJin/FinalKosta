@@ -15,10 +15,6 @@
 	href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/teamDetailCustomStyle.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/w3.css">
-
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/custom.css">
