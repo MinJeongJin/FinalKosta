@@ -49,7 +49,7 @@
 			<ul class="w3-navbar w3-black w3-large w3-card-12 w3-padding-12">
 				<li class="w3-navitem w3-tangerine">Teamphony</li>
 				<li><a href="#">마이 페이지</a></li>
-				<li><a href="#">회원 탈퇴</a></li>
+				<li><form action="${pageContext.request.contextPath}/member/erase.do" id="delete"><input type="hidden" value="member.memberId" name="memberId"><a href="${pageContext.request.contextPath}/member/erase.do" onclick="deleteAlter();">회원 탈퇴</a></form></li>
 				<li class="w3-right"><a href="${pageContext.request.contextPath}/team/main.do"><i class="fa fa-sign-in"></i></a></li>
 			</ul>
 		</div>
@@ -147,6 +147,7 @@
 	</div>
 
 	<%@ include file="/views/member/alertInMyPage.jspf"%>
+	<%@ include file="/views/member/alertDelete.jspf"%>
 
 	<script>
 		var upload = document.getElementsByTagName('input')[0], holder = document
@@ -259,6 +260,12 @@
 				window.alert('완전히 기입되어 있지 않은 사항이 있습니다.');
 			}
 		}
+		
+		var deleteAlter = function() {
+
+			document.getElementById('deleteAlter').style.display='block';
+
+		};
 
 	</script>
 

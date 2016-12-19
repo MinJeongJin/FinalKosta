@@ -218,11 +218,10 @@ public class MemberController {
 		return "/member/reviseMember";
 	}
 
-	@RequestMapping("delete.do")
+	@RequestMapping("erase.do")
 	public String eraseMember(HttpSession session) {
 
 		Member member = (Member) session.getAttribute("member");
-		System.out.println(member.getMemberId());
 		memberService.removeMember(member.getMemberId());
 
 		return "/common/login";
@@ -270,11 +269,11 @@ public class MemberController {
 
 		String stamp = "false";
 		Member member = (Member) session.getAttribute("member");
+		System.out.println(password+"1");
+		System.out.println(member.getPassword()+"2");
 		if (member.getPassword().equals(password)) {
-
 			stamp = "true";
 		}
-
 		try {
 			res.getWriter().write(stamp);
 			

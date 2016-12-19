@@ -12,19 +12,19 @@
 	</insert>
 
 	<select id="selectAllPost" parameterType="int" resultMap="PostMap">
-		Select id ,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where team_Code=#{teamCode} order By id
+		Select id ,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where team_Code=#{teamCode} order By id Desc
 	</select>
 	
 	<select id="selectPostByPostId" parameterType="int" resultMap="PostMap">
-		Select id,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where id=#{postId}
-	</select>
+		Select id, contents, team_Code, member_Id, video_Link, file_Path, image_Path from Post_tb where id=#{postId}
+	</select> 
 	
 	<select id="selectPostByMemberId" parameterType="String" resultMap="PostMap">
 		Select id,contents,team_Code,member_Id, video_Link, filePath, image_Path from Post_tb where memberId=#{memberId}
 	</select>
 	
 	<select id="selectPostByContents" parameterType="String" resultMap="PostMap">
-		Select id,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where contents like '%'||#{contents}||'%' order By id
+		Select id,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where contents like '%' || #{contents} || '%' order By id Desc
 	</select>
 	
 	<update id="updatePost" parameterType="post">
@@ -37,12 +37,12 @@
 
 	<resultMap type="Post" id="PostMap">
 		<id property="postId" column="id" />
-		<result property="contents" column="contents" />
-		<result property="teamCode" column="team_Code" />
-		<result property="imagePath" column="image_Path" />
-		<result property="videoLink" column="video_Link" />
-		<result property="filePath" column="file_Path" />
-		<association property="member" column="memberId" select="teamphony.store.mapper.MemberMapper.selectMemberByMemberId" javaType="Member" jdbcType="VARCHAR" />
+		<result property="contents" column="contents"/>
+		<result property="teamCode" column="team_Code"/>
+		<result property="imagePath" column="image_Path"/>
+		<result property="videoLink" column="video_Link"/>
+		<result property="filePath" column="file_Path"/>
+		<association property="member" column="member_Id" select="teamphony.store.mapper.MemberMapper.selectMemberByMemberId" javaType="Member" jdbcType="VARCHAR"/>
 	</resultMap>
 
 </mapper>
