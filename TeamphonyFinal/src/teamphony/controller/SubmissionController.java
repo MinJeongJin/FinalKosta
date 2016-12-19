@@ -79,9 +79,6 @@ public class SubmissionController {
 		
 		String uploadPath = request.getSession().getServletContext().getRealPath("/");
 		
-		System.out.println("uploadPath= " +  uploadPath);
-		
-		
 		TaskMember taskMember= new TaskMember();
 		taskMember.setCommitted(Integer.parseInt(committed));
 
@@ -292,12 +289,6 @@ public class SubmissionController {
 		return "/task/submission/submissionDetail";
 	}
 
-	@RequestMapping("/searchByMemberId.do")
-	public String searchSubmissionByMemberId(String memberId, Model model) {
-
-		return null;
-	}
-
 	@RequestMapping("/searchAll.do")
 	public String searchAllSubmission(HttpSession httpSession, Model model) {
 		
@@ -306,17 +297,11 @@ public class SubmissionController {
 		model.addAttribute("taskList", taskList);
 		
 		for(Task task : taskList){
-			System.out.println("===========controller//submission//searchAll============");
-			System.out.println("task.getTaskFileList().size= "+task.getTaskFileList().size());
 			
 			for(TaskFile taskFile : task.getTaskFileList()){
 				
-				
-				System.out.println("filePath= " + taskFile.getFilePath());
-				
 				taskFile.setFilePath(taskFile.getFilePath());
 			}
-			
 		}
 		
 		return "/task/submission/submissionList";
@@ -350,13 +335,7 @@ public class SubmissionController {
 		task.setPoint(Integer.parseInt(point));
 		task.setEvaluationCnt(Integer.parseInt(evaluationCnt));
 		
-		System.out.println("parse = "+Integer.parseInt(evaluated));
 		task.setEvaluated(Integer.parseInt(evaluated));
-		
-		
-		System.out.println("===========evaluate===========");
-		System.out.println("getEvaluated"+task.getEvaluated());
-		System.out.println("=============================");
 		service.modifyTask(task, assignmentTitle);
 		
 		return "redirect:searchAll.do";
