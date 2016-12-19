@@ -80,6 +80,32 @@ public class MemberController {
 		adminUser.add("admin");
 		return adminUser.contains(loginId);
 	}
+	
+	@RequestMapping(value = "login_Android.do", produces = "application/xml", method= RequestMethod.POST)
+	public @ResponseBody Member login_Android(String loginId) {
+
+		Member member = memberService.findMemberByMemberId(loginId);
+		System.out.println("login_Android");
+		
+		if(member == null){
+			
+			return new Member();
+		}
+		
+		return member;
+	}
+	
+	
+	@RequestMapping(value = "create_Android.do", method = RequestMethod.POST)
+	public String createMember_Andoroid(String memberId, String password, String alias) {
+		
+		Member member = new Member(memberId, password, alias);
+		member.setImagePath("pass");
+		memberService.registerMember(member);
+		System.out.println("createAndroid");
+		
+		return "create_success";
+	}
 
 	@RequestMapping(value = "create.do", method = RequestMethod.POST)
 	public String createMember(String memberId, String password, String alias, HttpServletRequest request) {

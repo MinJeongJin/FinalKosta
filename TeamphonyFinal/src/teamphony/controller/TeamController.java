@@ -1,6 +1,8 @@
 package teamphony.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,11 +19,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import teamphony.domain.Member;
 import teamphony.domain.Members;
 import teamphony.domain.Team;
 import teamphony.domain.Teams;
+import teamphony.service.facade.MemberService;
 import teamphony.service.facade.TeamService;
 
 // teamCode 중복 없이 randomGenerate
@@ -38,6 +44,8 @@ public class TeamController {
 
 	@Autowired
 	private TeamService service;
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping(value = "create.do", method = RequestMethod.POST)
 	public String createTeam(Team team, HttpSession session, Model model) {
@@ -59,6 +67,36 @@ public class TeamController {
 		service.belongToTeam(teamCode, leaderId);
 
 		return "redirect:/team/main.do";
+	}
+	
+	@RequestMapping(value = "create_Android.do", method = RequestMethod.POST)
+	public @ResponseStatus String createTeam_Android(String name, String cycle, String endDate) {
+
+		Team team = new Team();
+		int teamCode = getTeamCode();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+		Date date = null;
+		try {
+
+			java.util.Date util = sdf.parse(endDate);
+			date = new Date(util.getTime());
+
+		} catch (ParseException | java.text.ParseException e) {
+			e.printStackTrace();
+		}
+
+		String memberId = "tnghsla13";
+		team.setLeaderId(memberId);
+		team.setCode(teamCode);
+		team.setName(name);
+		team.setCycle(Integer.parseInt(cycle));
+		team.setEndDate(date);
+		
+		service.registerTeam(team);
+		service.belongToTeam(teamCode, memberId);
+
+		System.out.println("success");
+		return "teamCreated_Android";
 	}
 
 	private int getTeamCode() {
@@ -154,6 +192,23 @@ public class TeamController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+	}
+	
+	@RequestMapping(value = "main_Android.do", method = RequestMethod.GET, produces = "application/xml")
+	public @ResponseBody Teams searchTeamsByMemberId_Android(String memberId) {
+
+		memberId = "tnghsla13";
+		Member member = memberService.findMemberByMemberId(memberId);
+
+		List<Team> teamList = service.findTeamsByMemberId(memberId);
+		Teams teams = new Teams();
+		teams.setTeams(teamList);
+		
+		System.out.println("mainAdroid");
+		
+
+		return teams;
 
 	}
 
