@@ -93,8 +93,8 @@ display: none;
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button id="reset" type="reset" class="btn btn-primary">Cancel</button>
-                          <button id="okay" type="submit" class="btn btn-success">Submit</button>
+                          <button id="reset" type="reset" class="btn btn-primary">취소</button>
+                          <button id="okay" type="submit" class="btn btn-success">수정</button>
                         </div>
                       </div>
 
