@@ -262,49 +262,24 @@
 	vertical-align: middle;
 }
 
-.star-ratings-sprite {
-	background:
-		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
-		repeat-x;
-	font-size: 0;
-	height: 21px;
-	line-height: 0;
-	overflow: hidden;
-	text-indent: -999em;
-	width: 110px;
-	margin: 0 auto; & -rating { background :
-	url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
-	repeat-x;
-	background-position: 0 100%;
-	float: left;
-	height: 21px;
-	display: block;
-	}
+.starRating,
+.starRating span{
+    display:inline-block;
+    height:14px;
+    background:transparent url(${pageContext.request.contextPath}/resources/images/icoFiveStar.gif) no-repeat;
+    overflow:hidden;
 }
-@import
-	url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
-
-body {
-	margin: 50px;
-	text-align: center;
-	font-family: 'Open Sans', sans-serif;
-	background: #f2fbff;
+.starRating{
+    width:79px;
+    vertical-align:middle;
 }
-
-em {
-	font-style: italic;
-}
-
-h1 {
-	font-size: 24px;
-	margin-bottom: 25px;
-	font-weight: bold;
-	text-transform: uppercase;
-}
-
-h2 {
-	font-size: 16px;
-	margin-bottom: 15px;
+.starRating span{
+    font-size:0;
+    line-height:0;
+    vertical-align:top;
+    text-indent:-100px;
+    *text-indent:0;
+    background-position:0 -14px;
 }
 </style>
 
@@ -364,10 +339,10 @@ h2 {
 						<td><img alt="사진 없음" height="150" width="150"
 							src="${pageContext.request.contextPath}/resources/images/${evaluate.memberId}/${evaluate.imagePath}"></td>
 						<td>별명 : ${evaluate.alias}<br> 지금까지의 평점 :
-							<div class="star-ratings-sprite">
-								<span style="width:${evaluate.starPoint*10}%"
-									class="star-ratings-sprite-rating"></span>
-							</div>
+							<p>
+								<span class="starRating"><span
+								style="width:${evaluate.starPoint*10}%"></span></span>
+							</p>
 						</td>
 					</tr>
 				</table>
