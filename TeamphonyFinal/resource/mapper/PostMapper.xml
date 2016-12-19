@@ -23,8 +23,8 @@
 		Select id,contents,team_Code,member_Id, video_Link, filePath, image_Path from Post_tb where memberId=#{memberId}
 	</select>
 	
-	<select id="selectPostByContents" parameterType="String" resultMap="PostMap">
-		Select id,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where contents like '%' || #{contents} || '%' order By id Desc
+	<select id="selectPostByContents" parameterType="map" resultMap="PostMap">
+		Select id,contents,team_Code,member_Id, video_Link, file_Path, image_Path from Post_tb where team_Code = #{teamCode} And contents like '%' || #{contents} || '%' order By id Desc
 	</select>
 	
 	<update id="updatePost" parameterType="post">
