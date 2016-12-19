@@ -217,7 +217,7 @@
 		
 	</select>
 	
-	<select id="selectMembersTaskByMemberId" parameterType="String" resultType="task">
+	<select id="selectMembersTaskByMemberId"  resultType="task">
 			
 			SELECT 
 				TT.ID								AS taskId
