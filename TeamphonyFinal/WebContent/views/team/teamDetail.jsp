@@ -113,7 +113,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<div class="w3-row">
 
 					<p>
-						<strong>팀명:</strong>
+						<strong>팀명</strong>
 					</p>
 					<input id="teamName" name="name" maxlength="15" type="text"
 						value="${team.name}" class="w3-input w3-border" readonly required>
@@ -123,7 +123,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<div class="w3-row">
 
 					<p>
-						<strong>팀원 평가주기:</strong>
+						<strong>팀원 평가주기</strong>
 					</p>
 					<input id="cycle" min="0" max="3" name="cycle" type="number"
 						value="${team.cycle}" class="w3-input w3-border" readonly required>
@@ -133,7 +133,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				<div class="w3-row">
 
 					<p>
-						<strong>평가 만료기간:</strong>
+						<strong>평가 만료기간</strong>
 					</p>
 					<input id="endDate" name="endDate" type="date"
 						value="${team.endDate}" class="w3-input w3-border" readonly
@@ -159,7 +159,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<div class="w3-row">
 
 				<p>
-					<strong>팀원목록:</strong>
+					<strong>팀원목록</strong>
 				</p>
 
 				<ul class="w3-ul w3-card-4">
@@ -167,9 +167,17 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					<c:forEach items="${memberList}" var="member"
 						varStatus="cntOfMembers">
 
-						 <li class="w3-padding-16 w3-pale-yellow"><img
-                            src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
-                            class="w3-left w3-circle w3-margin-right" style="width: 30px; height:30px;">
+						 <li class="w3-padding-16 w3-pale-yellow">
+							 <c:choose>
+								 <c:when test="${member.imagePath eq 'pass' }">
+								 	<img src="${pageContext.request.contextPath}/resources/images/default.png"
+		                            class="w3-left w3-circle w3-margin-right" style="width: 30px; height:30px;">
+								 </c:when>
+								 <c:otherwise>
+									 <img src="${pageContext.request.contextPath}/resources/images/${member.memberId}/${member.imagePath}"
+		                            class="w3-left w3-circle w3-margin-right" style="width: 30px; height:30px;">
+		                           </c:otherwise>
+	                           </c:choose>
                             <span class="w3-large">${member.alias}</span> <br></li>
 
 					</c:forEach>
@@ -187,10 +195,6 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<%@ include file="/views/team/alertInDetail.jspf"%>
 		</div>
 
-		<div class="w3-black w3-center w3-padding-24 w3-card-12">
-			Designed by <a href="http://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">Suho</a>
-		</div>
 	</div>
 	<!-- End page content -->
 

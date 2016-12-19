@@ -343,7 +343,7 @@ h2 {
 			<h1>
 				<b>팀원 평가</b>
 			</h1>
-			<h4>${evaluation.alias }님을평가해주세요.</h4>
+			<h4>${evaluate.alias }님을 평가해주세요.</h4>
 			<div class="w3-section w3-bottombar "></div>
 		</header>
 

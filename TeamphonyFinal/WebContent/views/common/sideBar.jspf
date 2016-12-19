@@ -22,7 +22,7 @@
 				title="close menu"> <i class="fa fa-remove"></i></a> 
 				
 				<c:choose>
-					<c:when test="${member.imagePath eq null }">
+					<c:when test="${member.imagePath eq 'pass' }">
 						<img src="${pageContext.request.contextPath}/resources/images/default.png" style="width: 45%;" class="w3-round">
 					</c:when>
 					<c:otherwise>
