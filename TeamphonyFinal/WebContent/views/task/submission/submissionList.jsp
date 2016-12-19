@@ -269,6 +269,13 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			</tr>
 		</thead>
 		<tbody>
+	<c:choose>
+		<c:when test="${list eq null || empty list }">
+			<tr>
+				<h3>제출과제가 존재하지 않습니다.</h3><br><br>
+			</tr>
+		</c:when>
+	<c:otherwise>
 		<c:forEach items="${taskList }" var="task" varStatus="sts">
 			<c:forEach items="${task.assignmentTitleList }" var="assignmentTitle"> 
 				<c:forEach items="${task.memberIdList }" var="memberId" varStatus="sts">
@@ -317,9 +324,11 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 						${task.evaluationCnt } 회
 					</td>
 				</tr>
+					</c:forEach>
+				</c:forEach>
 			</c:forEach>
-			</c:forEach>
-			</c:forEach>
+		</c:otherwise>
+	</c:choose>
 	
 </table>
 <table>

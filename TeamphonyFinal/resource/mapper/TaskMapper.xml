@@ -61,14 +61,7 @@
 	 
 	
 	
-	<update id="updateTaskMemberForSubmission">
-			UPDATE TASK_MEMBER_TB
-				SET 
-				SUBMISSION_ID			= (SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
-				,COMMITTED 				= 1
-				WHERE ASSIGNMENT_ID		= #{assignmentId }
-				AND MEMBER_ID			= #{loginedMemberId }
-	</update>
+	
 	
 	<insert id="insertSubmission" parameterType="task">
 		<selectKey resultType="int" keyProperty="taskId" order="BEFORE">
@@ -301,6 +294,26 @@
 					,EVALUATION_CNT		= #{evaluationCnt, jdbcType=INTEGER}
 					,EVALUATED			= #{evaluated, jdbcType=INTEGER }
 			WHERE ID					= #{taskId }
+	</update>
+	
+	<update id="updateTaskMemberForSubmission">
+			UPDATE TASK_MEMBER_TB
+				SET 
+				SUBMISSION_ID			= (SELECT ID FROM TASK_TB WHERE ID=(SELECT MAX(ID) FROM TASK_TB))
+				,COMMITTED 				= 1
+				WHERE ASSIGNMENT_ID		= #{assignmentId }
+				AND MEMBER_ID			= #{loginedMemberId }
+	</update>
+	
+	<update id="updateTaskMemberForSubmissionDelete" >
+			UPDATE TASK_MEMBER_TB
+	
+		SET SUBMISSION_ID				= 0
+			,COMMITTED					= 0
+			
+			WHERE MEMBER_ID				= #{memberId }
+			AND SUBMISSION_ID			= #{taskId }
+		
 	</update>
 	
 	<delete id="deleteTaskMember" parameterType="int">

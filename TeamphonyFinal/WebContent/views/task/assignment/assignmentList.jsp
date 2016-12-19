@@ -152,6 +152,13 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			</tr>
 		</thead>
 		<tbody>
+	<c:choose>
+		<c:when test="${list eq null || empty list }">
+			<tr>
+				<h3>부여과제가 존재하지 않습니다.</h3><br><br>
+			</tr>
+		</c:when>
+	<c:otherwise>
 			<c:forEach items="${list }" var="task" varStatus="sts">
 				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 					<td>${sts.count }</td>
@@ -183,7 +190,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				</tr>
 				
 			</c:forEach>
-			
+		</c:otherwise>
+	</c:choose>
 		</div>
 	</div>
 </div>

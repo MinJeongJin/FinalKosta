@@ -12,7 +12,7 @@ public interface TaskStore {
 
 	void updateTask(Task task , String assignmentTitle);
 
-	void deleteTask(int taskId, int flag);
+	void deleteTask(String memberId, int taskId, int flag);
 
 	List<Task> selectAllTaskByFlag(int flag, int teamCode);
 

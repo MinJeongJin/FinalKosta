@@ -274,6 +274,13 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 		</tr>
 	</thead>
 	<tbody>
+	<c:choose>
+		<c:when test="${list eq null || empty list }">
+			<tr >
+				<h3 align="center">부여과제가 존재하지 않습니다.</h3><br><br>
+			</tr>
+		</c:when>
+	<c:otherwise>
 		<c:forEach items="${assignmentList }" var="task" varStatus="sts">
 				<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
 					<td>${sts.count }</td>
@@ -301,13 +308,16 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 					</td>
 				</tr>
 		</c:forEach>
-	</tbody>
+	</c:otherwise>
+</c:choose>
+</tbody>
 </table>
 </div>
 
 				
-<div style="padding-top: 50px">
+<div style="padding-top: 30px">
 <h1 align="left">${memberId } 님의 제출과제 리스트</h1><br><br>
+
 	<table class="table table-hover table-condensed">
 		<colgroup>
 			<col width="60" align="center">
@@ -335,6 +345,14 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	
 	
 	<tbody>
+	
+	<c:choose>
+	<c:when test="${list eq null || empty list }">
+		<tr >
+			<h3 align="center">제출과제가 존재하지 않습니다.</h3><br>
+		</tr>
+	</c:when>
+<c:otherwise>
 	<c:forEach items="${submissionList }" var="task" varStatus="sts">
 		<c:forEach items="${task.taskMember }" var="taskMember">
 			<c:if test="${taskMember.memberId eq memberId }"> 
@@ -386,6 +404,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 				</c:if>
 			</c:forEach>
 		</c:forEach> 
+</c:otherwise>
+</c:choose>
 	</tbody>
 </table>
 </div>

@@ -24,6 +24,8 @@ public interface TaskMapper {
 	void updateTask(Task task);
 //	추가했음
 	void updateTaskPoint(Task task);
+	
+	void updateTaskMemberForSubmissionDelete(@Param("memberId") String memberId, @Param("taskId") int taskId);
 //	추가했음
 	void deleteTask(int taskId);
 //	추가 했음
