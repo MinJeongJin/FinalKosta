@@ -19,7 +19,7 @@
                 <h4><b>진심</b> <small>삭제하시겠습니까?</small></h4>
 
                 <button class="w3-btn w3-dark-grey w3-section w3-padding " type="button" 
-                onclick="document.getElementById('deleteAlter').submit();">
+                onclick="window.location.href = '${pageContext.request.contextPath}/member/erase.do';">
                     <b>확인</b>
                 </button>
 

@@ -10,7 +10,7 @@ public interface PostService {
 	List<Post> findAllPost(int teamId);
 	Post findPostByPostId(int postId);
 	List<Post> findPostByMemberId(String memberId);
-	List<Post> findPostByContents(String contents);
+	List<Post> findPostByContents(String contents, int teamCode);
 	void modifyPost(Post post);
 	void removePost(int postId);
 }

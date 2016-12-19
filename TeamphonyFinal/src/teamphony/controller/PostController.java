@@ -213,8 +213,8 @@ public class PostController {
 	}
 	
 	@RequestMapping("searchBycontents.do")
-	public String searchPostByContents(String search, Model model){
-		List<Post> list = postService.findPostByContents(search);
+	public String searchPostByContents(String search, HttpSession session, Model model){
+		List<Post> list = postService.findPostByContents(search, (int)session.getAttribute("teamCode"));
 		model.addAttribute("listPost", list);
 		return "/post/postList2"; 
 	}

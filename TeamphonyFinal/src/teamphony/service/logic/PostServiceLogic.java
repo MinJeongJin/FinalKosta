@@ -36,8 +36,8 @@ public class PostServiceLogic implements PostService {
 	}
 
 	@Override
-	public List<Post> findPostByContents(String contents) {
-		return store.selectPostByContents(contents);
+	public List<Post> findPostByContents(String contents, int teamCode) {
+//		return store.selectPostByContents(contents, teamCode);
 	}
 
 	@Override
