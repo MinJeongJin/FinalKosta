@@ -83,7 +83,7 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 	}
 </script>
 
-<body class="w3-light-grey w3-content" style="max-width: 1600px;">
+<body class="w3-light-grey w3-content" style="max-width: 1600px;" onload="getMinDate();">
 
 
 
@@ -140,8 +140,8 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 			<th>평가 기한</th>
 			<td><input type="date" id="evalDayStart" name="evalDayStart">
 				<input type="time" id="evalHourStart" name="evalHourStart">-
-				<input type="date" id="evalDayEnd" name="evalDayEnd"> <input
-				type="time" id="evalHourEnd" name="evalHourEnd"></td>
+				<input type="date" id="evalDayEnd" name="evalDayEnd"> 
+				<input type="time" id="evalHourEnd" name="evalHourEnd"></td>
 		</tr>
 
 		<tr class="w3-hover-pale-red w3-padding w3-card-2 ">
@@ -180,7 +180,24 @@ a[name=aInBtn]:hover, a[name=aInBtn]:link, a[name=aInBtn]:active, a[name=aInBtn]
 </div>
 
 	<!-- End page content -->
+<script>
 
+
+
+var getMinDate = function() {
+
+	var date = new Date();
+	var year = date.getFullYear(); // 년도
+	var month = (1 + date.getMonth()); // 월
+	month = month >= 10 ? month : '0' + month; // 월 두자리로 변경 작업
+	var day = date.getDate(); // 일 
+	day = day >= 10 ? day : '0' + day; //일 두자리로 변경 작업
+
+	document.getElementById('deadlineDay').min = year + '-' + month + '-' + day;// yyyy-mm-dd format 변경
+	document.getElementById('evalDayStart').min = year + '-' + month + '-' + day;// yyyy-mm-dd format 변경
+	document.getElementById('evalDayEnd').min = year + '-' + month + '-' + day;// yyyy-mm-dd format 변경
+}
+</script>
 </body>
 
 </html>
